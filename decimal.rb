@@ -11,6 +11,7 @@ class DecimalScale
 
   @@smallest = [ 10.0, 5.0 ] # number of smallest ticks to fill range between major halfs
 
+  public
   def initialize ( width_mm, height_mm, size, min_dist_mm = 0.8, font_size_mm = 3 )
     @width_mm     = width_mm
     @height_mm    = height_mm
@@ -24,10 +25,12 @@ class DecimalScale
 
   # these constants will be added as explicit ticks with cursive names when render() is called
   # predefined: Euler's number, Pythagoras' number, square root of 2, Fibonacci's number
+  public
   def add_constants( constants = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 } )
     @constants = constants
   end
 
+  public
   def render ( )
     last = 0
     for i in 1..@size
