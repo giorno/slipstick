@@ -3,6 +3,7 @@
 require 'rasem'
 
 class DecimalScale
+
   @@heights = [ 1.0, # major tick (1, 10, 100, 1000, ...)
                 0.8, # minor tick (2, 3, 4, 5, ...)
                 0.7, # middle of minor ticks
@@ -16,8 +17,15 @@ class DecimalScale
     @size         = size
     @min_dist_mm  = min_dist_mm
     @font_size_mm = font_size_mm
+    @constants    = {}
 
     @img = Rasem::SVGImage.new( "%dmm" % @width_mm, "%dmm" % ( @height_mm + @font_size_mm ) )
+  end
+
+  # these constants will be added as explicit ticks with cursive names when render() is called
+  # predefined: Euler's number, Pythagoras' number, square root of 2, Fibonacci's number
+  def add_constants( constants = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 } )
+    @constants = constants
   end
 
   def render ( )
@@ -61,12 +69,15 @@ class DecimalScale
     end
     # last tick
     render_tick( @width_mm, @height_mm, "%d" % ( 10 ** @size ) )
+    # add constants if any specified
+    render_constants()
+
     @img.close
     return @img.output
   end
 
   private
-  def render_tick ( x_mm, height_mm, label = nil, bold = true )
+  def render_tick ( x_mm, height_mm, label = nil, bold = true, cursive = false )
     @img.line( "%fmm" % x_mm, "0mm", "%fmm" % x_mm, "%fmm" % height_mm )
     if not label.nil?
       @img.text( "%fmm" % x_mm,
@@ -75,13 +86,24 @@ class DecimalScale
                  { "fill" => "black",
                    "font-size" => "%dmm" % @font_size_mm,
                    "font-family" => "Arial",
+                   "font-style" => ( cursive ? "italic" : "normal" ),
                    "text-anchor" => "middle",
                    "dominant-baseline" => "hanging", # seems to be ignored by viewers
                    "font-weight" => bold ? "bold" : "normal" } )
     end
   end
+
+  private
+  def render_constants()
+    @constants.each do | name, value |
+      x = Math.log10( value ) * @width_mm / @size
+      h = @height_mm * @@heights[1]
+      render_tick( x, h, "%s" % name, false, true )
+    end
+  end
 end
 
 dec = DecimalScale.new( 300, 5, 2 )
+dec.add_constants()
 puts dec.render( )
 
