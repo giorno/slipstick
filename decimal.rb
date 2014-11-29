@@ -2,13 +2,13 @@
 
 require 'rasem'
 
-HEIGHTS = [ 1.0, # major tick (1, 10, 100, 1000, ...)
-            0.8, # minor tick (2, 3, 4, 5, ...)
-            0.7, # middle of minor ticks
-            0.6, 0.5, 0.4 ]
-
 class DecimalScale
-  @@smallest = [ 10.0, 5.0 ]
+  @@heights = [ 1.0, # major tick (1, 10, 100, 1000, ...)
+                0.8, # minor tick (2, 3, 4, 5, ...)
+                0.7, # middle of minor ticks
+                0.6, 0.5, 0.4 ]
+
+  @@smallest = [ 10.0, 5.0 ] # number of smallest ticks to fill range between major halfs
 
   def initialize ( width_mm, height_mm, size, min_dist_mm = 0.8, font_size_mm = 3 )
     @width_mm     = width_mm
@@ -31,7 +31,7 @@ class DecimalScale
         value = base + j * step
         # physical dimension coordinates
         x = Math.log10( value ) * @width_mm / @size
-        h = @height_mm * ( j == 0 ? HEIGHTS[0] : ( j % 2 == 0 ? HEIGHTS[1] : HEIGHTS[2] ) )
+        h = @height_mm * ( j == 0 ? @@heights[0] : ( j % 2 == 0 ? @@heights[1] : @@heights[2] ) )
         if j < 18 # last one is not rendered, but is required for small ticks calculation
           render_tick( x, h, ( j % 2 ) == 0 ? "%d" % value : nil )
         end
@@ -51,7 +51,7 @@ class DecimalScale
             stepper = step / no_smallest
             for k in 1..no_smallest - 1
               mx = Math.log10( base + ( j  - 1 ) * step + k * stepper ) * @width_mm / @size
-              h = @height_mm * ( k % ( no_smallest / 5 )  == 0 ? HEIGHTS[3] : HEIGHTS[4] )
+              h = @height_mm * ( k % ( no_smallest / 5 )  == 0 ? @@heights[3] : @@heights[4] )
               render_tick( mx, h, nil )
             end
           end
