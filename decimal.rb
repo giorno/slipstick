@@ -32,8 +32,13 @@ class DecimalScale
   # these constants will be added as explicit ticks with cursive names when render() is called
   # predefined: Euler's number, Pythagoras' number, square root of 2, Fibonacci's number
   public
-  def add_constants( constants = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 } )
+  def add_constants ( constants = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 } )
     @constants = constants
+  end
+
+  public
+  def add_subscale ( left_border_mm )
+    @left_border_mm = left_border_mm
   end
 
   public
@@ -80,7 +85,7 @@ class DecimalScale
     render_tick( @width_mm, @height_mm, "%d" % ( 10 ** @size ) )
     # add constants if any specified
     render_constants()
-
+    render_subscale()
     #@img.close
     #return @img.output
   end
@@ -118,6 +123,28 @@ class DecimalScale
       render_tick( x, h, "%s" % name, false, true )
     end
   end
+
+  # fill range given by border with short scale of log() for values under 1 to the left of the 1 tick
+  private
+  def render_subscale ( )
+    if @left_border_mm.nil?
+      return # no data to generate
+    end
+
+    x = 0
+    value = 1
+    while true do
+      value -= 0.025
+      x = Math.log10( value ) * @width_mm / @size
+      if x <= 0 - @left_border_mm
+        return
+      end
+      round = ( value * 20 ).round(2) % 2 == 0
+      h = @height_mm * ( round ? @@heights[1] : @@heights[2] )
+      render_tick( x, h, ( round ? "%.1f" % value : nil ) )
+    end
+  end
+
 end
 
 # a collection of Scales serving as a sliding strip
@@ -190,8 +217,11 @@ scale = strip.create_scale( 2 )
 scale.add_constants( )
 strip = sheet.create_strip( 25, 3.2 )
 scale = strip.create_scale( 2, 30 )
+scale.add_subscale( 20 )
 scale = strip.create_scale( 3, 30, 7 )
+scale.add_subscale( 20 )
 scale = strip.create_scale( 1, 30, 21, true )
+scale.add_subscale( 20 )
 scale.add_constants( )
 strip = sheet.create_strip( 15, 3.2 )
 scale = strip.create_scale( 1 )
