@@ -14,7 +14,7 @@ class DecimalScale
   @@tick_width = 0.15
 
   public
-  def initialize ( parent, label, width_mm, height_mm, baseline_x_mm, baseline_y_mm, size, align_bottom = false, min_dist_mm = 0.8, font_size_mm = 2.8 )
+  def initialize ( parent, label, width_mm, height_mm, baseline_x_mm, baseline_y_mm, size, align_bottom = false, min_dist_mm = 0.5, font_size_mm = 2.2 )
     @parent        = parent
     @label         = label
     @width_mm      = width_mm
@@ -91,12 +91,13 @@ class DecimalScale
       img = @parent.instance_variable_get( :@parent ).instance_variable_get( :@img )
       x = @parent.instance_variable_get( :@parent ).instance_variable_get( :@border_x_mm )
       img.text( "%fmm" % x,
-                "%fmm" % ( @baseline_y_mm + ( @align_bottom ? 0 : @font_size_mm ) ), # compensation for ignored (by viewers) vertical alignments
+                "%fmm" % ( @baseline_y_mm + ( @align_bottom ? -0.20 : 0.9 ) * @font_size_mm ), # compensation for ignored (by viewers) vertical alignments
                 "%s" % @label,
                 { "fill" => "black",
-                  "font-size" => "%dmm" % @font_size_mm,
+                  "font-size" => "%fmm" % @font_size_mm,
                   "font-family" => "Arial",
-                  "text-anchor" => "left" } )
+                  "text-anchor" => "left",
+                  "font-weight" => "bold" } )
     end
   end
 
@@ -113,10 +114,10 @@ class DecimalScale
                 "stroke-linecap" => "square" } )
     if not label.nil?
       img.text( "%fmm" % ( @baseline_x_mm + x_mm ),
-                "%fmm" % ( mult * height_mm + @baseline_y_mm + ( @align_bottom ? 0 : @font_size_mm ) ), # compensation for ignored (by viewers) vertical alignments
+                "%fmm" % ( mult * height_mm + @baseline_y_mm + ( @align_bottom ? -0.20 : 0.9 ) * @font_size_mm ), # compensation for ignored (by viewers) vertical alignments
                 "%s" % label,
                 { "fill" => "black",
-                  "font-size" => "%dmm" % @font_size_mm,
+                  "font-size" => "%fmm" % @font_size_mm,
                   "font-family" => "Arial",
                   "font-style" => ( cursive ? "italic" : "normal" ),
                   "text-anchor" => "middle",
