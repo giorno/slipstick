@@ -143,8 +143,10 @@ class DecimalScale
     end
 
     value = 1
+    last = 0
+    step = 0.025
     while true do
-      value -= 0.025
+      value -= step
       x = Math.log10( value ) * @width_mm / @size
       if x <= 0 - @left_border_mm
         return
@@ -152,6 +154,26 @@ class DecimalScale
       round = ( value * 20 ).round(2) % 2 == 0
       h = @height_mm * ( round ? @@heights[1] : @@heights[2] )
       render_tick( x, h, ( round ? "%.1f" % value : nil ) )
+
+      # filler
+      delta = last - x
+      no_smallest = 0
+      @@smallest.each do | no |
+        if delta > no * @min_dist_mm
+          no_smallest = no
+          break
+        end
+      end
+      if no_smallest > 0
+        stepper = step / no_smallest
+        $stderr.puts stepper
+        for k in 1..no_smallest - 1
+          mx = Math.log10( value + k * stepper ) * @width_mm / @size
+          h = @height_mm * ( k % ( no_smallest / 5 )  == 0 ? @@heights[3] : @@heights[4] )
+          render_tick( mx, h, nil )
+        end
+      end
+      last = x
     end
   end
 
