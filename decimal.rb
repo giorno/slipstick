@@ -153,7 +153,7 @@ class DecimalScale
       end
       round = ( value * 20 ).round(2) % 2 == 0
       h = @height_mm * ( round ? @@heights[1] : @@heights[2] )
-      render_tick( x, h, ( round ? "%.1f" % value : nil ) )
+      render_tick( x, h, ( round ? ( "%.1f" % value )[1..-1] : nil ) )
 
       # filler
       delta = last - x
@@ -166,7 +166,6 @@ class DecimalScale
       end
       if no_smallest > 0
         stepper = step / no_smallest
-        $stderr.puts stepper
         for k in 1..no_smallest - 1
           mx = Math.log10( value + k * stepper ) * @width_mm / @size
           h = @height_mm * ( k % ( no_smallest / 5 )  == 0 ? @@heights[3] : @@heights[4] )
