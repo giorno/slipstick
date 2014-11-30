@@ -7,9 +7,9 @@ class DecimalScale
   @@heights = [ 1.0, # major tick (1, 10, 100, 1000, ...)
                 0.8, # minor tick (2, 3, 4, 5, ...)
                 0.7, # middle of minor ticks
-                0.6, 0.5, 0.4 ]
+                0.6, 0.45, 0.4 ]
 
-  @@smallest = [ 10.0, 5.0 ] # number of smallest ticks to fill range between major halfs
+  @@smallest = [ 25.0, 10.0, 5.0, 2.0 ] # number of smallest ticks to fill range between major halfs
 
   public
   def initialize ( width_mm, height_mm, size, min_dist_mm = 0.8, font_size_mm = 3 )
