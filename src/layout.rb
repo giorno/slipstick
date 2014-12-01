@@ -1,5 +1,6 @@
 require 'rasem'
 
+require './hierarchy'
 require './decimal'
 
 module Io::Creat::Slipstick::Layout
