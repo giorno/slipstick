@@ -117,16 +117,16 @@ module Io::Creat::Slipstick
     end
 
     def render_label ( )
-      if not @label.nil?
+      if not @label.nil? and @w_label_mm > 0
         font_size_mm = @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_SIZE]
-        img.text( "%fmm" % @off_x_mm,
-                  "%fmm" % ( @off_y_mm + ( @flipped ? -0.20 : 0.9 ) * font_size_mm ),
-                  "%s" % @label,
-                  { "fill" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_COLOR],
-                    "font-size" => "%fmm" % font_size_mm,
-                    "font-family" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_FAMILY],
-                    "text-anchor" => "left",
-                    "font-weight" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
+        @img.text( "%fmm" % ( @off_x_mm + @w_label_mm / 2),
+                   "%fmm" % ( @off_y_mm + ( @flipped ? -0.20 : 0.9 ) * font_size_mm ),
+                   "%s" % @label,
+                   { "fill" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_COLOR],
+                     "font-size" => "%fmm" % font_size_mm,
+                     "font-family" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_FAMILY],
+                     "text-anchor" => "middle",
+                     "font-weight" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
       end
     end
 
@@ -183,7 +183,7 @@ module Io::Creat::Slipstick
 
     public
     def render ( )
-      last = 0
+      last = @w_label_mm + @w_subscale_mm
       for i in 1..@size
         # next tick
         upper = 10 ** i
@@ -192,9 +192,8 @@ module Io::Creat::Slipstick
         for j in 0..18
           value = base + j * step
           # physical dimension coordinates
-          x = Math.log10( value ) * @w_mainscale_mm / @size
+          x = @w_label_mm + @w_subscale_mm + Math.log10( value ) * @w_mainscale_mm / @size
           h = @h_mm * ( j == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0] : ( j % 2 == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] ) )
-          #$stderr.puts @w_mainscale_mm
           if j < 18 # last one is not rendered, but is required for small ticks calculation
            render_tick( x, h, ( j % 2 ) == 0 ? "%d" % value : nil )
           end
@@ -213,7 +212,7 @@ module Io::Creat::Slipstick
             if no_smallest > 0
               stepper = step / no_smallest
               for k in 1..no_smallest - 1
-                mx = Math.log10( base + ( j  - 1 ) * step + k * stepper ) * @w_mainscale_mm / @size
+                mx = @w_label_mm + @w_subscale_mm + Math.log10( base + ( j  - 1 ) * step + k * stepper ) * @w_mainscale_mm / @size
                 h = @h_mm * ( k % ( no_smallest / 5 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][4] )
                 render_tick( mx, h, nil )
               end
@@ -223,10 +222,12 @@ module Io::Creat::Slipstick
         end
       end
       # last tick
-      render_tick( @w_mainscale_mm, @h_mm, "%d" % ( 10 ** @size ) )
+      render_tick( @w_label_mm + @w_subscale_mm + @w_mainscale_mm, @h_mm, "%d" % ( 10 ** @size ) )
+      # label
+      render_label( )
       # add constants if any specified
       #render_constants()
-      #render_subscale()
+      render_subscale()
     end
 
 
@@ -241,29 +242,29 @@ module Io::Creat::Slipstick
 
     # fill range given by border with short scale of log() for values under 1 to the left of the 1 tick
     private
-    def render_subscale ( ) # disabled
-      if @left_border_mm.nil?
-        return # no data to generate
+    def render_subscale ( )
+      if @w_subscale_mm <= 0
+        return
       end
 
       value = 1
-      last = 0
+      last = @w_label_mm + @w_subscale_mm
       step = 0.025
       while true do
         value -= step
-        x = Math.log10( value ) * @width_mm / @size
-        if x <= 0 - @left_border_mm
+        x = @w_label_mm + @w_subscale_mm + Math.log10( value ) * @w_mainscale_mm / @size
+        if x <= @w_label_mm
           return
         end
         round = ( value * 20 ).round(2) % 2 == 0
-        h = @height_mm * ( round ? @@heights[1] : @@heights[2] )
+        h = @h_mm * ( round ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] )
         render_tick( x, h, ( round ? ( "%.1f" % value )[1..-1] : nil ) )
 
         # filler
         delta = last - x
         no_smallest = 0
-        @@smallest.each do | no |
-         if delta > no * @min_dist_mm
+        @dim[Io::Creat::Slipstick::Key::FODDERS].each do | no |
+         if delta >= no * @dim[Io::Creat::Slipstick::Key::CLEARING]
             no_smallest = no
             break
          end
@@ -271,8 +272,8 @@ module Io::Creat::Slipstick
         if no_smallest > 0
           stepper = step / no_smallest
           for k in 1..no_smallest - 1
-            mx = Math.log10( value + k * stepper ) * @width_mm / @size
-            h = @height_mm * ( k % ( no_smallest / 5 )  == 0 ? @@heights[3] : @@heights[4] )
+            mx = @w_label_mm + @w_subscale_mm + Math.log10( value + k * stepper ) * @w_mainscale_mm / @size
+            h = @h_mm * ( k % ( no_smallest / 5 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][4] )
             render_tick( mx, h, nil )
           end
         end
