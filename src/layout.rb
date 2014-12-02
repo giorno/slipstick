@@ -22,6 +22,19 @@ module Io::Creat::Slipstick::Layout
     def create_scale ( label, size, rel_off_y_mm = 0, flipped = false  )
       return Io::Creat::Slipstick::DecimalScale.new( self, label, size, 0, rel_off_y_mm, @h_mm, @w_mainscale_mm, @w_label_mm, @w_subscale_mm, @w_after_mm, flipped )
     end
+
+    public
+    def render()
+      h_mm = @h_mm / @children.length # allocate evenly
+      off_y_mm = @off_y_mm
+      @children.each do | child |
+        child.instance_variable_set( :@off_y_mm, off_y_mm + ( child.instance_variable_get( :@flipped ) ? h_mm : 0 ) )
+        child.instance_variable_set( :@h_mm, h_mm - child.calc_tick_font_height_mm( ) )
+        off_y_mm += h_mm
+        child.render( )
+      end
+      #super.render()
+    end
   end
 
   # a vertical layout of Strips to be printed and cut out
@@ -42,6 +55,7 @@ module Io::Creat::Slipstick::Layout
     # TODO throw exception when tracker would reach beyond the bottom border
     public
     def create_strip ( h_mm, w_mainscale_mm, w_label_mm = 0, w_subscale_mm = 0, w_after_mm = 0 )
+      raise "Strip widths exceed the space reserved for them in the Sheet" unless ( w_mainscale_mm + w_label_mm + w_subscale_mm + w_after_mm ) <= @w_mm
       strip = Strip.new( self, h_mm, @border_x_mm, @y_tracker_mm, w_mainscale_mm, w_label_mm, w_subscale_mm, w_after_mm )
       @y_tracker_mm += h_mm + @spacing_y_mm
       return strip

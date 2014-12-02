@@ -112,6 +112,10 @@ module Io::Creat::Slipstick
       @flipped        = flipped
     end
 
+    def calc_tick_font_height_mm ( )
+      return @style[Io::Creat::Slipstick::Key::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] * 1.2
+    end
+
     def render_label ( )
       if not @label.nil?
         font_size_mm = @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_SIZE]
@@ -159,7 +163,7 @@ module Io::Creat::Slipstick
 
     public
     def initialize ( parent, label, size, rel_off_x_mm, rel_off_y_mm, h_mm, w_mainscale_mm, w_label_mm = 0, w_subscale_mm = 0, w_after_mm = 0, flipped = false )
-      super( parent, label, rel_off_x_mm, rel_off_y_mm, w_label_mm, w_subscale_mm, w_mainscale_mm, w_after_mm, h_mm, flipped )
+      super( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, w_mainscale_mm, w_label_mm, w_subscale_mm, w_after_mm, flipped )
 
       @size          = size
       @constants     = {}
@@ -190,6 +194,7 @@ module Io::Creat::Slipstick
           # physical dimension coordinates
           x = Math.log10( value ) * @w_mainscale_mm / @size
           h = @h_mm * ( j == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0] : ( j % 2 == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] ) )
+          #$stderr.puts @w_mainscale_mm
           if j < 18 # last one is not rendered, but is required for small ticks calculation
            render_tick( x, h, ( j % 2 ) == 0 ? "%d" % value : nil )
           end
@@ -208,8 +213,8 @@ module Io::Creat::Slipstick
             if no_smallest > 0
               stepper = step / no_smallest
               for k in 1..no_smallest - 1
-                mx = Math.log10( base + ( j  - 1 ) * step + k * stepper ) * @width_mm / @size
-                h = @height_mm * ( k % ( no_smallest / 5 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][4] )
+                mx = Math.log10( base + ( j  - 1 ) * step + k * stepper ) * @w_mainscale_mm / @size
+                h = @h_mm * ( k % ( no_smallest / 5 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][4] )
                 render_tick( mx, h, nil )
               end
             end
