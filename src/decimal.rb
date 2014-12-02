@@ -2,41 +2,178 @@
 require './hierarchy'
 
 module Io::Creat::Slipstick
-  class DecimalScale
 
-    @@heights = [ 1.0, # major tick (1, 10, 100, 1000, ...)
-                  0.8, # minor tick (2, 3, 4, 5, ...)
-                  0.7, # middle of minor ticks
-                  0.6, 0.45, 0.4 ]
+  module Key
+    LINE_WIDTH    = 1
+    LINE_COLOR    = 2
+    FONT_FAMILY   = 10
+    FONT_WEIGHT   = 11
+    FONT_STYLE    = 12
+    FONT_COLOR    = 13
+    FONT_SIZE     = 14
+    TICK_HEIGHT   = 21 # relative height of a tick, depending on the range subdivision
+    TICK_OVERFLOW = 22 # how far beyond the scale border the tick shall overlap
+    TICK_CLEARING = 23 # minimal distance between neighbouring ticks
+    CLEARING      = 24
+    FODDERS       = 25
+    VERT_CORR     = 26
+    TICK          = 101
+    SCALE         = 102
+    CONSTANT      = 103
+  end
 
-    @@smallest = [ 50.0, 25.0, 10.0, 5.0, 2.0 ] # number of smallest ticks to fill range between major halfs
+  # pre-defined constants
+  CONST_MATH = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 }
 
-    @@tick_width = 0.15
+  module Entity
+    TICK     = 1 # regular tick for a calculated value
+    SCALE    = 2 # single scale
+    CONSTANT = 3 # tick for a pre-defined constant
+  end
+
+  module Style
+    # style is associated with entity (per entity)
+    ENTITY = { Io::Creat::Slipstick::Key::LINE_WIDTH  => 0.15, # mm
+               Io::Creat::Slipstick::Key::LINE_COLOR  => 'black',
+               Io::Creat::Slipstick::Key::FONT_FAMILY => 'Arial',
+               Io::Creat::Slipstick::Key::FONT_WEIGHT => 'bold',
+               Io::Creat::Slipstick::Key::FONT_STYLE  => 'normal',
+               Io::Creat::Slipstick::Key::FONT_COLOR  => 'black',
+               Io::Creat::Slipstick::Key::FONT_SIZE   => 2.3, # mm
+             }
+    # per scale style
+    DEFAULT = { Io::Creat::Slipstick::Key::TICK     => ENTITY,
+                Io::Creat::Slipstick::Key::SCALE    => ENTITY,
+                Io::Creat::Slipstick::Key::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic' } )
+              }
+  end
+
+  # dimensions controlling rendering of a scale (per scale)
+  module Dim
+    DEFAULT = { Io::Creat::Slipstick::Key::TICK_HEIGHT   => [ 1.0, 0.8, 0.7, 0.6, 0.45, 0.4 ],
+                Io::Creat::Slipstick::Key::TICK_OVERFLOW => 0, # mm
+                Io::Creat::Slipstick::Key::CLEARING      => 0.5, # mm, min distance between neighbouring ticks
+                Io::Creat::Slipstick::Key::FODDERS       => [ 50.0, 25.0, 10.0, 5.0, 2.0 ], # number of smallest ticks to fill range between majors and their halfs
+                Io::Creat::Slipstick::Key::VERT_CORR     => [ 0.2, 0.9 ], # corrections to workaround lack of support for dominant-baseline
+              }
+  end
+
+  class Node
+    public
+    def initialize ( parent, rel_off_x_mm, rel_off_y_mm )
+      @parent = parent
+      # root node
+      if @parent.nil?
+        @img      = nil # creation deferred to the tree root node
+	# defaults
+        @off_x_mm = rel_off_x_mm
+	@off_y_mm = rel_off_y_mm
+	@style    = Io::Creat::Slipstick::Style::DEFAULT
+	@dim      = Io::Creat::Slipstick::Dim::DEFAULT
+      else
+        # tree node or leaf -> derive/inherit from the parent
+        @img      = @parent.instance_variable_get( :@img )
+	assert( )
+        @off_x_mm = @parent.instance_variable_get( :@off_x_mm ) + rel_off_x_mm
+        @off_y_mm = @parent.instance_variable_get( :@off_y_mm ) + rel_off_y_mm
+	@style    = @parent.instance_variable_get( :@style )
+	@dim      = @parent.instance_variable_get( :@dim )
+        @parent.instance_variable_get( :@children ) << self # wire up
+      end
+      @children = []
+    end
+
+    # make sure that @img instance is initialized
+    private
+    def assert ( )
+	raise "SVG image not initialized in parent (likely the tree root node did not initialize it)!" unless not @img.nil?
+    end
+
+    # call render on children
+    public
+    def render ( )
+        assert( )
+	@children.each do | child |
+	  child.render( )
+	end
+    end
+  end
+
+  class Scale < Node
+    public
+    def initialize ( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, w_mainscale_mm, w_label_mm = 0, w_subscale_mm = 0, w_after_mm = 0, flipped = false )
+      super( parent, rel_off_x_mm, rel_off_y_mm )
+      @label          = label
+      @h_mm           = h_mm
+      @w_mainscale_mm = w_mainscale_mm
+      @w_label_mm     = w_label_mm
+      @w_subscale_mm  = w_subscale_mm
+      @w_after_mm     = w_after_mm
+      @flipped        = flipped
+    end
+
+    def render_label ( )
+      if not @label.nil?
+        font_size_mm = @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_SIZE]
+        img.text( "%fmm" % @off_x_mm,
+                  "%fmm" % ( @off_y_mm + ( @flipped ? -0.20 : 0.9 ) * font_size_mm ),
+                  "%s" % @label,
+                  { "fill" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_COLOR],
+                    "font-size" => "%fmm" % font_size_mm,
+                    "font-family" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_FAMILY],
+                    "text-anchor" => "left",
+                    "font-weight" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
+      end
+    end
+
+    # draws a vertical line with the current line style and optionally adds
+    # a label to it
+    protected
+    def render_tick ( x_mm, h_mm, label = nil, style = Io::Creat::Slipstick::Key::TICK )
+      flip = @flipped ? -1 : 1
+      @img.line( "%fmm" % ( @off_x_mm + x_mm ),
+                 "%fmm" % ( @off_y_mm - flip * @dim[Io::Creat::Slipstick::Key::CLEARING] ),
+                 "%fmm" % ( @off_x_mm + x_mm ),
+                 "%fmm" % ( @off_y_mm + flip * h_mm ),
+                 { "stroke" => @style[style][Io::Creat::Slipstick::Key::LINE_COLOR],
+                   "stroke-width" => "%fmm" % @style[style][Io::Creat::Slipstick::Key::LINE_WIDTH],
+                   "stroke-linecap" => "square" } )
+      if not label.nil?
+        font_size_mm = @style[style][Io::Creat::Slipstick::Key::FONT_SIZE]
+        @img.text( "%fmm" % ( @off_x_mm + x_mm ),
+                   "%fmm" % ( flip * h_mm + @off_y_mm + ( @flipped ? -0.20 : 0.9 ) * font_size_mm ), # compensation for ignored (by viewers) vertical alignments
+                   "%s" % label,
+                   { "fill" => @style[style][Io::Creat::Slipstick::Key::FONT_COLOR],
+                     "font-size" => "%fmm" % font_size_mm,
+                     "font-family" => @style[style][Io::Creat::Slipstick::Key::FONT_FAMILY],
+                     "font-style" => @style[style][Io::Creat::Slipstick::Key::FONT_STYLE],
+                     "text-anchor" => "middle",
+                     "dominant-baseline" => "hanging", # seems to be ignored by viewers
+                     "font-weight" => @style[style][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
+      end
+    end
+  end
+
+  # a leaf node
+  class DecimalScale < Scale
 
     public
-    def initialize ( parent, label, width_mm, height_mm, baseline_x_mm, baseline_y_mm, size, align_bottom = false, min_dist_mm = 0.5, font_size_mm = 2.2 )
-      @parent        = parent
-      @label         = label
-      @width_mm      = width_mm
-      @height_mm     = height_mm
-      @baseline_x_mm = baseline_x_mm
-      @baseline_y_mm = baseline_y_mm
+    def initialize ( parent, label, size, rel_off_x_mm, rel_off_y_mm, h_mm, w_mainscale_mm, w_label_mm = 0, w_subscale_mm = 0, w_after_mm = 0, flipped = false )
+      super( parent, label, rel_off_x_mm, rel_off_y_mm, w_label_mm, w_subscale_mm, w_mainscale_mm, w_after_mm, h_mm, flipped )
+
       @size          = size
-      @align_bottom  = align_bottom
-      @min_dist_mm   = min_dist_mm
-      @font_size_mm  = font_size_mm
       @constants     = {}
     end
 
     # these constants will be added as explicit ticks with cursive names when render() is called
     # predefined: Euler's number, Pythagoras' number, square root of 2, Fibonacci's number
     public
-    def add_constants ( constants = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 } )
+    def add_constants ( constants = CONST_MATH  )
       @constants = constants
     end
 
     public
-    def add_subscale ( left_border_mm )
+    def add_subscale ( left_border_mm ) # disabled
       @left_border_mm = left_border_mm
     end
 
@@ -51,8 +188,8 @@ module Io::Creat::Slipstick
         for j in 0..18
           value = base + j * step
           # physical dimension coordinates
-          x = Math.log10( value ) * @width_mm / @size
-          h = @height_mm * ( j == 0 ? @@heights[0] : ( j % 2 == 0 ? @@heights[1] : @@heights[2] ) )
+          x = Math.log10( value ) * @w_mainscale_mm / @size
+          h = @h_mm * ( j == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0] : ( j % 2 == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] ) )
           if j < 18 # last one is not rendered, but is required for small ticks calculation
            render_tick( x, h, ( j % 2 ) == 0 ? "%d" % value : nil )
           end
@@ -61,8 +198,8 @@ module Io::Creat::Slipstick
             # fill the range with smallest ticks
             delta = x - last
             no_smallest = 0
-            @@smallest.each do | no |
-              if delta > no * @min_dist_mm
+            @dim[Io::Creat::Slipstick::Key::FODDERS].each do | no |
+              if delta > no * @dim[Io::Creat::Slipstick::Key::CLEARING]
                 no_smallest = no
                 break
               end
@@ -72,7 +209,7 @@ module Io::Creat::Slipstick
               stepper = step / no_smallest
               for k in 1..no_smallest - 1
                 mx = Math.log10( base + ( j  - 1 ) * step + k * stepper ) * @width_mm / @size
-                h = @height_mm * ( k % ( no_smallest / 5 )  == 0 ? @@heights[3] : @@heights[4] )
+                h = @height_mm * ( k % ( no_smallest / 5 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][4] )
                 render_tick( mx, h, nil )
               end
             end
@@ -81,51 +218,15 @@ module Io::Creat::Slipstick
         end
       end
       # last tick
-      render_tick( @width_mm, @height_mm, "%d" % ( 10 ** @size ) )
+      render_tick( @w_mainscale_mm, @h_mm, "%d" % ( 10 ** @size ) )
       # add constants if any specified
-      render_constants()
-      render_subscale()
-      if not @label.nil?
-        img = @parent.instance_variable_get( :@parent ).instance_variable_get( :@img )
-        x = @parent.instance_variable_get( :@parent ).instance_variable_get( :@border_x_mm )
-        img.text( "%fmm" % x,
-                  "%fmm" % ( @baseline_y_mm + ( @align_bottom ? -0.20 : 0.9 ) * @font_size_mm ), # compensation for ignored (by viewers) vertical alignments
-                  "%s" % @label,
-                  { "fill" => "black",
-                    "font-size" => "%fmm" % @font_size_mm,
-                    "font-family" => "Arial",
-                    "text-anchor" => "left",
-                    "font-weight" => "bold" } )
-      end
+      #render_constants()
+      #render_subscale()
     end
 
-    private
-    def render_tick ( x_mm, height_mm, label = nil, bold = true, cursive = false )
-      img = @parent.instance_variable_get( :@parent ).instance_variable_get( :@img )
-      mult = @align_bottom ? -1 : 1
-      img.line( "%fmm" % ( @baseline_x_mm + x_mm ),
-                "%fmm" % @baseline_y_mm,
-                "%fmm" % ( @baseline_x_mm + x_mm ),
-                "%fmm" % ( @baseline_y_mm + mult * height_mm ),
-                { "stroke" => "black",
-                  "stroke-width" => "%fmm" % @@tick_width,
-                  "stroke-linecap" => "square" } )
-      if not label.nil?
-        img.text( "%fmm" % ( @baseline_x_mm + x_mm ),
-                  "%fmm" % ( mult * height_mm + @baseline_y_mm + ( @align_bottom ? -0.20 : 0.9 ) * @font_size_mm ), # compensation for ignored (by viewers) vertical alignments
-                  "%s" % label,
-                  { "fill" => "black",
-                    "font-size" => "%fmm" % @font_size_mm,
-                    "font-family" => "Arial",
-                    "font-style" => ( cursive ? "italic" : "normal" ),
-                    "text-anchor" => "middle",
-                    "dominant-baseline" => "hanging", # seems to be ignored by viewers
-                    "font-weight" => bold ? "bold" : "normal" } )
-      end
-    end
 
     private
-    def render_constants()
+    def render_constants() # disabled
       @constants.each do | name, value |
         x = Math.log10( value ) * @width_mm / @size
         h = @height_mm * @@heights[1]
@@ -135,7 +236,7 @@ module Io::Creat::Slipstick
 
     # fill range given by border with short scale of log() for values under 1 to the left of the 1 tick
     private
-    def render_subscale ( )
+    def render_subscale ( ) # disabled
       if @left_border_mm.nil?
         return # no data to generate
       end
