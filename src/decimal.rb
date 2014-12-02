@@ -17,9 +17,6 @@ module Io::Creat::Slipstick
     CLEARING      = 24
     FODDERS       = 25
     VERT_CORR     = 26
-    TICK          = 101
-    SCALE         = 102
-    CONSTANT      = 103
   end
 
   # pre-defined constants
@@ -39,12 +36,12 @@ module Io::Creat::Slipstick
                Io::Creat::Slipstick::Key::FONT_WEIGHT => 'bold',
                Io::Creat::Slipstick::Key::FONT_STYLE  => 'normal',
                Io::Creat::Slipstick::Key::FONT_COLOR  => 'black',
-               Io::Creat::Slipstick::Key::FONT_SIZE   => 2.3, # mm
+               Io::Creat::Slipstick::Key::FONT_SIZE   => 2.1, # mm
              }
     # per scale style
-    DEFAULT = { Io::Creat::Slipstick::Key::TICK     => ENTITY,
-                Io::Creat::Slipstick::Key::SCALE    => ENTITY,
-                Io::Creat::Slipstick::Key::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic' } )
+    DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,
+                Io::Creat::Slipstick::Entity::SCALE    => ENTITY,
+                Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic' } )
               }
   end
 
@@ -54,7 +51,7 @@ module Io::Creat::Slipstick
                 Io::Creat::Slipstick::Key::TICK_OVERFLOW => 0, # mm
                 Io::Creat::Slipstick::Key::CLEARING      => 0.5, # mm, min distance between neighbouring ticks
                 Io::Creat::Slipstick::Key::FODDERS       => [ 50.0, 25.0, 10.0, 5.0, 2.0 ], # number of smallest ticks to fill range between majors and their halfs
-                Io::Creat::Slipstick::Key::VERT_CORR     => [ 0.2, 0.9 ], # corrections to workaround lack of support for dominant-baseline
+                Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.2, 0.9 ], # corrections to workaround lack of support for dominant-baseline
               }
   end
 
@@ -113,27 +110,27 @@ module Io::Creat::Slipstick
     end
 
     def calc_tick_font_height_mm ( )
-      return @style[Io::Creat::Slipstick::Key::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] * 1.2
+      return @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] * 1.3
     end
 
     def render_label ( )
       if not @label.nil? and @w_label_mm > 0
-        font_size_mm = @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_SIZE]
+        font_size_mm = @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_SIZE]
         @img.text( "%fmm" % ( @off_x_mm + @w_label_mm / 2),
-                   "%fmm" % ( @off_y_mm + ( @flipped ? -0.20 : 0.9 ) * font_size_mm ),
+                   "%fmm" % ( @off_y_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ),
                    "%s" % @label,
-                   { "fill" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_COLOR],
+                   { "fill" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_COLOR],
                      "font-size" => "%fmm" % font_size_mm,
-                     "font-family" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_FAMILY],
+                     "font-family" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_FAMILY],
                      "text-anchor" => "middle",
-                     "font-weight" => @style[Io::Creat::Slipstick::Key::SCALE][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
+                     "font-weight" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
       end
     end
 
     # draws a vertical line with the current line style and optionally adds
     # a label to it
     protected
-    def render_tick ( x_mm, h_mm, label = nil, style = Io::Creat::Slipstick::Key::TICK )
+    def render_tick ( x_mm, h_mm, label = nil, style = Io::Creat::Slipstick::Entity::TICK )
       flip = @flipped ? -1 : 1
       @img.line( "%fmm" % ( @off_x_mm + x_mm ),
                  "%fmm" % ( @off_y_mm - flip * @dim[Io::Creat::Slipstick::Key::CLEARING] ),
@@ -145,7 +142,7 @@ module Io::Creat::Slipstick
       if not label.nil?
         font_size_mm = @style[style][Io::Creat::Slipstick::Key::FONT_SIZE]
         @img.text( "%fmm" % ( @off_x_mm + x_mm ),
-                   "%fmm" % ( flip * h_mm + @off_y_mm + ( @flipped ? -0.20 : 0.9 ) * font_size_mm ), # compensation for ignored (by viewers) vertical alignments
+                   "%fmm" % ( flip * h_mm + @off_y_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ), # compensation for ignored (by viewers) vertical alignments
                    "%s" % label,
                    { "fill" => @style[style][Io::Creat::Slipstick::Key::FONT_COLOR],
                      "font-size" => "%fmm" % font_size_mm,
@@ -226,7 +223,7 @@ module Io::Creat::Slipstick
       # label
       render_label( )
       # add constants if any specified
-      #render_constants()
+      render_constants()
       render_subscale()
     end
 
@@ -234,9 +231,9 @@ module Io::Creat::Slipstick
     private
     def render_constants() # disabled
       @constants.each do | name, value |
-        x = Math.log10( value ) * @width_mm / @size
-        h = @height_mm * @@heights[1]
-        render_tick( x, h, "%s" % name, false, true )
+        x = @w_label_mm + @w_subscale_mm + Math.log10( value ) * @w_mainscale_mm / @size
+        h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1]
+        render_tick( x, h, "%s" % name, Io::Creat::Slipstick::Entity::CONSTANT )
       end
     end
 
