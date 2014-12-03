@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-require './layout'
+require_relative 'sheet'
 
 sheet = Io::Creat::Slipstick::Layout::Sheet.new( )
 strip = sheet.create_strip( 5, 250, 5, 20, 15 )
