@@ -42,7 +42,7 @@ module Io::Creat::Slipstick
           end
 
           if j > 0
-	    last = render_fodder( last, x, base + ( j - 1 ) * step, step )
+	    render_fodder( last, x, base + ( j - 1 ) * step, step )
           end
           last = x
         end
