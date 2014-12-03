@@ -49,7 +49,7 @@ module Io::Creat::Slipstick
   module Dim
     DEFAULT = { Io::Creat::Slipstick::Key::TICK_HEIGHT   => [ 1.0, 0.8, 0.7, 0.6, 0.45, 0.4 ],
                 Io::Creat::Slipstick::Key::TICK_OVERFLOW => 0, # mm
-                Io::Creat::Slipstick::Key::CLEARING      => 0.5, # mm, min distance between neighbouring ticks
+                Io::Creat::Slipstick::Key::CLEARING      => 0.38, # mm, min distance between neighbouring ticks
                 Io::Creat::Slipstick::Key::FODDERS       => [ 50.0, 25.0, 10.0, 5.0, 2.0 ], # number of smallest ticks to fill range between majors and their halfs
                 Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.2, 0.9 ], # corrections to workaround lack of support for dominant-baseline
               }
@@ -247,14 +247,14 @@ module Io::Creat::Slipstick
 
       value = 1
       last = @w_label_mm + @w_subscale_mm
-      step = 0.025
+      step = 0.02
       while true do
         value -= step
         x = @w_label_mm + @w_subscale_mm + Math.log10( value ) * @w_mainscale_mm / @size
         if x <= @w_label_mm
           return
         end
-        round = ( value * 20 ).round(2) % 2 == 0
+        round = ( value * 20 ).round( 2 ) % 2 == 0
         h = @h_mm * ( round ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] )
         render_tick( x, h, ( round ? ( "%.1f" % value )[1..-1] : nil ) )
 
