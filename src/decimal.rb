@@ -30,7 +30,7 @@ module Io::Creat::Slipstick
 
   module Style
     # style is associated with entity (per entity)
-    ENTITY = { Io::Creat::Slipstick::Key::LINE_WIDTH  => 0.15, # mm
+    ENTITY = { Io::Creat::Slipstick::Key::LINE_WIDTH  => 0.1, # mm
                Io::Creat::Slipstick::Key::LINE_COLOR  => 'black',
                Io::Creat::Slipstick::Key::FONT_FAMILY => 'Arial',
                Io::Creat::Slipstick::Key::FONT_WEIGHT => 'bold',
@@ -134,7 +134,7 @@ module Io::Creat::Slipstick
     def render_tick ( x_mm, h_mm, label = nil, style = Io::Creat::Slipstick::Entity::TICK )
       flip = @flipped ? -1 : 1
       @img.line( "%fmm" % ( @off_x_mm + x_mm ),
-                 "%fmm" % ( @off_y_mm - flip * @dim[Io::Creat::Slipstick::Key::CLEARING] ),
+                 "%fmm" % ( @off_y_mm - flip * ( style == Io::Creat::Slipstick::Entity::CONSTANT ? -@dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] * h_mm : @dim[Io::Creat::Slipstick::Key::CLEARING] ) ),
                  "%fmm" % ( @off_x_mm + x_mm ),
                  "%fmm" % ( @off_y_mm + flip * h_mm ),
                  { "stroke" => @style[style][Io::Creat::Slipstick::Key::LINE_COLOR],
