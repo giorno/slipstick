@@ -98,14 +98,15 @@ module Io::Creat::Slipstick
 
   class Scale < Node
     public
-    def initialize ( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, w_mainscale_mm, w_label_mm = 0, w_subscale_mm = 0, w_after_mm = 0, flipped = false )
+    def initialize ( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, flipped = false )
       super( parent, rel_off_x_mm, rel_off_y_mm )
       @label          = label
       @h_mm           = h_mm
-      @w_mainscale_mm = w_mainscale_mm
-      @w_label_mm     = w_label_mm
-      @w_subscale_mm  = w_subscale_mm
-      @w_after_mm     = w_after_mm
+      # copy widths from the parent
+      @w_mainscale_mm = @parent.instance_variable_get( :@w_mainscale_mm )
+      @w_label_mm     = @parent.instance_variable_get( :@w_label_mm )
+      @w_subscale_mm  = @parent.instance_variable_get( :@w_subscale_mm )
+      @w_after_mm     = @parent.instance_variable_get( :@w_after_mm )
       @flipped        = flipped
     end
 
@@ -159,8 +160,8 @@ module Io::Creat::Slipstick
   class DecimalScale < Scale
 
     public
-    def initialize ( parent, label, size, rel_off_x_mm, rel_off_y_mm, h_mm, w_mainscale_mm, w_label_mm = 0, w_subscale_mm = 0, w_after_mm = 0, flipped = false )
-      super( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, w_mainscale_mm, w_label_mm, w_subscale_mm, w_after_mm, flipped )
+    def initialize ( parent, label, size, rel_off_x_mm, rel_off_y_mm, h_mm, flipped = false )
+      super( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, flipped )
 
       @size          = size
       @constants     = {}

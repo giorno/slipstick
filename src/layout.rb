@@ -20,7 +20,7 @@ module Io::Creat::Slipstick::Layout
 
     public
     def create_scale ( label, size, rel_off_y_mm = 0, flipped = false  )
-      return Io::Creat::Slipstick::DecimalScale.new( self, label, size, 0, rel_off_y_mm, @h_mm, @w_mainscale_mm, @w_label_mm, @w_subscale_mm, @w_after_mm, flipped )
+      return Io::Creat::Slipstick::DecimalScale.new( self, label, size, 0, rel_off_y_mm, @h_mm, flipped )
     end
 
     public
