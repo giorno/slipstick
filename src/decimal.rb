@@ -8,13 +8,20 @@ module Io::Creat::Slipstick
   class DecimalScale < Scale
 
     public
-    def initialize ( parent, label, size, rel_off_x_mm, rel_off_y_mm, h_mm, flipped = false )
+    def initialize ( parent, label, size, rel_off_x_mm, rel_off_y_mm, h_mm, flipped = false, inverse = false )
       super( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, flipped )
 
       @size      = size
+      @inverse   = inverse # if true, scale runs from the right to the left
       @constants = {}
       @scale     = @w_mainscale_mm / @size
       @start_mm  = @w_label_mm + @w_subscale_mm
+      if @inverse
+        @start_mm += @w_mainscale_mm
+        @dir = -1
+      else
+        @dir = 1
+      end
     end
 
     # these constants will be added as explicit ticks with cursive names when render() is called
@@ -35,7 +42,7 @@ module Io::Creat::Slipstick
         for j in 0..18
           value = base + j * step
           # physical dimension coordinates
-          x = @start_mm + Math.log10( value ) * @scale
+          x = @start_mm + @dir * Math.log10( value ) * @scale
           h = @h_mm * ( j == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0] : ( j % 2 == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] ) )
           if j < 18 # last one is not rendered, but is required for small ticks calculation
            render_tick( x, h, ( j % 2 ) == 0 ? "%d" % value : nil )
@@ -48,7 +55,7 @@ module Io::Creat::Slipstick
         end
       end
       # last tick
-      render_tick( @start_mm + @w_mainscale_mm, @h_mm, "%d" % ( 10 ** @size ) )
+      render_tick( @start_mm + @dir * @w_mainscale_mm, @h_mm, "%d" % ( 10 ** @size ) )
 
       render_label( )
       render_constants()
@@ -58,7 +65,7 @@ module Io::Creat::Slipstick
     private
     def render_constants()
       @constants.each do | name, value |
-        x = @start_mm + Math.log10( value ) * @scale
+        x = @start_mm + @dir * Math.log10( value ) * @scale
         h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1]
         render_tick( x, h, "%s" % name, Io::Creat::Slipstick::Entity::CONSTANT )
       end
@@ -79,7 +86,7 @@ module Io::Creat::Slipstick
       if no_smallest > 0
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
-          mx = @start_mm + Math.log10( start_val + k * stepper ) * @scale
+          mx = @start_mm + @dir * Math.log10( start_val + k * stepper ) * @scale
           h = @h_mm * ( k % ( no_smallest / 5 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][4] )
           render_tick( mx, h, nil )
         end
@@ -98,8 +105,8 @@ module Io::Creat::Slipstick
       step = 0.02
       while true do
         value -= step
-        x = @start_mm + Math.log10( value ) * @scale
-        if x <= @w_label_mm
+        x = @start_mm + @dir * Math.log10( value ) * @scale
+        if ( x.abs - @start_mm ).abs >= ( @inverse ? @w_after_mm : @w_subscale_mm )
           return
         end
         round = ( value * 20 ).round( 2 ) % 2 == 0

@@ -13,10 +13,8 @@ module Io::Creat::Slipstick::Layout
       super( nil, border_x_mm, border_y_mm.nil? ? border_x_mm : border_y_mm )
       @w_mm         = w_mm
       @h_mm         = h_mm
-      @border_x_mm  = border_x_mm
-      @border_y_mm  = border_y_mm.nil? ? border_x_mm : border_y_mm
-      @spacing_y_mm = spacing_y_mm.nil? ? @border_y_mm : spacing_y_mm
-      @y_tracker_mm = @border_y_mm
+      @spacing_y_mm = spacing_y_mm.nil? ? @off_y_mm : spacing_y_mm
+      @y_tracker_mm = @off_y_mm
       @img = Rasem::SVGImage.new( "%dmm" % @w_mm, "%dmm" % @h_mm )
     end
 
@@ -24,7 +22,7 @@ module Io::Creat::Slipstick::Layout
     public
     def create_strip ( h_mm, w_mainscale_mm, w_label_mm = 0, w_subscale_mm = 0, w_after_mm = 0 )
       raise "Strip widths exceed the space reserved for them in the Sheet" unless ( w_mainscale_mm + w_label_mm + w_subscale_mm + w_after_mm ) <= @w_mm
-      strip = Strip.new( self, h_mm, @border_x_mm, @y_tracker_mm, w_mainscale_mm, w_label_mm, w_subscale_mm, w_after_mm )
+      strip = Strip.new( self, h_mm, 0, @y_tracker_mm, w_mainscale_mm, w_label_mm, w_subscale_mm, w_after_mm )
       @y_tracker_mm += h_mm + @spacing_y_mm
       return strip
     end
