@@ -95,13 +95,14 @@ module Io::Creat::Slipstick
     # fill range given by border with short scale of log() for values under 1 to the left of the 1 tick
     private
     def render_subscales ( )
-               # start val    start pos                    step                    length
-      data = [ [ 1,           @start_mm,                   -0.02,                  @inverse ? @w_after_mm : @w_subscale_mm ], # subscale
-               [ 10 ** @size, @start_mm + @dir * @w_mainscale_mm, 0.1 * ( 10 ** @size ), @inverse ? @w_subscale_mm : @w_after_mm ] ] # afterscale
-      data.each do | value, start_mm, step, threshold_mm |
-        if threshold_mm <= 0
-          return
+               # match flag, start val    start pos                    step                    length
+      data = [ [ Io::Creat::Slipstick::Flag::RENDER_SUBSCALE, 1,           @start_mm,                   -0.02,                  @inverse ? @w_after_mm : @w_subscale_mm ], # subscale
+               [ Io::Creat::Slipstick::Flag::RENDER_AFTERSCALE, 10 ** @size, @start_mm + @dir * @w_mainscale_mm, 0.1 * ( 10 ** @size ), @inverse ? @w_subscale_mm : @w_after_mm ] ] # afterscale
+      data.each do | match, value, start_mm, step, threshold_mm |
+        if threshold_mm <= 0 or @flags & match == 0
+          next
         end
+
 
         last = start_mm
         while true do

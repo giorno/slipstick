@@ -51,9 +51,14 @@ module Io
         DEFAULT = { Io::Creat::Slipstick::Key::TICK_HEIGHT   => [ 1.0, 0.8, 0.7, 0.6, 0.45, 0.4 ],
                     Io::Creat::Slipstick::Key::TICK_OVERFLOW => 0, # mm
                     Io::Creat::Slipstick::Key::CLEARING      => 0.38, # mm, min distance between neighbouring ticks
-                    Io::Creat::Slipstick::Key::FODDERS       => [ 50.0, 25.0, 10.0, 5.0, 2.0 ], # number of smallest ticks to fill range between majors and their halfs
+                    Io::Creat::Slipstick::Key::FODDERS       => [ 100.0, 50.0, 25.0, 10.0, 5.0, 2.0 ], # number of smallest ticks to fill range between majors and their halfs
                     Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.2, 0.9 ], # corrections to workaround lack of support for dominant-baseline
                   }
+      end
+
+      module Flag
+        RENDER_SUBSCALE   = 1
+        RENDER_AFTERSCALE = 2
       end
     end
   end

@@ -16,6 +16,11 @@ module Io::Creat::Slipstick
       @w_subscale_mm  = @parent.instance_variable_get( :@w_subscale_mm )
       @w_after_mm     = @parent.instance_variable_get( :@w_after_mm )
       @flipped        = flipped
+      @flags          = Io::Creat::Slipstick::Flag::RENDER_SUBSCALE | Io::Creat::Slipstick::Flag::RENDER_AFTERSCALE
+    end
+
+    def set_flags ( flags )
+      @flags = flags
     end
 
     def calc_tick_font_height_mm ( )
