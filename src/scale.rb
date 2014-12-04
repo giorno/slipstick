@@ -23,10 +23,30 @@ module Io::Creat::Slipstick
       @flags = flags
     end
 
+    # these constants will be added as explicit ticks with cursive names when render() is called
+    # predefined: Euler's number, Pythagoras' number, square root of 2, Fibonacci's number
+    public
+    def add_constants ( constants = CONST_MATH  )
+      @constants = constants
+    end
+
+    public
     def calc_tick_font_height_mm ( )
       return @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] * 1.3
     end
 
+    protected
+    def calc_fodder ( start_mm, end_mm )
+      delta = ( start_mm.abs - end_mm.abs ).abs
+      @dim[Io::Creat::Slipstick::Key::FODDERS].each do | no |
+        if delta > no * @dim[Io::Creat::Slipstick::Key::CLEARING]
+          return no
+        end
+      end
+      return 0
+    end
+
+    protected
     def render_label ( )
       if not @label.nil? and @w_label_mm > 0
         font_size_mm = @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_SIZE]

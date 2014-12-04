@@ -1,6 +1,12 @@
 
 require_relative 'constants'
 require_relative 'decimal'
+require_relative 'linear'
+
+module Io::Creat::Slipstick::ScaleType
+  LOG_DECIMAL = 0
+  LIN_DECIMAL = 1
+end
 
 module Io::Creat::Slipstick::Layout
 
@@ -18,8 +24,15 @@ module Io::Creat::Slipstick::Layout
     end
 
     public
-    def create_scale ( label, size, rel_off_y_mm = 0, flipped = false, inverse = false )
-      return Io::Creat::Slipstick::DecimalScale.new( self, label, size, 0, rel_off_y_mm, @h_mm, flipped, inverse )
+    def create_scale ( type, label, size, rel_off_y_mm = 0, flipped = false, inverse = false )
+      case type
+        when Io::Creat::Slipstick::ScaleType::LOG_DECIMAL
+          return Io::Creat::Slipstick::DecimalScale.new( self, label, size, 0, rel_off_y_mm, @h_mm, flipped, inverse )
+        when Io::Creat::Slipstick::ScaleType::LIN_DECIMAL
+          return Io::Creat::Slipstick::LinearScale.new( self, label, size, 0, rel_off_y_mm, @h_mm, flipped )
+        else
+          raise "Unrecognized scale type"
+      end
     end
 
     public

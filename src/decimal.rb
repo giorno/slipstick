@@ -4,7 +4,7 @@ require_relative 'scale'
 
 module Io::Creat::Slipstick
 
-  # a leaf node
+  # logarithmic decimal scale
   class DecimalScale < Scale
 
     public
@@ -74,14 +74,7 @@ module Io::Creat::Slipstick
     # fill the range with smallest ticks
     private
     def render_fodder( start_mm, end_mm, start_val, step )
-      delta = ( start_mm.abs - end_mm.abs ).abs
-      no_smallest = 0
-      @dim[Io::Creat::Slipstick::Key::FODDERS].each do | no |
-        if delta > no * @dim[Io::Creat::Slipstick::Key::CLEARING]
-          no_smallest = no
-          break
-        end
-      end
+      no_smallest = calc_fodder( start_mm, end_mm )
       if no_smallest > 0
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
