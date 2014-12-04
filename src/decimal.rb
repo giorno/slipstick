@@ -59,7 +59,7 @@ module Io::Creat::Slipstick
 
       render_label( )
       render_constants()
-      render_subscale()
+      render_subscales()
     end
 
     private
@@ -82,7 +82,6 @@ module Io::Creat::Slipstick
           break
         end
       end
-
       if no_smallest > 0
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
@@ -95,26 +94,30 @@ module Io::Creat::Slipstick
 
     # fill range given by border with short scale of log() for values under 1 to the left of the 1 tick
     private
-    def render_subscale ( )
-      if @w_subscale_mm <= 0
-        return
-      end
-
-      value = 1
-      last = @start_mm
-      step = 0.02
-      while true do
-        value -= step
-        x = @start_mm + @dir * Math.log10( value ) * @scale
-        if ( x.abs - @start_mm ).abs >= ( @inverse ? @w_after_mm : @w_subscale_mm )
+    def render_subscales ( )
+               # start val    start pos                    step                    length
+      data = [ [ 1,           @start_mm,                   -0.02,                  @inverse ? @w_after_mm : @w_subscale_mm ], # subscale
+               [ 10 ** @size, @start_mm + @dir * @w_mainscale_mm, 0.1 * ( 10 ** @size ), @inverse ? @w_subscale_mm : @w_after_mm ] ] # afterscale
+      data.each do | value, start_mm, step, threshold_mm |
+        if threshold_mm <= 0
           return
         end
-        round = ( value * 20 ).round( 2 ) % 2 == 0
-        h = @h_mm * ( round ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] )
-        render_tick( x, h, ( round ? ( "%.1f" % value )[1..-1] : nil ) )
 
-        render_fodder( last, x, value, 0.02 )
-        last = x
+        last = start_mm
+        while true do
+          value += step
+          x = @start_mm + @dir * Math.log10( value ) * @scale
+          if ( x.abs - start_mm ).abs >= threshold_mm
+            break
+          end
+	  
+          round = ( value * 20 ).round( 2 ) % 2 == 0
+          h = @h_mm * ( round ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] )
+          render_tick( x, h,  value < 1 ? ( round ? ( "%.1f" % value )[1..-1] : nil ) : nil )
+
+          render_fodder( last, x, value - step, step )
+          last = x
+        end
       end
     end
 
