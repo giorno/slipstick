@@ -24,9 +24,10 @@ module Io
       CONST_MATH = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 }
 
       module Entity
-        TICK     = 1 # regular tick for a calculated value
-        SCALE    = 2 # single scale
-        CONSTANT = 3 # tick for a pre-defined constant
+        TICK     = 10 # regular tick for a calculated value
+        LOTICK   = 20 # small font tick for a calculated value
+        SCALE    = 30 # single scale
+        CONSTANT = 40 # tick for a pre-defined constant
       end
 
       module Style
@@ -41,8 +42,9 @@ module Io
                  }
         # per scale style
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,
+                    Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 1.8 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => ENTITY,
-                    Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic' } )
+                    Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic', Io::Creat::Slipstick::Key::FONT_SIZE => 1.8 } )
                   }
       end
 

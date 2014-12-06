@@ -39,10 +39,10 @@ module Io::Creat::Slipstick
           x = @start_mm + Math.log10( compute( try_deg ) * 10 ) * @scale
           delta_mm = last - x
           if delta_mm >= @clear_mm
+            delta_deg = deg - try_deg
             h_idx = ( try_deg % 10 == 0 ) ? 0 : ( ( try_deg % 5 == 0 ) ? 1 : 2 )
             h_mm = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
-            render_tick( x, h_mm, "%d" % try_deg )
-            delta_deg = deg - try_deg
+            render_tick( x, h_mm, "%d" % try_deg, try_deg % 10 == 0 ? Io::Creat::Slipstick::Entity::TICK : Io::Creat::Slipstick::Entity::LOTICK )
             if last > @lower_deg
               FODDERS.each do | match, rules |
                 if delta_deg == match
