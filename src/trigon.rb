@@ -5,6 +5,11 @@ module Io::Creat::Slipstick
 
   # trigonometric scales are aligned to single sized decimal scales (1-10)
   class TrigonometricScale < Scale
+              # dist    total ticks     grouping
+    FODDERS = { 1  => [ [ 12.0, 6.0 ],  [ 2, 6 ] ],
+                5  => [ [ 30.0, 15.0 ], [ 5, 10 ] ],
+                10 => [ [ 20.0],        [ 2, 10 ] ],
+                20 => [ [ 10.0],        [ 2, 10 ] ] }
     public
     def set_params ( upper_deg, lower_deg, steps_deg, clear_mm = 5 )
       # ranges and stepping specified in degrees
@@ -40,52 +45,19 @@ module Io::Creat::Slipstick
             delta_deg = deg - try_deg
             $stderr.puts delta_deg
             if last > @lower_deg
-              if delta_deg == 1
-                [ 12.0, 6.0 ].each do | fodders |
-                  if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
-                    next
-                  end
-                  fstep_deg = step / fodders
-                  for i in 1..fodders - 1
-                    fh_idx = 2 + ( ( i % ( fodders / 2 )  == 0 ) ? 1 : ( i % ( fodders / 6 ) == 0 ? 2 : 3 ) )
-                    fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * 10 ) * @scale
-                    render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
-                  end
-                end
-              elsif delta_deg == 5
-                [ 30.0, 15.0 ].each do | fodders |
-                  if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
-                    next
-                  end
-                  fstep_deg = step / fodders
-                  for i in 1..fodders - 1
-                    fh_idx = 1 + ( ( i % ( fodders / 5 )  == 0 ) ? 1 : ( i % ( fodders / 10 ) == 0 ? 2 : 3 ) )
-                    fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * 10 ) * @scale
-                    render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
-                  end
-                end
-              elsif delta_deg == 10
-                [ 20.0 ].each do | fodders |
-                  if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
-                    next
-                  end
-                  fstep_deg = step / fodders
-                  for i in 1..fodders - 1
-                    fh_idx = 1 + ( ( i % ( fodders / 2 )  == 0 ) ? 1 : ( i % ( fodders / 10 ) == 0 ? 2 : 3 ) )
-                    fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * 10 ) * @scale
-                    render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
-                  end
-                end
-              elsif delta_deg == 20
-                [ 10.0 ].each do | fodders |
-                  if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
-                    next
-                  end
-                  fstep_deg = step / fodders
-                  for i in 1..fodders - 1
-                    fh_idx = 1 + ( ( i % ( fodders / 2 )  == 0 ) ? 1 : ( i % ( fodders / 10 ) == 0 ? 2 : 3 ) )
-                    fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * 10 ) * @scale
-                    render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
+              FODDERS.each do | match, rules |
+                if delta_deg == match
+                  rules[0].each do | fodders |
+                    if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
+                      next
+                    end
+                    fstep_deg = step / fodders
+                    for i in 1..fodders - 1
+                      fh_idx = match == 1 ? 2 : 1
+                      fh_idx += ( ( i % ( fodders / rules[1][0] )  == 0 ) ? 1 : ( i % ( fodders / rules[1][1] ) == 0 ? 2 : 3 ) )
+                      fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * 10 ) * @scale
+                      render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
+                    end
                   end
                 end
               end
