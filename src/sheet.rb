@@ -5,6 +5,29 @@ require_relative 'strip'
 
 module Io::Creat::Slipstick::Layout
 
+  class Caption < Io::Creat::Slipstick::Node
+    public
+    def initialize ( parent, rel_off_x_mm, rel_off_y_mm, label )
+      super( parent, rel_off_x_mm, rel_off_y_mm )
+      @label = label
+    end
+
+    public
+    def render ( )
+        @img.text( "%fmm" % @off_x_mm,
+                   "%fmm" % ( @off_y_mm + @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] ),
+                   "%s" % @label,
+                   { "fill" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_COLOR],
+                     "font-size" => "%fmm" % @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE],
+                     "font-family" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_FAMILY],
+                     "font-style" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_STYLE],
+                     "text-anchor" => "left",
+                     "dominant-baseline" => "hanging", # seems to be ignored by viewers
+                     "font-weight" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
+      
+    end
+  end
+
   # a vertical layout of Strips to be printed and cut out
   class Sheet < Io::Creat::Slipstick::Node
     # by default initialized to landscape A4 format with 5mm borders
@@ -25,6 +48,13 @@ module Io::Creat::Slipstick::Layout
       strip = Strip.new( self, h_mm, 0, @y_tracker_mm, w_mainscale_mm, w_label_mm, w_subscale_mm, w_after_mm )
       @y_tracker_mm += h_mm + @spacing_y_mm
       return strip
+    end
+
+    public
+    def create_label ( label )
+      caption = Caption.new( self, 0, @y_tracker_mm, label )
+      @y_tracker_mm += caption.instance_variable_get( :@style )[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] + @spacing_y_mm
+      return caption
     end
 
     public

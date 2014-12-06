@@ -4,6 +4,7 @@ require_relative 'sheet'
 
 sheet = Io::Creat::Slipstick::Layout::Sheet.new( )
 
+  sheet.create_label( "LOGAREX 27403-II: L P K A | B CI C | D S T ST" )
   # LOGAREX 27403-II
   strip = sheet.create_strip( 20.0, 250.0, 5.0, 20.0, 15.0 )
     scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "", 0 )
