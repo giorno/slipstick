@@ -82,7 +82,7 @@ module Io::Creat::Slipstick
                  "%fmm" % ( @off_y_mm + flip * h_mm ),
                  { "stroke" => @style[style][Io::Creat::Slipstick::Key::LINE_COLOR],
                    "stroke-width" => "%fmm" % @style[style][Io::Creat::Slipstick::Key::LINE_WIDTH],
-                   "stroke-linecap" => "square" } )
+                   "stroke-linecap" => "butt" } )
       if not label.nil?
         font_size_mm = @style[style][Io::Creat::Slipstick::Key::FONT_SIZE]
         @img.text( "%fmm" % ( @off_x_mm + x_mm ),

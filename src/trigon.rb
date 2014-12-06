@@ -44,7 +44,6 @@ module Io::Creat::Slipstick
           try_deg = deg - step
           x = @start_mm + Math.log10( compute( try_deg ) * @precision ) * @scale
           delta_mm = last - x
-          #$stderr.puts "   %g" % try_deg, delta_mm
           if delta_mm.abs >= @clear_mm
             delta_deg = deg - try_deg
             h_idx = ( ( @precision * try_deg ) % @precision == 0 ) ? 0 : ( ( try_deg % 5 == 0 ) ? 1 : 2 )
@@ -53,7 +52,6 @@ module Io::Creat::Slipstick
             render_tick( x, h_mm, label, style )
             if last > @lower_deg
               @fodders.each do | match, rules |
-                $stderr.puts ">", delta_deg, match
                 if ( delta_deg - match ).abs < 0.00005
                   rules[0].each do | fodders |
                     if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
