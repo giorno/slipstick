@@ -28,15 +28,69 @@ module Io::Creat::Slipstick
       last = @start_mm + @w_mainscale_mm
       # rightmost tick
       render_tick( last, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], "%d" % deg )
-      while deg >= @lower_deg do
+      while deg > @lower_deg do
         @steps_deg.each do | step |
           try_deg = deg - step
           x = @start_mm + Math.log10( compute( try_deg ) * 10 ) * @scale
-          if last - x >= @clear_mm
-            h_idx = ( try_deg % 10 == 0 ) ? 0 : ( ( try_deg % 10 == 0 ) ? 1 : 2 )
+          delta_mm = last - x
+          if delta_mm >= @clear_mm
+            h_idx = ( try_deg % 10 == 0 ) ? 0 : ( ( try_deg % 5 == 0 ) ? 1 : 2 )
             h_mm = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
             render_tick( x, h_mm, "%d" % try_deg )
-            delta = deg - try_deg
+            delta_deg = deg - try_deg
+            $stderr.puts delta_deg
+            if last > @lower_deg
+              if delta_deg == 1
+                [ 12.0, 6.0 ].each do | fodders |
+                  if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
+                    next
+                  end
+                  fstep_deg = step / fodders
+                  for i in 1..fodders - 1
+                    fh_idx = 2 + ( ( i % ( fodders / 2 )  == 0 ) ? 1 : ( i % ( fodders / 6 ) == 0 ? 2 : 3 ) )
+                    fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * 10 ) * @scale
+                    render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
+                  end
+                end
+              elsif delta_deg == 5
+                [ 30.0, 15.0 ].each do | fodders |
+                  if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
+                    next
+                  end
+                  fstep_deg = step / fodders
+                  for i in 1..fodders - 1
+                    fh_idx = 1 + ( ( i % ( fodders / 5 )  == 0 ) ? 1 : ( i % ( fodders / 10 ) == 0 ? 2 : 3 ) )
+                    fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * 10 ) * @scale
+                    render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
+                  end
+                end
+              elsif delta_deg == 10
+                [ 20.0 ].each do | fodders |
+                  if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
+                    next
+                  end
+                  fstep_deg = step / fodders
+                  for i in 1..fodders - 1
+                    fh_idx = 1 + ( ( i % ( fodders / 2 )  == 0 ) ? 1 : ( i % ( fodders / 10 ) == 0 ? 2 : 3 ) )
+                    fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * 10 ) * @scale
+                    render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
+                  end
+                end
+              elsif delta_deg == 20
+                [ 10.0 ].each do | fodders |
+                  if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
+                    next
+                  end
+                  fstep_deg = step / fodders
+                  for i in 1..fodders - 1
+                    fh_idx = 1 + ( ( i % ( fodders / 2 )  == 0 ) ? 1 : ( i % ( fodders / 10 ) == 0 ? 2 : 3 ) )
+                    fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * 10 ) * @scale
+                    render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
+                  end
+                end
+              end
+            end
+            #render_fodder( last, x, deg, -step, h_idx + 1 )
             last = x
             deg = try_deg
             break
