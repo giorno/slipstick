@@ -46,7 +46,7 @@ module Io::Creat::Slipstick
           delta_mm = last - x
           if delta_mm.abs >= @clear_mm
             delta_deg = deg - try_deg
-            h_idx = ( ( @precision * try_deg ) % @precision == 0 ) ? 0 : ( ( try_deg % 5 == 0 ) ? 1 : 2 )
+            h_idx = ( ( @precision * try_deg ) % 100 == 0 ) ? 0 : ( ( ( @precision * try_deg ) % 50 == 0 ) ? 1 : 2 )
             h_mm = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
             style, label = fmt_label( try_deg )
             render_tick( x, h_mm, label, style )
