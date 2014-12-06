@@ -8,20 +8,17 @@ module Io::Creat::Slipstick
   class DecimalScale < Scale
 
     public
-    def initialize ( parent, label, size, rel_off_x_mm, rel_off_y_mm, h_mm, flipped = false, inverse = false )
-      super( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, flipped )
-
-      @size      = size
-      @inverse   = inverse # if true, scale runs from the right to the left
-      @constants = {}
-      @scale     = @w_mainscale_mm / @size
-      @start_mm  = @w_label_mm + @w_subscale_mm
+    def set_params ( size, inverse = false )
+      @size = size
+      @inverse = inverse # if true, scale runs from the right to the left
+      @scale = @w_mainscale_mm / @size
       if @inverse
         @start_mm += @w_mainscale_mm
         @dir = -1
       else
         @dir = 1
       end
+      @initialized = true
     end
 
     # these constants will be added as explicit ticks with cursive names when render() is called

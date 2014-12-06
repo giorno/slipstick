@@ -15,12 +15,22 @@ module Io::Creat::Slipstick
       @w_label_mm     = @parent.instance_variable_get( :@w_label_mm )
       @w_subscale_mm  = @parent.instance_variable_get( :@w_subscale_mm )
       @w_after_mm     = @parent.instance_variable_get( :@w_after_mm )
+      @start_mm       = @w_label_mm + @w_subscale_mm
+      @constants      = {}
       @flipped        = flipped
       @flags          = Io::Creat::Slipstick::Flag::RENDER_SUBSCALE | Io::Creat::Slipstick::Flag::RENDER_AFTERSCALE
+      @initialized    = false
     end
 
+    public
     def set_flags ( flags )
       @flags = flags
+    end
+
+    # used by Strip to check that all parameters were given to the scale
+    public
+    def check_initialized ( )
+      raise "Scale type specific parameters not initialized" unless @initialized
     end
 
     # these constants will be added as explicit ticks with cursive names when render() is called

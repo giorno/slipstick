@@ -8,13 +8,10 @@ module Io::Creat::Slipstick
   class LinearScale < Scale
 
     public
-    def initialize ( parent, label, size, rel_off_x_mm, rel_off_y_mm, h_mm, flipped = false )
-      super( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, flipped )
-
-      @size      = size
-      @constants = {}
-      @scale     = @w_mainscale_mm / @size
-      @start_mm  = @w_label_mm + @w_subscale_mm
+    def set_params ( size )
+      @size        = size
+      @initialized = true
+      @scale       = @w_mainscale_mm / @size
     end
 
     public
