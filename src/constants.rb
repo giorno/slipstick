@@ -50,7 +50,7 @@ module Io
 
       # dimensions controlling rendering of a scale (per scale)
       module Dim
-        DEFAULT = { Io::Creat::Slipstick::Key::TICK_HEIGHT   => [ 1.0, 0.85, 0.7, 0.55, 0.4, 0.25 ],
+        DEFAULT = { Io::Creat::Slipstick::Key::TICK_HEIGHT   => [ 1.0, 0.85, 0.7, 0.55, 0.4, 0.25, 0.15 ],
                     Io::Creat::Slipstick::Key::TICK_OVERFLOW => 0, # mm
                     Io::Creat::Slipstick::Key::CLEARING      => 0.4, # mm, min distance between neighbouring ticks
                     Io::Creat::Slipstick::Key::FODDERS       => [ 100.0, 50.0, 25.0, 10.0, 5.0, 2.0 ], # number of smallest ticks to fill range between majors and their halfs

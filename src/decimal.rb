@@ -40,13 +40,14 @@ module Io::Creat::Slipstick
           value = base + j * step
           # physical dimension coordinates
           x = @start_mm + @dir * Math.log10( value ) * @scale
-          h = @h_mm * ( j == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0] : ( j % 2 == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] ) )
+          h_idx = ( j == 0 ? 0 : ( j % 2 == 0 ? 1 : 2 ) )
+          h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
           if j < 18 # last one is not rendered, but is required for small ticks calculation
            render_tick( x, h, ( j % 2 ) == 0 ? "%d" % value : nil )
           end
 
           if j > 0
-	    render_fodder( last, x, base + ( j - 1 ) * step, step )
+	    render_fodder( last, x, base + ( j - 1 ) * step, step, 2 )
           end
           last = x
         end
@@ -70,13 +71,20 @@ module Io::Creat::Slipstick
 
     # fill the range with smallest ticks
     private
-    def render_fodder( start_mm, end_mm, start_val, step )
+    def render_fodder( start_mm, end_mm, start_val, step, h_idx_off = 2 )
       no_smallest = calc_fodder( start_mm, end_mm )
       if no_smallest > 0
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
           mx = @start_mm + @dir * Math.log10( start_val + k * stepper ) * @scale
-          h = @h_mm * ( k % ( no_smallest / 5 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][4] )
+          if no_smallest == 2 # simple case
+            h_idx = h_idx_off + 1
+          elsif no_smallest == 100
+            h_idx = h_idx_off + ( ( k % ( no_smallest / 5 ) == 0 ) ? 1 : ( k % ( no_smallest / 25 ) == 0 ? 2 : 3 ) )
+          else # 50, 25, 10
+            h_idx = h_idx_off + ( ( k % ( no_smallest / 5 ) == 0 ) ? 1 : ( k % ( no_smallest / 20 ) == 0 ? 2 : 3 ) )
+          end
+          h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
           render_tick( mx, h, nil )
         end
       end
@@ -93,7 +101,7 @@ module Io::Creat::Slipstick
           next
         end
 
-
+        prev_h_idx = 0
         last = start_mm
         while true do
           value += step
@@ -103,11 +111,20 @@ module Io::Creat::Slipstick
           end
 	  
           round = ( value * 20 ).round( 2 ) % 2 == 0
-          h = @h_mm * ( round ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][2] )
-          render_tick( x, h,  value < 1 ? ( round ? ( "%.1f" % value )[1..-1] : nil ) : nil )
+          h_idx = round ? 3 : 4
+          case match
+            when Io::Creat::Slipstick::Flag::RENDER_SUBSCALE
+              label = value < 1 && round ? ( "%.1f" % value )[1..-1] : nil
+            when Io::Creat::Slipstick::Flag::RENDER_AFTERSCALE
+              h_idx -= 1
+              label = "%g" % value
+          end
+          h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
+          render_tick( x, h, label, Io::Creat::Slipstick::Entity::LOTICK )
 
-          render_fodder( last, x, value - step, step )
+          render_fodder( last, x, value - step, step, [ h_idx, prev_h_idx ].max )
           last = x
+          prev_h_idx = h_idx
         end
       end
     end
