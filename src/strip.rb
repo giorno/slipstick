@@ -9,6 +9,7 @@ module Io::Creat::Slipstick::ScaleType
   LIN_DECIMAL = 1
   TGN_SIN     = 2
   TGN_TAN     = 3
+  TGN_SINTAN  = 4
 end
 
 module Io::Creat::Slipstick::Layout
@@ -37,6 +38,8 @@ module Io::Creat::Slipstick::Layout
           return Io::Creat::Slipstick::SinScale.new( self, label, 0, rel_off_y_mm, @h_mm, flipped )
         when Io::Creat::Slipstick::ScaleType::TGN_TAN
           return Io::Creat::Slipstick::TanScale.new( self, label, 0, rel_off_y_mm, @h_mm, flipped )
+        when Io::Creat::Slipstick::ScaleType::TGN_SINTAN
+          return Io::Creat::Slipstick::SinTanScale.new( self, label, 0, rel_off_y_mm, @h_mm, flipped )
         else
           raise "Unrecognized scale type"
       end
