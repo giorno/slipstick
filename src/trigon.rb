@@ -43,7 +43,6 @@ module Io::Creat::Slipstick
             h_mm = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
             render_tick( x, h_mm, "%d" % try_deg )
             delta_deg = deg - try_deg
-            $stderr.puts delta_deg
             if last > @lower_deg
               FODDERS.each do | match, rules |
                 if delta_deg == match
