@@ -42,7 +42,7 @@ module Io::Creat::Slipstick
 
     public
     def calc_tick_font_height_mm ( )
-      return @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] * 1.3
+      return @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] * 1.1
     end
 
     protected
