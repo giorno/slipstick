@@ -29,6 +29,16 @@ module Io::Creat::Slipstick
     end
 
     public
+    def set_overflow ( overflow_mm )
+      @dim = @dim.merge( Io::Creat::Slipstick::Key::TICK_OVERFLOW => overflow_mm )
+    end
+
+    protected
+    def compute ( val )
+      return val
+    end
+
+    public
     def render ( )
       last = @start_mm
       for i in 1..@size
@@ -76,12 +86,14 @@ module Io::Creat::Slipstick
       if no_smallest > 0
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
-          mx = @start_mm + @dir * Math.log10( start_val + k * stepper ) * @scale
+          mx = @start_mm + @dir * Math.log10( compute( start_val + k * stepper ) ) * @scale
           if no_smallest == 2 # simple case
             h_idx = h_idx_off + 1
           elsif no_smallest == 100
             h_idx = h_idx_off + ( ( k % ( no_smallest / 5 ) == 0 ) ? 1 : ( k % ( no_smallest / 25 ) == 0 ? 2 : 3 ) )
-          else # 50, 25, 10
+          elsif no_smallest == 25
+            h_idx = h_idx_off + ( ( k % ( no_smallest / 5 ) == 0 ) ? 1 : 2 )
+          else # 50, 10
             h_idx = h_idx_off + ( ( k % ( no_smallest / 5 ) == 0 ) ? 1 : ( k % ( no_smallest / 20 ) == 0 ? 2 : 3 ) )
           end
           h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]

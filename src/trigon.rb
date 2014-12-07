@@ -76,21 +76,7 @@ module Io::Creat::Slipstick
       end
       render_label( )
     end
-
-    # fill the range with smallest ticks
-    private
-    def render_fodder( start_mm, end_mm, start_val, step, h_off_idx )
-      no_smallest = calc_fodder( start_mm, end_mm )
-      if no_smallest > 0
-        stepper = step / no_smallest
-        for k in 1..no_smallest - 1
-          mx = @start_mm + Math.log10( compute( start_val + k * stepper ) * 10 ) * @scale
-          h = @h_mm * ( k % ( no_smallest / 5 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_off_idx] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_off_idx + 1] )
-          render_tick( mx, h, nil )
-        end
-      end
-    end
-end
+  end
 
   class SinScale < TrigonometricScale
     protected
