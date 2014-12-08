@@ -15,11 +15,11 @@ module Io::Creat::Slipstick
       @scale       = @w_mainscale_mm / 1
       @initialized = true
       @precision   = 10
-                 # dist    total ticks     grouping
-      @fodders = { 1  => [ [ 12.0, 6.0 ],  [ 2, 6 ] ],
-                   5  => [ [ 30.0, 15.0 ], [ 5, 10 ] ],
-                   10 => [ [ 20.0],        [ 2, 10 ] ],
-                   20 => [ [ 10.0],        [ 2, 10 ] ] }
+                 # dist    total ticks        grouping
+      @fodders = { 1  => [ [ 12.0, 6.0 ],     [ 2, 6 ] ],
+                   5  => [ [ 30.0, 15.0, 5 ], [ 5, 10, 1 ] ],
+                   10 => [ [ 20.0 ],          [ 2, 10 ] ],
+                   20 => [ [ 10.0 ],          [ 2, 10 ] ] }
     end
 
     # x position calculation function, must be overriden in the subclasses
@@ -60,7 +60,7 @@ module Io::Creat::Slipstick
                     fstep_deg = step / fodders
                     for i in 1..fodders - 1
                       fh_idx = ( match - @steps_deg[0] ).abs < 0.00005 ? 2 : 1
-                      fh_idx += ( ( i % ( fodders / rules[1][0] )  == 0 ) ? 1 : ( i % ( fodders / rules[1][1] ) == 0 ? 2 : 3 ) )
+                      fh_idx += ( ( i % ( fodders / rules[1][0] ) == 0 ) ? 1 : ( i % ( fodders / rules[1][1] ) == 0 ? 2 : 3 ) )
                       fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * @precision ) * @scale
                       render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
                     end
