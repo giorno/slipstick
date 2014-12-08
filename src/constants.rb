@@ -32,28 +32,36 @@ module Io
 
       module Style
         # style is associated with entity (per entity)
-        ENTITY = { Io::Creat::Slipstick::Key::LINE_WIDTH  => 0.1, # mm
+        ENTITY = { Io::Creat::Slipstick::Key::LINE_WIDTH  => 0.12, # mm
                    Io::Creat::Slipstick::Key::LINE_COLOR  => 'black',
                    Io::Creat::Slipstick::Key::FONT_FAMILY => 'Arial',
                    Io::Creat::Slipstick::Key::FONT_WEIGHT => 'bold',
                    Io::Creat::Slipstick::Key::FONT_STYLE  => 'normal',
                    Io::Creat::Slipstick::Key::FONT_COLOR  => 'black',
-                   Io::Creat::Slipstick::Key::FONT_SIZE   => 2.1, # mm
+                   Io::Creat::Slipstick::Key::FONT_SIZE   => 2.4, # mm
                  }
         # per scale style
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,
-                    Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 1.8 } ),
+                    Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 1.6 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => ENTITY,
                     Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic', Io::Creat::Slipstick::Key::FONT_SIZE => 1.8 } )
                   }
+
+        SMALL = DEFAULT.merge( Io::Creat::Slipstick::Entity::TICK => DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 1.8 } ) )
       end
 
       # dimensions controlling rendering of a scale (per scale)
       module Dim
-        DEFAULT = { Io::Creat::Slipstick::Key::TICK_HEIGHT   => [ 1.0, 0.88, 0.76, 0.54, 0.42, 0.3, 0.18 ],
+        DEFAULT = { Io::Creat::Slipstick::Key::TICK_HEIGHT   => [ 1.0, 0.9, 0.78, 0.66, 0.54, 0.42, 0.3 ],
                     Io::Creat::Slipstick::Key::TICK_OVERFLOW => 0, # mm
                     Io::Creat::Slipstick::Key::CLEARING      => 0.4, # mm, min distance between neighbouring ticks
-                    Io::Creat::Slipstick::Key::FODDERS       => [ 100.0, 50.0, 25.0, 10.0, 5.0, 2.0 ], # number of smallest ticks to fill range between majors and their halfs
+                    # number of smallest ticks to fill ranges:  ticks => groupings (for tick height calculation)
+                    Io::Creat::Slipstick::Key::FODDERS       => { 100 => [ 5, 10, 50 ],
+                                                                   50 => [ 5, 10 ],
+                                                                   25 => [ 5 ],
+                                                                   10 => [ 5 ],
+                                                                    5  => [ ],
+                                                                    2  => [ ] },
                     Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.15, 0.95 ], # corrections to workaround lack of support for dominant-baseline
                   }
       end

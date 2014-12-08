@@ -48,7 +48,7 @@ module Io::Creat::Slipstick
     protected
     def calc_fodder ( start_mm, end_mm )
       delta = ( start_mm.abs - end_mm.abs ).abs
-      @dim[Io::Creat::Slipstick::Key::FODDERS].each do | no |
+      @dim[Io::Creat::Slipstick::Key::FODDERS].each do | no, heights |
         if delta > no * @dim[Io::Creat::Slipstick::Key::CLEARING]
           return no
         end

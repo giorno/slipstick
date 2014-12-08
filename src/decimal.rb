@@ -87,15 +87,13 @@ module Io::Creat::Slipstick
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
           mx = @start_mm + @dir * Math.log10( compute( start_val + k * stepper ) ) * @scale
-          if no_smallest == 2 # simple case
-            h_idx = h_idx_off + 1
-          elsif no_smallest == 100
-            h_idx = h_idx_off + ( ( k % ( no_smallest / 5 ) == 0 ) ? 1 : ( k % ( no_smallest / 25 ) == 0 ? 2 : 3 ) )
-          elsif no_smallest == 25
-            h_idx = h_idx_off + ( ( k % ( no_smallest / 5 ) == 0 ) ? 1 : 2 )
-          else # 50, 10
-            h_idx = h_idx_off + ( ( k % ( no_smallest / 5 ) == 0 ) ? 1 : ( k % ( no_smallest / 20 ) == 0 ? 2 : 3 ) )
-          end
+            h_idx = h_idx_off + @dim[Io::Creat::Slipstick::Key::FODDERS][no_smallest].length + 1
+            @dim[Io::Creat::Slipstick::Key::FODDERS][no_smallest].each_with_index do | mod, index |
+              if k % ( no_smallest / mod ) == 0
+                h_idx = h_idx_off + 1 + index
+                break
+              end
+            end
           h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
           render_tick( mx, h, nil )
         end

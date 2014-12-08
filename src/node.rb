@@ -28,6 +28,11 @@ module Io::Creat::Slipstick
       @children = []
     end
 
+    public
+    def set_style ( style )
+      @style = style
+    end
+
     # make sure that @img instance is initialized
     private
     def assert ( )
