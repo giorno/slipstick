@@ -57,13 +57,19 @@ module Io::Creat::Slipstick::Layout
       @img.line( "%gmm" % @off_x_mm, "%gmm" % @off_y_mm, "%gmm" % ( @off_x_mm + MARK_SIZE ), "%gmm" % @off_y_mm, style )
       @img.line( "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%gmm" % ( @off_y_mm + @h_mm ), "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%gmm" % ( @off_y_mm + @h_mm - MARK_SIZE ), style )
       @img.line( "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%gmm" % ( @off_y_mm + @h_mm ), "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm - MARK_SIZE ), "%gmm" % ( @off_y_mm + @h_mm ), style )
-      h_mm = @h_mm / @children.length # allocate evenly
       off_y_mm = @off_y_mm
+      # calculate height occupied by text
+      h_text_mm = 0
+      @children.each do | child |
+        h_text_mm += child.calc_tick_font_height_mm( )
+      end
+      h_mm = ( @h_mm - h_text_mm ) / @children.length
       @children.each do | child |
         child.check_initialized( )
-        child.instance_variable_set( :@off_y_mm, off_y_mm + ( child.instance_variable_get( :@flipped ) ? h_mm : 0 ) )
-        child.instance_variable_set( :@h_mm, h_mm - child.calc_tick_font_height_mm( ) )
-        off_y_mm += h_mm
+        h_scale_mm = h_mm + child.calc_tick_font_height_mm( )
+        child.instance_variable_set( :@off_y_mm, off_y_mm + ( child.instance_variable_get( :@flipped ) ? h_scale_mm : 0 ) )
+        child.instance_variable_set( :@h_mm, h_mm )
+        off_y_mm += h_scale_mm
         child.render( )
       end
     end
