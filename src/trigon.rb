@@ -5,7 +5,7 @@ module Io::Creat::Slipstick
 
   # trigonometric scales are aligned to single sized decimal scales (1-10)
   class TrigonometricScale < Scale
-    MAX_LOOPS = 10
+    MAX_LOOPS = 100
 
     public
     def set_params ( upper_deg, lower_deg, steps_deg, clear_mm = 5 )
