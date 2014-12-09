@@ -38,7 +38,7 @@ module Io::Creat::Slipstick
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
           mx = @start_mm + ( start_val * step + k * stepper ) * @scale
-          h = @h_mm * ( k % ( no_smallest / 5 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][4] )
+          h = @h_mm * ( k % ( no_smallest / 5.0 )  == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][4] )
           render_tick( mx, h, nil )
         end
       end

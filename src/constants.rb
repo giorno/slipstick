@@ -34,7 +34,7 @@ module Io
         # style is associated with entity (per entity)
         ENTITY = { Io::Creat::Slipstick::Key::LINE_WIDTH  => 0.11, # mm
                    Io::Creat::Slipstick::Key::LINE_COLOR  => 'black',
-                   Io::Creat::Slipstick::Key::FONT_FAMILY => 'Arial',
+                   Io::Creat::Slipstick::Key::FONT_FAMILY => 'Droid Sans,Arial,Sans-serif',
                    Io::Creat::Slipstick::Key::FONT_WEIGHT => 'bold',
                    Io::Creat::Slipstick::Key::FONT_STYLE  => 'normal',
                    Io::Creat::Slipstick::Key::FONT_COLOR  => 'black',

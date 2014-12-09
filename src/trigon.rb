@@ -5,6 +5,8 @@ module Io::Creat::Slipstick
 
   # trigonometric scales are aligned to single sized decimal scales (1-10)
   class TrigonometricScale < Scale
+    MAX_LOOPS = 10
+
     public
     def set_params ( upper_deg, lower_deg, steps_deg, clear_mm = 5 )
       # ranges and stepping specified in degrees
@@ -39,7 +41,9 @@ module Io::Creat::Slipstick
       last = @start_mm + Math.log10( compute( @upper_deg ) * @precision ) * @scale
       # rightmost tick
       render_tick( last, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], "%d°" % deg )
-      while deg > @lower_deg do
+      i = 0
+      while i < MAX_LOOPS and deg > @lower_deg do
+        i += 1
         @steps_deg.each do | step |
           try_deg = deg - step
           x = @start_mm + Math.log10( compute( try_deg ) * @precision ) * @scale
