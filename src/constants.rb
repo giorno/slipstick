@@ -12,6 +12,7 @@ module Io
         FONT_STYLE    = 12
         FONT_COLOR    = 13
         FONT_SIZE     = 14
+        FONT_SPACING  = 15 # SVG letter-spacing property
         TICK_HEIGHT   = 21 # relative height of a tick, depending on the range subdivision
         TICK_OVERFLOW = 22 # how far beyond the scale border the tick shall overlap
         TICK_CLEARING = 23 # minimal distance between neighbouring ticks
@@ -32,17 +33,18 @@ module Io
 
       module Style
         # style is associated with entity (per entity)
-        ENTITY = { Io::Creat::Slipstick::Key::LINE_WIDTH  => 0.11, # mm
-                   Io::Creat::Slipstick::Key::LINE_COLOR  => 'black',
-                   Io::Creat::Slipstick::Key::FONT_FAMILY => 'Droid Sans,Arial,Sans-serif',
-                   Io::Creat::Slipstick::Key::FONT_WEIGHT => 'bold',
-                   Io::Creat::Slipstick::Key::FONT_STYLE  => 'normal',
-                   Io::Creat::Slipstick::Key::FONT_COLOR  => 'black',
-                   Io::Creat::Slipstick::Key::FONT_SIZE   => 2.4, # mm
+        ENTITY = { Io::Creat::Slipstick::Key::LINE_WIDTH   => 0.11, # mm
+                   Io::Creat::Slipstick::Key::LINE_COLOR   => 'black',
+                   Io::Creat::Slipstick::Key::FONT_FAMILY  => 'Droid Sans Mono,Arial,Sans-serif',
+                   Io::Creat::Slipstick::Key::FONT_WEIGHT  => 'normal',
+                   Io::Creat::Slipstick::Key::FONT_STYLE   => 'normal',
+                   Io::Creat::Slipstick::Key::FONT_COLOR   => 'black',
+                   Io::Creat::Slipstick::Key::FONT_SPACING => -0.1,
+                   Io::Creat::Slipstick::Key::FONT_SIZE    => 2.4, # mm
                  }
         # per scale style
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,
-                    Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 1.6 } ),
+                    Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.0 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => ENTITY,
                     Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic', Io::Creat::Slipstick::Key::FONT_SIZE => 1.8 } )
                   }

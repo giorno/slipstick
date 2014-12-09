@@ -67,6 +67,7 @@ module Io::Creat::Slipstick
                      "font-size" => "%fmm" % font_size_mm,
                      "font-family" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_FAMILY],
                      "text-anchor" => "middle",
+                     "letter-spacing" => "%gem" % @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_SPACING],
                      "font-weight" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
       end
     end
@@ -93,6 +94,7 @@ module Io::Creat::Slipstick
                      "font-family" => @style[style][Io::Creat::Slipstick::Key::FONT_FAMILY],
                      "font-style" => @style[style][Io::Creat::Slipstick::Key::FONT_STYLE],
                      "text-anchor" => "middle",
+                     "letter-spacing" => "%gem" % @style[style][Io::Creat::Slipstick::Key::FONT_SPACING],
                      "dominant-baseline" => "hanging", # seems to be ignored by viewers
                      "font-weight" => @style[style][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
       end
