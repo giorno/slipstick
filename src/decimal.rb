@@ -105,7 +105,7 @@ module Io::Creat::Slipstick
     def render_subscales ( )
                # match flag, start val    start pos                    step                    length
       data = [ [ Io::Creat::Slipstick::Flag::RENDER_SUBSCALE, 1,           @start_mm,                   -0.02,                  @inverse ? @w_after_mm : @w_subscale_mm ], # subscale
-               [ Io::Creat::Slipstick::Flag::RENDER_AFTERSCALE, 10 ** @size, @start_mm + @dir * @w_mainscale_mm, 0.1 * ( 10 ** @size ), @inverse ? @w_subscale_mm : @w_after_mm ] ] # afterscale
+               [ Io::Creat::Slipstick::Flag::RENDER_AFTERSCALE, 10 ** @size, @start_mm + @dir * @w_mainscale_mm, 0.05 * ( 10 ** @size ), @inverse ? @w_subscale_mm : @w_after_mm ] ] # afterscale
       data.each do | match, value, start_mm, step, threshold_mm |
         if threshold_mm <= 0 or @flags & match == 0
           next
@@ -120,14 +120,16 @@ module Io::Creat::Slipstick
             break
           end
 	  
-          round = ( value * 20 ).round( 2 ) % 2 == 0
-          h_idx = round ? 3 : 4
+          h_idx = 3
           case match
             when Io::Creat::Slipstick::Flag::RENDER_SUBSCALE
+              round = ( value * 20 ).round( 2 ) % 2 == 0
+              h_idx = round ? 3 : 4
               label = value < 1 && round ? ( "%.1f" % value )[1..-1] : nil
             when Io::Creat::Slipstick::Flag::RENDER_AFTERSCALE
+              round = ( value * 10 ** @size ).round( 2 ) % 10 ** ( @size + 1 ) == 0
               h_idx -= 1
-              label = "%g" % value
+              label = round ? "%g" % value : nil
           end
           h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
           render_tick( x, h, label, Io::Creat::Slipstick::Entity::LOTICK )
