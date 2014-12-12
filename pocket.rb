@@ -78,18 +78,18 @@ module Io
 
           # render invagination on a side of the stator
           protected
-          def pocket ( off_y_mm, alpha, dir = 1 )
-            vert_delta_y_mm = @r_mm * Math.tan( calc_rev_alpha( alpha ) / 2 )
-            hor_delta_y_mm = @r_mm * Math.sin( calc_rev_alpha( alpha ) )
-            hor_delta_x_mm = @r_mm * ( 1.0 - Math.cos( calc_rev_alpha( alpha ) ) )
+          def pocket ( dir = 1 )
+            vert_delta_y_mm = @r_mm * Math.tan( calc_rev_alpha( @alpha ) / 2 )
+            hor_delta_y_mm = @r_mm * Math.sin( calc_rev_alpha( @alpha ) )
+            hor_delta_x_mm = @r_mm * ( 1.0 - Math.cos( calc_rev_alpha( @alpha ) ) )
             # reference points A and B
             x_CD_mm = dir > 0 ? @w_mm : 0
             x_AB_mm = x_CD_mm - dir * @d_mm
-            y_A_mm = off_y_mm + dir * @w_pocket_mm / 2.0
-            y_B_mm = off_y_mm - dir * @w_pocket_mm / 2.0
+            y_A_mm = @off_y_mm + dir * @w_pocket_mm / 2.0
+            y_B_mm = @off_y_mm - dir * @w_pocket_mm / 2.0
             # reference points C and D
-            y_C_mm = y_B_mm - dir * @d_mm * Math.tan( alpha )
-            y_D_mm = y_A_mm + dir * @d_mm * Math.tan( alpha )
+            y_C_mm = y_B_mm - dir * @d_mm * Math.tan( @alpha )
+            y_D_mm = y_A_mm + dir * @d_mm * Math.tan( @alpha )
             # lead in
             line x_CD_mm, y_C_mm - dir * vert_delta_y_mm
             arc x_CD_mm - dir * hor_delta_x_mm, y_C_mm - dir * ( vert_delta_y_mm - hor_delta_y_mm ), @r_mm
@@ -109,9 +109,9 @@ module Io
             pbegin
               move 0, 0
               line @w_mm, 0
-              pocket @off_y_mm, @alpha
+              pocket
               line 0, @h_mm
-              pocket @off_y_mm, @alpha, -1
+              pocket -1
               line 0, 0
             pend
             @img.close
