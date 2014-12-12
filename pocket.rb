@@ -7,66 +7,116 @@ module Io
     module Slipstick
       module Utils
 
-        # draws a pocket feature for stator element, needed because Inkscape
-        # does not support fillet tool in the main codebase
-        class PocketDrawer
+        # draws path for stator element of a slipstick, needed because Inkscape
+        # does not support fillet tool in the main/stable codebase yet
+        class StatorDrawer
           public
-          def initialize ( h_mm, r_mm, d_mm, w_mm, alpha_deg = 90.0, off_y_mm = nil )
+          def initialize ( w_mm, h_mm, r_mm, d_mm, w_pocket_mm, alpha_deg = 90.0, off_y_mm = nil )
             @r_mm = r_mm # arc diameter
             @d_mm = d_mm # horizontal depth
             @h_mm = h_mm # vertical height
-            @w_mm = w_mm # wertical width
+            @w_mm = w_mm # width
+            @w_pocket_mm = w_pocket_mm # vertical width of pocket
             @off_y_mm = off_y_mm.nil? ? h_mm / 2.0 : off_y_mm # zero point
             @alpha = ( alpha_deg / 2.0 ) * Math::PI / 180 # angle between pocket sides
 	    @frame_mm = 10.0
-            @img = Rasem::SVGImage.new( "%dmm" % ( @d_mm + @frame_mm ), "%dmm" % ( @frame_mm + @h_mm ) )
+            @img = Rasem::SVGImage.new( "%dmm" % ( @w_mm + @frame_mm ), "%dmm" % ( @frame_mm + @h_mm ) )
+            @output = @img.instance_variable_get( :@output )
+            @in_path = false
+          end
+
+          # begin an SVG path
+          protected
+          def pbegin ( x_mm = 0.0, y_mm = 0.0 )
+            @output << %Q{<path d="}
+            @in_path = true
+          end
+
+          # close an SVG path and apply the style in the process
+          protected
+          def pend ( )
+            @output << %Q{" fill="none" stroke="black" stroke-width="0.25"/>}
+            @in_path = false
           end
 
           protected
-          def line ( x1_mm, y1_mm, x2_mm, y2_mm )
-#	    $stderr.puts( "%g %g %g %g" % [x1_mm, y1_mm, x2_mm, y2_mm] )
-            @img.line "%g" % ( @frame_mm / 2 + @d_mm + x1_mm ), "%g" % ( @frame_mm / 2 + @off_y_mm + y1_mm ), "%g" % ( @frame_mm / 2 + @d_mm + x2_mm ), "%g" % ( @frame_mm / 2 + @off_y_mm + y2_mm ), { :stroke => 'black', :stroke_width=>0.25}
+          def assert_in_path ( )
+            raise "Attempted drawing in a closed path" unless @in_path == true
           end
 
-          # missing feature in rasem library
           protected
-          def arc ( xs_mm, ys_mm, xe_mm, ye_mm, r_mm )
-            @img.instance_variable_get( :@output ) << %Q{<path d="M#{@frame_mm / 2 + @d_mm + xs_mm},#{@frame_mm / 2 + @off_y_mm + ys_mm} A#{r_mm},#{r_mm} 0 0,1 #{@frame_mm / 2 + @d_mm + xe_mm},#{@frame_mm / 2 + @off_y_mm + ye_mm} " fill="none" stroke="black" stroke-width="0.25"/>}
+          def move ( x_mm, y_mm )
+            assert_in_path
+            @output << %Q{M#{@frame_mm / 2 + x_mm},#{@frame_mm / 2 + y_mm} }
           end
 
+          protected
+          def line ( x_mm, y_mm )
+            assert_in_path
+            @output << %Q{L#{@frame_mm / 2 + x_mm},#{@frame_mm / 2 + y_mm} }
+          end
+
+          # render line segment using relative coordinates
+          protected
+          def rline ( x_mm, y_mm )
+            assert_in_path
+            @output << %Q{l#{x_mm},#{y_mm} }
+          end
+
+          protected
+          def arc ( x_mm, y_mm, r_mm, dir = "0,1" )
+            assert_in_path
+            @output << %Q{A#{r_mm},#{r_mm} 0 #{dir} #{@frame_mm / 2 + x_mm},#{@frame_mm / 2 + y_mm} }
+          end
+
+          # calculates opposite angle value [rad]
           protected
           def calc_rev_alpha ( alpha )
             raise "Angle must be in range 0..π/2" unless ( alpha >= 0.0 ) and ( alpha <= Math::PI )
             return ( Math::PI / 2 ) - alpha
           end
 
+          # render invagination on a side of the stator
+          protected
+          def pocket ( off_y_mm, alpha, dir = 1 )
+            vert_delta_y_mm = @r_mm * Math.tan( calc_rev_alpha( alpha ) / 2 )
+            hor_delta_y_mm = @r_mm * Math.sin( calc_rev_alpha( alpha ) )
+            hor_delta_x_mm = @r_mm * ( 1.0 - Math.cos( calc_rev_alpha( alpha ) ) )
+            # reference points A and B
+            x_CD_mm = dir > 0 ? @w_mm : 0
+            x_AB_mm = x_CD_mm - dir * @d_mm
+            y_A_mm = off_y_mm + dir * @w_pocket_mm / 2.0
+            y_B_mm = off_y_mm - dir * @w_pocket_mm / 2.0
+            # reference points C and D
+            y_C_mm = y_B_mm - dir * @d_mm * Math.tan( alpha )
+            y_D_mm = y_A_mm + dir * @d_mm * Math.tan( alpha )
+            # lead in
+            line x_CD_mm, y_C_mm - dir * vert_delta_y_mm
+            arc x_CD_mm - dir * hor_delta_x_mm, y_C_mm - dir * ( vert_delta_y_mm - hor_delta_y_mm ), @r_mm
+            line x_AB_mm + dir * hor_delta_x_mm, y_B_mm + dir * ( vert_delta_y_mm - hor_delta_y_mm )
+            # bottom of the pocket
+            arc x_AB_mm, y_B_mm + dir * ( vert_delta_y_mm ), @r_mm, "0,0"
+            line x_AB_mm, y_A_mm - dir * vert_delta_y_mm
+            arc x_AB_mm + dir * hor_delta_x_mm, y_A_mm - dir * ( vert_delta_y_mm - hor_delta_y_mm), @r_mm, "0,0"
+            # lead out
+            line x_CD_mm - dir * hor_delta_x_mm, y_D_mm + dir * ( vert_delta_y_mm - hor_delta_y_mm )
+            arc x_CD_mm, y_D_mm + dir * ( vert_delta_y_mm ), @r_mm
+            line x_CD_mm, dir > 0 ? @h_mm : 0
+          end
+
           public
           def render ( )
-            vert_delta_y_mm = @r_mm * Math.tan( calc_rev_alpha( @alpha ) / 2 )
-            hor_delta_y_mm = @r_mm * Math.sin( calc_rev_alpha( @alpha ) )
-            hor_delta_x_mm = @r_mm * ( 1.0 - Math.cos( calc_rev_alpha( @alpha ) ) )
-            # reference points A and B
-            x_AB_mm = 0.0
-            y_A_mm = -@w_mm / 2.0
-            y_B_mm = @w_mm / 2.0
-            line x_AB_mm, y_A_mm + vert_delta_y_mm,  x_AB_mm, y_B_mm - vert_delta_y_mm
-            # reference points C and D
-            x_CD_mm = -@d_mm
-            y_C_mm = y_B_mm + @d_mm * Math.tan( @alpha )
-            y_D_mm = y_A_mm - @d_mm * Math.tan( @alpha )
-            line x_CD_mm, y_C_mm + vert_delta_y_mm, x_CD_mm, @h_mm - @off_y_mm
-            line x_CD_mm, y_D_mm - vert_delta_y_mm, x_CD_mm, -@off_y_mm
-            # slopes
-            line x_CD_mm + hor_delta_x_mm, y_C_mm + vert_delta_y_mm - hor_delta_y_mm, x_AB_mm - hor_delta_x_mm, y_B_mm - vert_delta_y_mm + hor_delta_y_mm
-            arc x_CD_mm, y_C_mm + vert_delta_y_mm, x_CD_mm + hor_delta_x_mm, y_C_mm + vert_delta_y_mm - hor_delta_y_mm, @r_mm
-            arc x_AB_mm, y_B_mm - vert_delta_y_mm, x_AB_mm - hor_delta_x_mm, y_B_mm - vert_delta_y_mm + hor_delta_y_mm, @r_mm
-            line x_CD_mm + hor_delta_x_mm, y_D_mm - vert_delta_y_mm + hor_delta_y_mm, x_AB_mm - hor_delta_x_mm, y_A_mm + vert_delta_y_mm - hor_delta_y_mm
-            arc x_AB_mm - hor_delta_x_mm, y_A_mm + vert_delta_y_mm - hor_delta_y_mm, x_AB_mm, y_A_mm + vert_delta_y_mm, @r_mm
-            arc x_CD_mm + hor_delta_x_mm, y_D_mm - vert_delta_y_mm + hor_delta_y_mm, x_CD_mm, y_D_mm - vert_delta_y_mm, @r_mm
-            #export
+            pbegin
+              move 0, 0
+              line @w_mm, 0
+              pocket @off_y_mm, @alpha
+              line 0, @h_mm
+              pocket @off_y_mm, @alpha, -1
+              line 0, 0
+            pend
             @img.close
 	    # to have paths use user units (mm)
-            return @img.output.sub! '<svg ', '<svg viewBox="0 0 %g %g" ' % [ @d_mm + @frame_mm, @frame_mm + @h_mm ]
+            return @img.output.sub! '<svg ', '<svg viewBox="0 0 %g %g" ' % [ @w_mm + @frame_mm, @frame_mm + @h_mm ]
           end
         end
 
@@ -75,6 +125,6 @@ module Io
   end
 end
 
-drawer = Io::Creat::Slipstick::Utils::PocketDrawer.new( 60.0, 6.0, 8.0, 16.0, 60 )
+drawer = Io::Creat::Slipstick::Utils::StatorDrawer.new( 287.0, 60.0, 4.0, 8.0, 16.0, 60 )
 puts drawer.render()
 
