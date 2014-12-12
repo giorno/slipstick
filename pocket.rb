@@ -104,6 +104,23 @@ module Io
             line x_CD_mm, dir > 0 ? @h_mm : 0
           end
 
+          # render see through window that will be cut out
+	  protected
+	  def cutout ( )
+	    dim = [ 2 * @d_mm, @off_y_mm - @w_pocket_mm / 2, @w_mm - 2 * @d_mm, @off_y_mm + @w_pocket_mm / 2 ]
+	    pbegin
+	      move dim[0] + @r_mm, dim[1]
+	      line dim[2] - @r_mm, dim[1]
+	      arc dim[2], dim[1] + @r_mm, @r_mm
+	      line dim[2], dim[3] - @r_mm
+	      arc dim[2] - @r_mm, dim[3], @r_mm
+	      line dim[0] + @r_mm, dim[3]
+	      arc dim[0], dim[3] - @r_mm, @r_mm
+	      line dim[0], dim[1] + @r_mm
+	      arc dim[0] + @r_mm, dim[1], @r_mm
+	    pend
+	  end
+
           public
           def render ( )
             pbegin
@@ -114,6 +131,7 @@ module Io
               pocket -1
               line 0, 0
             pend
+	    cutout
             @img.close
 	    # to have paths use user units (mm)
             return @img.output.sub! '<svg ', '<svg viewBox="0 0 %g %g" ' % [ @w_mm + @frame_mm, @frame_mm + @h_mm ]
@@ -125,6 +143,6 @@ module Io
   end
 end
 
-drawer = Io::Creat::Slipstick::Utils::StatorDrawer.new( 287.0, 60.0, 4.0, 8.0, 16.0, 60 )
+drawer = Io::Creat::Slipstick::Utils::StatorDrawer.new( 287.0, 60.0, 3.0, 8.0, 20.0, 60 )
 puts drawer.render()
 
