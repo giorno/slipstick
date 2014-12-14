@@ -11,12 +11,14 @@ module Io
         # does not support fillet tool in the main/stable codebase yet
         class StatorDrawer
           public
-          def initialize ( w_mm, h_mm, r_mm, d_mm, w_pocket_mm, alpha_deg = 90.0, off_y_mm = nil )
-            @r_mm = r_mm # arc diameter
+          def initialize ( w_mm, h_mm, r_pocket_mm, r_cutout_mm, d_mm, w_pocket_mm, w_cutout_mm, alpha_deg = 90.0, off_y_mm = nil )
+            @r_pocket_mm = r_pocket_mm # arc diameter
+            @r_cutout_mm = r_cutout_mm
             @d_mm = d_mm # horizontal depth
             @h_mm = h_mm # vertical height
             @w_mm = w_mm # width
             @w_pocket_mm = w_pocket_mm # vertical width of pocket
+            @w_cutout_mm = w_cutout_mm # window height
             @off_y_mm = off_y_mm.nil? ? h_mm / 2.0 : off_y_mm # zero point
             @alpha = ( alpha_deg / 2.0 ) * Math::PI / 180 # angle between pocket sides
 	    @frame_mm = 10.0
@@ -35,7 +37,7 @@ module Io
           # close an SVG path and apply the style in the process
           protected
           def pend ( )
-            @output << %Q{" fill="none" stroke="black" stroke-width="0.25"/>}
+            @output << %Q{" fill="none" stroke="black" stroke-width="0.11"/>}
             @in_path = false
           end
 
@@ -64,9 +66,9 @@ module Io
           end
 
           protected
-          def arc ( x_mm, y_mm, r_mm, dir = "0,1" )
+          def arc ( x_mm, y_mm, r_pocket_mm, dir = "0,1" )
             assert_in_path
-            @output << %Q{A#{r_mm},#{r_mm} 0 #{dir} #{@frame_mm / 2 + x_mm},#{@frame_mm / 2 + y_mm} }
+            @output << %Q{A#{r_pocket_mm},#{r_pocket_mm} 0 #{dir} #{@frame_mm / 2 + x_mm},#{@frame_mm / 2 + y_mm} }
           end
 
           # calculates opposite angle value [rad]
@@ -79,9 +81,9 @@ module Io
           # render invagination on a side of the stator
           protected
           def pocket ( dir = 1 )
-            vert_delta_y_mm = @r_mm * Math.tan( calc_rev_alpha( @alpha ) / 2 )
-            hor_delta_y_mm = @r_mm * Math.sin( calc_rev_alpha( @alpha ) )
-            hor_delta_x_mm = @r_mm * ( 1.0 - Math.cos( calc_rev_alpha( @alpha ) ) )
+            vert_delta_y_mm = @r_pocket_mm * Math.tan( calc_rev_alpha( @alpha ) / 2 )
+            hor_delta_y_mm = @r_pocket_mm * Math.sin( calc_rev_alpha( @alpha ) )
+            hor_delta_x_mm = @r_pocket_mm * ( 1.0 - Math.cos( calc_rev_alpha( @alpha ) ) )
             # reference points A and B
             x_CD_mm = dir > 0 ? @w_mm : 0
             x_AB_mm = x_CD_mm - dir * @d_mm
@@ -92,32 +94,32 @@ module Io
             y_D_mm = y_A_mm + dir * @d_mm * Math.tan( @alpha )
             # lead in
             line x_CD_mm, y_C_mm - dir * vert_delta_y_mm
-            arc x_CD_mm - dir * hor_delta_x_mm, y_C_mm - dir * ( vert_delta_y_mm - hor_delta_y_mm ), @r_mm
+            arc x_CD_mm - dir * hor_delta_x_mm, y_C_mm - dir * ( vert_delta_y_mm - hor_delta_y_mm ), @r_pocket_mm
             line x_AB_mm + dir * hor_delta_x_mm, y_B_mm + dir * ( vert_delta_y_mm - hor_delta_y_mm )
             # bottom of the pocket
-            arc x_AB_mm, y_B_mm + dir * ( vert_delta_y_mm ), @r_mm, "0,0"
+            arc x_AB_mm, y_B_mm + dir * ( vert_delta_y_mm ), @r_pocket_mm, "0,0"
             line x_AB_mm, y_A_mm - dir * vert_delta_y_mm
-            arc x_AB_mm + dir * hor_delta_x_mm, y_A_mm - dir * ( vert_delta_y_mm - hor_delta_y_mm), @r_mm, "0,0"
+            arc x_AB_mm + dir * hor_delta_x_mm, y_A_mm - dir * ( vert_delta_y_mm - hor_delta_y_mm), @r_pocket_mm, "0,0"
             # lead out
             line x_CD_mm - dir * hor_delta_x_mm, y_D_mm + dir * ( vert_delta_y_mm - hor_delta_y_mm )
-            arc x_CD_mm, y_D_mm + dir * ( vert_delta_y_mm ), @r_mm
+            arc x_CD_mm, y_D_mm + dir * ( vert_delta_y_mm ), @r_pocket_mm
             line x_CD_mm, dir > 0 ? @h_mm : 0
           end
 
           # render see through window that will be cut out
 	  protected
 	  def cutout ( )
-	    dim = [ 2 * @d_mm, @off_y_mm - @w_pocket_mm / 2, @w_mm - 2 * @d_mm, @off_y_mm + @w_pocket_mm / 2 ]
+	    dim = [ 2 * @d_mm, @off_y_mm - @w_cutout_mm / 2, @w_mm - 2 * @d_mm, @off_y_mm + @w_cutout_mm / 2 ]
 	    pbegin
-	      move dim[0] + @r_mm, dim[1]
-	      line dim[2] - @r_mm, dim[1]
-	      arc dim[2], dim[1] + @r_mm, @r_mm
-	      line dim[2], dim[3] - @r_mm
-	      arc dim[2] - @r_mm, dim[3], @r_mm
-	      line dim[0] + @r_mm, dim[3]
-	      arc dim[0], dim[3] - @r_mm, @r_mm
-	      line dim[0], dim[1] + @r_mm
-	      arc dim[0] + @r_mm, dim[1], @r_mm
+	      move dim[0] + @r_cutout_mm, dim[1]
+	      line dim[2] - @r_cutout_mm, dim[1]
+	      arc dim[2], dim[1] + @r_cutout_mm, @r_cutout_mm
+	      line dim[2], dim[3] - @r_cutout_mm
+	      arc dim[2] - @r_cutout_mm, dim[3], @r_cutout_mm
+	      line dim[0] + @r_cutout_mm, dim[3]
+	      arc dim[0], dim[3] - @r_cutout_mm, @r_cutout_mm
+	      line dim[0], dim[1] + @r_cutout_mm
+	      arc dim[0] + @r_cutout_mm, dim[1], @r_cutout_mm
 	    pend
 	  end
 
@@ -143,6 +145,6 @@ module Io
   end
 end
 
-drawer = Io::Creat::Slipstick::Utils::StatorDrawer.new( 287.0, 60.0, 3.0, 8.0, 20.0, 60 )
+drawer = Io::Creat::Slipstick::Utils::StatorDrawer.new( 287.0, 66.0, 4, 2.0, 5.0, 36.0, 18.0, 60 )
 puts drawer.render()
 
