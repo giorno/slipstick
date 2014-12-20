@@ -58,13 +58,13 @@ module Io
                     Io::Creat::Slipstick::Key::TICK_OVERFLOW => 0, # mm
                     Io::Creat::Slipstick::Key::CLEARING      => 0.4, # mm, min distance between neighbouring ticks
                     # number of smallest ticks to fill ranges:  ticks => groupings (for tick height calculation)
-                    Io::Creat::Slipstick::Key::FODDERS       => { 100 => [ 5, 10, 50 ],
+                    Io::Creat::Slipstick::Key::FODDERS       => { #100 => [ 5, 10, 50 ],
                                                                    50 => [ 5, 10 ],
                                                                    25 => [ 5 ],
                                                                    10 => [ 5 ],
                                                                     5  => [ ],
                                                                     2  => [ ] },
-                    Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.15, 0.95 ], # corrections to workaround lack of support for dominant-baseline
+                    Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.05, 0.85 ], # corrections to workaround lack of support for dominant-baseline
                   }
       end
 
