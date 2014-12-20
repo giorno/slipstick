@@ -18,14 +18,28 @@ module Io::Creat::Slipstick
       else
         @dir = 1
       end
+      # by default values between 1 and 2 in single range scale are labeled
+      if @size == 1
+        add_extra_labels( [ 1.1, 1.2, 1.3, 1.5, 1.7, 1.8, 1.9 ] )
+      end
       @initialized = true
     end
 
-    # these constants will be added as explicit ticks with cursive names when render() is called
-    # predefined: Euler's number, Pythagoras' number, square root of 2, Fibonacci's number
     public
     def add_constants ( constants = CONST_MATH  )
       @constants = constants
+    end
+
+    # adds values that will be rendered regardless their cardinality
+    # in the scale
+    public
+    def add_extra_labels ( labels = [] )
+      @extra_labels = labels
+    end
+
+    protected
+    def is_extra_label ( value )
+      return instance_variable_defined?( :@extra_labels ) && @extra_labels.include?( value )
     end
 
     public
@@ -53,7 +67,7 @@ module Io::Creat::Slipstick
           h_idx = ( j == 0 ? 0 : ( j % 2 == 0 ? 1 : 2 ) )
           h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
           if j < 18 # last one is not rendered, but is required for small ticks calculation
-           render_tick( x, h, ( j % 2 ) == 0 ? "%d" % value : nil )
+            render_tick( x, h, ( j % 2 == 0 or is_extra_label( value ) ) ? "%g" % value : nil, is_extra_label( value ) ? Io::Creat::Slipstick::Entity::LOTICK : Io::Creat::Slipstick::Entity::TICK )
           end
 
           if j > 0
@@ -86,7 +100,8 @@ module Io::Creat::Slipstick
       if no_smallest > 0
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
-          mx = @start_mm + @dir * Math.log10( compute( start_val + k * stepper ) ) * @scale
+          value = start_val + k * stepper
+          mx = @start_mm + @dir * Math.log10( compute( value ) ) * @scale
             h_idx = h_idx_off + @dim[Io::Creat::Slipstick::Key::FODDERS][no_smallest].length + 1
             @dim[Io::Creat::Slipstick::Key::FODDERS][no_smallest].each_with_index do | mod, index |
               if k % ( no_smallest / mod ) == 0
@@ -95,7 +110,8 @@ module Io::Creat::Slipstick
               end
             end
           h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
-          render_tick( mx, h, nil )
+          value = value.round( 2 )
+          render_tick( mx, h, is_extra_label( value ) ? "%g" % ( value * 10 ) : nil, Io::Creat::Slipstick::Entity::LOTICK )
         end
       end
     end
