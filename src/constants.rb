@@ -22,7 +22,7 @@ module Io
       end
 
       # pre-defined constants
-      CONST_MATH = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 }
+      CONST_MATH = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "Φ" => 1.61803398874 }
 
       module Entity
         TICK     = 10 # regular tick for a calculated value
