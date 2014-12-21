@@ -72,7 +72,7 @@ module Io::Creat::Slipstick
           h_idx = ( j == 0 ? 0 : ( j % 2 == 0 ? 1 : 2 ) )
           h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
           if j < 18 # last one is not rendered, but is required for small ticks calculation
-            render_tick( x, h, ( j % 2 == 0 or is_extra_label( value ) ) ? "%g" % value : nil, is_extra_label( value ) ? Io::Creat::Slipstick::Entity::LOTICK : Io::Creat::Slipstick::Entity::TICK )
+            render_tick( x, h, ( j % 2 == 0 or is_extra_label( value ) ) ? "%g" % ( is_extra_label( value ) ? value * 10 : value ) : nil, is_extra_label( value ) ? Io::Creat::Slipstick::Entity::LOTICK : Io::Creat::Slipstick::Entity::TICK )
           end
 
           if j > 0
