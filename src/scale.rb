@@ -86,7 +86,7 @@ module Io::Creat::Slipstick
                    "stroke-linecap" => "butt" } )
       if not label.nil?
         font_size_mm = @style[style][Io::Creat::Slipstick::Key::FONT_SIZE]
-        @img.text( "%fmm" % ( @off_x_mm + x_mm ),
+        @img.text( "%fmm" % ( @off_x_mm + x_mm + ( style == Io::Creat::Slipstick::Entity::CONSTANT ? -font_size_mm * 0.05 : 0 ) ),
                    "%fmm" % ( flip * h_mm + @off_y_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ), # compensation for ignored (by viewers) vertical alignments
                    "%s" % label,
                    { "fill" => @style[style][Io::Creat::Slipstick::Key::FONT_COLOR],
