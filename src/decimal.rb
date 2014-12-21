@@ -100,12 +100,18 @@ module Io::Creat::Slipstick
 
     # renders main scale fodders
     private
-    def render_fodder_main ( from, step, h_idx_off = 3 )
+    def calc_fodder_main ( from )
       no_smallest = 0 
       @fodders.each do | key, no |
         if key > from then break end
         no_smallest = no
       end
+      return no_smallest
+    end
+
+     # internal method rendering fodder ticks
+    private
+    def render_fodder_int ( no_smallest, from, step, h_idx_off = 3 )
       if no_smallest > 0
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
@@ -125,27 +131,15 @@ module Io::Creat::Slipstick
       end
     end
 
+    private
+    def render_fodder_main ( from, step, h_idx_off = 3 )
+      render_fodder_int( calc_fodder_main( from ), from, step, h_idx_off )
+    end
+
     # fill the range with smallest ticks
     private
     def render_fodder( start_mm, end_mm, start_val, step, h_idx_off = 2 )
-      no_smallest = calc_fodder( start_mm, end_mm )
-      if no_smallest > 0
-        stepper = step / no_smallest
-        for k in 1..no_smallest - 1
-          value = start_val + k * stepper
-          mx = @start_mm + @dir * Math.log10( compute( value ) ) * @scale
-            h_idx = h_idx_off + @dim[Io::Creat::Slipstick::Key::FODDERS][no_smallest].length + 1
-            @dim[Io::Creat::Slipstick::Key::FODDERS][no_smallest].each_with_index do | mod, index |
-              if k % ( no_smallest / mod ) == 0
-                h_idx = h_idx_off + 1 + index
-                break
-              end
-            end
-          h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
-          value = value.round( 2 )
-          render_tick( mx, h, is_extra_label( value ) ? "%g" % ( value * 10 ) : nil, Io::Creat::Slipstick::Entity::LOTICK )
-        end
-      end
+      render_fodder_int( calc_fodder( start_mm, end_mm ), start_val, step, h_idx_off )
     end
 
     # fill range given by border with short scale of log() for values under 1 to the left of the 1 tick
