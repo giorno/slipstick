@@ -6,10 +6,11 @@ module Io::Creat::Slipstick
 
   class Scale < Node
     public
-    def initialize ( parent, label, rel_off_x_mm, rel_off_y_mm, h_mm, flipped = false )
+    def initialize ( parent, label, rel_off_x_mm, rel_off_y_mm, h_ratio, flipped = false )
       super( parent, rel_off_x_mm, rel_off_y_mm )
       @label          = label
-      @h_mm           = h_mm
+      @h_ratio        = h_ratio
+      @h_mm           = 0.0
       # copy widths from the parent
       @w_mainscale_mm = @parent.instance_variable_get( :@w_mainscale_mm )
       @w_label_mm     = @parent.instance_variable_get( :@w_label_mm )

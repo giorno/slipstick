@@ -31,20 +31,20 @@ module Io::Creat::Slipstick::Layout
     end
 
     public
-    def create_scale ( type, label, rel_off_y_mm = 0, flipped = false )
+    def create_scale ( type, label, h_ratio = 1, flipped = false )
       case type
         when Io::Creat::Slipstick::ScaleType::LOG_DECIMAL
-          return Io::Creat::Slipstick::DecimalScale.new( self, label, 0, rel_off_y_mm, @h_mm, flipped )
+          return Io::Creat::Slipstick::DecimalScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::LIN_DECIMAL
-          return Io::Creat::Slipstick::LinearScale.new( self, label, 0, rel_off_y_mm, @h_mm, flipped )
+          return Io::Creat::Slipstick::LinearScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::TGN_SIN
-          return Io::Creat::Slipstick::SinScale.new( self, label, 0, rel_off_y_mm, @h_mm, flipped )
+          return Io::Creat::Slipstick::SinScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::TGN_TAN
-          return Io::Creat::Slipstick::TanScale.new( self, label, 0, rel_off_y_mm, @h_mm, flipped )
+          return Io::Creat::Slipstick::TanScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::TGN_SINTAN
-          return Io::Creat::Slipstick::SinTanScale.new( self, label, 0, rel_off_y_mm, @h_mm, flipped )
+          return Io::Creat::Slipstick::SinTanScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::TGN_PYTHAG
-          return Io::Creat::Slipstick::PythagoreanScale.new( self, label, 0, rel_off_y_mm, @h_mm, flipped )
+          return Io::Creat::Slipstick::PythagoreanScale.new( self, label, 0, 0, h_ratio, flipped )
         else
           raise "Unrecognized scale type"
       end
@@ -60,11 +60,15 @@ module Io::Creat::Slipstick::Layout
       off_y_mm = @off_y_mm
       # calculate height occupied by text
       h_text_mm = 0
+      h_ratios = 0
       @children.each do | child |
         h_text_mm += child.calc_tick_font_height_mm( )
+        h_ratios += child.instance_variable_get( :@h_ratio )
       end
-      h_mm = ( @h_mm - h_text_mm ) / @children.length
+      hs_mm = ( @h_mm - h_text_mm )
       @children.each do | child |
+        # distribute heights according to the reatios
+        h_mm = hs_mm * ( child.instance_variable_get( :@h_ratio ) / h_ratios )
         child.check_initialized( )
         h_scale_mm = h_mm + child.calc_tick_font_height_mm( )
         child.instance_variable_set( :@off_y_mm, off_y_mm + ( child.instance_variable_get( :@flipped ) ? h_scale_mm : 0 ) )
