@@ -6,8 +6,6 @@ module Io::Creat::Slipstick
   # trigonometric scales are aligned to single sized decimal scales (1-10)
   class TrigonometricScale < Scale
     MAX_LOOPS = 100
-
-    public
     def set_params ( upper_deg, lower_deg, steps_deg, clear_mm = 5 )
       # ranges and stepping specified in degrees
       @upper_deg   = upper_deg
@@ -17,11 +15,20 @@ module Io::Creat::Slipstick
       @scale       = @w_mainscale_mm / 1
       @initialized = true
       @precision   = 10
-                 # dist    total ticks        grouping
-      @fodders = { 1  => [ [ 12.0, 6.0 ],     [ 2, 6 ] ],
-                   5  => [ [ 30.0, 15.0, 5 ], [ 5, 10, 1 ] ],
-                   10 => [ [ 20.0 ],          [ 2, 10 ] ],
-                   20 => [ [ 10.0 ],          [ 2, 10 ] ] }
+
+      @fodders     = { 90 => 8, 70 => 20, 60 => 10, 40 => 15, 20 => 6, 10 => 12 }
+    end
+
+    protected
+    def get_fodders ( )
+      return { 12 => [ 2, 6 ],
+                6 => [ 2, 2 ],
+               30 => [ 5, 10, 1 ],
+               15 => [ 5, 1 ],
+                5 => [ 1, 1 ],
+               20 => [ 2, 10 ],
+               10 => [ 5, 1 ],
+                8 => [ 2, 8 ], }
     end
 
     # x position calculation function, must be overriden in the subclasses
@@ -54,22 +61,23 @@ module Io::Creat::Slipstick
             h_mm = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
             style, label = fmt_label( try_deg )
             render_tick( x, h_mm, label, style )
-            if last > @lower_deg
-              @fodders.each do | match, rules |
-                if ( delta_deg - match ).abs < 0.00005
-                  rules[0].each do | fodders |
-                    if delta_mm / fodders < @dim[Io::Creat::Slipstick::Key::CLEARING]
-                      next
-                    end
-                    fstep_deg = step / fodders
-                    for i in 1..fodders - 1
-                      fh_idx = ( match - @steps_deg[0] ).abs < 0.00005 ? 2 : 1
-                      fh_idx += ( ( i % ( fodders / rules[1][0] ) == 0 ) ? 1 : ( i % ( fodders / rules[1][1] ) == 0 ? 2 : 3 ) )
-                      fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * @precision ) * @scale
-                      render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
-                    end
-                  end
-                end
+            # fodders
+            no_smallest = 0
+            match = 0
+            @fodders.each do | threshold, fodders |
+              if try_deg < threshold
+                no_smallest = fodders
+                match = threshold
+              end
+            end
+            if no_smallest > 0 and last > @lower_deg
+              rules = get_fodders( )[no_smallest]
+              fstep_deg = step * 1.0 / no_smallest
+              for i in 1..no_smallest - 1
+                fh_idx = ( match - @steps_deg[0] ).abs < 0.00005 ? 2 : 1
+                fh_idx += ( ( i % ( no_smallest / rules[0] ) == 0 ) ? 1 : ( i % ( no_smallest / rules[1] ) == 0 ? 2 : 3 ) )
+                fx_mm = @start_mm + Math.log10( compute( try_deg + i * fstep_deg ) * @precision ) * @scale
+                render_tick( fx_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][fh_idx] )
               end
             end
             last = x
@@ -94,6 +102,12 @@ module Io::Creat::Slipstick
     def compute ( deg )
       return Math.tan( Math::PI * deg / 180 )
     end
+
+    public
+    def render ( )
+      @fodders = { 90 => 8, 70 => 20, 60 => 10, 45 => 30, 25 => 6, 20 => 6, 10 => 12 }
+      super()
+    end
   end
 
   # interpolates sin and tan for small degrees
@@ -102,11 +116,16 @@ module Io::Creat::Slipstick
     def set_params ( upper_deg, lower_deg, steps_deg, clear_mm = 5 )
       super( upper_deg, lower_deg, steps_deg, clear_mm )
       @precision   = 100
-                 # dist    total ticks     grouping
-      @fodders = { 1.0/12.0  => [ [ 10.0 ],  [ 5, 10 ] ],
-                   0.5  => [ [ 30.0, 15.0 ], [ 3, 6 ] ],
-                   10 => [ [ 20.0],        [ 2, 10 ] ],
-                   20 => [ [ 10.0],        [ 2, 10 ] ] }
+      @fodders     = { 6 => 6, 5 => 15, 3 => 30, 1 => 10 }
+    end
+
+    protected
+    def get_fodders ( )
+      return {
+                6 => [ 3, 2 ],
+               30 => [ 3, 6, 1 ],
+               15 => [ 3, 1 ],
+               10 => [ 5, 1 ], }
     end
 
     protected
