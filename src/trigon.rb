@@ -47,7 +47,7 @@ module Io::Creat::Slipstick
       deg = @upper_deg
       last = @start_mm + Math.log10( compute( @upper_deg ) * @precision ) * @scale
       # rightmost tick
-      render_tick( last, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], "%d°" % deg )
+      render_tick( last, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], "\u00a0%d°" % deg )
       i = 0
       while i < MAX_LOOPS and deg > @lower_deg do
         i += 1
