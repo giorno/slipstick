@@ -6,7 +6,11 @@ module Io::Creat::Slipstick
 
   # logarithmic decimal scale
   class DecimalScale < Scale
-
+    # structure used to calculate smallest ticks
+    #           size   range start => number of fodders
+    FODDERS = { 3 => { 1 => 25, 2 => 10, 5 => 5, 10 => 25, 20 => 10, 50 => 5, 100 => 25, 200 => 10, 500 => 5 },
+                2 => { 1 => 25, 2 => 10, 5 => 5, 10 => 25, 20 => 10, 50 => 5 },
+                1 => { 1 => 50, 2 => 25, 4 => 10 } }
     public
     def set_params ( size, inverse = false )
       @size = size
@@ -22,6 +26,7 @@ module Io::Creat::Slipstick
       if @size == 1
         add_extra_labels( [ 1.1, 1.2, 1.3, 1.5, 1.7, 1.8, 1.9 ] )
       end
+      @fodders = FODDERS[ @size ]
       @initialized = true
     end
 
@@ -71,7 +76,7 @@ module Io::Creat::Slipstick
           end
 
           if j > 0
-	    render_fodder( last, x, base + ( j - 1 ) * step, step, 2 )
+	    render_fodder_main( base + ( j - 1 ) * step, step, 2 )
           end
           last = x
         end
@@ -90,6 +95,33 @@ module Io::Creat::Slipstick
         x = @start_mm + @dir * Math.log10( value ) * @scale
         h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1]
         render_tick( x, h, "%s" % name, Io::Creat::Slipstick::Entity::CONSTANT )
+      end
+    end
+
+    # renders main scale fodders
+    private
+    def render_fodder_main ( from, step, h_idx_off = 3 )
+      no_smallest = 0 
+      @fodders.each do | key, no |
+        if key > from then break end
+        no_smallest = no
+      end
+      if no_smallest > 0
+        stepper = step / no_smallest
+        for k in 1..no_smallest - 1
+          value = from + k * stepper
+          mx = @start_mm + @dir * Math.log10( compute( value ) ) * @scale
+            h_idx = h_idx_off + @dim[Io::Creat::Slipstick::Key::FODDERS][no_smallest].length + 1
+            @dim[Io::Creat::Slipstick::Key::FODDERS][no_smallest].each_with_index do | mod, index |
+              if k % ( no_smallest / mod ) == 0
+                h_idx = h_idx_off + 1 + index
+                break
+              end
+            end
+          h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
+          value = value.round( 2 )
+          render_tick( mx, h, is_extra_label( value ) ? "%g" % ( value * 10 ) : nil, Io::Creat::Slipstick::Entity::LOTICK )
+        end
       end
     end
 
