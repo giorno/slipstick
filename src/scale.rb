@@ -61,13 +61,13 @@ module Io::Creat::Slipstick
     def render_label ( )
       if not @label.nil? and @w_label_mm > 0
         font_size_mm = @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_SIZE]
-        @img.text( "%fmm" % ( @off_x_mm + @w_label_mm / 2),
+        @img.text( "%fmm" % ( @off_x_mm ),
                    "%fmm" % ( @off_y_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ),
                    "%s" % @label,
                    { "fill" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_COLOR],
                      "font-size" => "%fmm" % font_size_mm,
                      "font-family" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_FAMILY],
-                     "text-anchor" => "middle",
+                     "text-anchor" => "left",
                      "letter-spacing" => "%gem" % @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_SPACING],
                      "font-weight" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
       end

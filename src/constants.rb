@@ -45,7 +45,7 @@ module Io
         # per scale style
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,
                     Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 1.8 } ),
-                    Io::Creat::Slipstick::Entity::SCALE    => ENTITY,
+                    Io::Creat::Slipstick::Entity::SCALE    => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 1.8 } ),
                     Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic', Io::Creat::Slipstick::Key::FONT_SIZE => 1.8 } )
                   }
 
