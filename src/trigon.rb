@@ -32,7 +32,7 @@ module Io::Creat::Slipstick
 
     protected
     def fmt_label ( val )
-      return [ val % 10 == 0 ? Io::Creat::Slipstick::Entity::TICK : Io::Creat::Slipstick::Entity::LOTICK, "%d°" % val ]
+      return [ val % 10 == 0 ? Io::Creat::Slipstick::Entity::TICK : Io::Creat::Slipstick::Entity::LOTICK, "\u00a0%d°" % val ]
     end
 
     public
@@ -111,11 +111,11 @@ module Io::Creat::Slipstick
 
     protected
     def fmt_label ( val )
-      label = "%g°" % val
+      label = "\u00a0%g°" % val
       if val < 1.0
-        label = "%d'" % ( val * 60 ).round( 1 )
+        label = "\u00a0%d'" % ( val * 60 ).round( 1 )
       elsif ( val * 10 ) % 10 != 0
-        label = "%d°%d'" % [ val, 6 * ( val * 10 % 10 ) ]
+        label = "\u00a0\u00a0\u00a0\u00a0%d°%d'" % [ val, 6 * ( val * 10 % 10 ) ]
       end
       return [ ( 10 * val ) % 10 == 0 ? Io::Creat::Slipstick::Entity::TICK : Io::Creat::Slipstick::Entity::LOTICK, label ]
     end
