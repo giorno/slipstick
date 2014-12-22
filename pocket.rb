@@ -145,6 +145,6 @@ module Io
   end
 end
 
-drawer = Io::Creat::Slipstick::Utils::StatorDrawer.new( 287.0, 54.0, 4, 2.0, 5.0, 20.0, 16.0, 60 )
+drawer = Io::Creat::Slipstick::Utils::StatorDrawer.new( 287.0, 62.0, 4, 0.1, 5.0, 20.0, 16.0, 60 )
 puts drawer.render()
 
