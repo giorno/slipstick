@@ -8,10 +8,11 @@ require_relative 'pythag'
 module Io::Creat::Slipstick::ScaleType
   LOG_DECIMAL = 0
   LIN_DECIMAL = 1
-  TGN_SIN     = 2
-  TGN_TAN     = 3
-  TGN_SINTAN  = 4
-  TGN_PYTHAG  = 5
+  LIN_INCH    = 2
+  TGN_SIN     = 3
+  TGN_TAN     = 4
+  TGN_SINTAN  = 5
+  TGN_PYTHAG  = 6
 end
 
 module Io::Creat::Slipstick::Layout
@@ -37,6 +38,8 @@ module Io::Creat::Slipstick::Layout
           return Io::Creat::Slipstick::DecimalScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::LIN_DECIMAL
           return Io::Creat::Slipstick::LinearScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::LIN_INCH
+          return Io::Creat::Slipstick::InchScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::TGN_SIN
           return Io::Creat::Slipstick::SinScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::TGN_TAN

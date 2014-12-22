@@ -32,8 +32,12 @@ module Io::Creat::Slipstick
 
     # fill the range with smallest ticks
     private
-    def render_fodder( start_mm, end_mm, start_val, step )
-      no_smallest = calc_fodder( start_mm, end_mm )
+    def render_fodder ( start_mm, end_mm, start_val, step )
+      render_fodder_int( calc_fodder( start_mm, end_mm ), end_mm, start_val, step )
+    end
+
+    private
+    def render_fodder_int ( no_smallest, start_mm, start_val, step )
       if no_smallest > 0
         stepper = step / no_smallest
         for k in 1..no_smallest - 1
@@ -44,6 +48,41 @@ module Io::Creat::Slipstick
       end
     end
 
+  end
+
+  class InchScale < LinearScale
+
+    public
+    def set_params ( size )
+      super( size )
+      @scale = @size * 2.54
+    end
+
+    # fill the range with smallest ticks
+    private
+    def render_fodder ( start_mm, end_mm, start_val, step )
+      render_fodder_int( 16, end_mm, start_val, step )
+    end
+
+    private
+    def render_fodder_int ( no_smallest, start_mm, start_val, step )
+      heights = [ 8, 4, 2, 1 ]
+      if no_smallest > 0
+        stepper = step / no_smallest
+        for k in 1..no_smallest - 1
+          x_mm = @start_mm + ( start_val * step + k * stepper ) * @scale
+          h_idx = 1
+          heights.each do | divisor |
+            h_idx += 1
+            if k % divisor == 0
+              break
+            end
+          end
+          h_mm = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
+          render_tick( x_mm, h_mm, nil )
+        end
+      end
+    end
   end
 end
 

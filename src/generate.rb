@@ -61,6 +61,9 @@ sheet = Io::Creat::Slipstick::Layout::Sheet.new( 287, 200, 10, 5, 15 )
   strip = sheet.create_strip( 10, 250.0, 7.0, 13.0, 7.0 )
     scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "cm", 0.33 )
       scale.set_params( 25 )
+  strip = sheet.create_strip( 10, 250.0, 7.0, 13.0, 7.0 )
+    scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_INCH, "in", 0.33, true )
+      scale.set_params( 10 )
 
 puts sheet.render( )
 
