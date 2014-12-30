@@ -2,11 +2,11 @@
 
 require_relative 'sheet'
 
-sheet = Io::Creat::Slipstick::Layout::Sheet.new( 287, 200, 10, 5, 15 )
+sheet = Io::Creat::Slipstick::Layout::Sheet.new( 297, 200, 10, 5, 15 )
 
   sheet.create_label( "LOGAREX 27403-II: L P K A | B CI C | D S T ST" )
   # LOGAREX 27403-II
-  strip = sheet.create_strip( 22.0, 250.0, 7.0, 13.0, 7.0 )
+  strip = sheet.create_strip( 22.0, 260.0, 7.0, 13.0, 7.0 )
     #scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "", 0 )
     #  scale.set_params( 25 )
     scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "log x", 0.33 )
@@ -24,7 +24,7 @@ sheet = Io::Creat::Slipstick::Layout::Sheet.new( 287, 200, 10, 5, 15 )
       scale.add_constants( )
       #scale.set_overflow( 2.0 )
 
-  strip = sheet.create_strip( 18.0, 250.0, 7.0, 13.0, 7.0 )
+  strip = sheet.create_strip( 18.0, 260.0, 7.0, 13.0, 7.0 )
     scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5 )
       scale.set_params( 2 )
       #scale.set_overflow( 2.0 )
@@ -38,7 +38,7 @@ sheet = Io::Creat::Slipstick::Layout::Sheet.new( 287, 200, 10, 5, 15 )
       #scale.set_overflow( 2.0 )
       scale.add_constants( )
 
-  strip = sheet.create_strip( 22.0, 250.0, 7.0, 13.0, 7.0 )
+  strip = sheet.create_strip( 22.0, 260.0, 7.0, 13.0, 7.0 )
     scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x", 0.5 )
       scale.set_params( 1 )
       scale.add_constants( )
@@ -58,10 +58,10 @@ sheet = Io::Creat::Slipstick::Layout::Sheet.new( 287, 200, 10, 5, 15 )
 
   sheet.create_label( "CM" )
   # standard rule scale in centimeters
-  strip = sheet.create_strip( 10, 250.0, 7.0, 13.0, 7.0 )
+  strip = sheet.create_strip( 10, 260.0, 7.0, 13.0, 7.0 )
     scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "cm", 0.33 )
-      scale.set_params( 25 )
-  strip = sheet.create_strip( 10, 250.0, 7.0, 13.0, 7.0 )
+      scale.set_params( 26 )
+  strip = sheet.create_strip( 10, 260.0, 7.0, 13.0, 7.0 )
     scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_INCH, "in", 0.33, true )
       scale.set_params( 10 )
 
