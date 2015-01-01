@@ -39,7 +39,7 @@ module Io
                    Io::Creat::Slipstick::Key::FONT_WEIGHT  => 'normal',
                    Io::Creat::Slipstick::Key::FONT_STYLE   => 'normal',
                    Io::Creat::Slipstick::Key::FONT_COLOR   => 'black',
-                   Io::Creat::Slipstick::Key::FONT_SPACING => -0.1,
+                   Io::Creat::Slipstick::Key::FONT_SPACING => -0.15,
                    Io::Creat::Slipstick::Key::FONT_SIZE    => 3.0, # mm
                  }
         # per scale style
