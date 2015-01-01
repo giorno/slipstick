@@ -18,6 +18,7 @@ module Io::Creat::Slipstick
         @x_mm  = 5.0
         @y_mm  = 5.0
         @w_mm  = 287.0
+        @b_mm  = 0.1 # bending radius (approximated)
 
         w_m_mm = 250.0
         w_l_mm = 7.0
@@ -28,7 +29,7 @@ module Io::Creat::Slipstick
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x", 0.5 )
             scale.set_params( 1 )
             scale.add_constants( )
-            #scale.set_overflow( 2.0 )
+            scale.set_overflow( 2.0 )
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_SIN, "sin", 0.33, true )
             scale.set_style( Io::Creat::Slipstick::Style::SMALL )
             scale.set_params( 90, 5, [ 1, 5, 10, 20 ] )
@@ -41,18 +42,22 @@ module Io::Creat::Slipstick
             scale.set_style( Io::Creat::Slipstick::Style::SMALL )
             scale.set_params( 6, 0.5, [ 1.0 / 12.0, 0.5 ], 8 )
             scale.set_flags( 0 )
+            scale.set_overflow( @b_mm )
 
         strip = create_strip( @x_mm, @y_mm + @t_mm + @hl_mm, 8, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "cm", 0.33 )
             scale.set_params( 25 )
+            scale.set_overflow( @b_mm )
 
         strip = create_strip( @x_mm, @y_mm + @t_mm + @h_mm + @hl_mm - 8, 8, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
-          scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_INCH, "in", 0.33, true )
+          scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_INCH, "inches", 0.33, true )
             scale.set_params( 10 )
+            scale.set_overflow( @b_mm )
 
         strip = create_strip( @x_mm, @y_mm + 2 * @t_mm + @h_mm + @hu_mm, @hu_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "log x", 0.33 )
             scale.set_params( 10 )
+            scale.set_overflow( @b_mm )
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_PYTHAG, "√(1-x²)", 0.33 )
             scale.set_style( Io::Creat::Slipstick::Style::SMALL )
             scale.set_params( )
@@ -64,7 +69,7 @@ module Io::Creat::Slipstick
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5, true )
             scale.set_params( 2 )
             scale.add_constants( )
-            #scale.set_overflow( 2.0 )
+            scale.set_overflow( 2.0 )
 
         strip = create_strip( @x_mm, ( ( @h_mm - @hs_mm ) / 2 ) + 2 * @y_mm + 2 * @t_mm + @h_mm + @hu_mm + @hl_mm, @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5 )

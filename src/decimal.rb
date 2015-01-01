@@ -47,11 +47,6 @@ module Io::Creat::Slipstick
       return instance_variable_defined?( :@extra_labels ) && @extra_labels.include?( value )
     end
 
-    public
-    def set_overflow ( overflow_mm )
-      @dim = @dim.merge( Io::Creat::Slipstick::Key::TICK_OVERFLOW => overflow_mm )
-    end
-
     protected
     def compute ( val )
       return val

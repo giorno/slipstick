@@ -28,6 +28,11 @@ module Io::Creat::Slipstick
       @flags = flags
     end
 
+    public
+    def set_overflow ( overflow_mm )
+      @dim = @dim.merge( Io::Creat::Slipstick::Key::TICK_OVERFLOW => overflow_mm )
+    end
+
     # used by Strip to check that all parameters were given to the scale
     public
     def check_initialized ( )
@@ -61,8 +66,9 @@ module Io::Creat::Slipstick
     def render_label ( )
       if not @label.nil? and @w_label_mm > 0
         font_size_mm = @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_SIZE]
-        @img.text( "%fmm" % ( @off_x_mm ),
-                   "%fmm" % ( @off_y_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ),
+        dy_mm = ( @flipped ? -@h_mm : @h_mm ) / 2
+        @img.text( "%fmm" % ( @off_x_mm + @dim[Io::Creat::Slipstick::Key::CLEARING] ),
+                   "%fmm" % ( @off_y_mm + dy_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ),
                    "%s" % @label,
                    { "fill" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_COLOR],
                      "font-size" => "%fmm" % font_size_mm,
