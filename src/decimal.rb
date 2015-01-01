@@ -169,8 +169,8 @@ module Io::Creat::Slipstick
               h_idx = round ? 3 : 4
               label = value < 1 && round ? ( "%.1f" % value )[1..-1] : nil
             when Io::Creat::Slipstick::Flag::RENDER_AFTERSCALE
-              round = ( value * 10 ** @size ).round( 2 ) % 10 ** ( @size + 1 ) == 0
-              h_idx -= 1
+              round = ( value * 10 ).round( 2 ) % 10 ** ( @size ) == 0
+              h_idx -= round ? 2 : 1
               label = round ? "%g" % value : nil
           end
           h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
