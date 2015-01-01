@@ -19,9 +19,9 @@ module Io::Creat::Slipstick
         @y_mm  = 5.0
         @w_mm  = 287.0
 
-        w_m_mm = 260.0
+        w_m_mm = 250.0
         w_l_mm = 7.0
-        w_s_mm = 13.0
+        w_s_mm = 23.0
         w_a_mm = 7.0
 
         strip = create_strip( @x_mm, @y_mm, @hl_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
@@ -44,7 +44,7 @@ module Io::Creat::Slipstick
 
         strip = create_strip( @x_mm, @y_mm + @t_mm + @hl_mm, 8, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "cm", 0.33 )
-            scale.set_params( 26 )
+            scale.set_params( 25 )
 
         strip = create_strip( @x_mm, @y_mm + @t_mm + @h_mm + @hl_mm - 8, 8, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_INCH, "in", 0.33, true )
