@@ -55,11 +55,11 @@ module Io::Creat::Slipstick::Layout
 
     public
     def render()
-      style = { "stroke-width" => 0.5, "stroke" => "gray", "stroke-cap" => "square" }
-      @img.line( "%gmm" % @off_x_mm, "%gmm" % @off_y_mm, "%gmm" % @off_x_mm, "%gmm" % ( @off_y_mm + MARK_SIZE ), style )
-      @img.line( "%gmm" % @off_x_mm, "%gmm" % @off_y_mm, "%gmm" % ( @off_x_mm + MARK_SIZE ), "%gmm" % @off_y_mm, style )
-      @img.line( "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%gmm" % ( @off_y_mm + @h_mm ), "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%gmm" % ( @off_y_mm + @h_mm - MARK_SIZE ), style )
-      @img.line( "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%gmm" % ( @off_y_mm + @h_mm ), "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm - MARK_SIZE ), "%gmm" % ( @off_y_mm + @h_mm ), style )
+      #style = { "stroke-width" => 0.5, "stroke" => "gray", "stroke-cap" => "square" }
+      #@img.line( "%gmm" % @off_x_mm, "%gmm" % @off_y_mm, "%gmm" % @off_x_mm, "%gmm" % ( @off_y_mm + MARK_SIZE ), style )
+      #@img.line( "%gmm" % @off_x_mm, "%gmm" % @off_y_mm, "%gmm" % ( @off_x_mm + MARK_SIZE ), "%gmm" % @off_y_mm, style )
+      #@img.line( "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%gmm" % ( @off_y_mm + @h_mm ), "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%gmm" % ( @off_y_mm + @h_mm - MARK_SIZE ), style )
+      #@img.line( "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%gmm" % ( @off_y_mm + @h_mm ), "%gmm" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm - MARK_SIZE ), "%gmm" % ( @off_y_mm + @h_mm ), style )
       off_y_mm = @off_y_mm
       # calculate height occupied by text
       h_text_mm = 0

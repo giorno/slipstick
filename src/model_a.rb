@@ -91,19 +91,29 @@ module Io::Creat::Slipstick
       end
 
       private
-      def rect ( x1, y1, x2, y2 )
-        @img.rectangle( "%gmm" % x1, "%gmm" % y1, "%gmm" % x2, "%gmm" % y2, { :fill => "none", :stroke => "black", :stroke_width => "0.1mm" } )
+      def rect ( x, y, w, h )
+        @img.rectangle( "%gmm" % x, "%gmm" % y, "%gmm" % w, "%gmm" % h, @style )
+      end
+
+      private
+      def line ( x1, y1, x2, y2 )
+        @img.line( "%gmm" % x1, "%gmm" % y1, "%gmm" % x2, "%gmm" % y2, @style )
       end
 
       # render strips and edges for cutting/bending
       public
       def render()
-        # cutting guidelines
-        rect( @x_mm, @y_mm, @w_mm, @hu_mm )
-        rect( @x_mm, @y_mm + @hu_mm + @t_mm, @w_mm, @h_mm )
-        rect( @x_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm, @w_mm, @hl_mm )
-        rect( @x_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @y_mm, @w_mm, @h_mm )
-        
+        @style = { :stroke_width => "0.1mm", :stroke => "#dddddd", :stroke_cap => "square", :fill => "none" }
+        # cutting guidelines for the stator
+        rect( @x_mm, @y_mm, @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
+        # bending guidelines for the stator
+        line( @x_mm, @y_mm + @hu_mm, @x_mm + @w_mm, @y_mm + @hu_mm )
+        line( @x_mm, @y_mm + @hu_mm + @t_mm, @x_mm + @w_mm, @y_mm + @hu_mm + @t_mm )
+        line( @x_mm, @y_mm + @hu_mm + @t_mm + @h_mm, @x_mm + @w_mm, @y_mm + @hu_mm + @t_mm + @h_mm )
+        line( @x_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm, @x_mm + @w_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm )
+        # cutting guidelines for the slipstick
+        line( 0, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @y_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @y_mm )
+        line( 0, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm + @y_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm + @y_mm )
         # strips
         return super()
       end
