@@ -37,7 +37,7 @@ module Io::Creat::Slipstick
             scale.set_style( Io::Creat::Slipstick::Style::SMALL )
             scale.set_params( 45, 5, [ 1, 5, 10, 20 ] )
             scale.set_flags( 0 )
-          scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_SINTAN, "s-t", 0.33, true )
+          scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_SINTAN, "sin-tan", 0.33, true )
             scale.set_style( Io::Creat::Slipstick::Style::SMALL )
             scale.set_params( 6, 0.5, [ 1.0 / 12.0, 0.5 ], 8 )
             scale.set_flags( 0 )
