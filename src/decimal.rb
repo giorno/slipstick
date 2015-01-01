@@ -146,7 +146,7 @@ module Io::Creat::Slipstick
     private
     def render_subscales ( )
                # match flag, start val    start pos                    step                    length
-      data = [ [ Io::Creat::Slipstick::Flag::RENDER_SUBSCALE, 1,           @start_mm,                   -0.02,                  @inverse ? @w_after_mm : @w_subscale_mm ], # subscale
+      data = [ [ Io::Creat::Slipstick::Flag::RENDER_SUBSCALE, 1,           @start_mm,                   -0.05,                  @inverse ? @w_after_mm : @w_subscale_mm ], # subscale
                [ Io::Creat::Slipstick::Flag::RENDER_AFTERSCALE, 10 ** @size, @start_mm + @dir * @w_mainscale_mm, 0.05 * ( 10 ** @size ), @inverse ? @w_subscale_mm : @w_after_mm ] ] # afterscale
       data.each do | match, value, start_mm, step, threshold_mm |
         if threshold_mm <= 0 or @flags & match == 0
