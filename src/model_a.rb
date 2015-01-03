@@ -6,10 +6,12 @@ module Io::Creat::Slipstick
   module Model
 
     class A < Io::Creat::Slipstick::Layout::Sheet
-
+      LAYER_FACE = 1
+      LAYER_REVERSE = 2
       public
-      def initialize ( )
+      def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
         super()
+        @layers = layers
         @hu_mm = 22.0 # height of upper half of stator strip
         @hl_mm = 22.0 # height of lower half of stator strip
         @hs_mm = 18.0 # height of slipstick strip
@@ -24,6 +26,25 @@ module Io::Creat::Slipstick
         w_l_mm = 7.0
         w_s_mm = 23.0
         w_a_mm = 7.0
+
+        if @layers & LAYER_REVERSE != 0
+          strip = create_strip( @x_mm, ( ( @h_mm - @hs_mm ) / 2 ) + 2 * @y_mm + 2 * @t_mm + @h_mm + @hu_mm + @hl_mm, @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5 )
+              scale.set_params( 2 )
+              scale.set_overflow( 4.0 )
+              scale.add_constants( )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "1/x", 0.33, true )
+              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+              scale.set_params( 1, true )
+              scale.add_constants( )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x", 0.5, true )
+              scale.set_params( 1 )
+              scale.set_overflow( 4.0 )
+              scale.add_constants( )
+        end
+        if @layers & LAYER_FACE == 0
+          return
+        end
 
         strip = create_strip( @x_mm, @y_mm, @hl_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x", 0.5 )
@@ -71,19 +92,6 @@ module Io::Creat::Slipstick
             scale.add_constants( )
             scale.set_overflow( 2.0 )
 
-        strip = create_strip( @x_mm, ( ( @h_mm - @hs_mm ) / 2 ) + 2 * @y_mm + 2 * @t_mm + @h_mm + @hu_mm + @hl_mm, @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
-          scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5 )
-            scale.set_params( 2 )
-            scale.set_overflow( 4.0 )
-            scale.add_constants( )
-          scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "1/x", 0.33, true )
-            scale.set_style( Io::Creat::Slipstick::Style::SMALL )
-            scale.set_params( 1, true )
-            scale.add_constants( )
-          scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x", 0.5, true )
-            scale.set_params( 1 )
-            scale.set_overflow( 4.0 )
-            scale.add_constants( )
       end
       
       # allows to create strip with absolute positioning
@@ -109,16 +117,18 @@ module Io::Creat::Slipstick
       public
       def render()
         @style = { :stroke_width => "0.1mm", :stroke => "#dddddd", :stroke_cap => "square", :fill => "none" }
-        # cutting guidelines for the stator
-        rect( @x_mm, @y_mm, @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
-        # bending guidelines for the stator
-        line( @x_mm, @y_mm + @hu_mm, @x_mm + @w_mm, @y_mm + @hu_mm )
-        line( @x_mm, @y_mm + @hu_mm + @t_mm, @x_mm + @w_mm, @y_mm + @hu_mm + @t_mm )
-        line( @x_mm, @y_mm + @hu_mm + @t_mm + @h_mm, @x_mm + @w_mm, @y_mm + @hu_mm + @t_mm + @h_mm )
-        line( @x_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm, @x_mm + @w_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm )
-        # cutting guidelines for the slipstick
-        line( 0, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @y_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @y_mm )
-        line( 0, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm + @y_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm + @y_mm )
+        if @layers & LAYER_REVERSE != 0
+          # cutting guidelines for the stator
+          rect( @x_mm, @y_mm, @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
+          # bending guidelines for the stator
+          line( @x_mm, @y_mm + @hu_mm, @x_mm + @w_mm, @y_mm + @hu_mm )
+          line( @x_mm, @y_mm + @hu_mm + @t_mm, @x_mm + @w_mm, @y_mm + @hu_mm + @t_mm )
+          line( @x_mm, @y_mm + @hu_mm + @t_mm + @h_mm, @x_mm + @w_mm, @y_mm + @hu_mm + @t_mm + @h_mm )
+          line( @x_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm, @x_mm + @w_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm )
+          # cutting guidelines for the slipstick
+          line( 0, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @y_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @y_mm )
+          line( 0, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm + @y_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm + @y_mm )
+        end
         # strips
         return super()
       end
@@ -128,5 +138,17 @@ module Io::Creat::Slipstick
   end # Model
 end # Io::Creat::Slipstick
 
-a = Io::Creat::Slipstick::Model::A.new()
+layers = Io::Creat::Slipstick::Model::A::LAYER_FACE | Io::Creat::Slipstick::Model::A::LAYER_REVERSE
+if ARGV.length > 0
+  if ARGV[0] == 'face'
+    layers = Io::Creat::Slipstick::Model::A::LAYER_FACE
+  elsif ARGV[0] == 'reverse'
+    layers = Io::Creat::Slipstick::Model::A::LAYER_REVERSE
+  elsif ARGV[0] != 'both'
+    $stderr.puts "Usage: #{$0} [both|face|reverse]\n\nOutputs SVG for requested side of the slide rule printout."
+    exit
+  end
+end
+
+a = Io::Creat::Slipstick::Model::A.new( layers )
 puts a.render()
