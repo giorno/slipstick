@@ -50,7 +50,7 @@ module Io::Creat::Slipstick
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x", 0.5 )
             scale.set_params( 1 )
             scale.add_constants( )
-            scale.set_overflow( 2.0 )
+            scale.set_overflow( 1.0 )
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_SIN, "sin", 0.33, true )
             scale.set_style( Io::Creat::Slipstick::Style::SMALL )
             scale.set_params( 90, 5, [ 1, 5, 10, 20 ] )
@@ -90,7 +90,7 @@ module Io::Creat::Slipstick
           scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5, true )
             scale.set_params( 2 )
             scale.add_constants( )
-            scale.set_overflow( 2.0 )
+            scale.set_overflow( 1.0 )
 
       end
       
