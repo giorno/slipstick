@@ -22,7 +22,7 @@ module Io::Creat::Slipstick::Layout
                      "font-family" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_FAMILY],
                      "font-style" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_STYLE],
                      "text-anchor" => "left",
-                     "dominant-baseline" => "hanging", # seems to be ignored by viewers
+                     #"dominant-baseline" => "hanging", # seems to be ignored by viewers
                      "font-weight" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
       
     end

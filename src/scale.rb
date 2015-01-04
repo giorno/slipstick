@@ -102,7 +102,7 @@ module Io::Creat::Slipstick
                      "font-style" => @style[style][Io::Creat::Slipstick::Key::FONT_STYLE],
                      "text-anchor" => "middle",
                      "letter-spacing" => "%gem" % @style[style][Io::Creat::Slipstick::Key::FONT_SPACING],
-                     "dominant-baseline" => "hanging", # seems to be ignored by viewers
+                     #"dominant-baseline" => "hanging", # seems to be ignored by viewers
                      "font-weight" => @style[style][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
       end
     end
