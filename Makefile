@@ -21,6 +21,9 @@ check_rasem :
 check_inkscape :
 	$(info Checking if Inkscape is installed in $(INKSCAPE))
 	@ls -la $(INKSCAPE) > /dev/null
+ifeq ($(OS),Darwin)
+	$(info Some SVG properties may not be supported in $(OS))
+endif
 
 # Builds printouts for Model A
 model_a :
@@ -28,6 +31,7 @@ model_a :
 	@src/model_a.rb reverse > build/model_a_reverse.svg 
 	@$(INKSCAPE) -z -A build/model_a_face.pdf build/model_a_face.svg
 	@$(INKSCAPE) -z -A build/model_a_reverse.pdf build/model_a_reverse.svg
+	$(info Result PDF's are in directory 'build')
 
 prerequisites : print_os check_ruby check_rasem check_inkscape
 
