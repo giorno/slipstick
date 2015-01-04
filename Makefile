@@ -9,7 +9,7 @@ clean :
 	@rm -rf build
 
 print_os :
-	$(info Detected operating system $(OS))
+	$(info Detected operating system: $(OS))
 check_ruby :
 	$(info Checking if Ruby is installed)
 	@which ruby > /dev/null
@@ -19,7 +19,7 @@ check_rasem :
 	@gem list | grep rasem > /dev/null
 
 check_inkscape :
-	$(info Checking if Inkscape is installed)
+	$(info Checking if Inkscape is installed in $(INKSCAPE))
 	@ls -la $(INKSCAPE) > /dev/null
 
 # Builds printouts for Model A
