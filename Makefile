@@ -1,5 +1,9 @@
 OS=$(shell uname -s)
-INKSCAPE=$(shell which inkscape 2> /dev/null)
+ifeq ($(OS),Darwin)
+	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape-bin"
+else
+	INKSCAPE=$(shell which inkscape 2> /dev/null)
+endif
 
 all : prerequisites prepare model_a
 
@@ -18,7 +22,6 @@ check_rasem :
 
 check_inkscape :
 ifeq ($(OS),Darwin)
-	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
 	$(info Checking if Inkscape is installed in $(INKSCAPE))
 	@ls -la $(INKSCAPE) > /dev/null
 	$(info Some SVG properties may not be supported in $(OS))
