@@ -23,7 +23,8 @@ This requires Inkscape in non-GUI mode.
 Standard labels: [Droid Sans Mono](http://www.droidfonts.com/info/droid-sans-mono-fonts/)
 Constant labels: [Droid Serif](http://www.droidfonts.com/info/droid-serif-fonts/)
 
-Gentoo: `emerge media-fonts/droid`
+####Gentoo Linux
+`emerge media-fonts/droid`
 
 ##Usage
 
