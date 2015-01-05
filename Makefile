@@ -1,7 +1,5 @@
 OS=$(shell uname -s)
-ifeq ($(OS),Darwin)
-	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
-endif
+INKSCAPE=$(shell which inkscape 2> /dev/null)
 
 all : prerequisites prepare model_a
 
@@ -19,10 +17,16 @@ check_rasem :
 	@gem list | grep rasem > /dev/null
 
 check_inkscape :
+ifeq ($(OS),Darwin)
+	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
 	$(info Checking if Inkscape is installed in $(INKSCAPE))
 	@ls -la $(INKSCAPE) > /dev/null
-ifeq ($(OS),Darwin)
 	$(info Some SVG properties may not be supported in $(OS))
+else
+	$(info Checking if Inkscape is installed)
+ifeq ($(INKSCAPE),)
+	$(error Inkscape binary not found)
+endif
 endif
 
 # Builds printouts for Model A
@@ -31,7 +35,7 @@ model_a :
 	@src/model_a.rb reverse > build/model_a_reverse.svg 
 	@$(INKSCAPE) -z -A build/model_a_face.pdf build/model_a_face.svg
 	@$(INKSCAPE) -z -A build/model_a_reverse.pdf build/model_a_reverse.svg
-	$(info Result PDF's are in directory 'build')
+	@echo "Result PDF's are in directory 'build'"
 
 prerequisites : print_os check_ruby check_rasem check_inkscape
 
