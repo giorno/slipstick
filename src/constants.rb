@@ -22,7 +22,7 @@ module Io
       end
 
       # pre-defined constants
-      CONST_MATH = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "Φ" => 1.61803398874 }
+      CONST_MATH = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 }
 
       module Entity
         TICK     = 10 # regular tick for a calculated value
@@ -46,7 +46,7 @@ module Io
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,
                     Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } ),
-                    Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic', Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } )
+                    Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_FAMILY => 'Droid Serif,Arial,Sans-serif', Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic', Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } )
                   }
 
         SMALL = DEFAULT.merge( Io::Creat::Slipstick::Entity::TICK => DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } ) )
