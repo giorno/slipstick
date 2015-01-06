@@ -1,6 +1,6 @@
 OS=$(shell uname -s)
 ifeq ($(OS),Darwin)
-	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape-bin"
+	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
 else
 	INKSCAPE=$(shell which inkscape 2> /dev/null)
 endif
@@ -20,6 +20,10 @@ check_rasem :
 	$(info Checking if Ruby Gem Rasem is installed)
 	@gem list | grep rasem > /dev/null
 
+check_gs :
+	$(info Checking if Ghostscript is installed)
+	@which gs > /dev/null
+
 check_inkscape :
 ifeq ($(OS),Darwin)
 	$(info Checking if Inkscape is installed in $(INKSCAPE))
@@ -38,9 +42,10 @@ model_a :
 	@src/model_a.rb reverse > build/model_a_reverse.svg 
 	@$(INKSCAPE) -z -A build/model_a_face.pdf build/model_a_face.svg
 	@$(INKSCAPE) -z -A build/model_a_reverse.pdf build/model_a_reverse.svg
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=build/model_a.pdf build/model_a_face.pdf build/model_a_reverse.pdf
 	@echo "Result PDF's are in directory 'build'"
 
-prerequisites : print_os check_ruby check_rasem check_inkscape
+prerequisites : print_os check_ruby check_rasem check_inkscape check_gs
 
 prepare: clean
 	@mkdir build
