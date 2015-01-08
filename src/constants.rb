@@ -5,20 +5,20 @@ module Io
     module Slipstick
 
       module Key
-        LINE_WIDTH    = 1
-        LINE_COLOR    = 2
-        FONT_FAMILY   = 10
-        FONT_WEIGHT   = 11
-        FONT_STYLE    = 12
-        FONT_COLOR    = 13
-        FONT_SIZE     = 14
-        FONT_SPACING  = 15 # SVG letter-spacing property
-        TICK_HEIGHT   = 21 # relative height of a tick, depending on the range subdivision
-        TICK_OVERFLOW = 22 # how far beyond the scale border the tick shall overlap
-        TICK_CLEARING = 23 # minimal distance between neighbouring ticks
-        CLEARING      = 24
-        FODDERS       = 25
-        VERT_CORR     = 26
+        LINE_WIDTH    = 10
+        LINE_COLOR    = 20
+        FONT_FAMILY   = 100
+        FONT_WEIGHT   = 110
+        FONT_STYLE    = 120
+        FONT_COLOR    = 130
+        FONT_SIZE     = 140
+        FONT_SPACING  = 150 # SVG letter-spacing property
+        TICK_HEIGHT   = 210 # relative height of a tick, depending on the range subdivision
+        TICK_OVERFLOW = 220 # how far beyond the scale border the tick shall overlap
+        TICK_CLEARING = 230 # minimal distance between neighbouring ticks
+        CLEARING      = 240
+        FODDERS       = 250
+        VERT_CORR     = 260
       end
 
       # pre-defined constants
@@ -39,14 +39,14 @@ module Io
                    Io::Creat::Slipstick::Key::FONT_WEIGHT  => 'normal',
                    Io::Creat::Slipstick::Key::FONT_STYLE   => 'normal',
                    Io::Creat::Slipstick::Key::FONT_COLOR   => 'black',
-                   Io::Creat::Slipstick::Key::FONT_SPACING => -0.15,
+                   Io::Creat::Slipstick::Key::FONT_SPACING => -1.2, # px, Inkscape does not support anything else
                    Io::Creat::Slipstick::Key::FONT_SIZE    => 3.0, # mm
                  }
         # per scale style
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,
                     Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } ),
-                    Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_FAMILY => 'Droid Serif,Arial,Sans-serif', Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic', Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } )
+                    Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_FAMILY => 'Open Sans,Arial,Sans-serif', Io::Creat::Slipstick::Key::FONT_WEIGHT => 'normal', Io::Creat::Slipstick::Key::FONT_STYLE => 'italic', Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } )
                   }
 
         SMALL = DEFAULT.merge( Io::Creat::Slipstick::Entity::TICK => DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } ) )
