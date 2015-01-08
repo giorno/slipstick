@@ -9,26 +9,42 @@ To make it work, project requires certain applications in the environment. To ma
 This includes SVG output generation for simple scales or paper models. It relies on Ruby and Ruby Gem [Rasem](https://github.com/aseldawy/rasem).
 
 ####Gentoo Linux
-`emerge dev-lang/ruby dev-ruby/rubygems`
-
-`gem install rasem`
+```
+emerge dev-lang/ruby dev-ruby/rubygems
+gem install rasem
+```
 
 ###PDF printouts
 This requires Inkscape in non-GUI mode.
 
 ####Gentoo Linux
-`emerge media-gfx/inkscape`
+```
+emerge media-gfx/inkscape
+```
 
 ###Fonts used for labels and scale numbering
-Standard labels: [Droid Sans Mono](http://www.droidfonts.com/info/droid-sans-mono-fonts/)
-Constant labels: [Droid Serif](http://www.droidfonts.com/info/droid-serif-fonts/)
 
 ####Gentoo Linux
-`emerge media-fonts/droid`
+Standard labels: [Droid Sans Mono](http://www.droidfonts.com/info/droid-sans-mono-fonts/)
 
+```
+emerge media-fonts/droid
+```
+
+Constant labels: [Open Sans](http://www.fontsquirrel.com/fonts/open-sans), download [the ZIP file](http://www.fontsquirrel.com/fonts/download/open-sans) and extract it into `~/.fonts` directory, then update the fonts cache:
+
+```
+wget http://www.fontsquirrel.com/fonts/download/open-sans -O /tmp/open-sans.zip
+unzip /tmp/open-sans.zip -d ~/.fonts
+fc-cache -f -v
+rm /tmp/open-sans.zip
+```
 ##Usage
 
 ###Make paper model PDF printouts
-In the project directory: `make`
+In the project directory:
+```
+make
+```
 
 PDF export will fail if prerequisite applications are not installed. Exported PDF's are put in directory `build` (created in the process).
