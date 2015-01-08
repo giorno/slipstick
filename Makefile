@@ -24,6 +24,11 @@ check_gs :
 	$(info Checking if Ghostscript is installed)
 	@which gs > /dev/null
 
+# TODO this may be an optional tool
+check_xmllint :
+	$(info Checking if xmllint is installed)
+	@which xmllint > /dev/null
+
 check_inkscape :
 ifeq ($(OS),Darwin)
 	$(info Checking if Inkscape is installed in $(INKSCAPE))
@@ -38,14 +43,14 @@ endif
 
 # Builds printouts for Model A
 model_a :
-	@src/model_a.rb face > build/model_a_face.svg
-	@src/model_a.rb reverse > build/model_a_reverse.svg 
+	@src/model_a.rb face | xmllint --format - > build/model_a_face.svg
+	@src/model_a.rb reverse | xmllint --format - > build/model_a_reverse.svg 
 	@$(INKSCAPE) -z -A build/model_a_face.pdf build/model_a_face.svg
 	@$(INKSCAPE) -z -A build/model_a_reverse.pdf build/model_a_reverse.svg
 	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=build/model_a.pdf build/model_a_face.pdf build/model_a_reverse.pdf
 	@echo "Result PDF's are in directory 'build'"
 
-prerequisites : print_os check_ruby check_rasem check_inkscape check_gs
+prerequisites : print_os check_ruby check_rasem check_xmllint check_inkscape check_gs
 
 prepare: clean
 	@mkdir build
