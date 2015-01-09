@@ -16,16 +16,17 @@ module Io::Creat::Slipstick
 
     public
     def render ( )
-      last = @start_mm
+      last_mm = @start_mm
       for i in 0..@size * 2
-        x = @start_mm + ( i * @scale / 2 )
-        h = @h_mm * ( i % 2 == 0 ? @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0] : @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][1] )
-	render_tick( x, h, ( i % 2 ) == 0 ? "%d" % ( i / 2 ) : nil )
-	delta = last - x
+        x_mm = @start_mm + ( i * @scale / 2 )
+	h_idx = i % 2 == 0 ? 0 : 1
+        h_mm = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
+	render_tick( x_mm, h_mm, ( i % 2 ) == 0 ? "%d" % ( i / 2 ) : nil )
+	delta = last_mm - x_mm
 	if i > 0
-	  render_fodder( last, x, i - 1, 0.5 )
+	  render_fodder( last_mm, x_mm, i - 1, 0.5 )
 	end
-	last = x
+	last_mm = x_mm
       end
       render_label( )
     end
@@ -48,7 +49,7 @@ module Io::Creat::Slipstick
       end
     end
 
-  end
+  end # LinearScale
 
   class InchScale < LinearScale
 
@@ -83,6 +84,8 @@ module Io::Creat::Slipstick
         end
       end
     end
-  end
-end
+
+  end # InchScale
+
+end # Io::Creat::Slipstick
 

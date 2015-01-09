@@ -19,7 +19,7 @@ module Io::Creat::Slipstick
       last = -1
       @values.each do | val |
         x = @start_mm + Math.log10( compute( val ) ) * @scale
-        render_tick( x, @h_mm, "%s\u00a0" % ( "%g" % val )[1..-1] )
+        render_tick( x, @h_mm, fmt_label( val ) )
         if not last_val.nil?
           render_fodder( last, x, last_val, val - last_val, 1 )
         end
@@ -27,6 +27,11 @@ module Io::Creat::Slipstick
         last_val = val
       end
       render_label( )
+    end
+
+    protected
+    def fmt_label( val )
+      return "%s\u00a0" % ( "%g" % val )[1..-1]
     end
 
     protected

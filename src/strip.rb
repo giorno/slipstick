@@ -4,6 +4,7 @@ require_relative 'decimal'
 require_relative 'linear'
 require_relative 'trigon'
 require_relative 'pythag'
+require_relative 'power'
 
 module Io::Creat::Slipstick::ScaleType
   LOG_DECIMAL = 0
@@ -13,6 +14,7 @@ module Io::Creat::Slipstick::ScaleType
   TGN_TAN     = 4
   TGN_SINTAN  = 5
   TGN_PYTHAG  = 6
+  LOG_POWER   = 7
 end
 
 module Io::Creat::Slipstick::Layout
@@ -48,6 +50,8 @@ module Io::Creat::Slipstick::Layout
           return Io::Creat::Slipstick::SinTanScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::TGN_PYTHAG
           return Io::Creat::Slipstick::PythagoreanScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::LOG_POWER
+          return Io::Creat::Slipstick::PowerScale.new( self, label, 0, 0, h_ratio, flipped )
         else
           raise "Unrecognized scale type"
       end

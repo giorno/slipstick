@@ -104,7 +104,7 @@ module Io::Creat::Slipstick
       return no_smallest
     end
 
-     # internal method rendering fodder ticks
+    # internal method rendering fodder ticks
     private
     def render_fodder_int ( no_smallest, from, step, h_idx_off = 3 )
       if no_smallest > 0
