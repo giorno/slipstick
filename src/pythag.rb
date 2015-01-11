@@ -11,6 +11,7 @@ module Io::Creat::Slipstick
       @scale       = @w_mainscale_mm / 1
       @values      = values
       @dir         = 1
+      @h_idx_off   = 1
     end
 
     public
@@ -21,7 +22,7 @@ module Io::Creat::Slipstick
         x = @start_mm + Math.log10( compute( val ) ) * @scale
         render_tick( x, @h_mm, fmt_label( val ) )
         if not last_val.nil?
-          render_fodder( last, x, last_val, val - last_val, 1 )
+          render_fodder( last, x, last_val, val - last_val, @h_idx_off )
         end
         last = x
         last_val = val

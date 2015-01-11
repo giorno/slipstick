@@ -61,7 +61,9 @@ module Io
                     Io::Creat::Slipstick::Key::FODDERS       => { #100 => [ 5, 10, 50 ],
                                                                    50 => [ 5, 10 ],
                                                                    25 => [ 5 ],
+                                                                   20 => [ 4 ],
                                                                    10 => [ 5 ],
+                                                                   10.0 => [ 2 ],
                                                                     5  => [ ],
                                                                     2  => [ ] },
                     Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.05, 0.85 ], # corrections to workaround lack of support for dominant-baseline
