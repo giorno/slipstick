@@ -36,10 +36,20 @@ module Io::Creat::Slipstick
       exp = Math.log10( val )
       if val > 100 and exp % 1 == 0
         return "\u00a0%dK" % ( val / 1000 )
-      elsif val > 100 and val % 10 == 0
-        return super( val )[0]
+      else
+        text = super( val )
+        if val > 100 and val % 10 == 0
+          return text[0]
+        elsif text.length > 3
+          indent = ''
+          for i in 1 .. text.length - 3
+            indent += "\u00a0"
+          end
+          return indent + text
+        else
+          return @mult == 1 ? text.gsub( '.', '') : text
+        end
       end
-      return @mult == 1 ? super( val ).gsub( '.', '') : super( val )
     end
 
   end # PowerScale
