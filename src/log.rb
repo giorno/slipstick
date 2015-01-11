@@ -41,7 +41,7 @@ module Io::Creat::Slipstick
       last_mm = -1
       @values.each do | val |
         x_mm = @start_mm + Math.log10( comp( val ) ) * @scale
-        render_tick( x_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][ @small.include?( val ) ? 1 : 0 ], fmt( val ) )
+        render_tick( x_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][ @small.include?( val ) ? 1 : 0 ], fmt( val ), @small.include?( val ) ? Io::Creat::Slipstick::Entity::LOTICK : Io::Creat::Slipstick::Entity::TICK )
         if not last_val.nil?
           render_fodder( last_val, val - last_val, 1 )
         end
