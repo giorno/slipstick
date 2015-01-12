@@ -127,7 +127,7 @@ module Io::Creat::Slipstick
       # render strips and edges for cutting/bending
       public
       def render()
-        @style = { :stroke_width => "0.1mm", :stroke => "#dddddd", :stroke_cap => "square", :fill => "none" }
+        @style = { :stroke_width => "0.1mm", :stroke => "#aaaaaa", :stroke_cap => "square", :fill => "none" }
         if ( ( @layers & LAYER_STOCK ) != 0 ) and ( ( @layers & LAYER_REVERSE ) != 0 )
           # cutting guidelines for the stator
           rect( @x_mm, @y_mm, @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
