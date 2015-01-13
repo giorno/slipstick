@@ -29,6 +29,7 @@ module Io::Creat::Slipstick
         w_s_mm = 23.0
         w_a_mm = 7.0
 
+        # scales of the stator
         if ( ( @layers & LAYER_STOCK ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           strip = create_strip( @x_mm, @y_mm, @hl_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x", 0.5 )
@@ -77,15 +78,16 @@ module Io::Creat::Slipstick
               scale.set_overflow( 1.0 )
         end
 
+        # sides of the slide
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) == 0 )
           strip = create_strip( @x_mm, 2 * @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL3", 0.5 )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e·⁰¹ˣ", 0.5 )
               scale.set_params( 100 )
               scale.set_overflow( 4.0 )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL2", 0.33, true )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e·¹ˣ", 0.33, true )
               scale.set_style( Io::Creat::Slipstick::Style::SMALL )
               scale.set_params( 10 )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL1", 0.5, true )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e¹ˣ", 0.5, true )
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
 
