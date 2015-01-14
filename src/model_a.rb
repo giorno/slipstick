@@ -81,10 +81,10 @@ module Io::Creat::Slipstick
         # sides of the slide
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) == 0 )
           strip = create_strip( @x_mm, 2 * @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e·⁰¹ˣ", 0.5 )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e⁰·⁰¹ˣ", 0.5 )
               scale.set_params( 100 )
               scale.set_overflow( 4.0 )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e·¹ˣ", 0.33, true )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e⁰·¹ˣ", 0.33, true )
               scale.set_style( Io::Creat::Slipstick::Style::SMALL )
               scale.set_params( 10 )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e¹ˣ", 0.5, true )
