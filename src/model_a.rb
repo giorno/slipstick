@@ -64,7 +64,7 @@ module Io::Creat::Slipstick
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "log x", 0.33 )
               scale.set_params( 10 )
               scale.set_overflow( @b_mm )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_PYTHAG, "√(1-x²)", 0.33 )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_PYTHAG, "√1-x²", 0.33 )
               scale.set_style( Io::Creat::Slipstick::Style::SMALL )
               scale.set_params( )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x³", 0.33 )
