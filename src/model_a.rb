@@ -20,7 +20,7 @@ module Io::Creat::Slipstick
         @t_mm  = 1.0 # thickness of the slipstick
         @h_mm  = @hu_mm + @hl_mm + @hs_mm
         @x_mm  = 5.0
-        @y_mm  = 5.0
+        @y_mm  = 10.0
         @w_mm  = 287.0
         @b_mm  = 0.1 # bending radius (approximated)
 
@@ -80,7 +80,7 @@ module Io::Creat::Slipstick
 
         # sides of the slide
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) == 0 )
-          strip = create_strip( @x_mm, 2 * @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e⁰·⁰¹ˣ", 0.5 )
               scale.set_params( 100 )
               scale.set_overflow( 4.0 )
@@ -91,7 +91,7 @@ module Io::Creat::Slipstick
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
 
-          strip = create_strip( @x_mm, ( ( @h_mm - @hs_mm ) / 2 ) + 2 * @y_mm + 2 * @t_mm + @h_mm + @hu_mm + @hl_mm, @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          strip = create_strip( @x_mm, ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm + @hl_mm, @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5 )
               scale.set_params( 2 )
               scale.set_overflow( 4.0 )
@@ -141,10 +141,10 @@ module Io::Creat::Slipstick
         end
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           # cutting guidelines for the slipstick
-          line( 0, 2 * @y_mm, 297, 2 * @y_mm )
-          line( 0, 2 * @y_mm + @h_mm, 297, 2 * @y_mm + @h_mm )
-          line( 0, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @y_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @y_mm )
-          line( 0, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm + @y_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm + @y_mm )
+          line( 0, @y_mm, 297, @y_mm )
+          line( 0, @y_mm + @h_mm, 297, @y_mm + @h_mm )
+          line( 0, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
+          line( 0, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm )
         end
         # strips
         return super()

@@ -69,7 +69,7 @@ module Io::Creat::Slipstick
         dy_mm = ( @flipped ? -@h_mm : @h_mm ) / 2
         @img.text( "%fmm" % ( @off_x_mm + @dim[Io::Creat::Slipstick::Key::CLEARING] ),
                    "%fmm" % ( @off_y_mm + dy_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ),
-                   "%s" % @label,
+                   "\u00a0%s" % @label,
                    { "fill" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_COLOR],
                      "font-size" => "%fmm" % font_size_mm,
                      "font-family" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_FAMILY],
