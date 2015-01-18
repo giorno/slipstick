@@ -23,6 +23,7 @@ module Io::Creat::Slipstick
         @y_mm  = 10.0
         @w_mm  = 287.0
         @b_mm  = 0.1 # bending radius (approximated)
+        @cs_mm = 0.5 # correction for slide height
 
         w_m_mm = 250.0
         w_l_mm = 7.0
@@ -141,10 +142,10 @@ module Io::Creat::Slipstick
         end
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           # cutting guidelines for the slipstick
-          line( 0, @y_mm, 297, @y_mm )
-          line( 0, @y_mm + @h_mm, 297, @y_mm + @h_mm )
-          line( 0, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
-          line( 0, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm )
+          line( 0, @y_mm + @cs_mm, 297, @y_mm + @cs_mm )
+          line( 0, @y_mm + @h_mm - @cs_mm, 297, @y_mm + @h_mm - @cs_mm )
+          line( 0, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @cs_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @cs_mm )
+          line( 0, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm - @cs_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm - @cs_mm )
         end
         # strips
         return super()
