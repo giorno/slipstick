@@ -18,6 +18,7 @@ module Io::Creat::Slipstick
         @hl_mm = 22.0 # height of lower half of stator strip
         @hs_mm = 18.0 # height of slipstick strip
         @t_mm  = 2.0 # thickness of the slipstick
+        @sh_mm = @h_mm # sheet height
         @h_mm  = @hu_mm + @hl_mm + @hs_mm
         @x_mm  = 5.0
         @y_mm  = 10.0
@@ -131,14 +132,15 @@ module Io::Creat::Slipstick
       public
       def render()
         @style = { :stroke_width => "0.1mm", :stroke => "#aaaaaa", :stroke_cap => "square", :fill => "none" }
+        # stock lines are intentionally positioned upside down (in landscape)
         if ( ( @layers & LAYER_STOCK ) != 0 ) and ( ( @layers & LAYER_REVERSE ) != 0 )
           # cutting guidelines for the stator
-          rect( @x_mm, @y_mm, @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
+          rect( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm ), @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
           # bending guidelines for the stator
-          line( @x_mm, @y_mm + @hu_mm, @x_mm + @w_mm, @y_mm + @hu_mm )
-          line( @x_mm, @y_mm + @hu_mm + @t_mm, @x_mm + @w_mm, @y_mm + @hu_mm + @t_mm )
-          line( @x_mm, @y_mm + @hu_mm + @t_mm + @h_mm, @x_mm + @w_mm, @y_mm + @hu_mm + @t_mm + @h_mm )
-          line( @x_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm, @x_mm + @w_mm, @y_mm + @hu_mm + 2 * @t_mm + @h_mm )
+          line( @x_mm, @sh_mm - ( @y_mm + @hu_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm ) )
+          line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ) )
+          line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ) )
+          line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ) )
         end
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           # cutting guidelines for the slipstick
