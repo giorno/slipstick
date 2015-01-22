@@ -1,3 +1,5 @@
+.PHONY: fonts
+
 OS=$(shell uname -s)
 ifeq ($(OS),Darwin)
 	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
@@ -5,13 +7,14 @@ else
 	INKSCAPE=$(shell which inkscape 2> /dev/null)
 endif
 
-all : prerequisites prepare model_a
+all : prerequisites prepare fonts model_a
 
 clean :
 	@rm -rf build
 
 print_os :
 	$(info Detected operating system: $(OS))
+
 check_ruby :
 	$(info Checking if Ruby is installed)
 	@which ruby > /dev/null
@@ -41,8 +44,12 @@ ifeq ($(INKSCAPE),)
 endif
 endif
 
+fonts :
+	@$(MAKE) -C fonts install
+
 # Builds printouts for Model A
 model_a :
+	$(info Generating Model A)
 	@src/model_a.rb stock face | xmllint --format - > build/model_a_stock_face.svg
 	@src/model_a.rb stock reverse | xmllint --format - > build/model_a_stock_reverse.svg 
 	@src/model_a.rb slide face | xmllint --format - > build/model_a_slide_face.svg
@@ -56,6 +63,6 @@ model_a :
 
 prerequisites : print_os check_ruby check_rasem check_xmllint check_inkscape check_gs
 
-prepare: clean
-	@mkdir build
+prepare:
+	@mkdir -p build
 
