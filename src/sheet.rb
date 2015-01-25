@@ -14,11 +14,11 @@ module Io::Creat::Slipstick::Layout
 
     public
     def render ( )
-        @img.text( "%fmm" % @off_x_mm,
-                   "%fmm" % ( @off_y_mm + @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] ),
+        @img.text( "%f" % @off_x_mm,
+                   "%f" % ( @off_y_mm + @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] ),
                    "%s" % @label,
                    { "fill" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_COLOR],
-                     "font-size" => "%fmm" % @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE],
+                     "font-size" => "%f" % @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE],
                      "font-family" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_FAMILY],
                      "font-style" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_STYLE],
                      "text-anchor" => "left",
@@ -38,7 +38,7 @@ module Io::Creat::Slipstick::Layout
       @h_mm         = h_mm
       @spacing_y_mm = spacing_y_mm.nil? ? @off_y_mm : spacing_y_mm
       @y_tracker_mm = @off_y_mm
-      @img = Io::Creat::Svg.new( "%dmm" % @w_mm, "%dmm" % @h_mm )
+      @img = Io::Creat::Svg.new( "%d" % @w_mm, "%d" % @h_mm )
     end
 
     # TODO throw exception when tracker would reach beyond the bottom border
@@ -58,10 +58,12 @@ module Io::Creat::Slipstick::Layout
     end
 
     public
-    def render()
+    def render( no_return = false)
        super()
-       @img.close
-       return @img.output
+       if not no_return
+         @img.close
+         return @img.output
+       end
     end
   end
 end # module io::creat::slipstick::layout

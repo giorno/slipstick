@@ -39,7 +39,7 @@ module Io
                    Io::Creat::Slipstick::Key::FONT_WEIGHT  => 'normal',
                    Io::Creat::Slipstick::Key::FONT_STYLE   => 'normal',
                    Io::Creat::Slipstick::Key::FONT_COLOR   => 'black',
-                   Io::Creat::Slipstick::Key::FONT_SPACING => -1.2, # px, Inkscape does not support anything else
+                   Io::Creat::Slipstick::Key::FONT_SPACING => -0.33, # px, Inkscape does not support anything else
                    Io::Creat::Slipstick::Key::FONT_SIZE    => 3.0, # mm
                  }
         # per scale style
@@ -66,7 +66,7 @@ module Io
                                                                    10.0 => [ 2 ],
                                                                     5  => [ ],
                                                                     2  => [ ] },
-                    Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.05, 0.85 ], # corrections to workaround lack of support for dominant-baseline
+                    Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.10, 0.90 ], # corrections to workaround lack of support for dominant-baseline
                   }
       end
 

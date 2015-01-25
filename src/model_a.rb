@@ -2,6 +2,7 @@
 
 require_relative 'qr'
 require_relative 'sheet'
+require_relative 'gr_trigon'
 
 module Io::Creat::Slipstick
   module Model
@@ -13,12 +14,12 @@ module Io::Creat::Slipstick
       LAYER_STOCK   = 0x4 # generate stator if set, slide if not set
 
       # branding/version texts on the stock face
-      STYLE_BRAND   = { "font-size" => "2.4mm",
+      STYLE_BRAND   = { "font-size" => "2.4",
                         "font-family" => "Slipstick Sans Mono",
                         "font-weight" => "normal",
                         "fill" => "#f57900",
                         "text-anchor" => "middle" }
-      STYLE_QR      = { :fill => "#f57900", :stroke_width => "0.01mm", :stroke => "#f57900" }
+      STYLE_QR      = { :fill => "#f57900", :stroke_width => "0.01", :stroke => "#f57900" }
 
       public
       def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
@@ -130,17 +131,17 @@ module Io::Creat::Slipstick
 
       private
       def rect ( x, y, w, h )
-        @img.rectangle( "%gmm" % x, "%gmm" % y, "%gmm" % w, "%gmm" % h, @style )
+        @img.rectangle( "%g" % x, "%g" % y, "%g" % w, "%g" % h, @style )
       end
 
       private
       def line ( x1, y1, x2, y2 )
-        @img.line( "%gmm" % x1, "%gmm" % y1, "%gmm" % x2, "%gmm" % y2, @style )
+        @img.line( "%g" % x1, "%g" % y1, "%g" % x2, "%g" % y2, @style )
       end
 
       private
       def text ( x, y, string, style )
-        @img.text( "%gmm" % x, "%gmm" % y, string, style )
+        @img.text( "%g" % x, "%g" % y, string, style )
       end
 
       private
@@ -150,7 +151,7 @@ module Io::Creat::Slipstick
       # render strips and edges for cutting/bending
       public
       def render()
-        @style = { :stroke_width => "0.1mm", :stroke => "#aaaaaa", :stroke_cap => "square", :fill => "none" }
+        @style = { :stroke_width => "0.1", :stroke => "#aaaaaa", :stroke_cap => "square", :fill => "none" }
         # stock lines are intentionally positioned upside down (in landscape)
         if ( @layers & LAYER_STOCK ) != 0
           if ( @layers & LAYER_REVERSE ) != 0
@@ -164,10 +165,13 @@ module Io::Creat::Slipstick
           else
             # branding texts
             text( @x_mm + 174, @y_mm + 106, "creat.io MODEL A", STYLE_BRAND )
+            # sin-cos help
+            bottom_off_mm = 15.0
+            bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
+            gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
+            gr = Io::Creat::Slipstick::Graphics::Trigonometric.new( @img, gr_size_mm, bottom_off_mm, bottom_mm )
             # QR code
-            qr_off_mm = 15.0
-            qr_size_mm = @h_mm - ( 2 * qr_off_mm )
-            qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - qr_size_mm - qr_off_mm, @y_mm + qr_off_mm + @hl_mm + @t_mm, qr_size_mm, STYLE_QR )
+            qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
           end
         end
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
@@ -178,7 +182,9 @@ module Io::Creat::Slipstick
           line( 0, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm - @cs_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm - @cs_mm )
         end
         # strips
-        return super()
+        super( true )
+        @img.close()
+        return @img.output
       end
 
     end # A

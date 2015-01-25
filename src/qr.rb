@@ -17,10 +17,10 @@ module Io::Creat::Slipstick
       qr.modules.each_index do |x|
         qr.modules.each_index do |y|
           if qr.dark?( x, y )
-            @img.rectangle( "%gmm" % ( x_mm + x * @scale ),
-                            "%gmm" % ( y_mm + y * @scale ),
-                            "%gmm" % @scale,
-                            "%gmm" % @scale,
+            @img.rectangle( "%g" % ( x_mm + x * @scale ),
+                            "%g" % ( y_mm + y * @scale ),
+                            "%g" % @scale,
+                            "%g" % @scale,
                             style )
           end
         end
