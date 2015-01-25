@@ -45,7 +45,11 @@ endif
 endif
 
 fonts :
+ifneq ($(OS),Darwin)
 	@$(MAKE) -C fonts install
+else
+	$(warning Fonts are not generated on Mac OS X)
+endif
 
 # Builds printouts for Model A
 model_a :

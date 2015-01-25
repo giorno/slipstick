@@ -1,5 +1,6 @@
 #!/usr/bin/ruby
 
+require_relative 'qr'
 require_relative 'sheet'
 
 module Io::Creat::Slipstick
@@ -17,6 +18,7 @@ module Io::Creat::Slipstick
                         "font-weight" => "normal",
                         "fill" => "#f57900",
                         "text-anchor" => "middle" }
+      STYLE_QR      = { :fill => "#f57900", :stroke_width => "0.01mm", :stroke => "#f57900" }
 
       public
       def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
@@ -141,6 +143,10 @@ module Io::Creat::Slipstick
         @img.text( "%gmm" % x, "%gmm" % y, string, style )
       end
 
+      private
+      def qr ( label )
+      end
+
       # render strips and edges for cutting/bending
       public
       def render()
@@ -158,6 +164,10 @@ module Io::Creat::Slipstick
           else
             # branding texts
             text( @x_mm + 174, @y_mm + 106, "creat.io MODEL A", STYLE_BRAND )
+            # QR code
+            qr_off_mm = 15.0
+            qr_size_mm = @h_mm - ( 2 * qr_off_mm )
+            qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - qr_size_mm - qr_off_mm, @y_mm + qr_off_mm + @hl_mm + @t_mm, qr_size_mm, STYLE_QR )
           end
         end
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
