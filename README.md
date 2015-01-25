@@ -6,12 +6,13 @@ This project generates printable PDF's of paper-made slide rules (it can also be
 To make it work, project requires certain applications in the environment. To make it appealing, certain fonts have to be installed.
 
 ###Basic features
-This includes SVG output generation for simple scales or paper models. It relies on Ruby and Ruby Gem [Rasem](https://github.com/aseldawy/rasem).
+This includes SVG output generation for simple scales or paper models. It relies on Ruby and Ruby Gems [Rasem](https://github.com/aseldawy/rasem) and [RQRcoder](https://github.com/whomwah/rqrcode).
 
 ####Gentoo Linux
 ```
 emerge dev-lang/ruby dev-ruby/rubygems
 gem install rasem
+gem install rqrcode
 ```
 
 ###PDF printouts
