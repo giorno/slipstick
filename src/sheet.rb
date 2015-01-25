@@ -1,7 +1,7 @@
-require 'rasem'
 
 require_relative 'constants'
 require_relative 'strip'
+require_relative 'svg'
 
 module Io::Creat::Slipstick::Layout
 
@@ -38,7 +38,7 @@ module Io::Creat::Slipstick::Layout
       @h_mm         = h_mm
       @spacing_y_mm = spacing_y_mm.nil? ? @off_y_mm : spacing_y_mm
       @y_tracker_mm = @off_y_mm
-      @img = Rasem::SVGImage.new( "%dmm" % @w_mm, "%dmm" % @h_mm )
+      @img = Io::Creat::Svg.new( "%dmm" % @w_mm, "%dmm" % @h_mm )
     end
 
     # TODO throw exception when tracker would reach beyond the bottom border
