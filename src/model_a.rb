@@ -5,10 +5,18 @@ require_relative 'sheet'
 module Io::Creat::Slipstick
   module Model
 
+    # model A inspired by layout of LOGAREX 27403-II
     class A < Io::Creat::Slipstick::Layout::Sheet
-      LAYER_FACE    = 0x1 # side of a printout list
-      LAYER_REVERSE = 0x2
-      LAYER_STOCK   = 0x4 # stator, slide if not set
+      LAYER_FACE    = 0x1 # front side (page) of a printout list
+      LAYER_REVERSE = 0x2 # reverse side of the printout`
+      LAYER_STOCK   = 0x4 # generate stator if set, slide if not set
+
+      # branding/version texts on the stock face
+      STYLE_BRAND   = { "font-size" => "2.4mm",
+                        "font-family" => "Slipstick Sans Mono",
+                        "font-weight" => "normal",
+                        "fill" => "#f57900",
+                        "text-anchor" => "middle" }
 
       public
       def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
@@ -128,19 +136,29 @@ module Io::Creat::Slipstick
         @img.line( "%gmm" % x1, "%gmm" % y1, "%gmm" % x2, "%gmm" % y2, @style )
       end
 
+      private
+      def text ( x, y, string, style )
+        @img.text( "%gmm" % x, "%gmm" % y, string, style )
+      end
+
       # render strips and edges for cutting/bending
       public
       def render()
         @style = { :stroke_width => "0.1mm", :stroke => "#aaaaaa", :stroke_cap => "square", :fill => "none" }
         # stock lines are intentionally positioned upside down (in landscape)
-        if ( ( @layers & LAYER_STOCK ) != 0 ) and ( ( @layers & LAYER_REVERSE ) != 0 )
-          # cutting guidelines for the stator
-          rect( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm ), @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
-          # bending guidelines for the stator
-          line( @x_mm, @sh_mm - ( @y_mm + @hu_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm ) )
-          line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ) )
-          line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ) )
-          line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ) )
+        if ( @layers & LAYER_STOCK ) != 0
+          if ( @layers & LAYER_REVERSE ) != 0
+            # cutting guidelines for the stator
+            rect( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm ), @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
+            # bending guidelines for the stator
+            line( @x_mm, @sh_mm - ( @y_mm + @hu_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm ) )
+            line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ) )
+            line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ) )
+            line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ) )
+          else
+            # branding texts
+            text( @x_mm + 174, @y_mm + 106, "creat.io MODEL A", STYLE_BRAND )
+          end
         end
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           # cutting guidelines for the slipstick
