@@ -25,7 +25,6 @@ module Io::Creat::Slipstick
           end
         end
       end
-      #puts qr.to_s
     end
 
   end # Qr
