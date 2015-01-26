@@ -29,8 +29,10 @@ module Io
 
       # close an SVG path and apply the style in the process
       public
-      def pend ( )
-        @output << %Q{" fill="none" stroke="black" stroke-width="0.11"/>}
+      def pend ( style = { "fill" => "none", "stroke" => "black", "stroke-width" => "0.11" } )
+        @output << %Q{" }
+	write_style(style)
+        @output << %Q{/>}
         @in_path = false
       end
 
