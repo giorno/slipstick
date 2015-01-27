@@ -85,7 +85,7 @@ module Io::Creat::Slipstick
         STEPS.each_with_index do | alpha, index |
           @img.line( @x_mm + Math::sin( alpha ) * ( @r_step_mm + @overlap_mm ), @y_mm - Math::cos( alpha ) * ( @r_step_mm + @overlap_mm ), @x_mm, @y_mm, @line_style )
           # degrees
-          rtext( alpha, 1.5, "\u00a0%g°" % ( 90 - ( alpha * 180 / Math::PI ) ) )
+          rtext( alpha, 1.5, "%g°" % ( 90 - ( alpha * 180 / Math::PI ) ) )
           # rads
           rtext( alpha, 2.5, RADS[index] )
           # sin
