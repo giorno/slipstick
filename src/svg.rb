@@ -51,13 +51,32 @@ module Io
       public
       def rline ( x_mm, y_mm )
         assert_in_path
-        @output << %Q{l#{x_mm},#{y_mm} }
+        @output << %Q{L#{x_mm},#{y_mm} }
       end
 
       public
       def arc ( x_mm, y_mm, r_mm, dir = "0,1" )
         assert_in_path
         @output << %Q{A#{r_mm},#{r_mm} 0 #{dir} #{x_mm},#{y_mm} }
+      end
+
+      # render text rotated around its position coordinates
+      public
+      def rtext( x, y, deg, text, style )
+        @output << %Q{<text x="#{x}" y="#{y}" transform="rotate(#{deg}, #{x}, #{y})"}
+        style = fix_style(default_style.merge(style))
+        @output << %Q{ font-family="#{style.delete "font-family"}"} if style["font-family"]
+        @output << %Q{ font-size="#{style.delete "font-size"}"} if style["font-size"]
+        write_style style
+        @output << ">"
+        dy = 0      # First line should not be shifted
+        text.each_line do |line|
+          @output << %Q{<tspan x="#{x}" dy="#{dy}em">}
+          dy = 1    # Next lines should be shifted
+          @output << line.rstrip
+          @output << "</tspan>"
+        end
+        @output << "</text>"
       end
 
     end # Svg
