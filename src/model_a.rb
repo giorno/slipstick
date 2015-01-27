@@ -19,7 +19,7 @@ module Io::Creat::Slipstick
                         "font-weight" => "normal",
                         "fill" => "#f57900",
                         "text-anchor" => "middle" }
-      STYLE_QR      = { :fill => "#f57900", :stroke_width => "0.01", :stroke => "#f57900" }
+      STYLE_QR      = { :fill => "black", :stroke_width => "0.01", :stroke => "black" }
 
       public
       def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
@@ -169,7 +169,7 @@ module Io::Creat::Slipstick
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
-            gr = Io::Creat::Slipstick::Graphics::Trigonometric.new( @img, gr_size_mm, bottom_off_mm, bottom_mm )
+            gr = Io::Creat::Slipstick::Graphics::Trigonometric.new( @img, gr_size_mm, 2 * bottom_off_mm, bottom_mm )
             # QR code
             qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
           end
