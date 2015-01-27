@@ -8,8 +8,8 @@ module Io::Creat::Slipstick
     class Trigonometric
       STEPS = [ Math::PI / 2, Math::PI / 3, Math::PI / 4, Math::PI / 6, 0 ]
       RADS = [ "0", "π/6", "π/4", "π/3", "π/2" ]
-      COS = [ "√0/2", "√1/2", "√2/2", "√3/2", "√4/0" ]
-      SIN = [ "√4/2", "√3/2", "√2/2", "√1/2", "√0/0" ]
+      COS = [ "\u221b0/2", "\u221b1/2", "\u221b2/2", "\u221b3/2", "\u221b4/2" ]
+      SIN = [ "\u221b4/2", "\u221b3/2", "\u221b2/2", "\u221b1/2", "\u221b0/2" ]
 
       public
       def initialize ( img, size_mm, x_mm, y_mm, style = Io::Creat::Slipstick::Style::DEFAULT )
@@ -63,7 +63,7 @@ module Io::Creat::Slipstick
         step = scale / 2
         @img.pbegin()
           @img.move( x, y - f.call( 0 ) )
-          ( 0..2 * Math::PI ).step( Math::PI / 9 ) do | alpha |
+          ( 0..2 * Math::PI ).step( Math::PI / 18 ) do | alpha |
             @img.rline( x + alpha * scale, y - f.call( alpha ) )
           end
         @img.pend( @line_style )
@@ -94,10 +94,15 @@ module Io::Creat::Slipstick
           rtext( alpha, 4.5, COS[index] )
         end
 
-        @img.rtext( @x_mm - 2 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, -90, "sin", @text_style )
-        @img.rtext( @x_mm - 2 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, -90, "cos", @text_style )
-        graph( @x_mm - 5 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::sin( a ) } )
-        graph( @x_mm - 5 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::cos( a ) } )
+        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, -90, "sin", @text_style )
+        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, -90, "cos", @text_style )
+        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "\u00a0\u00a0tan = sin/cos", @text_style.merge( { "text-anchor" => "start" } ) )
+        @img.rtext( @x_mm - 4 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "cotan = cos/sin", @text_style.merge( { "text-anchor" => "start" } ) )
+        @img.rtext( @x_mm - 3 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "\u00a0\u00a0sec = 1/cos", @text_style.merge( { "text-anchor" => "start" } ) )
+        @img.rtext( @x_mm - 2 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "cosec = 1/sin", @text_style.merge( { "text-anchor" => "start" } ) )
+        @img.text( @x_mm + @size_mm, @y_mm - @size_mm + @text_style["font-size"], "1 = sin² + cos²", @text_style.merge( { "text-anchor" => "end" } ) )
+        graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::sin( a ) } )
+        graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::cos( a ) } )
       end
 
     end # Trigonometric
