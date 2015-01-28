@@ -181,21 +181,8 @@ module Io::Creat::Slipstick
             gr = Io::Creat::Slipstick::Graphics::Trigonometric.new( @img, gr_size_mm, 2 * bottom_off_mm, bottom_mm )
 
             # table of scale labels
-            bp = ScalesBackprint.new( @img, 3 * bottom_off_mm + gr_size_mm, bottom_mm, gr_size_mm )
+            bp = ConstantsBackprint.new( @img, 3 * bottom_off_mm + gr_size_mm, bottom_mm, gr_size_mm )
             bp.render()
-	    #table = Io::Creat::Slipstick::Graphics::Table.new( @img, 3 * bottom_off_mm + gr_size_mm, bottom_mm )
-            #  tr = table.tr( 4 )
-            #    td = tr.td( "LL2", 4 )
-            #    td = tr.td( "A", 1 )
-            #    td = tr.td( "A", 2 )
-            #    td = tr.td( "A", 6 )
-            #  tr = table.tr( 2 )
-            #    td = tr.td( "LL2", 2 )
-            #    td = tr.td( "LL2" )
-            #  tr = table.tr( 4 )
-            #    td = tr.td( "LL2", 3 )
-            #    td = tr.td( "LL2" )
-	    #table.render()
             # QR code
             qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
           end
@@ -323,6 +310,45 @@ module Io::Creat::Slipstick
       end
 
       end # ScalesBackprint
+
+      class ConstantsBackprint < Backprint
+      CONSTANTS =  [ [ 'imaginary',       'i²', '-1' ],
+                     [ 'Meissel–Mertens', 'M₁', '0.26149 72128' ],
+                     [ 'Omega',           'Ω',  '0.56714 32904' ],
+                     [ 'Euler-Mascheroni', 'γ', '0.57721 56649' ],
+                     [ 'Apéry',            'ζ', '1.20205 69032' ],
+                     [ 'Pythagoras',       "\u221b2", '1.41421 35624' ],
+                     [ 'Ramanujan-Soldner', 'μ', '1.45136 92349' ],
+                     [ 'Golden ration', 'φ', '1.61803 39887' ],
+                     [ 'Theodorus', "\u221b3", '1.73205 08076' ],
+                     [ '', "\u221b5", '2.23606 79775' ],
+                     [ 'Euler', 'e', '2.71828 18285' ],
+                     [ 'Archimedes', 'π', '3.14159 26536' ],
+                     [ 'Reciprocal Fibonacci', 'ψ', '3.35988 56662' ],
+                   ]
+      def render ( )
+        my_mm = @y_mm - @h_mm / 2
+        w_mm = @fs_mm * 2.5
+        #h_mm = 1.4 * @fs_mm
+        h_mm = @h_mm / 12
+        fs_mm = h_mm / 1.6
+        style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => fs_mm } )
+        spacing = @fs_mm * 0.2
+        tables = []
+        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm, @y_mm, spacing, style )
+        CONSTANTS.each do | constant |
+          tr = table.tr( h_mm )
+            td = tr.td( constant[0], 5 * w_mm )
+            td = tr.td( constant[1], 1 * w_mm )
+            td = tr.td( constant[2], 4 * w_mm )
+        end
+        tables << table
+        tables.each do | table |
+          table.render()
+        end
+      end
+
+      end # ConstantsBackprint
 
       class SinCosBackprint < Backprint
       end # SinCosBackprint
