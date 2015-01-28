@@ -83,7 +83,7 @@ module Io::Creat::Slipstick
 
           # top stock strip
           strip = create_strip( @x_mm, @y_mm + 2 * @t_mm + @h_mm + @hu_mm, @hu_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "log x", 0.33 )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "log", 0.33 )
               scale.set_params( 10 )
               scale.set_overflow( @b_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_PYTHAG, "√1-x²", 0.33 )
@@ -253,8 +253,8 @@ module Io::Creat::Slipstick
       def render ( )
         my_mm = @y_mm - @h_mm / 2
         w_mm = @fs_mm * 5
-        h_mm = 1.6 * @fs_mm
-        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm, @y_mm, @fs_mm * 0.2 )
+        h_mm = 1.4 * @fs_mm
+        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm, @y_mm, @fs_mm * 0.2, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @fs_mm } ) )
           tr = table.tr( h_mm )
             td = tr.td( 'L1', w_mm )
             td = tr.td( 'L1', w_mm )

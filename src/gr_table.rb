@@ -66,8 +66,8 @@ module Io::Creat::Slipstick
     class Table < Styled
 
       public
-      def initialize ( img, x_mm, y_mm, spacing = 0 )
-        super( Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
+      def initialize ( img, x_mm, y_mm, spacing = 0, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
+        super( style )
         @text_style = @text_style.merge( { "text-anchor" => "start" } )
         @img   = img
         @x_mm  = x_mm
@@ -103,7 +103,7 @@ module Io::Creat::Slipstick
             if jndex > 0
               @img.line( @x_mm + j_mm, @y_mm + h_mm, @x_mm + j_mm, @y_mm + h_mm + row.geth(), @line_style )
             end
-            @img.text( @x_mm + j_mm + @spacing, @y_mm + h_mm + row.geth - @spacing - ( row.geth() - Io::Creat::Slipstick::Dim::DEFAULT[Io::Creat::Slipstick::Key::VERT_CORR][1] * @text_style["font-size"] ) / 2, cell.gett(), @text_style )
+            @img.text( @x_mm + j_mm + @spacing, @y_mm + h_mm + row.geth - ( row.geth() + @spacing - Io::Creat::Slipstick::Dim::DEFAULT[Io::Creat::Slipstick::Key::VERT_CORR][1] * @text_style["font-size"] ) / 2, cell.gett(), @text_style )
             j_mm += cell.getw()
           end
           h_mm += row.geth()
