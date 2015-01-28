@@ -7,6 +7,7 @@ module Io::Creat::Slipstick
 
   # renders QR code onto Rasem SVG canvas
   class Qr
+    # mapping of QR size (version) to number of squares per dimension
     DENSITY = { 1 => 21.0, 2 => 25.0, 3 => 29.0, 4 => 33.0, 10 => 57.0, 25 => 117.0, 40 => 177.0 }
 
     public

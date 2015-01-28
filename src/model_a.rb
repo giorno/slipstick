@@ -1,14 +1,18 @@
 #!/usr/bin/ruby
 
+# vim: et
+
 require_relative 'qr'
 require_relative 'sheet'
 require_relative 'gr_trigon'
+require_relative 'gr_table'
 
 module Io::Creat::Slipstick
   module Model
 
     # model A inspired by layout of LOGAREX 27403-II
     class A < Io::Creat::Slipstick::Layout::Sheet
+      # layers to generate
       LAYER_FACE    = 0x1 # front side (page) of a printout list
       LAYER_REVERSE = 0x2 # reverse side of the printout`
       LAYER_STOCK   = 0x4 # generate stator if set, slide if not set
@@ -19,6 +23,7 @@ module Io::Creat::Slipstick
                         "font-weight" => "normal",
                         "fill" => "#f57900",
                         "text-anchor" => "middle" }
+      # QR code style
       STYLE_QR      = { :fill => "black", :stroke_width => "0.01", :stroke => "black" }
 
       public
@@ -44,6 +49,7 @@ module Io::Creat::Slipstick
 
         # scales of the stator
         if ( ( @layers & LAYER_STOCK ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
+          # bottom stock strip
           strip = create_strip( @x_mm, @y_mm, @hl_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x", 0.5 )
               scale.set_params( 1 )
@@ -63,16 +69,19 @@ module Io::Creat::Slipstick
               scale.set_flags( 0 )
               scale.set_overflow( @b_mm )
 
+          # top of the stock back
           strip = create_strip( @x_mm, @y_mm + @t_mm + @hl_mm, 8, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "cm", 0.33 )
               scale.set_params( 25 )
               scale.set_overflow( @b_mm )
 
+          # bottom of the stock back
           strip = create_strip( @x_mm, @y_mm + @t_mm + @h_mm + @hl_mm - 8, 8, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_INCH, "inches", 0.33, true )
               scale.set_params( 10 )
               scale.set_overflow( @b_mm )
 
+          # top stock strip
           strip = create_strip( @x_mm, @y_mm + 2 * @t_mm + @h_mm + @hu_mm, @hu_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "log x", 0.33 )
               scale.set_params( 10 )
@@ -170,6 +179,23 @@ module Io::Creat::Slipstick
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
             gr = Io::Creat::Slipstick::Graphics::Trigonometric.new( @img, gr_size_mm, 2 * bottom_off_mm, bottom_mm )
+
+            # table of scale labels
+            bp = ScalesBackprint.new( @img, 3 * bottom_off_mm + gr_size_mm, bottom_mm, gr_size_mm )
+            bp.render()
+	    #table = Io::Creat::Slipstick::Graphics::Table.new( @img, 3 * bottom_off_mm + gr_size_mm, bottom_mm )
+            #  tr = table.tr( 4 )
+            #    td = tr.td( "LL2", 4 )
+            #    td = tr.td( "A", 1 )
+            #    td = tr.td( "A", 2 )
+            #    td = tr.td( "A", 6 )
+            #  tr = table.tr( 2 )
+            #    td = tr.td( "LL2", 2 )
+            #    td = tr.td( "LL2" )
+            #  tr = table.tr( 4 )
+            #    td = tr.td( "LL2", 3 )
+            #    td = tr.td( "LL2" )
+	    #table.render()
             # QR code
             qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
           end
@@ -186,6 +212,68 @@ module Io::Creat::Slipstick
         @img.close()
         return @img.output
       end
+
+      # common properties and functionality of graphical helpers printed on the
+      # back of the stock
+      class Backprint
+
+        public
+        def initialize ( img, x_mm, y_mm, h_mm, w_mm = nil )
+          @img   = img
+          @x_mm  = x_mm
+          @y_mm  = y_mm
+          @h_mm  = h_mm
+          @w_mm  = w_mm.nil? ? h_mm : w_mm
+          # font size for given backprint height
+          # other graphics dimensions may be calculated from it
+          @fs_mm = @h_mm / ( 5 * 3.5 )
+        end
+
+       public
+        def getfs ( )
+        end
+
+      end # Backprint
+
+      #class QrBackprint < Backprint
+
+      #  def initialize ( img, text, size, level, x_mm, y_mm, size_mm, style )
+      #    super( img, x_mm, y_mm, size_mm )
+      #    @qr = Qr.new( @img, text, size, level, @x_mm, @y_mm, @size_mm, style )
+      #  end
+
+      #  def render ()
+      #    qr.render()
+      #  end
+
+      #end # QrBackprint
+
+      class ScalesBackprint < Backprint
+
+      def render ( )
+        my_mm = @y_mm - @h_mm / 2
+        w_mm = @fs_mm * 5
+        h_mm = 1.6 * @fs_mm
+        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm, @y_mm, @fs_mm * 0.2 )
+          tr = table.tr( h_mm )
+            td = tr.td( 'L1', w_mm )
+            td = tr.td( 'L1', w_mm )
+          tr = table.tr( h_mm )
+            td = tr.td( 'L1', w_mm )
+            td = tr.td( 'L1', w_mm )
+          tr = table.tr( h_mm )
+            td = tr.td( 'L1', w_mm )
+            td = tr.td( 'L1', w_mm )
+          tr = table.tr( h_mm )
+            td = tr.td( 'L1', w_mm )
+            td = tr.td( 'L1', w_mm )
+        table.render()
+      end
+
+      end # ScalesBackprint
+
+      class SinCosBackprint < Backprint
+      end # SinCosBackprint
 
     end # A
 

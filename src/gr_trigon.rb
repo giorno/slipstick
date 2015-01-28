@@ -1,23 +1,22 @@
 
-require_relative 'constants'
+require_relative 'gr_style'
 
 module Io::Creat::Slipstick
   module Graphics
 
     # renders sin-cos help graphics
-    class Trigonometric
-      STEPS = [ Math::PI / 2, Math::PI / 3, Math::PI / 4, Math::PI / 6, 0 ]
-      RADS = [ "0", "π/6", "π/4", "π/3", "π/2" ]
-      COS = [ "\u221b0/2", "\u221b1/2", "\u221b2/2", "\u221b3/2", "\u221b4/2" ]
-      SIN = [ "\u221b4/2", "\u221b3/2", "\u221b2/2", "\u221b1/2", "\u221b0/2" ]
+    class Trigonometric < Styled
+      STEPS = [ Math::PI / 2, Math::PI / 3, Math::PI / 4, Math::PI / 6,           0  ]
+      RADS  = [          "0",        "π/6",        "π/4",        "π/3",        "π/2" ]
+      COS   = [  "\u221b0/2",  "\u221b1/2",  "\u221b2/2",  "\u221b3/2",  "\u221b4/2" ]
+      SIN   = [  "\u221b4/2",  "\u221b3/2",  "\u221b2/2",  "\u221b1/2",  "\u221b0/2" ]
 
       public
       def initialize ( img, size_mm, x_mm, y_mm, style = Io::Creat::Slipstick::Style::DEFAULT )
-        @img        = img
         @size_mm    = size_mm
         @r_step_mm  = @size_mm / 5
-        @line_style = map_line_style( style[Io::Creat::Slipstick::Entity::TICK] )
-        @text_style = map_text_style( style[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @r_step_mm / 3.5 } ) )
+        super( Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @r_step_mm / 3.5 } ) )
+        @img        = img
         @overlap_mm = @r_step_mm * 0.1
         @output     = @img.instance_variable_get( :@output )
         @x_mm       = x_mm # X coord of arcs center
@@ -25,31 +24,12 @@ module Io::Creat::Slipstick
         render()
       end
 
-      # convert Slipstick style to line style
-      private
-      def map_line_style ( from )
-        return { "stroke" => from[Io::Creat::Slipstick::Key::LINE_COLOR],
-                 "stroke-width" => from[Io::Creat::Slipstick::Key::LINE_WIDTH],
-                 "stroke-linecap" => "butt",
-                 "fill" => "none" }
-      end
-
-      # convert Slipstick style to text style
-      private
-      def map_text_style ( from )
-        return { "fill" => from[Io::Creat::Slipstick::Key::FONT_COLOR],
-                 "font-size" => from[Io::Creat::Slipstick::Key::FONT_SIZE],
-                 "font-family" => from[Io::Creat::Slipstick::Key::FONT_FAMILY],
-                 "font-style" => from[Io::Creat::Slipstick::Key::FONT_STYLE],
-                 "text-anchor" => "middle" }
-      end
-      
       private
       def rtext( alpha, r_mlp, text, corr = 0.4 )
         div = text.index( '/' )
         if not div.nil?
           rtext( alpha, r_mlp, text[0..div-1], -0.29 )
-          @img.line( @x_mm + Math::sin( alpha ) * ( r_mlp * @r_step_mm - 2 * @overlap_mm ), @y_mm - Math::cos( alpha ) * ( r_mlp * @r_step_mm - 2 * @overlap_mm ), @x_mm + Math::sin( alpha ) * ( r_mlp * @r_step_mm + 2 * @overlap_mm ), @y_mm - Math::cos( alpha ) * ( r_mlp * @r_step_mm + 2 * @overlap_mm ), @line_style )
+          @img.line( @x_mm + Math::sin( alpha ) * ( r_mlp * @r_step_mm - 2 * @overlap_mm ), @y_mm - Math::cos( alpha ) * ( r_mlp * @r_step_mm - 2 * @overlap_mm ), @x_mm + Math::sin( alpha ) * ( r_mlp * @r_step_mm + 2 * @overlap_mm ), @y_mm - Math::cos( alpha ) * ( r_mlp * @r_step_mm + 2 * @overlap_mm ), @line_style.merge( { "stroke-linecap" => "butt" } ) )
           rtext( alpha, r_mlp, text[div+1], 0.92 )
           return
         end
@@ -67,15 +47,15 @@ module Io::Creat::Slipstick
             @img.rline( x + alpha * scale, y - f.call( alpha ) )
           end
         @img.pend( @line_style )
-        @img.line( x - w * 0.1, y, x + w * 1.1, y, @line_style )
+        @img.line( x - w * 0.1, y, x + w * 1.1, y, @line_style.merge( { "stroke-linecap" => "butt" } ) )
       end
 
       def render ( )
 
         for i in 2..5
           @img.pbegin()
-            @img.move( @x_mm, @y_mm - i * @r_step_mm )
-            @img.arc( @x_mm + i * @r_step_mm, @y_mm, i * @r_step_mm )
+            @img.move( @x_mm - @overlap_mm, @y_mm - Math::sqrt( ( i * @r_step_mm ) ** 2  - @overlap_mm ** 2 ) )
+            @img.arc( @x_mm + Math::sqrt( ( i * @r_step_mm ) ** 2  - @overlap_mm ** 2 ), @y_mm + @overlap_mm, i * @r_step_mm )
           @img.pend( @line_style )
           STEPS.each do | alpha |
             @img.line( @x_mm + Math::sin( alpha ) * ( i * @r_step_mm - @overlap_mm ), @y_mm - Math::cos( alpha ) * ( i * @r_step_mm - @overlap_mm ), @x_mm + Math::sin( alpha ) * ( i * @r_step_mm + @overlap_mm ), @y_mm - Math::cos( alpha ) * ( i * @r_step_mm + @overlap_mm ), @line_style )

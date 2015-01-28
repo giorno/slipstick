@@ -21,7 +21,7 @@ module Io::Creat::Slipstick::Layout
 
   # a collection of Scales serving as a sliding strip
   class Strip < Io::Creat::Slipstick::Node
-    MARK_SIZE = 0.5
+
     public
     def initialize ( parent, h_mm, rel_off_x_mm, rel_off_y_mm, w_mainscale_mm, w_label_mm = 0, w_subscale_mm = 0, w_after_mm = 0 )
       super( parent, rel_off_x_mm, rel_off_y_mm )
@@ -59,11 +59,6 @@ module Io::Creat::Slipstick::Layout
 
     public
     def render()
-      #style = { "stroke-width" => 0.5, "stroke" => "gray", "stroke-cap" => "square" }
-      #@img.line( "%g" % @off_x_mm, "%g" % @off_y_mm, "%g" % @off_x_mm, "%g" % ( @off_y_mm + MARK_SIZE ), style )
-      #@img.line( "%g" % @off_x_mm, "%g" % @off_y_mm, "%g" % ( @off_x_mm + MARK_SIZE ), "%g" % @off_y_mm, style )
-      #@img.line( "%g" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%g" % ( @off_y_mm + @h_mm ), "%g" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%g" % ( @off_y_mm + @h_mm - MARK_SIZE ), style )
-      #@img.line( "%g" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm ), "%g" % ( @off_y_mm + @h_mm ), "%g" % ( @off_x_mm + @w_label_mm + @w_subscale_mm + @w_mainscale_mm + @w_after_mm - MARK_SIZE ), "%g" % ( @off_y_mm + @h_mm ), style )
       off_y_mm = @off_y_mm
       # calculate height occupied by text
       h_text_mm = 0
@@ -74,7 +69,7 @@ module Io::Creat::Slipstick::Layout
       end
       hs_mm = ( @h_mm - h_text_mm )
       @children.each do | child |
-        # distribute heights according to the reatios
+        # distribute heights according to the ratios
         h_mm = hs_mm * ( child.instance_variable_get( :@h_ratio ) / h_ratios )
         child.check_initialized( )
         h_scale_mm = h_mm + child.calc_tick_font_height_mm( )
@@ -84,7 +79,7 @@ module Io::Creat::Slipstick::Layout
         child.render( )
       end
     end
-  end
+  end # Strip
 
-end # module io::creat::slipstick::layout
+end # Io::Creat::Slipstick::Layout
 
