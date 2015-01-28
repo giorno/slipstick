@@ -10,12 +10,11 @@ UnderlinePosition: -103
 UnderlineWidth: 102
 Ascent: 1638
 Descent: 410
-InvalidEm: 0
 sfntRevision: 0x00010000
 LayerCount: 2
-Layer: 0 1 "Back" 1
-Layer: 1 1 "Fore" 0
-XUID: [1021 834 1336795918 395774]
+Layer: 0 1 "Back"  1
+Layer: 1 1 "Fore"  0
+XUID: [1021 834 1336795918 13115687]
 FSType: 8
 OS2Version: 3
 OS2_WeightWidthSlopeOnly: 0
@@ -51,8 +50,6 @@ OS2SupXOff: 0
 OS2SupYOff: 976
 OS2StrikeYSize: 102
 OS2StrikeYPos: 498
-OS2CapHeight: 0
-OS2XHeight: 0
 OS2Vendor: '1ASC'
 OS2CodePages: 2000019f.00000000
 OS2UnicodeRanges: e00002ef.4000205b.00000028.00000000
@@ -2724,7 +2721,7 @@ EndShort
 ShortTable: maxp 16
   1
   0
-  901
+  902
   144
   18
   82
@@ -2739,15 +2736,15 @@ ShortTable: maxp 16
   3
   1
 EndShort
-LangName: 1033 "+AKkA 2015, Jan Stanik+AAoAqQAA 2007, Google Corporation" "" "" "FontForge 2.0 : Slipstick Sans Mono Regular : 17-1-2015" "" "Version 1.00 build 1" "" "" "Jan Stanik" "" "Slipstick Sans Mono is used in Slipstick generator." "" "" "Licensed under the Apache License, Version 2.0" "http://www.apache.org/licenses/LICENSE-2.0" "" "" "" "Slipstick Sans Mono"
-GaspTable: 2 5 2 65535 3 0
+LangName: 1033 "+AKkA 2015, Jan Stanik+AAoAqQAA 2007, Google Corporation" "" "" "FontForge 2.0 : Slipstick Sans Mono Regular : 17-1-2015" "" "Version 1.00 build 1" "" "" "Jan Stanik" "" "Slipstick Sans Mono is used in Slipstick generator." "" "" "Licensed under the Apache License, Version 2.0" "http://www.apache.org/licenses/LICENSE-2.0" "" "" "" "Slipstick Sans Mono" 
+GaspTable: 2 5 2 65535 3
 Encoding: UnicodeBmp
 UnicodeInterp: none
 NameList: Adobe Glyph List
 DisplaySize: -24
 AntiAlias: 1
 FitToEm: 1
-WinInfo: 8672 32 16
+WinInfo: 50 50 15
 BeginChars: 65563 902
 
 StartChar: .notdef
@@ -2796,7 +2793,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 193 1462 m 1,0,-1
@@ -2817,8 +2813,6 @@ Encoding: 65537 -1 1
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: nonmarkingreturn
@@ -2826,8 +2820,6 @@ Encoding: 65538 -1 2
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: space
@@ -2835,8 +2827,6 @@ Encoding: 32 32 3
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: exclam
@@ -2898,7 +2888,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 676 414 m 1,0,-1
@@ -2967,7 +2956,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 522 1462 m 1,0,-1
@@ -3174,7 +3162,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 936 893 m 1,0,-1
@@ -3425,7 +3412,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 684 111 m 1,0,-1
@@ -3669,7 +3655,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 291 784 m 0,0,1
@@ -3941,7 +3926,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 602 776 m 1,0,-1
@@ -4011,7 +3995,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 733 1462 m 1,0,-1
@@ -4068,7 +4051,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 739 1462 m 1,0,-1
@@ -4127,7 +4109,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 489 -324 m 1,0,-1
@@ -4183,7 +4164,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 715 1556 m 1,0,-1
@@ -4243,7 +4223,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 539 647 m 1,0,-1
@@ -4331,7 +4310,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 770 262 m 1,0,-1
@@ -4382,7 +4360,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 285 465 m 1,0,-1
@@ -4429,7 +4406,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 301 m 0,0,1
@@ -4475,7 +4451,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1016 1462 m 1,0,-1
@@ -4546,7 +4521,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 612 -20 m 0,0,1
@@ -4618,7 +4592,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 758 0 m 1,0,-1
@@ -4725,7 +4698,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1069 0 m 1,0,-1
@@ -4852,7 +4824,6 @@ IUP[y]
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 694 770 m 1,0,-1
@@ -4974,7 +4945,6 @@ IUP[y]
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1126 328 m 1,0,-1
@@ -5088,7 +5058,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 172 59 m 1,0,-1
@@ -5197,7 +5166,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 965 1464 m 1,0,-1
@@ -5305,7 +5273,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 334 0 m 1,0,-1
@@ -5448,7 +5415,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 764 774 m 1,0,1
@@ -5565,7 +5531,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 264 -2 m 1,0,-1
@@ -5647,7 +5612,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 1126 m 256,0,1
@@ -5738,7 +5702,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 621 1126 m 256,0,1
@@ -5859,7 +5822,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1075 221 m 1,0,-1
@@ -5944,7 +5906,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 152 852 m 1,0,-1
@@ -6062,7 +6023,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 152 381 m 1,0,-1
@@ -6157,7 +6117,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 465 414 m 1,0,-1
@@ -6337,7 +6296,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 799 401 m 1,0,-1
@@ -6555,7 +6513,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1004 0 m 1,0,-1
@@ -6665,7 +6622,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 135 1462 m 1,0,-1
@@ -6753,7 +6709,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1124 201 m 1,0,-1
@@ -6825,7 +6780,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 135 0 m 1,0,-1
@@ -6916,7 +6870,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1059 0 m 1,0,-1
@@ -7028,7 +6981,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 430 0 m 1,0,-1
@@ -7115,7 +7067,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 672 772 m 1,0,-1
@@ -7209,7 +7160,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1094 0 m 1,0,-1
@@ -7302,7 +7252,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1001 0 m 1,0,-1
@@ -7370,7 +7319,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 137 39 m 1,0,-1
@@ -7594,7 +7542,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1198 0 m 1,0,-1
@@ -7667,7 +7614,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 233 0 m 1,0,-1
@@ -7867,7 +7813,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 532 0 m 1,0,-1
@@ -8012,7 +7957,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1092 0 m 1,0,-1
@@ -8076,7 +8020,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 616 -20 m 0,0,1
@@ -8159,7 +8102,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 362 569 m 1,0,-1
@@ -8271,7 +8213,6 @@ IUP[y]
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 862 39 m 1,0,1
@@ -8416,7 +8357,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 373 604 m 1,0,-1
@@ -8504,7 +8444,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 141 49 m 1,0,-1
@@ -8598,7 +8537,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 707 0 m 1,0,-1
@@ -8659,7 +8597,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1104 1464 m 1,0,-1
@@ -8835,7 +8772,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 997 1462 m 1,0,-1
@@ -9211,7 +9147,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 528 1008 m 1,0,-1
@@ -9433,7 +9368,6 @@ SFVTL[parallel]
 MDRP[grey]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1174 0 m 1,0,-1
@@ -9636,7 +9570,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 612 723 m 1,0,-1
@@ -9727,7 +9660,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1124 0 m 1,0,-1
@@ -9802,7 +9734,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 940 -324 m 1,0,-1
@@ -9852,7 +9783,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 389 1462 m 1,0,-1
@@ -9921,7 +9851,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 289 -174 m 1,0,-1
@@ -9994,7 +9923,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 111 549 m 1,0,-1
@@ -10033,7 +9961,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1243 -324 m 1,0,-1
@@ -10082,7 +10009,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 811 1241 m 1,0,-1
@@ -10168,7 +10094,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 895 0 m 1,0,-1
@@ -10265,7 +10190,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 340 139 m 1,0,-1
@@ -10343,7 +10267,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1061 1059 m 1,0,-1
@@ -10427,7 +10350,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 897 147 m 1,0,-1
@@ -10534,7 +10456,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1096 514 m 1,0,-1
@@ -10634,7 +10555,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1044 961 m 1,0,-1
@@ -10793,7 +10713,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1126 1098 m 1,0,-1
@@ -10902,7 +10821,6 @@ IUP[y]
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 887 0 m 1,0,-1
@@ -10981,7 +10899,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 633 1550 m 0,0,1
@@ -11068,7 +10985,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 743 1550 m 0,0,1
@@ -11216,7 +11132,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 383 553 m 1,0,-1
@@ -11290,7 +11205,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 532 1413 m 1,0,-1
@@ -11421,7 +11335,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 977 0 m 1,0,-1
@@ -11514,7 +11427,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 887 0 m 1,0,-1
@@ -11575,7 +11487,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 610 -20 m 0,0,1
@@ -11664,7 +11575,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 340 139 m 1,0,-1
@@ -11760,7 +11670,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 889 950 m 1,0,-1
@@ -11845,7 +11754,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1059 1073 m 1,0,-1
@@ -11932,7 +11840,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 203 49 m 1,0,-1
@@ -12055,7 +11962,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1020 150 m 1,0,-1
@@ -12133,7 +12039,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 922 0 m 1,0,-1
@@ -12275,7 +12180,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 498 0 m 1,0,-1
@@ -12591,7 +12495,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 813 0 m 1,0,-1
@@ -12793,7 +12696,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 510 563 m 1,0,-1
@@ -12930,7 +12832,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 82 1098 m 1,0,-1
@@ -13030,7 +12931,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1044 0 m 1,0,-1
@@ -13152,7 +13052,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 745 -16 m 2,0,1
@@ -13205,7 +13104,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 539 1556 m 1,0,-1
@@ -13319,7 +13217,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 483 315 m 2,0,1
@@ -13398,7 +13295,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 152 586 m 1,0,-1
@@ -13420,8 +13316,6 @@ Encoding: 160 160 98
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: exclamdown
@@ -13468,7 +13362,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 840 m 256,0,1
@@ -13568,7 +13461,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 743 1319 m 1,0,1
@@ -13680,7 +13572,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1063 1401 m 1,0,-1
@@ -13808,7 +13699,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 303 936 m 1,0,-1
@@ -14035,7 +13925,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 612 723 m 1,0,-1
@@ -14105,7 +13994,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 539 1556 m 1,0,-1
@@ -14252,7 +14140,6 @@ SVTCA[x-axis]
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 420 1067 m 1,0,1
@@ -14353,7 +14240,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 426 1497 m 256,0,1
@@ -14487,7 +14373,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 1483 m 0,0,1
@@ -14602,7 +14487,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 799 797 m 1,0,-1
@@ -14709,7 +14593,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 197 553 m 1,0,-1
@@ -14781,7 +14664,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1075 797 m 1,0,-1
@@ -14799,7 +14681,6 @@ Encoding: 173 173 111
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 16 45 N 1 0 0 1 0 0 3
 EndChar
@@ -14961,7 +14842,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 1483 m 0,0,1
@@ -15025,7 +14905,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1249 1556 m 1,0,-1
@@ -15175,7 +15054,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 1483 m 0,0,1
@@ -15247,7 +15125,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 539 647 m 1,0,-1
@@ -15355,7 +15232,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 879 672 m 1,0,-1
@@ -15516,7 +15392,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 670 1085 m 1,0,1
@@ -15580,7 +15455,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 418 1268 m 1,0,1
@@ -15660,7 +15534,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 362 391 m 2,0,1
@@ -15767,7 +15640,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1079 -260 m 1,0,-1
@@ -15791,7 +15663,6 @@ Encoding: 183 183 121
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 950 m 256,0,1
@@ -15874,7 +15745,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 428 -483 m 1,0,-1
@@ -15931,7 +15801,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 586 1460 m 1,0,-1
@@ -16001,7 +15870,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 612 784 m 0,0,1
@@ -16099,7 +15967,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1030 526 m 1,0,-1
@@ -16188,11 +16055,10 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 123 185 N 1 0 0 1 -345 0 3
 Refer: 838 8260 N 1 0 0 1 0 0 2
-Refer: 883 -1 N 1 0 0 1 313 -679 2
+Refer: 884 -1 N 1 0 0 1 313 -679 2
 EndChar
 
 StartChar: onehalf
@@ -16200,7 +16066,6 @@ Encoding: 189 189 127
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 123 185 N 1 0 0 1 -364 0 3
 Refer: 838 8260 N 1 0 0 1 -65 0 2
@@ -16270,11 +16135,10 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 117 179 N 1 0 0 1 -321 0 3
 Refer: 838 8260 N 1 0 0 1 53 0 2
-Refer: 883 -1 N 1 0 0 1 334 -679 2
+Refer: 884 -1 N 1 0 0 1 334 -679 2
 EndChar
 
 StartChar: questiondown
@@ -16375,7 +16239,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 674 840 m 256,0,1
@@ -16432,7 +16295,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -77 338 2
@@ -16464,7 +16326,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 102 338 2
@@ -16496,7 +16357,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 0 338 2
@@ -16529,7 +16389,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 -1 338 2
@@ -16566,7 +16425,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 0 338 2
@@ -16630,7 +16488,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 342 730 N 1 0 0 1 0 125 2
@@ -16777,7 +16634,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1210 0 m 1,0,-1
@@ -16823,7 +16679,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 38 67 N 1 0 0 1 0 0 3
 Refer: 122 184 N 1 0 0 1 80 0 2
@@ -16856,7 +16711,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -73 338 2
@@ -16888,7 +16742,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 63 338 2
@@ -16920,7 +16773,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 35 338 2
@@ -16956,7 +16808,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 25 338 2
@@ -16989,7 +16840,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -108 338 2
@@ -17021,7 +16871,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 119 338 2
@@ -17053,7 +16902,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 0 338 2
@@ -17089,7 +16937,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -17175,7 +17022,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 135 0 m 1,0,-1
@@ -17229,7 +17075,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 49 78 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 4 338 2
@@ -17262,7 +17107,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -81 338 2
@@ -17294,7 +17138,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 90 338 2
@@ -17327,7 +17170,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 0 338 2
@@ -17359,7 +17201,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 8 338 2
@@ -17395,7 +17236,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -17495,7 +17335,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 508 723 m 1,0,-1
@@ -17615,7 +17454,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 309 74 m 1,0,-1
@@ -17673,7 +17511,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -69 338 2
@@ -17705,7 +17542,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 76 338 2
@@ -17737,7 +17573,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 0 338 2
@@ -17773,7 +17608,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -17805,7 +17639,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 76 338 2
@@ -17880,7 +17713,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 362 317 m 1,0,-1
@@ -18025,7 +17857,6 @@ SVTCA[y-axis]
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 479 49 m 1,0,-1
@@ -18086,7 +17917,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -85 0 2
@@ -18122,7 +17952,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 84 0 2
@@ -18158,7 +17987,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 8 0 2
@@ -18202,7 +18030,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 10 0 2
@@ -18250,7 +18077,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 12 0 2
@@ -18286,7 +18112,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 342 730 N 1 0 0 1 -1 0 2
@@ -18403,7 +18228,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 522 662 m 1,0,-1
@@ -18464,7 +18288,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 70 99 N 1 0 0 1 0 0 3
 Refer: 122 184 N 1 0 0 1 49 0 2
@@ -18497,7 +18320,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -44 0 2
@@ -18541,7 +18363,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 82 0 2
@@ -18573,7 +18394,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 16 0 2
@@ -18609,7 +18429,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 18 0 2
@@ -18642,7 +18461,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 243 305 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -85 0 2
@@ -18674,7 +18492,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 243 305 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 113 0 2
@@ -18707,7 +18524,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 243 305 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 0 0 2
@@ -18744,7 +18560,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 243 305 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 0 0 2
@@ -18867,7 +18682,6 @@ SVTCA[y-axis]
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 889 852 m 1,0,-1
@@ -18926,7 +18740,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 81 110 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 6 0 2
@@ -18959,7 +18772,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -40 0 2
@@ -18991,7 +18803,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 80 0 2
@@ -19024,7 +18835,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 -5 0 2
@@ -19056,7 +18866,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 0 0 2
@@ -19093,7 +18902,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -7 0 2
@@ -19189,7 +18997,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 612 1196 m 0,0,1
@@ -19325,7 +19132,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 377 33 m 1,0,-1
@@ -19385,7 +19191,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -77 0 2
@@ -19417,7 +19222,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 82 0 2
@@ -19449,7 +19253,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 8 0 2
@@ -19485,7 +19288,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 0 2
@@ -19517,7 +19319,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 76 0 2
@@ -19589,7 +19390,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 340 950 m 1,0,1
@@ -19649,7 +19449,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 8 0 2
@@ -19682,7 +19481,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 0 338 2
@@ -19714,7 +19512,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 -9 0 2
@@ -19747,7 +19544,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 -3 338 2
@@ -19779,7 +19575,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 -11 0 2
@@ -19816,7 +19611,6 @@ DELTAP1
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 343 731 N 1 0 0 1 399 0 2
@@ -19865,7 +19659,6 @@ DELTAP1
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 343 731 N 1 0 0 1 291 0 2
@@ -19897,7 +19690,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 38 67 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 242 338 2
@@ -19929,7 +19721,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 70 99 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 160 0 2
@@ -19981,7 +19772,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 38 67 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 160 338 2
@@ -20013,7 +19803,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 70 99 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 84 0 2
@@ -20045,7 +19834,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 38 67 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 164 338 2
@@ -20077,7 +19865,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 70 99 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 84 0 2
@@ -20109,7 +19896,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 38 67 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 154 338 2
@@ -20141,7 +19927,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 70 99 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 92 0 2
@@ -20174,7 +19959,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 39 68 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 -9 338 2
@@ -20216,10 +20000,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 71 100 N 1 0 0 1 -58 0 2
-Refer: 879 -1 N 1 0 0 1 580 0 2
+Refer: 880 -1 N 1 0 0 1 580 0 2
 EndChar
 
 StartChar: Dcroat
@@ -20227,7 +20010,6 @@ Encoding: 272 272 210
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 146 208 N 1 0 0 1 0 0 3
 EndChar
@@ -20328,7 +20110,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 897 147 m 1,0,-1
@@ -20392,7 +20173,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 10 338 2
@@ -20424,7 +20204,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 20 0 2
@@ -20456,7 +20235,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 29 338 2
@@ -20488,7 +20266,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 16 0 2
@@ -20520,7 +20297,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 35 309 2
@@ -20552,7 +20328,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 23 0 2
@@ -20579,7 +20354,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 343 731 N 1 0 0 1 205 0 2
@@ -20606,7 +20380,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 343 731 N 1 0 0 1 227 31 2
@@ -20638,7 +20411,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 35 338 2
@@ -20670,7 +20442,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 25 0 2
@@ -20702,7 +20473,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 42 71 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 80 338 2
@@ -20735,7 +20505,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 74 103 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 -9 0 2
@@ -20775,7 +20544,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 42 71 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 98 338 2
@@ -20808,7 +20576,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 74 103 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 -13 0 2
@@ -20840,7 +20607,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 42 71 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 109 338 2
@@ -20872,7 +20638,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 74 103 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 -1 0 2
@@ -20904,10 +20669,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 42 71 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 57 0 2
+Refer: 881 -1 N 1 0 0 1 57 0 2
 EndChar
 
 StartChar: gcommaaccent
@@ -20936,10 +20700,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 74 103 N 1 0 0 1 0 0 3
-Refer: 881 -1 N 1 0 0 1 45 0 2
+Refer: 882 -1 N 1 0 0 1 45 0 2
 EndChar
 
 StartChar: Hcircumflex
@@ -20968,7 +20731,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 43 72 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 0 338 2
@@ -21000,7 +20762,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 75 104 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 14 393 2
@@ -21101,7 +20862,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 135 1219 m 1,0,-1
@@ -21222,7 +20982,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 887 0 m 1,0,-1
@@ -21279,7 +21038,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 0 338 2
@@ -21312,7 +21070,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 243 305 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 -3 0 2
@@ -21344,7 +21101,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 2 338 2
@@ -21377,7 +21133,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 243 305 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 0 0 2
@@ -21409,7 +21164,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 0 338 2
@@ -21441,7 +21195,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 243 305 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 25 0 2
@@ -21468,7 +21221,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 343 731 N 1 0 0 1 8 0 2
@@ -21495,7 +21247,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 76 105 N 1 0 0 1 0 0 3
 Refer: 343 731 N 1 0 0 1 25 0 2
@@ -21527,7 +21278,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 0 338 2
@@ -21581,7 +21331,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 541 954 m 1,0,-1
@@ -21671,7 +21420,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 156 0 m 1,0,-1
@@ -21786,7 +21534,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 295 1550 m 0,0,1
@@ -21847,7 +21594,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 45 74 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 268 338 2
@@ -21880,10 +21626,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 337 710 N 1 0 0 1 20 0 3
-Refer: 878 -1 N 1 0 0 1 0 0 2
+Refer: 879 -1 N 1 0 0 1 0 0 2
 EndChar
 
 StartChar: Kcommaaccent
@@ -21913,10 +21658,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 46 75 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 27 0 2
+Refer: 881 -1 N 1 0 0 1 27 0 2
 EndChar
 
 StartChar: kcommaaccent
@@ -21946,10 +21690,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 78 107 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 2 0 2
+Refer: 881 -1 N 1 0 0 1 2 0 2
 EndChar
 
 StartChar: kgreenlandic
@@ -22077,7 +21820,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 383 508 m 1,0,-1
@@ -22126,7 +21868,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 47 76 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 -155 338 2
@@ -22158,7 +21899,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 79 108 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 78 395 2
@@ -22191,10 +21931,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 47 76 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 8 0 2
+Refer: 881 -1 N 1 0 0 1 8 0 2
 EndChar
 
 StartChar: lcommaaccent
@@ -22224,10 +21963,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 79 108 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 -22 0 2
+Refer: 881 -1 N 1 0 0 1 -22 0 2
 EndChar
 
 StartChar: Lcaron
@@ -22251,10 +21989,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 47 76 N 1 0 0 1 0 0 3
-Refer: 879 -1 N 1 0 0 1 256 -93 2
+Refer: 880 -1 N 1 0 0 1 256 -93 2
 EndChar
 
 StartChar: lcaron
@@ -22280,10 +22017,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 79 108 N 1 0 0 1 0 0 3
-Refer: 879 -1 N 1 0 0 1 371 0 2
+Refer: 880 -1 N 1 0 0 1 371 0 2
 EndChar
 
 StartChar: Ldot
@@ -22307,7 +22043,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 47 76 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 242 -620 2
@@ -22340,7 +22075,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 79 108 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 358 -712 2
@@ -22477,7 +22211,6 @@ MDRP[rnd,grey]
 MDRP[rnd,grey]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 270 0 m 1,0,-1
@@ -22645,7 +22378,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 532 592 m 1,0,-1
@@ -22696,7 +22428,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 49 78 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 98 338 2
@@ -22728,7 +22459,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 81 110 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 111 0 2
@@ -22761,10 +22491,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 49 78 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 -50 0 2
+Refer: 881 -1 N 1 0 0 1 -50 0 2
 EndChar
 
 StartChar: ncommaaccent
@@ -22794,10 +22523,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 81 110 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 -28 0 2
+Refer: 881 -1 N 1 0 0 1 -28 0 2
 EndChar
 
 StartChar: Ncaron
@@ -22827,7 +22555,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 49 78 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 -3 338 2
@@ -22859,7 +22586,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 81 110 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 12 0 2
@@ -22927,7 +22653,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 283 1462 m 1,0,-1
@@ -23058,7 +22783,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 297 1210 m 1,0,-1
@@ -23151,7 +22875,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 342 0 m 1,0,-1
@@ -23201,7 +22924,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 4 338 2
@@ -23233,7 +22955,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 0 0 2
@@ -23266,7 +22987,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 -1 338 2
@@ -23298,7 +23018,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 0 0 2
@@ -23334,7 +23053,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 345 733 N 1 0 0 1 80 338 2
@@ -23370,7 +23088,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 345 733 N 1 0 0 1 82 0 2
@@ -23456,7 +23173,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1227 0 m 1,0,-1
@@ -23599,7 +23315,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 651 201 m 1,0,1
@@ -23661,7 +23376,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 53 82 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 29 338 2
@@ -23693,7 +23407,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 85 114 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 92 0 2
@@ -23726,10 +23439,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 53 82 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 -3 0 2
+Refer: 881 -1 N 1 0 0 1 -3 0 2
 EndChar
 
 StartChar: rcommaaccent
@@ -23776,10 +23488,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 85 114 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 -296 0 2
+Refer: 881 -1 N 1 0 0 1 -296 0 2
 EndChar
 
 StartChar: Rcaron
@@ -23809,7 +23520,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 53 82 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 -30 338 2
@@ -23842,7 +23552,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 85 114 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 12 0 2
@@ -23874,7 +23583,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 54 83 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 96 338 2
@@ -23906,7 +23614,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 86 115 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 94 0 2
@@ -23938,7 +23645,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 54 83 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 20 338 2
@@ -23970,7 +23676,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 86 115 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 23 0 2
@@ -23995,7 +23700,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 54 83 N 1 0 0 1 0 0 3
 Refer: 122 184 N 1 0 0 1 -22 0 2
@@ -24024,7 +23728,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 86 115 N 1 0 0 1 0 0 3
 Refer: 122 184 N 1 0 0 1 -9 0 2
@@ -24056,7 +23759,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 54 83 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 31 338 2
@@ -24088,7 +23790,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 86 115 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 10 0 2
@@ -24121,10 +23822,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 55 84 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 -34 0 2
+Refer: 881 -1 N 1 0 0 1 -34 0 2
 EndChar
 
 StartChar: tcommaaccent
@@ -24153,10 +23853,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 87 116 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 6 0 2
+Refer: 881 -1 N 1 0 0 1 6 0 2
 EndChar
 
 StartChar: Tcaron
@@ -24185,7 +23884,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 55 84 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 -1 338 2
@@ -24214,10 +23912,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 87 116 N 1 0 0 1 0 0 3
-Refer: 879 -1 N 1 0 0 1 305 0 2
+Refer: 880 -1 N 1 0 0 1 305 0 2
 EndChar
 
 StartChar: Tbar
@@ -24316,7 +24013,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 520 819 m 1,0,-1
@@ -24458,7 +24154,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1020 150 m 1,0,-1
@@ -24515,7 +24210,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 6 338 2
@@ -24547,7 +24241,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 2 0 2
@@ -24580,7 +24273,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 0 338 2
@@ -24612,7 +24304,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 2 0 2
@@ -24645,7 +24336,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 -1 338 2
@@ -24677,7 +24367,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 0 0 2
@@ -24713,7 +24402,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 342 730 N 1 0 0 1 2 338 2
@@ -24750,7 +24438,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 342 730 N 1 0 0 1 -3 0 2
@@ -24786,7 +24473,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 345 733 N 1 0 0 1 76 338 2
@@ -24822,7 +24508,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 345 733 N 1 0 0 1 80 0 2
@@ -24849,7 +24534,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 343 731 N 1 0 0 1 27 0 2
@@ -24885,7 +24569,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 343 731 N 1 0 0 1 309 0 2
@@ -24917,7 +24600,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 58 87 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 2 338 2
@@ -24950,7 +24632,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 90 119 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 -3 0 2
@@ -24982,7 +24663,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 -1 338 2
@@ -25014,7 +24694,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 2 0 2
@@ -25050,7 +24729,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -25082,7 +24760,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 61 90 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 57 338 2
@@ -25114,7 +24791,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 93 122 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 78 0 2
@@ -25146,7 +24822,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 61 90 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 16 338 2
@@ -25178,7 +24853,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 93 122 N 1 0 0 1 0 0 3
 Refer: 341 729 N 1 0 0 1 16 0 2
@@ -25210,7 +24884,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 61 90 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 -1 338 2
@@ -25242,7 +24915,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 93 122 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 12 0 2
@@ -25301,7 +24973,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1018 1532 m 1,0,-1
@@ -25407,7 +25078,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 668 836 m 1,0,-1
@@ -25496,7 +25166,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1147 733 m 0,0,1
@@ -25606,7 +25275,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1112 551 m 0,0,1
@@ -25708,7 +25376,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 950 1462 m 1,0,-1
@@ -25840,7 +25507,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 786 0 m 1,0,-1
@@ -25899,9 +25565,8 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
-Refer: 878 -1 N 1 0 0 1 0 0 3
+Refer: 879 -1 N 1 0 0 1 0 0 3
 Refer: 338 711 N 1 0 0 1 -9 0 2
 EndChar
 
@@ -25993,7 +25658,6 @@ DELTAP1
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 342 730 N 1 0 0 1 2 125 2
@@ -26079,7 +25743,6 @@ DELTAP1
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 342 730 N 1 0 0 1 0 0 2
@@ -26112,7 +25775,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 136 198 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 213 338 2
@@ -26144,7 +25806,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 168 230 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 113 0 2
@@ -26176,7 +25837,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 154 216 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 57 338 2
@@ -26208,7 +25868,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 186 248 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 80 0 2
@@ -26240,10 +25899,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 54 83 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 0 0 2
+Refer: 881 -1 N 1 0 0 1 0 0 2
 EndChar
 
 StartChar: scommaaccent
@@ -26273,10 +25931,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 86 115 N 1 0 0 1 0 0 3
-Refer: 880 -1 N 1 0 0 1 -28 0 2
+Refer: 881 -1 N 1 0 0 1 -28 0 2
 EndChar
 
 StartChar: uni02BC
@@ -26284,7 +25941,6 @@ Encoding: 700 700 336
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 822 8217 N 1 0 0 1 0 0 3
 EndChar
@@ -26339,7 +25995,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 946 1241 m 1,0,-1
@@ -26407,7 +26062,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 946 1542 m 1,0,1
@@ -26496,7 +26150,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 326 1391 m 1,0,-1
@@ -26589,7 +26242,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 915 1518 m 1,0,1
@@ -26685,7 +26337,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 1509 m 0,0,1
@@ -26840,7 +26491,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 610 1241 m 0,0,1
@@ -26926,7 +26576,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 815 -319 m 1,0,-1
@@ -27000,7 +26649,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 358 1241 m 1,0,-1
@@ -27091,7 +26739,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 246 1268 m 1,0,1
@@ -27116,7 +26763,6 @@ Encoding: 739 739 346
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 SplineSet
 530 1013 m 1,0,-1
@@ -27217,7 +26863,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 840 -338 m 0,0,1
@@ -27254,7 +26899,6 @@ Encoding: 768 768 348
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 67 96 N 1 0 0 1 0 0 3
 EndChar
@@ -27264,7 +26908,6 @@ Encoding: 769 769 349
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 118 180 N 1 0 0 1 0 0 3
 EndChar
@@ -27274,7 +26917,6 @@ Encoding: 771 771 350
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 344 732 N 1 0 0 1 0 0 3
 EndChar
@@ -27332,7 +26974,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 801 1491 m 0,0,1
@@ -27416,7 +27057,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 940 1241 m 1,0,-1
@@ -27470,7 +27110,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 508 -246 m 0,0,1
@@ -27526,7 +27165,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 479 1268 m 1,0,-1
@@ -27635,7 +27273,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 532 1415 m 1,0,1
@@ -27689,7 +27326,6 @@ MIAP[rnd]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 -443 -105 2
@@ -27736,7 +27372,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 862 m 256,0,1
@@ -27786,7 +27421,6 @@ MIAP[rnd]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 -593 -105 2
@@ -27831,7 +27465,6 @@ MIAP[rnd]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 43 72 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 -634 -105 2
@@ -27867,7 +27500,6 @@ MIAP[rnd]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 -572 -105 2
@@ -27899,7 +27531,6 @@ MIAP[rnd]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 -611 -105 2
@@ -27931,7 +27562,6 @@ MIAP[rnd]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 -716 -105 2
@@ -27963,7 +27593,6 @@ MIAP[rnd]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 388 937 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 -613 -105 2
@@ -27993,7 +27622,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 404 953 N 1 0 0 1 0 0 3
 Refer: 355 901 N 1 0 0 1 -58 0 2
@@ -28004,7 +27632,6 @@ Encoding: 913 913 365
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 EndChar
@@ -28014,7 +27641,6 @@ Encoding: 914 914 366
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 37 66 N 1 0 0 1 0 0 3
 EndChar
@@ -28081,7 +27707,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1071 1462 m 1,0,-1
@@ -28310,7 +27935,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1159 125 m 1,0,-1
@@ -28334,7 +27958,6 @@ Encoding: 917 917 369
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 EndChar
@@ -28344,7 +27967,6 @@ Encoding: 918 918 370
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 61 90 N 1 0 0 1 0 0 3
 EndChar
@@ -28354,7 +27976,6 @@ Encoding: 919 919 371
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 43 72 N 1 0 0 1 0 0 3
 EndChar
@@ -28463,7 +28084,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 616 -20 m 0,0,1
@@ -28493,7 +28113,6 @@ Encoding: 921 921 373
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 EndChar
@@ -28503,7 +28122,6 @@ Encoding: 922 922 374
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 46 75 N 1 0 0 1 0 0 3
 EndChar
@@ -28701,7 +28319,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1196 0 m 1,0,-1
@@ -28722,7 +28339,6 @@ Encoding: 924 924 376
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 48 77 N 1 0 0 1 0 0 3
 EndChar
@@ -28732,7 +28348,6 @@ Encoding: 925 925 377
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 49 78 N 1 0 0 1 0 0 3
 EndChar
@@ -28815,7 +28430,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 152 1462 m 1,0,-1
@@ -28841,7 +28455,6 @@ Encoding: 927 927 379
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 EndChar
@@ -28890,7 +28503,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1094 0 m 1,0,-1
@@ -28910,7 +28522,6 @@ Encoding: 929 929 381
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 51 80 N 1 0 0 1 0 0 3
 EndChar
@@ -29050,7 +28661,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 131 0 m 1,0,-1
@@ -29074,7 +28684,6 @@ Encoding: 932 932 383
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 55 84 N 1 0 0 1 0 0 3
 EndChar
@@ -29084,7 +28693,6 @@ Encoding: 933 933 384
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 EndChar
@@ -29275,7 +28883,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 532 1483 m 1,0,-1
@@ -29321,7 +28928,6 @@ Encoding: 935 935 386
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 59 88 N 1 0 0 1 0 0 3
 EndChar
@@ -29450,7 +29056,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1174 983 m 2,0,1
@@ -29605,7 +29210,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 541 147 m 1,0,-1
@@ -29660,7 +29264,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -29696,7 +29299,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -29729,7 +29331,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 396 945 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 16 0 2
@@ -29761,7 +29362,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 400 949 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 96 0 2
@@ -29793,7 +29393,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 402 951 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 80 0 2
@@ -29825,7 +29424,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 404 953 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 -9 0 2
@@ -29862,7 +29460,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 416 965 N 1 0 0 1 0 0 3
 Refer: 355 901 N 1 0 0 1 -3 0 2
@@ -29936,7 +29533,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 862 950 m 1,0,-1
@@ -30056,7 +29652,6 @@ IUP[y]
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 723 829 m 1,0,-1
@@ -30203,7 +29798,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 739 63 m 2,0,1
@@ -30308,7 +29902,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 557 938 m 1,0,1
@@ -30425,7 +30018,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 840 647 m 1,0,-1
@@ -30595,7 +30187,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 223 1556 m 1,0,-1
@@ -30678,7 +30269,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 887 -492 m 1,0,-1
@@ -30784,7 +30374,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 612 -20 m 0,0,1
@@ -30855,7 +30444,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 610 1098 m 1,0,-1
@@ -30875,7 +30463,6 @@ Encoding: 954 954 405
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 250 312 N 1 0 0 1 0 0 3
 EndChar
@@ -30972,7 +30559,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 61 0 m 1,0,-1
@@ -31066,7 +30652,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 342 391 m 2,0,1
@@ -31212,7 +30797,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 61 1098 m 1,0,-1
@@ -31387,7 +30971,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 985 887 m 1,0,-1
@@ -31431,7 +31014,6 @@ Encoding: 959 959 410
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 EndChar
@@ -31563,7 +31145,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1184 150 m 1,0,-1
@@ -31647,7 +31228,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 340 70 m 1,0,-1
@@ -31783,7 +31363,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 940 -401 m 1,0,-1
@@ -31861,7 +31440,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1174 1098 m 1,0,-1
@@ -31975,7 +31553,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1081 1098 m 1,0,-1
@@ -32052,7 +31629,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 160 1098 m 1,0,-1
@@ -32170,7 +31746,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 524 -492 m 1,0,-1
@@ -32432,7 +32007,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 637 506 m 1,0,-1
@@ -32573,7 +32147,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 682 1554 m 1,0,-1
@@ -32773,7 +32346,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 195 1098 m 1,0,-1
@@ -32830,7 +32402,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 404 953 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -71 0 2
@@ -32867,7 +32438,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 416 965 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 0 0 2
@@ -32899,7 +32469,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 72 0 2
@@ -32931,7 +32500,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 416 965 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 39 0 2
@@ -32963,7 +32531,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 420 969 N 1 0 0 1 0 0 3
 Refer: 354 900 N 1 0 0 1 51 0 2
@@ -33069,7 +32636,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 874 977 m 1,0,1
@@ -33283,7 +32849,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 612 731 m 1,0,1
@@ -33419,7 +32984,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 379 -20 m 0,0,1
@@ -33507,7 +33071,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -73 338 2
@@ -33543,7 +33106,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 25 338 2
@@ -33680,7 +33242,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 664 4 m 1,0,-1
@@ -33735,7 +33296,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 367 915 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 109 338 2
@@ -33816,7 +33376,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 332 846 m 1,0,-1
@@ -33844,7 +33403,6 @@ Encoding: 1029 1029 434
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 54 83 N 1 0 0 1 0 0 3
 EndChar
@@ -33854,7 +33412,6 @@ Encoding: 1030 1030 435
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 EndChar
@@ -33889,7 +33446,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -33900,7 +33456,6 @@ Encoding: 1032 1032 437
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 45 74 N 1 0 0 1 0 0 3
 EndChar
@@ -34044,7 +33599,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 375 1298 m 1,0,-1
@@ -34151,7 +33705,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 549 0 m 1,0,-1
@@ -34293,7 +33846,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 508 897 m 1,0,-1
@@ -34343,7 +33895,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 455 1050 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 156 338 2
@@ -34376,7 +33927,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 453 1048 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -75 338 2
@@ -34408,10 +33958,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 464 1059 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 6 338 2
+Refer: 878 -1 N 1 0 0 1 6 338 2
 EndChar
 
 StartChar: afii10145
@@ -34488,7 +34037,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1094 0 m 1,0,-1
@@ -34512,7 +34060,6 @@ Encoding: 1040 1040 445
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 EndChar
@@ -34575,7 +34122,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 135 0 m 1,0,-1
@@ -34604,7 +34150,6 @@ Encoding: 1042 1042 447
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 37 66 N 1 0 0 1 0 0 3
 EndChar
@@ -34614,7 +34159,6 @@ Encoding: 1043 1043 448
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 367 915 N 1 0 0 1 0 0 3
 EndChar
@@ -34753,7 +34297,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1221 -385 m 1,0,-1
@@ -34784,7 +34327,6 @@ Encoding: 1045 1045 450
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 EndChar
@@ -34997,7 +34539,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 373 754 m 1,0,-1
@@ -35110,7 +34651,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 702 770 m 1,0,-1
@@ -35244,7 +34784,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 137 1462 m 1,0,-1
@@ -35293,10 +34832,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 453 1048 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 0 338 2
+Refer: 878 -1 N 1 0 0 1 0 338 2
 EndChar
 
 StartChar: afii10028
@@ -35436,7 +34974,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1198 0 m 1,0,-1
@@ -35570,7 +35107,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1094 0 m 1,0,-1
@@ -35594,7 +35130,6 @@ Encoding: 1052 1052 457
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 48 77 N 1 0 0 1 0 0 3
 EndChar
@@ -35604,7 +35139,6 @@ Encoding: 1053 1053 458
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 43 72 N 1 0 0 1 0 0 3
 EndChar
@@ -35614,7 +35148,6 @@ Encoding: 1054 1054 459
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 EndChar
@@ -35624,7 +35157,6 @@ Encoding: 1055 1055 460
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 380 928 N 1 0 0 1 0 0 3
 EndChar
@@ -35634,7 +35166,6 @@ Encoding: 1056 1056 461
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 51 80 N 1 0 0 1 0 0 3
 EndChar
@@ -35644,7 +35175,6 @@ Encoding: 1057 1057 462
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 38 67 N 1 0 0 1 0 0 3
 EndChar
@@ -35654,7 +35184,6 @@ Encoding: 1058 1058 463
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 55 84 N 1 0 0 1 0 0 3
 EndChar
@@ -35826,7 +35355,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1200 1462 m 1,0,-1
@@ -35856,7 +35384,6 @@ Encoding: 1060 1060 465
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 385 934 N 1 0 0 1 0 0 3
 EndChar
@@ -35866,7 +35393,6 @@ Encoding: 1061 1061 466
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 59 88 N 1 0 0 1 0 0 3
 EndChar
@@ -35936,7 +35462,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1034 166 m 1,0,-1
@@ -36009,7 +35534,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1094 0 m 1,0,-1
@@ -36128,7 +35652,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1110 0 m 1,0,-1
@@ -36281,7 +35804,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1051 166 m 1,0,-1
@@ -36370,7 +35892,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 326 0 m 1,0,-1
@@ -36485,7 +36006,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 96 0 m 1,0,-1
@@ -36578,7 +36098,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 176 0 m 1,0,-1
@@ -36681,7 +36200,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 145 1241 m 1,0,-1
@@ -36820,7 +36338,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 403 682 m 1,0,-1
@@ -36968,7 +36485,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 610 604 m 1,0,-1
@@ -36997,7 +36513,6 @@ Encoding: 1072 1072 477
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 EndChar
@@ -37071,7 +36586,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1040 1571 m 1,0,-1
@@ -37198,7 +36712,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 844 582 m 1,0,-1
@@ -37281,7 +36794,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1038 944 m 1,0,-1
@@ -37415,7 +36927,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1128 -381 m 1,0,-1
@@ -37444,7 +36955,6 @@ Encoding: 1077 1077 482
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 EndChar
@@ -37716,7 +37226,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 535 565 m 1,0,-1
@@ -37835,7 +37344,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 506 647 m 2,0,1
@@ -37999,7 +37507,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 332 1098 m 1,0,-1
@@ -38056,10 +37563,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 485 1080 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 37 0 2
+Refer: 878 -1 N 1 0 0 1 37 0 2
 EndChar
 
 StartChar: afii10076
@@ -38207,7 +37713,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 913 1098 m 1,0,-1
@@ -38436,7 +37941,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1040 0 m 1,0,-1
@@ -38647,7 +38151,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1114 0 m 1,0,-1
@@ -38743,7 +38246,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 342 1098 m 1,0,-1
@@ -38767,7 +38269,6 @@ Encoding: 1086 1086 491
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 EndChar
@@ -38820,7 +38321,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 342 0 m 1,0,-1
@@ -38840,7 +38340,6 @@ Encoding: 1088 1088 493
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 83 112 N 1 0 0 1 0 0 3
 EndChar
@@ -38850,7 +38349,6 @@ Encoding: 1089 1089 494
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 70 99 N 1 0 0 1 0 0 3
 EndChar
@@ -38922,7 +38420,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1106 944 m 1,0,-1
@@ -38942,7 +38439,6 @@ Encoding: 1091 1091 496
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 EndChar
@@ -39047,7 +38543,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 694 1114 m 1,0,1
@@ -39077,7 +38572,6 @@ Encoding: 1093 1093 498
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 91 120 N 1 0 0 1 0 0 3
 EndChar
@@ -39145,7 +38639,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1180 -381 m 1,0,-1
@@ -39218,7 +38711,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 334 1098 m 1,0,-1
@@ -39335,7 +38827,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 696 154 m 1,0,-1
@@ -39470,7 +38961,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 680 154 m 1,0,-1
@@ -39567,7 +39057,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 586 647 m 1,0,-1
@@ -39696,7 +39185,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 274 647 m 1,0,-1
@@ -39790,7 +39278,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 399 647 m 1,0,-1
@@ -39921,7 +39408,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 190 41 m 1,0,-1
@@ -40051,7 +39537,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 434 489 m 1,0,-1
@@ -40196,7 +39681,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 313 0 m 1,0,-1
@@ -40247,7 +39731,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -44 0 2
@@ -40283,7 +39766,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 18 0 2
@@ -40394,7 +39876,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 645 -467 m 1,0,-1
@@ -40454,7 +39935,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 480 1075 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 104 0 2
@@ -40560,7 +40040,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1061 1059 m 1,0,-1
@@ -40587,7 +40066,6 @@ Encoding: 1109 1109 514
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 86 115 N 1 0 0 1 0 0 3
 EndChar
@@ -40597,7 +40075,6 @@ Encoding: 1110 1110 515
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 76 105 N 1 0 0 1 0 0 3
 EndChar
@@ -40633,7 +40110,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 243 305 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 0 0 2
@@ -40644,7 +40120,6 @@ Encoding: 1112 1112 517
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 77 106 N 1 0 0 1 0 0 3
 EndChar
@@ -40777,7 +40252,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 713 647 m 1,0,-1
@@ -40900,7 +40374,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 268 1098 m 1,0,-1
@@ -40934,7 +40407,6 @@ Encoding: 1115 1115 520
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 233 295 N 1 0 0 1 0 0 3
 EndChar
@@ -40965,7 +40437,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 250 312 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 90 0 2
@@ -40998,7 +40469,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 485 1080 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -77 0 2
@@ -41030,10 +40500,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 10 0 2
+Refer: 878 -1 N 1 0 0 1 10 0 2
 EndChar
 
 StartChar: afii10193
@@ -41111,7 +40580,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 342 154 m 1,0,-1
@@ -41253,7 +40721,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 700 186 m 1,0,1
@@ -41433,7 +40900,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 283 0 m 1,0,-1
@@ -41548,7 +41014,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 506 846 m 1,0,-1
@@ -41660,7 +41125,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 739 944 m 1,0,-1
@@ -41791,7 +41255,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 913 1319 m 0,0,1
@@ -41928,7 +41391,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 895 -20 m 0,0,1
@@ -42148,7 +41610,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 528 682 m 1,0,-1
@@ -42391,7 +41852,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 729 1098 m 1,0,-1
@@ -42687,7 +42147,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 727 682 m 1,0,-1
@@ -42929,7 +42388,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 926 1098 m 1,0,-1
@@ -43057,7 +42515,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 0 0 m 1,0,-1
@@ -43224,7 +42681,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 10 0 m 1,0,-1
@@ -43389,7 +42845,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 352 0 m 1,0,-1
@@ -43593,7 +43048,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 371 0 m 1,0,-1
@@ -43779,7 +43233,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 541 -20 m 0,0,1
@@ -44054,7 +43507,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 893 1362 m 0,0,1
@@ -44153,7 +43605,6 @@ Encoding: 1136 1136 541
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 387 936 N 1 0 0 1 0 0 3
 EndChar
@@ -44163,7 +43614,6 @@ Encoding: 1137 1137 542
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 419 968 N 1 0 0 1 0 0 3
 EndChar
@@ -44218,7 +43668,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1147 733 m 0,0,1
@@ -44311,7 +43760,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1112 551 m 0,0,1
@@ -44429,7 +43877,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1204 1325 m 0,0,1
@@ -44546,7 +43993,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 82 1098 m 1,0,-1
@@ -44614,7 +44060,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 545 1140 N 1 0 0 1 0 0 3
 Refer: 352 783 N 1 0 0 1 -32 338 2
@@ -44651,7 +44096,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 546 1141 N 1 0 0 1 0 0 3
 Refer: 352 783 N 1 0 0 1 -44 0 2
@@ -44775,7 +44219,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 618 733 m 0,0,1
@@ -45001,7 +44444,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 627 551 m 256,0,1
@@ -45160,7 +44602,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1147 733 m 0,0,1
@@ -45311,7 +44752,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1112 551 m 0,0,1
@@ -45545,7 +44985,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 989 1995 m 1,0,-1
@@ -45794,7 +45233,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 797 -20 m 0,0,1
@@ -46057,7 +45495,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 989 1796 m 1,0,-1
@@ -46334,7 +45771,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 975 1444 m 1,0,-1
@@ -46451,7 +45887,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 797 1319 m 0,0,1
@@ -46547,7 +45982,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 709 -20 m 2,0,1
@@ -46752,7 +46186,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 578 432 m 1,0,-1
@@ -46809,7 +46242,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 985 1360 m 0,0,1
@@ -46870,7 +46302,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 256 1382 m 2,0,1
@@ -46937,7 +46368,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 481 1462 m 0,0,1
@@ -47001,7 +46431,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 723 1462 m 0,0,1
@@ -47026,7 +46455,6 @@ Encoding: 1160 1160 564
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 SplineSet
 608 1077 m 0,0,1
@@ -47191,7 +46619,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 696 195 m 1,0,1
@@ -47374,7 +46801,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 922 0 m 1,0,-1
@@ -47592,7 +47018,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 862 0 m 1,0,-1
@@ -47706,7 +47131,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 385 846 m 1,0,-1
@@ -47824,7 +47248,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 399 1313 m 1,0,-1
@@ -47977,7 +47400,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1094 1034 m 0,0,1
@@ -48142,7 +47564,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 662 -20 m 0,0,1
@@ -48263,7 +47684,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 883 1462 m 1,0,-1
@@ -48330,7 +47750,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1018 961 m 1,0,-1
@@ -48401,7 +47820,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1124 1462 m 1,0,-1
@@ -48478,7 +47896,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 291 0 m 1,0,-1
@@ -48562,7 +47979,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 469 643 m 0,0,1
@@ -48660,7 +48076,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 639 -502 m 0,0,1
@@ -48822,7 +48237,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1053 0 m 1,0,-1
@@ -48956,7 +48370,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 991 0 m 1,0,-1
@@ -49006,10 +48419,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 452 1047 N 1 0 0 1 0 0 3
-Refer: 898 -1 N 1 0 0 1 -9 0 2
+Refer: 899 -1 N 1 0 0 1 -9 0 2
 EndChar
 
 StartChar: uni0499
@@ -49035,10 +48447,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 484 1079 N 1 0 0 1 0 0 3
-Refer: 898 -1 N 1 0 0 1 -11 0 2
+Refer: 899 -1 N 1 0 0 1 -11 0 2
 EndChar
 
 StartChar: uni049A
@@ -49168,7 +48579,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1067 166 m 1,0,-1
@@ -49274,7 +48684,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 942 0 m 1,0,-1
@@ -49441,7 +48850,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1198 0 m 1,0,-1
@@ -49601,7 +49009,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 528 422 m 1,0,-1
@@ -49753,7 +49160,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1198 0 m 1,0,-1
@@ -49910,7 +49316,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 59 1374 m 1,0,-1
@@ -50041,7 +49446,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1198 0 m 1,0,-1
@@ -50162,7 +49566,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 991 1098 m 1,0,-1
@@ -50267,7 +49670,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1034 166 m 1,0,-1
@@ -50382,7 +49784,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 838 0 m 1,0,-1
@@ -50487,7 +49888,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 924 0 m 1,0,-1
@@ -50574,7 +49974,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 967 0 m 1,0,-1
@@ -50670,7 +50069,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 715 791 m 1,0,1
@@ -50791,7 +50189,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 825 -502 m 0,0,1
@@ -50946,7 +50343,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1147 702 m 0,0,1
@@ -51161,7 +50557,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 684 500 m 0,0,1
@@ -51251,10 +50646,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 38 67 N 1 0 0 1 0 0 3
-Refer: 898 -1 N 1 0 0 1 158 0 2
+Refer: 899 -1 N 1 0 0 1 158 0 2
 EndChar
 
 StartChar: uni04AB
@@ -51278,10 +50672,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 70 99 N 1 0 0 1 0 0 3
-Refer: 898 -1 N 1 0 0 1 55 0 2
+Refer: 899 -1 N 1 0 0 1 55 0 2
 EndChar
 
 StartChar: uni04AC
@@ -51365,7 +50758,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 707 0 m 1,0,-1
@@ -51445,7 +50837,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 522 0 m 1,0,-1
@@ -51469,7 +50860,6 @@ Encoding: 1198 1198 602
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 EndChar
@@ -51580,7 +50970,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 705 -492 m 1,0,-1
@@ -51810,7 +51199,6 @@ DELTAP1
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 612 723 m 1,0,-1
@@ -51976,7 +51364,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 971 0 m 1,0,-1
@@ -52172,7 +51559,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1075 166 m 1,0,-1
@@ -52388,7 +51774,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 510 563 m 1,0,-1
@@ -52475,7 +51860,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 444 166 m 1,0,-1
@@ -52568,7 +51952,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1180 -381 m 1,0,-1
@@ -52659,7 +52042,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1034 166 m 1,0,-1
@@ -52760,7 +52142,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 838 0 m 1,0,-1
@@ -52878,7 +52259,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1094 0 m 1,0,-1
@@ -53013,7 +52393,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 334 1098 m 1,0,-1
@@ -53095,7 +52474,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 135 1462 m 1,0,-1
@@ -53184,7 +52562,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 895 0 m 1,0,-1
@@ -53302,7 +52679,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 733 1485 m 0,0,1
@@ -53456,7 +52832,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 727 -20 m 0,0,1
@@ -53616,7 +52991,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 733 1485 m 0,0,1
@@ -53792,7 +53166,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 686 1118 m 0,0,1
@@ -53848,7 +53221,6 @@ Encoding: 1216 1216 620
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 EndChar
@@ -53879,10 +53251,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 451 1046 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 0 338 2
+Refer: 878 -1 N 1 0 0 1 0 338 2
 EndChar
 
 StartChar: uni04C2
@@ -53911,10 +53282,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 483 1078 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 0 0 2
+Refer: 878 -1 N 1 0 0 1 0 0 2
 EndChar
 
 StartChar: uni04C3
@@ -54012,7 +53382,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 496 637 m 0,0,1
@@ -54142,7 +53511,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 618 610 m 1,0,1
@@ -54259,7 +53627,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1032 166 m 1,0,-1
@@ -54366,7 +53733,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1016 154 m 1,0,-1
@@ -54479,7 +53845,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 600 -512 m 0,0,1
@@ -54589,7 +53954,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 657 -502 m 0,0,1
@@ -54711,7 +54075,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1032 166 m 1,0,-1
@@ -54814,7 +54177,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 834 0 m 1,0,-1
@@ -54905,7 +54267,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 907 166 m 1,0,-1
@@ -55020,7 +54381,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 879 489 m 1,0,1
@@ -55276,7 +54636,6 @@ DELTAP2
 DELTAP2
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 510 0 m 1,0,-1
@@ -55520,7 +54879,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1053 1098 m 1,0,-1
@@ -55565,7 +54923,6 @@ Encoding: 1231 1231 635
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 EndChar
@@ -55597,10 +54954,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 -1 338 2
+Refer: 878 -1 N 1 0 0 1 -1 338 2
 EndChar
 
 StartChar: uni04D1
@@ -55629,10 +54985,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 4 0 2
+Refer: 878 -1 N 1 0 0 1 4 0 2
 EndChar
 
 StartChar: uni04D2
@@ -55666,7 +55021,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 0 338 2
@@ -55702,7 +55056,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 12 0 2
@@ -55713,7 +55066,6 @@ Encoding: 1236 1236 640
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 136 198 N 1 0 0 1 0 0 3
 EndChar
@@ -55723,7 +55075,6 @@ Encoding: 1237 1237 641
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 168 230 N 1 0 0 1 0 0 3
 EndChar
@@ -55755,10 +55106,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 23 338 2
+Refer: 878 -1 N 1 0 0 1 23 338 2
 EndChar
 
 StartChar: uni04D7
@@ -55787,10 +55137,9 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
-Refer: 877 -1 N 1 0 0 1 16 0 2
+Refer: 878 -1 N 1 0 0 1 16 0 2
 EndChar
 
 StartChar: uni04D8
@@ -55863,7 +55212,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 547 1321 m 0,0,1
@@ -55985,7 +55333,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 557 1118 m 0,0,1
@@ -56055,7 +55402,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 644 1240 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -56091,7 +55437,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 645 1241 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 0 2
@@ -56128,7 +55473,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 451 1046 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 0 338 2
@@ -56165,7 +55509,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 483 1078 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 0 0 2
@@ -56202,7 +55545,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 452 1047 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -19 338 2
@@ -56239,7 +55581,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 484 1079 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -3 0 2
@@ -56327,7 +55668,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 586 827 m 1,0,1
@@ -56438,7 +55778,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 584 469 m 1,0,1
@@ -56502,7 +55841,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 453 1048 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 2 338 2
@@ -56534,7 +55872,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 485 1080 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 2 0 2
@@ -56570,7 +55907,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 453 1048 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -56606,7 +55942,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 485 1080 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 0 2
@@ -56642,7 +55977,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -56679,7 +56013,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -7 0 2
@@ -56690,7 +56023,6 @@ Encoding: 1256 1256 660
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 543 1138 N 1 0 0 1 0 0 3
 EndChar
@@ -56700,7 +56032,6 @@ Encoding: 1257 1257 661
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 544 1139 N 1 0 0 1 0 0 3
 EndChar
@@ -56735,7 +56066,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 543 1138 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -56772,7 +56102,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 544 1139 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -7 0 2
@@ -56809,7 +56138,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 474 1069 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -120 338 2
@@ -56846,7 +56174,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 506 1101 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -48 0 2
@@ -56878,7 +56205,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 464 1059 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 8 338 2
@@ -56910,7 +56236,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 339 713 N 1 0 0 1 2 0 2
@@ -56947,7 +56272,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 464 1059 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -1 338 2
@@ -56983,7 +56307,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 8 0 2
@@ -57019,7 +56342,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 464 1059 N 1 0 0 1 0 0 3
 Refer: 345 733 N 1 0 0 1 82 338 2
@@ -57055,7 +56377,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 345 733 N 1 0 0 1 94 0 2
@@ -57091,7 +56412,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 468 1063 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -57127,7 +56447,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 500 1095 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -5 0 2
@@ -57196,7 +56515,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1124 1462 m 1,0,-1
@@ -57266,7 +56584,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 291 0 m 1,0,-1
@@ -57313,7 +56630,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 472 1067 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 338 2
@@ -57349,7 +56665,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 504 1099 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 2 0 2
@@ -57434,7 +56749,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1124 1462 m 1,0,-1
@@ -57546,7 +56860,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 291 0 m 1,0,-1
@@ -57608,10 +56921,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 59 88 N 1 0 0 1 0 0 3
-Refer: 899 -1 N 1 0 0 1 436 0 2
+Refer: 900 -1 N 1 0 0 1 436 0 2
 EndChar
 
 StartChar: uni04FD
@@ -57649,10 +56961,9 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 91 120 N 1 0 0 1 0 0 3
-Refer: 900 -1 N 1 0 0 1 350 0 2
+Refer: 901 -1 N 1 0 0 1 350 0 2
 EndChar
 
 StartChar: uni04FE
@@ -57821,7 +57132,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 762 692 m 1,0,-1
@@ -58044,7 +57354,6 @@ CALL
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 166 635 m 1,0,-1
@@ -58118,7 +57427,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 137 428 m 0,0,1
@@ -58153,7 +57461,6 @@ Encoding: 1281 1281 685
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 71 100 N 1 0 0 1 0 0 3
 EndChar
@@ -58226,7 +57533,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1155 848 m 1,0,-1
@@ -58342,7 +57648,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 856 131 m 0,0,1
@@ -58485,7 +57790,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 510 391 m 0,0,1
@@ -58616,7 +57920,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 522 283 m 0,0,1
@@ -58756,7 +58059,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 965 0 m 1,0,-1
@@ -58890,7 +58192,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 774 0 m 1,0,-1
@@ -59027,7 +58328,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 557 1298 m 1,0,-1
@@ -59153,7 +58453,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 557 944 m 1,0,-1
@@ -59273,7 +58572,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 731 391 m 2,0,1
@@ -59393,7 +58691,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 285 1098 m 1,0,-1
@@ -59506,7 +58803,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 672 758 m 1,0,-1
@@ -59618,7 +58914,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 635 586 m 1,0,-1
@@ -59729,7 +59024,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 625 391 m 2,0,1
@@ -59825,7 +59119,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 41 944 m 1,0,-1
@@ -59936,7 +59229,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 211 1120 m 0,0,1
@@ -59996,7 +59288,6 @@ Encoding: 1297 1297 701
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 400 949 N 1 0 0 1 0 0 3
 EndChar
@@ -60006,7 +59297,6 @@ Encoding: 1298 1298 702
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 456 1051 N 1 0 0 1 0 0 3
 EndChar
@@ -60016,7 +59306,6 @@ Encoding: 1299 1299 703
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 488 1083 N 1 0 0 1 0 0 3
 EndChar
@@ -60051,7 +59340,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 347 755 N 1 0 0 1 2 0 2
@@ -60087,7 +59375,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 347 755 N 1 0 0 1 -5 0 2
@@ -60119,7 +59406,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 48 77 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 100 340 2
@@ -60151,7 +59437,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 80 109 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 127 0 2
@@ -60184,7 +59469,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 58 87 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -81 338 2
@@ -60217,7 +59501,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 90 119 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -114 0 2
@@ -60249,7 +59532,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 58 87 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 82 338 2
@@ -60281,7 +59563,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 90 119 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 104 0 2
@@ -60317,7 +59598,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 58 87 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 4 338 2
@@ -60354,7 +59634,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 90 119 N 1 0 0 1 0 0 3
 Refer: 106 168 N 1 0 0 1 -1 0 2
@@ -60386,7 +59665,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 0 0 2
@@ -60418,7 +59696,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 -19 0 2
@@ -60450,7 +59727,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 33 338 2
@@ -60482,7 +59758,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 25 0 2
@@ -60518,10 +59793,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
-Refer: 890 -1 N 1 0 0 1 121 338 2
+Refer: 891 -1 N 1 0 0 1 121 338 2
 EndChar
 
 StartChar: uni1EA5
@@ -60554,10 +59828,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
-Refer: 890 -1 N 1 0 0 1 125 0 2
+Refer: 891 -1 N 1 0 0 1 125 0 2
 EndChar
 
 StartChar: uni1EA6
@@ -60591,10 +59864,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
-Refer: 891 -1 N 1 0 0 1 -108 338 2
+Refer: 892 -1 N 1 0 0 1 -108 338 2
 EndChar
 
 StartChar: uni1EA7
@@ -60628,10 +59900,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
-Refer: 891 -1 N 1 0 0 1 -103 0 2
+Refer: 892 -1 N 1 0 0 1 -103 0 2
 EndChar
 
 StartChar: uni1EA8
@@ -60664,10 +59935,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
-Refer: 892 -1 N 1 0 0 1 88 338 2
+Refer: 893 -1 N 1 0 0 1 88 338 2
 EndChar
 
 StartChar: uni1EA9
@@ -60700,10 +59970,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
-Refer: 892 -1 N 1 0 0 1 92 0 2
+Refer: 893 -1 N 1 0 0 1 92 0 2
 EndChar
 
 StartChar: uni1EAA
@@ -60736,10 +60005,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
-Refer: 893 -1 N 1 0 0 1 8 338 2
+Refer: 894 -1 N 1 0 0 1 8 338 2
 EndChar
 
 StartChar: uni1EAB
@@ -60772,10 +60040,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
-Refer: 893 -1 N 1 0 0 1 12 0 2
+Refer: 894 -1 N 1 0 0 1 12 0 2
 EndChar
 
 StartChar: uni1EAC
@@ -60819,7 +60086,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 0 338 2
@@ -60867,7 +60133,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 8 0 2
@@ -60904,10 +60169,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
-Refer: 894 -1 N 1 0 0 1 0 338 2
+Refer: 895 -1 N 1 0 0 1 0 338 2
 EndChar
 
 StartChar: uni1EAF
@@ -60940,10 +60204,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
-Refer: 894 -1 N 1 0 0 1 -1 0 2
+Refer: 895 -1 N 1 0 0 1 -1 0 2
 EndChar
 
 StartChar: uni1EB0
@@ -60976,10 +60239,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
-Refer: 895 -1 N 1 0 0 1 0 338 2
+Refer: 896 -1 N 1 0 0 1 0 338 2
 EndChar
 
 StartChar: uni1EB1
@@ -61012,10 +60274,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
-Refer: 895 -1 N 1 0 0 1 -1 0 2
+Refer: 896 -1 N 1 0 0 1 -1 0 2
 EndChar
 
 StartChar: uni1EB2
@@ -61048,10 +60309,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
-Refer: 896 -1 N 1 0 0 1 0 338 2
+Refer: 897 -1 N 1 0 0 1 0 338 2
 EndChar
 
 StartChar: uni1EB3
@@ -61084,10 +60344,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
-Refer: 896 -1 N 1 0 0 1 -1 0 2
+Refer: 897 -1 N 1 0 0 1 -1 0 2
 EndChar
 
 StartChar: uni1EB4
@@ -61121,10 +60380,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
-Refer: 897 -1 N 1 0 0 1 0 338 2
+Refer: 898 -1 N 1 0 0 1 0 338 2
 EndChar
 
 StartChar: uni1EB5
@@ -61157,10 +60415,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
-Refer: 897 -1 N 1 0 0 1 -1 0 2
+Refer: 898 -1 N 1 0 0 1 -1 0 2
 EndChar
 
 StartChar: uni1EB6
@@ -61206,7 +60463,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 36 65 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 -3 338 2
@@ -61254,7 +60510,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 68 97 N 1 0 0 1 0 0 3
 Refer: 340 728 N 1 0 0 1 -11 0 2
@@ -61287,7 +60542,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 23 0 2
@@ -61319,7 +60573,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 23 0 2
@@ -61351,7 +60604,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 39 338 2
@@ -61383,7 +60635,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 57 0 2
@@ -61415,7 +60666,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 25 338 2
@@ -61447,7 +60697,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 33 0 2
@@ -61483,10 +60732,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
-Refer: 890 -1 N 1 0 0 1 129 338 2
+Refer: 891 -1 N 1 0 0 1 129 338 2
 EndChar
 
 StartChar: uni1EBF
@@ -61519,10 +60767,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
-Refer: 890 -1 N 1 0 0 1 117 0 2
+Refer: 891 -1 N 1 0 0 1 117 0 2
 EndChar
 
 StartChar: uni1EC0
@@ -61556,10 +60803,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
-Refer: 891 -1 N 1 0 0 1 -99 338 2
+Refer: 892 -1 N 1 0 0 1 -99 338 2
 EndChar
 
 StartChar: uni1EC1
@@ -61593,10 +60839,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
-Refer: 891 -1 N 1 0 0 1 -112 0 2
+Refer: 892 -1 N 1 0 0 1 -112 0 2
 EndChar
 
 StartChar: uni1EC2
@@ -61629,10 +60874,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
-Refer: 892 -1 N 1 0 0 1 96 338 2
+Refer: 893 -1 N 1 0 0 1 96 338 2
 EndChar
 
 StartChar: uni1EC3
@@ -61665,10 +60909,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
-Refer: 892 -1 N 1 0 0 1 84 0 2
+Refer: 893 -1 N 1 0 0 1 84 0 2
 EndChar
 
 StartChar: uni1EC4
@@ -61702,10 +60945,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
-Refer: 893 -1 N 1 0 0 1 16 338 2
+Refer: 894 -1 N 1 0 0 1 16 338 2
 EndChar
 
 StartChar: uni1EC5
@@ -61738,10 +60980,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
-Refer: 893 -1 N 1 0 0 1 4 0 2
+Refer: 894 -1 N 1 0 0 1 4 0 2
 EndChar
 
 StartChar: uni1EC6
@@ -61785,7 +61026,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 40 69 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 35 338 2
@@ -61833,7 +61073,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 72 101 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 16 0 2
@@ -61866,7 +61105,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 31 338 2
@@ -61898,7 +61136,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 243 305 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 47 0 2
@@ -61930,7 +61167,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 44 73 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 0 0 2
@@ -61963,7 +61199,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 76 105 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 20 0 2
@@ -61996,7 +61231,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 0 0 2
@@ -62028,7 +61262,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 0 0 2
@@ -62060,7 +61293,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 23 338 2
@@ -62092,7 +61324,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 31 0 2
@@ -62128,10 +61359,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
-Refer: 890 -1 N 1 0 0 1 115 338 2
+Refer: 891 -1 N 1 0 0 1 115 338 2
 EndChar
 
 StartChar: uni1ED1
@@ -62164,10 +61394,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
-Refer: 890 -1 N 1 0 0 1 115 0 2
+Refer: 891 -1 N 1 0 0 1 115 0 2
 EndChar
 
 StartChar: uni1ED2
@@ -62201,10 +61430,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
-Refer: 891 -1 N 1 0 0 1 -114 338 2
+Refer: 892 -1 N 1 0 0 1 -114 338 2
 EndChar
 
 StartChar: uni1ED3
@@ -62238,10 +61466,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
-Refer: 891 -1 N 1 0 0 1 -114 0 2
+Refer: 892 -1 N 1 0 0 1 -114 0 2
 EndChar
 
 StartChar: uni1ED4
@@ -62274,10 +61501,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
-Refer: 892 -1 N 1 0 0 1 82 338 2
+Refer: 893 -1 N 1 0 0 1 82 338 2
 EndChar
 
 StartChar: uni1ED5
@@ -62310,10 +61536,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
-Refer: 892 -1 N 1 0 0 1 82 0 2
+Refer: 893 -1 N 1 0 0 1 82 0 2
 EndChar
 
 StartChar: uni1ED6
@@ -62346,10 +61571,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
-Refer: 893 -1 N 1 0 0 1 2 338 2
+Refer: 894 -1 N 1 0 0 1 2 338 2
 EndChar
 
 StartChar: uni1ED7
@@ -62382,10 +61606,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
-Refer: 893 -1 N 1 0 0 1 2 0 2
+Refer: 894 -1 N 1 0 0 1 2 0 2
 EndChar
 
 StartChar: uni1ED8
@@ -62433,7 +61656,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 0 338 2
@@ -62481,7 +61703,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 82 111 N 1 0 0 1 0 0 3
 Refer: 337 710 N 1 0 0 1 0 0 2
@@ -62514,7 +61735,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 323 416 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 90 338 2
@@ -62541,7 +61761,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 324 417 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 80 0 2
@@ -62574,7 +61793,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 323 416 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -81 338 2
@@ -62603,7 +61821,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 324 417 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -40 0 2
@@ -62636,7 +61853,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 323 416 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 23 338 2
@@ -62669,7 +61885,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 324 417 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 31 0 2
@@ -62702,7 +61917,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 323 416 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 8 338 2
@@ -62731,7 +61945,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 324 417 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 0 0 2
@@ -62764,7 +61977,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 323 416 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 0 0 2
@@ -62797,7 +62009,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 324 417 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 0 0 2
@@ -62829,7 +62040,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 0 0 2
@@ -62861,7 +62071,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 0 0 2
@@ -62893,7 +62102,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 56 85 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 23 338 2
@@ -62925,7 +62133,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 88 117 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 29 0 2
@@ -62958,7 +62165,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 325 431 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 -1 338 2
@@ -62987,7 +62193,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 326 432 N 1 0 0 1 0 0 3
 Refer: 118 180 N 1 0 0 1 -1 0 2
@@ -63020,7 +62225,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 325 431 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -146 338 2
@@ -63049,7 +62253,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 326 432 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -149 0 2
@@ -63082,7 +62285,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 325 431 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 -38 338 2
@@ -63115,7 +62317,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 326 432 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 -30 0 2
@@ -63147,7 +62348,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 325 431 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 -58 338 2
@@ -63174,7 +62374,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 326 432 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 -50 0 2
@@ -63207,7 +62406,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 325 431 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 -71 0 2
@@ -63240,7 +62438,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 326 432 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 -67 0 2
@@ -63273,7 +62470,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -114 338 2
@@ -63306,7 +62502,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 67 96 N 1 0 0 1 -105 0 2
@@ -63338,7 +62533,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 -1 0 2
@@ -63367,7 +62561,6 @@ SVTCA[y-axis]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 353 803 N 1 0 0 1 303 0 2
@@ -63399,7 +62592,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 20 338 2
@@ -63431,7 +62623,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 351 777 N 1 0 0 1 20 0 2
@@ -63463,7 +62654,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 60 89 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 12 338 2
@@ -63495,7 +62685,6 @@ CALL
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 92 121 N 1 0 0 1 0 0 3
 Refer: 344 732 N 1 0 0 1 12 0 2
@@ -63552,10 +62741,9 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 50 79 N 1 0 0 1 145 0 2
-Refer: 889 -1 N 1 0 0 1 -613 0 2
+Refer: 890 -1 N 1 0 0 1 -613 0 2
 EndChar
 
 StartChar: uni2000
@@ -63563,8 +62751,6 @@ Encoding: 8192 8192 805
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni2001
@@ -63572,8 +62758,6 @@ Encoding: 8193 8193 806
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni2002
@@ -63581,8 +62765,6 @@ Encoding: 8194 8194 807
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni2003
@@ -63590,8 +62772,6 @@ Encoding: 8195 8195 808
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni2004
@@ -63599,8 +62779,6 @@ Encoding: 8196 8196 809
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni2005
@@ -63608,8 +62786,6 @@ Encoding: 8197 8197 810
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni2006
@@ -63617,8 +62793,6 @@ Encoding: 8198 8198 811
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni2007
@@ -63626,8 +62800,6 @@ Encoding: 8199 8199 812
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni2008
@@ -63635,8 +62807,6 @@ Encoding: 8200 8200 813
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni2009
@@ -63644,8 +62814,6 @@ Encoding: 8201 8201 814
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni200A
@@ -63653,8 +62821,6 @@ Encoding: 8202 8202 815
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uni200B
@@ -63662,8 +62828,6 @@ Encoding: 8203 8203 816
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: endash
@@ -63697,7 +62861,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 184 465 m 1,0,-1
@@ -63734,7 +62897,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 -6 465 m 1,0,-1
@@ -63771,7 +62933,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 -6 465 m 1,0,-1
@@ -63849,7 +63010,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1249 -184 m 1,0,-1
@@ -63914,7 +63074,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 461 961 m 1,0,-1
@@ -63989,7 +63148,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 766 1462 m 1,0,-1
@@ -64075,7 +63233,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 756 238 m 1,0,-1
@@ -64134,7 +63291,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 680 1462 m 1,0,1
@@ -64227,7 +63383,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 674 961 m 1,0,-1
@@ -64344,7 +63499,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 553 1462 m 1,0,-1
@@ -64462,7 +63616,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 543 238 m 1,0,-1
@@ -64534,7 +63687,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 989 989 m 1,0,-1
@@ -64615,7 +63767,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 668 496 m 1,0,-1
@@ -64693,7 +63844,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 1010 m 0,0,1
@@ -64808,7 +63958,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 205 250 m 256,0,1
@@ -65016,7 +64165,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 260 860 m 0,0,1
@@ -65080,7 +64228,6 @@ Encoding: 8242 8242 833
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 10 39 N 1 0 0 1 0 0 3
 EndChar
@@ -65090,7 +64237,6 @@ Encoding: 8243 8243 834
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 5 34 N 1 0 0 1 0 0 3
 EndChar
@@ -65165,7 +64311,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 401 553 m 1,0,-1
@@ -65223,7 +64368,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 827 526 m 1,0,-1
@@ -65276,7 +64420,6 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 4 33 N 1 0 0 1 231 0 3
 Refer: 4 33 N 1 0 0 1 -232 0 2
@@ -65321,7 +64464,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1057 1462 m 1,0,-1
@@ -65337,7 +64479,6 @@ Encoding: 8304 8304 839
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 SplineSet
 611 672 m 0,0,1
@@ -65366,7 +64507,6 @@ Encoding: 8305 8305 840
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 SplineSet
 689 792 m 1,0,-1
@@ -65449,7 +64589,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 764 797 m 1,0,-1
@@ -65574,7 +64713,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 483 399 m 1,0,-1
@@ -65739,7 +64877,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1063 1401 m 1,0,-1
@@ -65905,7 +65042,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 240 569 m 1,0,-1
@@ -66068,7 +65204,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1071 -324 m 1,0,-1
@@ -66239,7 +65374,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 442 934 m 1,0,-1
@@ -66443,7 +65577,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 532 1436 m 1,0,-1
@@ -66594,7 +65727,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 885 332 m 1,0,-1
@@ -66865,7 +65997,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 649 0 m 1,0,-1
@@ -67022,7 +66153,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 303 741 m 1,0,-1
@@ -67060,7 +66190,6 @@ Encoding: 8486 8486 851
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 Refer: 388 937 N 1 0 0 1 0 0 3
 EndChar
@@ -67131,7 +66260,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1143 530 m 1,0,-1
@@ -67249,11 +66377,10 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 123 185 N 1 0 0 1 -349 0 3
 Refer: 838 8260 N 1 0 0 1 -56 0 2
-Refer: 887 -1 N 1 0 0 1 342 -665 2
+Refer: 888 -1 N 1 0 0 1 342 -665 2
 EndChar
 
 StartChar: threeeighths
@@ -67339,11 +66466,10 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 Refer: 117 179 N 1 0 0 1 -331 0 3
 Refer: 838 8260 N 1 0 0 1 -17 0 2
-Refer: 887 -1 N 1 0 0 1 362 -665 2
+Refer: 888 -1 N 1 0 0 1 362 -665 2
 EndChar
 
 StartChar: fiveeighths
@@ -67433,11 +66559,10 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
-Refer: 884 -1 N 1 0 0 1 -312 0 3
+Refer: 885 -1 N 1 0 0 1 -312 0 3
 Refer: 838 8260 N 1 0 0 1 -17 0 2
-Refer: 887 -1 N 1 0 0 1 362 -665 2
+Refer: 888 -1 N 1 0 0 1 362 -665 2
 EndChar
 
 StartChar: seveneighths
@@ -67527,11 +66652,10 @@ SHC[rp1]
 SHC[rp1]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
-Refer: 886 -1 N 1 0 0 1 -339 0 3
+Refer: 887 -1 N 1 0 0 1 -339 0 3
 Refer: 838 8260 N 1 0 0 1 -81 0 2
-Refer: 887 -1 N 1 0 0 1 362 -665 2
+Refer: 888 -1 N 1 0 0 1 362 -665 2
 EndChar
 
 StartChar: partialdiff
@@ -67539,7 +66663,6 @@ Encoding: 8706 8706 857
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 SplineSet
 924 862 m 1,0,-1
@@ -67777,7 +66900,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 74 113 m 1,0,-1
@@ -67851,7 +66973,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 926 -492 m 1,0,-1
@@ -67995,7 +67116,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 74 -492 m 1,0,-1
@@ -68047,7 +67167,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 152 647 m 1,0,-1
@@ -68063,26 +67182,47 @@ Encoding: 8730 8730 862
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
 Fore
 SplineSet
-612 -14 m 5,0,-1
- 479 -14 l 5,1,-1
- 203 764 l 5,2,-1
- 23 764 l 5,3,-1
- 23 907 l 5,4,-1
- 319 907 l 5,5,-1
- 549 244 l 5,6,-1
- 1093 1781 l 5,7,-1
- 4822 1781 l 5,8,-1
- 4822 1638 l 5,9,-1
- 1183 1638 l 5,10,-1
- 612 -14 l 5,0,-1
+612 -14 m 1,0,-1
+ 479 -14 l 1,1,-1
+ 203 764 l 1,2,-1
+ 23 764 l 1,3,-1
+ 23 907 l 1,4,-1
+ 319 907 l 1,5,-1
+ 549 244 l 1,6,-1
+ 1093 1781 l 1,7,-1
+ 4822 1781 l 1,8,-1
+ 4822 1638 l 1,9,-1
+ 1183 1638 l 1,10,-1
+ 612 -14 l 1,0,-1
+EndSplineSet
+EndChar
+
+StartChar: uni221B
+Encoding: 8731 8731 863
+Width: 1229
+Flags: W
+LayerCount: 2
+Fore
+SplineSet
+612 -14 m 1,0,-1
+ 479 -14 l 1,1,-1
+ 203 764 l 1,2,-1
+ 23 764 l 1,3,-1
+ 23 907 l 1,4,-1
+ 319 907 l 1,5,-1
+ 549 244 l 1,6,-1
+ 1093 1781 l 1,7,-1
+ 2462 1781 l 1,8,-1
+ 2462 1638 l 1,9,-1
+ 1183 1638 l 1,10,-1
+ 612 -14 l 1,0,-1
 EndSplineSet
 EndChar
 
 StartChar: infinity
-Encoding: 8734 8734 863
+Encoding: 8734 8734 864
 Width: 1229
 Flags: W
 TtInstrs:
@@ -68180,7 +67320,6 @@ CALL
 CALL
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 610 621 m 1,0,1
@@ -68214,7 +67353,7 @@ EndSplineSet
 EndChar
 
 StartChar: integral
-Encoding: 8747 8747 864
+Encoding: 8747 8747 865
 Width: 1229
 Flags: W
 TtInstrs:
@@ -68261,7 +67400,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 993 1538 m 1,0,-1
@@ -68282,7 +67420,7 @@ EndSplineSet
 EndChar
 
 StartChar: approxequal
-Encoding: 8776 8776 865
+Encoding: 8776 8776 866
 Width: 1229
 Flags: W
 TtInstrs:
@@ -68360,7 +67498,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 152 788 m 1,0,-1
@@ -68389,7 +67526,7 @@ EndSplineSet
 EndChar
 
 StartChar: notequal
-Encoding: 8800 8800 866
+Encoding: 8800 8800 867
 Width: 1229
 Flags: W
 TtInstrs:
@@ -68505,7 +67642,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 399 442 m 1,0,-1
@@ -68533,7 +67669,7 @@ EndSplineSet
 EndChar
 
 StartChar: lessequal
-Encoding: 8804 8804 867
+Encoding: 8804 8804 868
 Width: 1229
 Flags: W
 TtInstrs:
@@ -68640,7 +67776,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1075 221 m 1,0,-1
@@ -68660,7 +67795,7 @@ EndSplineSet
 EndChar
 
 StartChar: greaterequal
-Encoding: 8805 8805 868
+Encoding: 8805 8805 869
 Width: 1229
 Flags: W
 TtInstrs:
@@ -68765,7 +67900,6 @@ DELTAP1
 DELTAP1
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 152 381 m 1,0,-1
@@ -68785,7 +67919,7 @@ EndSplineSet
 EndChar
 
 StartChar: lozenge
-Encoding: 9674 9674 869
+Encoding: 9674 9674 870
 Width: 1229
 Flags: W
 TtInstrs:
@@ -68859,7 +67993,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1104 737 m 1,0,-1
@@ -68878,7 +68011,7 @@ EndSplineSet
 EndChar
 
 StartChar: uniFB01
-Encoding: 64257 64257 870
+Encoding: 64257 64257 871
 Width: 1229
 Flags: W
 TtInstrs:
@@ -68966,7 +68099,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 672 961 m 1,0,-1
@@ -69003,7 +68135,7 @@ EndSplineSet
 EndChar
 
 StartChar: uniFB02
-Encoding: 64258 64258 871
+Encoding: 64258 64258 872
 Width: 1229
 Flags: W
 TtInstrs:
@@ -69075,7 +68207,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 672 961 m 1,0,-1
@@ -69106,7 +68237,7 @@ EndSplineSet
 EndChar
 
 StartChar: uniFB03
-Encoding: 64259 64259 872
+Encoding: 64259 64259 873
 Width: 1229
 Flags: W
 TtInstrs:
@@ -69211,7 +68342,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 1065 0 m 1,0,-1
@@ -69264,7 +68394,7 @@ EndSplineSet
 EndChar
 
 StartChar: uniFB04
-Encoding: 64260 64260 873
+Encoding: 64260 64260 874
 Width: 1229
 Flags: W
 TtInstrs:
@@ -69367,7 +68497,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 840 971 m 1,0,-1
@@ -69420,16 +68549,14 @@ EndSplineSet
 EndChar
 
 StartChar: uniFEFF
-Encoding: 65279 65279 874
+Encoding: 65279 65279 875
 Width: 1229
 Flags: W
 LayerCount: 2
-Back
-Fore
 EndChar
 
 StartChar: uniFFFC
-Encoding: 65532 65532 875
+Encoding: 65532 65532 876
 Width: 1229
 Flags: W
 TtInstrs:
@@ -69696,7 +68823,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 659.5 985 m 128,-1,1
@@ -69845,7 +68971,7 @@ EndSplineSet
 EndChar
 
 StartChar: uniFFFD
-Encoding: 65533 65533 876
+Encoding: 65533 65533 877
 Width: 1229
 Flags: W
 TtInstrs:
@@ -69929,7 +69055,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 614 1556 m 1,0,-1
@@ -69985,7 +69110,7 @@ EndSplineSet
 EndChar
 
 StartChar: cyrillicbreve
-Encoding: 65539 -1 877
+Encoding: 65539 -1 878
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70035,7 +69160,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 997 1559 m 1,0,1
@@ -70051,7 +69175,7 @@ EndSplineSet
 EndChar
 
 StartChar: dotlessj
-Encoding: 65540 -1 878
+Encoding: 65540 -1 879
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70104,7 +69228,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 135 -457 m 1,0,-1
@@ -70124,7 +69247,7 @@ EndSplineSet
 EndChar
 
 StartChar: caroncommaaccent
-Encoding: 65541 -1 879
+Encoding: 65541 -1 880
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70152,7 +69275,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 494 1255 m 1,0,-1
@@ -70168,7 +69290,7 @@ EndSplineSet
 EndChar
 
 StartChar: commaaccent
-Encoding: 65542 -1 880
+Encoding: 65542 -1 881
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70201,7 +69323,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 483 -426 m 1,0,1
@@ -70216,7 +69337,7 @@ EndSplineSet
 EndChar
 
 StartChar: commaaccentrotate
-Encoding: 65543 -1 881
+Encoding: 65543 -1 882
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70249,7 +69370,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 745 1542 m 1,0,1
@@ -70264,7 +69384,7 @@ EndSplineSet
 EndChar
 
 StartChar: zerosuperior
-Encoding: 65544 -1 882
+Encoding: 65544 -1 883
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70304,7 +69424,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 612 569 m 0,0,1
@@ -70323,7 +69442,7 @@ EndSplineSet
 EndChar
 
 StartChar: foursuperior
-Encoding: 65545 -1 883
+Encoding: 65545 -1 884
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70415,7 +69534,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 895 854 m 1,0,-1
@@ -70440,7 +69558,7 @@ EndSplineSet
 EndChar
 
 StartChar: fivesuperior
-Encoding: 65546 -1 884
+Encoding: 65546 -1 885
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70538,7 +69656,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 336 705 m 1,0,-1
@@ -70563,7 +69680,7 @@ EndSplineSet
 EndChar
 
 StartChar: sixsuperior
-Encoding: 65547 -1 885
+Encoding: 65547 -1 886
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70625,7 +69742,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 797 1493 m 1,0,-1
@@ -70652,7 +69768,7 @@ EndSplineSet
 EndChar
 
 StartChar: sevensuperior
-Encoding: 65548 -1 886
+Encoding: 65548 -1 887
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70711,7 +69827,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 451 672 m 1,0,-1
@@ -70726,7 +69841,7 @@ EndSplineSet
 EndChar
 
 StartChar: eightsuperior
-Encoding: 65549 -1 887
+Encoding: 65549 -1 888
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70857,7 +69972,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 698 1090 m 1,0,1
@@ -70888,7 +70002,7 @@ EndSplineSet
 EndChar
 
 StartChar: ninesuperior
-Encoding: 65550 -1 888
+Encoding: 65550 -1 889
 Width: 1229
 Flags: W
 TtInstrs:
@@ -70951,7 +70065,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 391 584 m 1,0,-1
@@ -70980,7 +70093,7 @@ EndSplineSet
 EndChar
 
 StartChar: dasiaoxia
-Encoding: 65551 -1 889
+Encoding: 65551 -1 890
 Width: 1229
 Flags: W
 TtInstrs:
@@ -71034,7 +70147,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 301 1255 m 0,0,1
@@ -71068,7 +70180,7 @@ EndSplineSet
 EndChar
 
 StartChar: circumflexacutecomb
-Encoding: 65552 -1 890
+Encoding: 65552 -1 891
 Width: 1229
 Flags: W
 TtInstrs:
@@ -71142,7 +70254,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 811 1241 m 1,0,-1
@@ -71174,7 +70285,7 @@ EndSplineSet
 EndChar
 
 StartChar: circumflexgravecomb
-Encoding: 65553 -1 891
+Encoding: 65553 -1 892
 Width: 1229
 Flags: W
 TtInstrs:
@@ -71248,7 +70359,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 418 1268 m 1,0,1
@@ -71280,7 +70390,7 @@ EndSplineSet
 EndChar
 
 StartChar: circumflexhookcomb
-Encoding: 65554 -1 892
+Encoding: 65554 -1 893
 Width: 1229
 Flags: W
 TtInstrs:
@@ -71381,7 +70491,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 844 1241 m 1,0,-1
@@ -71422,7 +70531,7 @@ EndSplineSet
 EndChar
 
 StartChar: circumflextildecomb
-Encoding: 65555 -1 893
+Encoding: 65555 -1 894
 Width: 1229
 Flags: W
 TtInstrs:
@@ -71528,7 +70637,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 301 1268 m 1,0,1
@@ -71572,7 +70680,7 @@ EndSplineSet
 EndChar
 
 StartChar: breveacutecomb
-Encoding: 65556 -1 894
+Encoding: 65556 -1 895
 Width: 1229
 Flags: W
 TtInstrs:
@@ -71623,7 +70731,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 549 1528 m 1,0,1
@@ -71658,7 +70765,7 @@ EndSplineSet
 EndChar
 
 StartChar: brevegravecomb
-Encoding: 65557 -1 895
+Encoding: 65557 -1 896
 Width: 1229
 Flags: W
 TtInstrs:
@@ -71711,7 +70818,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 664 1501 m 1,0,-1
@@ -71746,7 +70852,7 @@ EndSplineSet
 EndChar
 
 StartChar: brevehookcomb
-Encoding: 65558 -1 896
+Encoding: 65558 -1 897
 Width: 1229
 Flags: W
 TtInstrs:
@@ -71838,7 +70944,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 915 1507 m 1,0,1
@@ -71881,7 +70986,7 @@ EndSplineSet
 EndChar
 
 StartChar: brevetildecomb
-Encoding: 65559 -1 897
+Encoding: 65559 -1 898
 Width: 1229
 Flags: W
 TtInstrs:
@@ -71973,7 +71078,6 @@ IUP[x]
 IUP[y]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 907 1507 m 1,0,1
@@ -72020,7 +71124,7 @@ EndSplineSet
 EndChar
 
 StartChar: cyrillichookleft
-Encoding: 65560 -1 898
+Encoding: 65560 -1 899
 Width: 1229
 Flags: W
 TtInstrs:
@@ -72060,7 +71164,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 625 -238 m 0,0,1
@@ -72083,7 +71186,7 @@ EndSplineSet
 EndChar
 
 StartChar: cyrillicbighookUC
-Encoding: 65561 -1 899
+Encoding: 65561 -1 900
 Width: 1229
 Flags: W
 TtInstrs:
@@ -72113,7 +71216,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 793 166 m 1,0,-1
@@ -72135,7 +71237,7 @@ EndSplineSet
 EndChar
 
 StartChar: cyrillicbighookLC
-Encoding: 65562 -1 900
+Encoding: 65562 -1 901
 Width: 1229
 Flags: W
 TtInstrs:
@@ -72165,7 +71267,6 @@ IUP[y]
 IUP[x]
 EndTTInstrs
 LayerCount: 2
-Back
 Fore
 SplineSet
 793 154 m 1,0,-1
@@ -72183,29 +71284,6 @@ SplineSet
  637 -199 637 -199 637 -150 c 2,16,-1
  637 154 l 1,17,-1
  793 154 l 1,0,-1
-EndSplineSet
-EndChar
-
-StartChar: uni221B
-Encoding: 8731 8731 901
-Width: 1229
-Flags: WO
-LayerCount: 2
-Back
-Fore
-SplineSet
-612 -14 m 1,0,-1
- 479 -14 l 1,1,-1
- 203 764 l 1,2,-1
- 23 764 l 1,3,-1
- 23 907 l 1,4,-1
- 319 907 l 1,5,-1
- 549 244 l 1,6,-1
- 1093 1781 l 1,7,-1
- 2462 1781 l 1,8,-1
- 2462 1638 l 1,9,-1
- 1183 1638 l 1,10,-1
- 612 -14 l 1,0,-1
 EndSplineSet
 EndChar
 EndChars
