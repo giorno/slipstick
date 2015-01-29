@@ -33,6 +33,7 @@ module Io::Creat::Slipstick
       def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
         super()
         @layers = layers
+        @bprints = [] # backprints
         @hu_mm = 22.0 # height of upper half of stator strip
         @hl_mm = 22.0 # height of lower half of stator strip
         @hs_mm = 18.0 # height of slipstick strip
@@ -101,6 +102,25 @@ module Io::Creat::Slipstick
               scale.set_params( 2 )
               scale.add_constants( )
               scale.set_overflow( 1.0 )
+
+          # backprints
+          @bp_border_mm = 15.0
+          # sin-cos help
+            #bottom_off_mm = 15.0
+          @bp_y_mm = @y_mm + @hl_mm + @t_mm + @bp_border_mm
+          @bp_h_mm = @h_mm - 2 * @bp_border_mm
+            #gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
+          @bp_x_mm = @x_mm + @bp_border_mm
+          gr = Trigonometric.new( @img, @bp_h_mm, @bp_x_mm, @bp_y_mm )
+            @bprints << gr
+            @bp_x_mm += @bp_border_mm + gr.getw()
+
+          # table of scale labels
+          cbp = ConstantsBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
+            @bprints << cbp
+            @bp_x_mm += @bp_border_mm + cbp.getw()
+            #bp.render()
+         
         end
 
         # sides of the slide
@@ -181,12 +201,15 @@ module Io::Creat::Slipstick
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
-            gr = Trigonometric.new( @img, gr_size_mm, 2 * bottom_off_mm, bottom_mm )
-            gr.render()
+            #gr = Trigonometric.new( @img, gr_size_mm, 2 * bottom_off_mm, bottom_mm )
+            #gr.render()
 
             # table of scale labels
-            bp = ConstantsBackprint.new( @img, 3 * bottom_off_mm + gr_size_mm, bottom_mm, gr_size_mm )
-            bp.render()
+            #bp = ConstantsBackprint.new( @img, 3 * bottom_off_mm + gr_size_mm, bottom_mm, gr_size_mm )
+            #bp.render()
+            @bprints.each do | bp |
+              bp.render()
+            end
             # QR code
             qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
           end
