@@ -67,7 +67,7 @@ module Io::Creat::Slipstick
 
       public
       def initialize ( img, x_mm, y_mm, spacing = 0, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
-        super( style )
+        super( style.merge( { Io::Creat::Slipstick::Key::FONT_SPACING => -0.15 } ) )
         @text_style = @text_style.merge( { "text-anchor" => "start" } )
         @img   = img
         @x_mm  = x_mm

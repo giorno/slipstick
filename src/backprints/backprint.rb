@@ -13,7 +13,7 @@ module Io::Creat::Slipstick
 
       public
       def initialize ( img, x_mm, y_mm, h_mm, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
-        super( style )
+        super( style.merge( { Io::Creat::Slipstick::Key::FONT_SPACING => -0.15 } ) )
         @img   = img # Svg instance to render on
         @x_mm  = x_mm # left boundary
         @y_mm  = y_mm # top boundary

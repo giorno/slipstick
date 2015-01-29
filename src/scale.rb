@@ -74,7 +74,7 @@ module Io::Creat::Slipstick
                      "font-size" => "%f" % font_size_mm,
                      "font-family" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_FAMILY],
                      "text-anchor" => "left",
-                     #"letter-spacing" => "%gpx" % @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_SPACING],
+                     "letter-spacing" => "%gpx" % @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_SPACING],
                      "font-weight" => @style[Io::Creat::Slipstick::Entity::SCALE][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
       end
     end

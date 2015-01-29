@@ -19,6 +19,7 @@ module Io::Creat::Slipstick
                         "font-size" => style[Io::Creat::Slipstick::Key::FONT_SIZE],
                         "font-family" => style[Io::Creat::Slipstick::Key::FONT_FAMILY],
                         "font-style" => style[Io::Creat::Slipstick::Key::FONT_STYLE],
+                        "letter-spacing" => "%gpx" % style[Io::Creat::Slipstick::Key::FONT_SPACING],
                         "text-anchor" => "middle" }
       end
 
