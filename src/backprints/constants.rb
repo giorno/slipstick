@@ -23,6 +23,8 @@ module Io::Creat::Slipstick
                      [ 'Archimedes',             'π', "\u00a03.1415926536" ],
                      [ 'Reciprocal Fibonacci',   'ψ', "\u00a03.3598856662" ],
                    ]
+      PHYS = [ [ 'Astronomic unit' ],
+               [ 'Speed of light' ] ]
       def render ( )
         my_mm = @y_mm - @h_mm / 2
         w_mm = @fs_mm * 2.5
