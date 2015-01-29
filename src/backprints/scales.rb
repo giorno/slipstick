@@ -15,7 +15,7 @@ module Io::Creat::Slipstick
         my_mm = @y_mm - @h_mm / 2
         w_mm = @fs_mm * 2.5
         h_mm = @h_mm / 12
-        fs_mm = h_mm / 1.4
+        fs_mm = h_mm / 1.6
         style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => fs_mm } )
         spacing = @fs_mm * 0.2
         tables = []
@@ -80,6 +80,11 @@ module Io::Creat::Slipstick
         tables.each do | table |
           table.render()
         end
+      end
+
+      public
+      def getw()
+        return @fs_mm * 6.5 * 2.5
       end
 
     end # ScalesBackprint

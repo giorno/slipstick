@@ -105,21 +105,24 @@ module Io::Creat::Slipstick
 
           # backprints
           @bp_border_mm = 15.0
-          # sin-cos help
-            #bottom_off_mm = 15.0
           @bp_y_mm = @y_mm + @hl_mm + @t_mm + @bp_border_mm
           @bp_h_mm = @h_mm - 2 * @bp_border_mm
-            #gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
-          @bp_x_mm = @x_mm + @bp_border_mm
-          gr = Trigonometric.new( @img, @bp_h_mm, @bp_x_mm, @bp_y_mm )
+          @bp_x_mm = @x_mm + @bp_border_mm / 2
+
+          # scales layout
+          lo = ScalesBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
+            @bprints << lo
+            @bp_x_mm += @bp_border_mm / 2 + lo.getw()
+
+          # sin-cos help
+          gr = Trigonometric.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
             @bprints << gr
-            @bp_x_mm += @bp_border_mm + gr.getw()
+            @bp_x_mm += @bp_border_mm / 2 + gr.getw()
 
           # table of scale labels
           cbp = ConstantsBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
             @bprints << cbp
-            @bp_x_mm += @bp_border_mm + cbp.getw()
-            #bp.render()
+            @bp_x_mm += @bp_border_mm / 2 + cbp.getw()
          
         end
 
@@ -197,20 +200,15 @@ module Io::Creat::Slipstick
           else
             # branding texts
             text( @x_mm + 174, @y_mm + 106, "creat.io MODEL A", STYLE_BRAND )
-            # sin-cos help
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
-            #gr = Trigonometric.new( @img, gr_size_mm, 2 * bottom_off_mm, bottom_mm )
-            #gr.render()
-
-            # table of scale labels
-            #bp = ConstantsBackprint.new( @img, 3 * bottom_off_mm + gr_size_mm, bottom_mm, gr_size_mm )
-            #bp.render()
+            # backprints
             @bprints.each do | bp |
               bp.render()
             end
             # QR code
+            # TODO refactor to inherit from Backprint
             qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
           end
         end

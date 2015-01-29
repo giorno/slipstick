@@ -46,6 +46,11 @@ module Io::Creat::Slipstick
 
     end # ConstantsBackprint
 
+    public
+    def getw()
+      return 10 * @fs_mm * 2.5
+    end
+
   end # Backprints
 end # Io::Creat::Slipstick
 
