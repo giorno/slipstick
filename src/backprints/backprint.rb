@@ -12,8 +12,8 @@ module Io::Creat::Slipstick
     class Backprint < Styled
 
       public
-      def initialize ( img, x_mm, y_mm, h_mm )
-        super( )
+      def initialize ( img, x_mm, y_mm, h_mm, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
+        super( style )
         @img   = img # Svg instance to render on
         @x_mm  = x_mm # left boundary
         @y_mm  = y_mm # top boundary

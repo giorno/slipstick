@@ -1,27 +1,25 @@
 
-require_relative 'backprints/styled'
+# vim: et
+
+require_relative 'backprint'
 
 module Io::Creat::Slipstick
-  module Graphics
+  module Backprints
 
     # renders sin-cos help graphics
-    class Trigonometric < Backprints::Styled
+    class Trigonometric < Backprint
       STEPS = [ Math::PI / 2, Math::PI / 3, Math::PI / 4, Math::PI / 6,           0  ]
       RADS  = [          "0",        "π/6",        "π/4",        "π/3",        "π/2" ]
       COS   = [  "\u221b0/2",  "\u221b1/2",  "\u221b2/2",  "\u221b3/2",  "\u221b4/2" ]
       SIN   = [  "\u221b4/2",  "\u221b3/2",  "\u221b2/2",  "\u221b1/2",  "\u221b0/2" ]
 
       public
-      def initialize ( img, size_mm, x_mm, y_mm, style = Io::Creat::Slipstick::Style::DEFAULT )
-        @size_mm    = size_mm
-        @r_step_mm  = @size_mm / 5
-        super( Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @r_step_mm / 3.5 } ) )
+      def initialize ( img, h_mm, x_mm, y_mm )
+        @r_step_mm  = h_mm / 5
+        super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @r_step_mm / 3.5 } ) )
         @img        = img
         @overlap_mm = @r_step_mm * 0.1
         @output     = @img.instance_variable_get( :@output )
-        @x_mm       = x_mm # X coord of arcs center
-        @y_mm       = y_mm + @size_mm # Y coord of arcs center
-        render()
       end
 
       private
@@ -50,6 +48,7 @@ module Io::Creat::Slipstick
         @img.line( x - w * 0.1, y, x + w * 1.1, y, @line_style.merge( { "stroke-linecap" => "butt" } ) )
       end
 
+      public
       def render ( )
 
         for i in 2..5
@@ -80,13 +79,14 @@ module Io::Creat::Slipstick
         @img.rtext( @x_mm - 4 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "cotan = cos/sin", @text_style.merge( { "text-anchor" => "start" } ) )
         @img.rtext( @x_mm - 3 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "\u00a0\u00a0sec = 1/cos", @text_style.merge( { "text-anchor" => "start" } ) )
         @img.rtext( @x_mm - 2 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "cosec = 1/sin", @text_style.merge( { "text-anchor" => "start" } ) )
-        @img.text( @x_mm + @size_mm, @y_mm - @size_mm + @text_style["font-size"], "1 = sin² + cos²", @text_style.merge( { "text-anchor" => "end" } ) )
+        @img.text( @x_mm + @h_mm, @y_mm - @h_mm + @text_style["font-size"], "1 = sin² + cos²", @text_style.merge( { "text-anchor" => "end" } ) )
+        # cute little graphs
         graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::sin( a ) } )
         graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::cos( a ) } )
       end
 
     end # Trigonometric
 
-  end # Graphics
+  end # Backprints
 end # Io::Creat::Slipstick
 

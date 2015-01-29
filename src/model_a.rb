@@ -4,9 +4,9 @@
 
 require_relative 'qr'
 require_relative 'sheet'
-require_relative 'gr_trigon'
-require_relative 'backprints/scales'
 require_relative 'backprints/constants'
+require_relative 'backprints/scales'
+require_relative 'backprints/trigon'
 
 include Io::Creat::Slipstick::Backprints
 
@@ -181,7 +181,8 @@ module Io::Creat::Slipstick
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
-            gr = Io::Creat::Slipstick::Graphics::Trigonometric.new( @img, gr_size_mm, 2 * bottom_off_mm, bottom_mm )
+            gr = Trigonometric.new( @img, gr_size_mm, 2 * bottom_off_mm, bottom_mm )
+            gr.render()
 
             # table of scale labels
             bp = ConstantsBackprint.new( @img, 3 * bottom_off_mm + gr_size_mm, bottom_mm, gr_size_mm )
