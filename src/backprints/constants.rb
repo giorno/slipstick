@@ -35,7 +35,7 @@ module Io::Creat::Slipstick
         CONSTANTS.each do | constant |
           tr = table.tr( h_mm )
             td = tr.td( constant[0], 5 * w_mm )
-            td = tr.td( constant[1], 1 * w_mm )
+            td = tr.td( constant[1], 1 * w_mm, Td::MID )
             td = tr.td( constant[2], 4 * w_mm )
         end
         tables << table

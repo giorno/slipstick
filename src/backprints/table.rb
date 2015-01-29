@@ -17,48 +17,38 @@ module Io::Creat::Slipstick
       end
 
       public
-      def td ( content, w_mm = 1 )
-        cell = Td.new( content, w_mm )
+      def td ( content, w_mm = 1, hal = Td::LEF )
+        cell = Td.new( content, w_mm, hal )
         @w_mm += w_mm
         @cells << cell
         return cell
       end
 
+      # getters
       public
-      def getw ( )
-        return @w_mm
-      end
-
-      public
-      def geth ( )
-        return @h_mm
-      end
-
-      public
-      def getc ( )
-        return @cells
-      end
+      def getw ( ) return @w_mm end
+      def geth ( ) return @h_mm end
+      def getc ( ) return @cells end
 
     end # Tr
 
     # table cell
     class Td
+      LEF = 1 # align to the left
+      MID = 2 # align to the middle
 
       public
-      def initialize ( content, w_mm, hal = "start", tal = "middle" )
+      def initialize ( content, w_mm, hal = LEF )
         @w_mm = w_mm
         @content = content
+        @align = hal
       end
 
+      # getters
       public
-      def getw ( )
-        return @w_mm
-      end
-
-      public
-      def gett ( )
-        return @content
-      end
+      def getw ( ) return @w_mm end
+      def gett ( ) return @content end
+      def geta ( ) return @align end
 
     end # Td
 
@@ -103,7 +93,8 @@ module Io::Creat::Slipstick
             if jndex > 0
               @img.line( @x_mm + j_mm, @y_mm + h_mm, @x_mm + j_mm, @y_mm + h_mm + row.geth(), @line_style )
             end
-            @img.text( @x_mm + j_mm + @spacing, @y_mm + h_mm + row.geth - ( row.geth() + @spacing - Io::Creat::Slipstick::Dim::DEFAULT[Io::Creat::Slipstick::Key::VERT_CORR][1] * @text_style["font-size"] ) / 2, cell.gett(), @text_style )
+            hal = cell.geta()
+            @img.text( @x_mm + j_mm + ( hal == Td::MID ? cell.getw / 2 : @spacing ), @y_mm + h_mm + row.geth - ( row.geth() + @spacing - Io::Creat::Slipstick::Dim::DEFAULT[Io::Creat::Slipstick::Key::VERT_CORR][1] * @text_style["font-size"] ) / 2, cell.gett(), hal == Td::MID ? @text_style.merge( { 'text-anchor' => 'middle' } ): @text_style )
             j_mm += cell.getw()
           end
           h_mm += row.geth()
