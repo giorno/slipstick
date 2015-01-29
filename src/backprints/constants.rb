@@ -9,19 +9,19 @@ module Io::Creat::Slipstick
   module Backprints
 
     class ConstantsBackprint < Backprint
-      CONSTANTS =  [ [ 'imaginary',       'i²', '-1' ],
-                     [ 'Meissel–Mertens', 'M₁', '0.26149 72128' ],
-                     [ 'Omega',           'Ω',  '0.56714 32904' ],
-                     [ 'Euler-Mascheroni', 'γ', '0.57721 56649' ],
-                     [ 'Apéry',            'ζ', '1.20205 69032' ],
-                     [ 'Pythagoras',       "\u221b2", '1.41421 35624' ],
-                     [ 'Ramanujan-Soldner', 'μ', '1.45136 92349' ],
-                     [ 'Golden ration', 'φ', '1.61803 39887' ],
-                     [ 'Theodorus', "\u221b3", '1.73205 08076' ],
-                     [ '', "\u221b5", '2.23606 79775' ],
-                     [ 'Euler', 'e', '2.71828 18285' ],
-                     [ 'Archimedes', 'π', '3.14159 26536' ],
-                     [ 'Reciprocal Fibonacci', 'ψ', '3.35988 56662' ],
+      CONSTANTS =  [ [ 'imaginary',             'i²', "-1" ],
+                     [ 'Meissel–Mertens',       'M₁', "\u00a00.2614972128" ],
+                     [ 'Omega',                  'Ω', "\u00a00.5671432904" ],
+                     [ 'Euler-Mascheroni',       'γ', "\u00a00.5772156649" ],
+                     [ 'Apéry',                  'ζ', "\u00a01.2020569032" ],
+                     [ 'Pythagoras',       "\u221b2", "\u00a01.4142135624" ],
+                     [ 'Ramanujan-Soldner',      'μ', "\u00a01.4513692349" ],
+                     [ 'Golden ratio',           'φ', "\u00a01.6180339887" ],
+                     [ 'Theodorus',        "\u221b3", "\u00a01.7320508076" ],
+                     [ '',                 "\u221b5", "\u00a02.2360679775" ],
+                     [ 'Euler',                  'e', "\u00a02.7182818285" ],
+                     [ 'Archimedes',             'π', "\u00a03.1415926536" ],
+                     [ 'Reciprocal Fibonacci',   'ψ', "\u00a03.3598856662" ],
                    ]
       def render ( )
         my_mm = @y_mm - @h_mm / 2
@@ -34,14 +34,19 @@ module Io::Creat::Slipstick
         table = Table.new( @img, @x_mm, @y_mm, spacing, style )
         CONSTANTS.each do | constant |
           tr = table.tr( h_mm )
-            td = tr.td( constant[0], 5 * w_mm )
+            td = tr.td( constant[0], 4.5 * w_mm )
             td = tr.td( constant[1], 1 * w_mm, Td::MID )
-            td = tr.td( constant[2], 4 * w_mm )
+            td = tr.td( constant[2], 3 * w_mm )
         end
         tables << table
         tables.each do | table |
           table.render()
         end
+      end
+
+      public
+      def getw ( )
+        return 8.5 * @fs_mm * 2.5
       end
 
     end # ConstantsBackprint
