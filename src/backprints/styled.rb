@@ -1,16 +1,16 @@
 
 # vim: et
 
-require_relative 'constants'
+require_relative '../constants'
 
 module Io::Creat::Slipstick
-  module Graphics
+  module Backprints
 
+    # generate Rasem styles from Slipstick styles
     class Styled
 
-      # populate Rasem styles from Slipstick styles
       public
-      def initialize ( style )
+      def initialize ( style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
         @line_style =  { "stroke" => style[Io::Creat::Slipstick::Key::LINE_COLOR],
                         "stroke-width" => style[Io::Creat::Slipstick::Key::LINE_WIDTH],
                         "stroke-linecap" => "round",
@@ -22,8 +22,8 @@ module Io::Creat::Slipstick
                         "text-anchor" => "middle" }
       end
 
-    end # Style
+    end # Scaled
 
-  end # Graphics
+  end # Backprints
 end # Io::Creat::Slipstick
 

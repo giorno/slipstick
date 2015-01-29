@@ -1,11 +1,11 @@
 
-require_relative 'gr_style'
+require_relative 'backprints/styled'
 
 module Io::Creat::Slipstick
   module Graphics
 
     # renders sin-cos help graphics
-    class Trigonometric < Styled
+    class Trigonometric < Backprints::Styled
       STEPS = [ Math::PI / 2, Math::PI / 3, Math::PI / 4, Math::PI / 6,           0  ]
       RADS  = [          "0",        "π/6",        "π/4",        "π/3",        "π/2" ]
       COS   = [  "\u221b0/2",  "\u221b1/2",  "\u221b2/2",  "\u221b3/2",  "\u221b4/2" ]

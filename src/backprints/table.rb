@@ -1,10 +1,10 @@
 
 # vim: et
 
-require_relative 'gr_style'
+require_relative 'styled'
 
 module Io::Creat::Slipstick
-  module Graphics
+  module Backprints
 
     # table row
     class Tr
@@ -113,6 +113,6 @@ module Io::Creat::Slipstick
 
     end # Table
 
-  end # Graphics
+  end # Backprints
 end # Io::Creat::Slipstick
 

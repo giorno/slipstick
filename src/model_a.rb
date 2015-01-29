@@ -5,7 +5,10 @@
 require_relative 'qr'
 require_relative 'sheet'
 require_relative 'gr_trigon'
-require_relative 'gr_table'
+require_relative 'backprints/scales'
+require_relative 'backprints/constants'
+
+include Io::Creat::Slipstick::Backprints
 
 module Io::Creat::Slipstick
   module Model
@@ -199,159 +202,6 @@ module Io::Creat::Slipstick
         @img.close()
         return @img.output
       end
-
-      # common properties and functionality of graphical helpers printed on the
-      # back of the stock
-      class Backprint
-
-        public
-        def initialize ( img, x_mm, y_mm, h_mm, w_mm = nil )
-          @img   = img
-          @x_mm  = x_mm
-          @y_mm  = y_mm
-          @h_mm  = h_mm
-          @w_mm  = w_mm.nil? ? h_mm : w_mm
-          # font size for given backprint height
-          # other graphics dimensions may be calculated from it
-          @fs_mm = @h_mm / ( 5 * 3.5 )
-        end
-
-       public
-        def getfs ( )
-        end
-
-      end # Backprint
-
-      #class QrBackprint < Backprint
-
-      #  def initialize ( img, text, size, level, x_mm, y_mm, size_mm, style )
-      #    super( img, x_mm, y_mm, size_mm )
-      #    @qr = Qr.new( @img, text, size, level, @x_mm, @y_mm, @size_mm, style )
-      #  end
-
-      #  def render ()
-      #    qr.render()
-      #  end
-
-      #end # QrBackprint
-
-      class ScalesBackprint < Backprint
-
-      def render ( )
-        my_mm = @y_mm - @h_mm / 2
-        w_mm = @fs_mm * 2.5
-        #h_mm = 1.4 * @fs_mm
-        h_mm = @h_mm / 12
-        fs_mm = h_mm / 1.4
-        style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => fs_mm } )
-        spacing = @fs_mm * 0.2
-        tables = []
-        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm, @y_mm, spacing, style )
-          tr = table.tr( h_mm )
-            td = tr.td( 'L', w_mm )
-            td = tr.td( 'log', 2 * w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'P', w_mm )
-            td = tr.td( '√1-x²', w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'K', w_mm )
-            td = tr.td( 'x³', w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'A', w_mm )
-            td = tr.td( 'x²', w_mm )
-          tables << table
-        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm, @y_mm + 4.5 * h_mm, spacing, style )
-          tr = table.tr( h_mm )
-            td = tr.td( 'B', w_mm )
-            td = tr.td( 'x²', 2 * w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'CI', w_mm )
-            td = tr.td( '1/x', w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'C', w_mm )
-            td = tr.td( 'x', w_mm )
-          tables << table
-        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm, @y_mm + 8 * h_mm, spacing, style )
-          tr = table.tr( h_mm )
-            td = tr.td( 'D', w_mm )
-            td = tr.td( 'x', 2 * w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'S', w_mm )
-            td = tr.td( 'sin', w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'T', w_mm )
-            td = tr.td( 'tan', w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'ST', w_mm )
-            td = tr.td( 'sin-tan', w_mm )
-          tables << table
-        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm + 0.5 * h_mm + 3 * w_mm, @y_mm + 3 * h_mm, spacing, style )
-          tr = table.tr( h_mm )
-            td = tr.td( 'cm', 3 * w_mm )
-          tables << table
-        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm + 0.5 * h_mm + 3 * w_mm, @y_mm + 4.5 * h_mm, spacing, style )
-          tr = table.tr( h_mm )
-            td = tr.td( 'LL1', w_mm )
-            td = tr.td( 'e⁰·⁰¹ˣ', 2 * w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'LL2', w_mm )
-            td = tr.td( 'e⁰·¹ˣ', w_mm )
-          tr = table.tr( h_mm )
-            td = tr.td( 'LL3', w_mm )
-            td = tr.td( 'e¹ˣ', w_mm )
-          tables << table
-        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm + 0.5 * h_mm + 3 * w_mm, @y_mm + 8 * h_mm, spacing, style )
-          tr = table.tr( h_mm )
-            td = tr.td( 'inches', 3 * w_mm )
-          tables << table
-        tables.each do | table |
-          table.render()
-        end
-      end
-
-      end # ScalesBackprint
-
-      class ConstantsBackprint < Backprint
-      CONSTANTS =  [ [ 'imaginary',       'i²', '-1' ],
-                     [ 'Meissel–Mertens', 'M₁', '0.26149 72128' ],
-                     [ 'Omega',           'Ω',  '0.56714 32904' ],
-                     [ 'Euler-Mascheroni', 'γ', '0.57721 56649' ],
-                     [ 'Apéry',            'ζ', '1.20205 69032' ],
-                     [ 'Pythagoras',       "\u221b2", '1.41421 35624' ],
-                     [ 'Ramanujan-Soldner', 'μ', '1.45136 92349' ],
-                     [ 'Golden ration', 'φ', '1.61803 39887' ],
-                     [ 'Theodorus', "\u221b3", '1.73205 08076' ],
-                     [ '', "\u221b5", '2.23606 79775' ],
-                     [ 'Euler', 'e', '2.71828 18285' ],
-                     [ 'Archimedes', 'π', '3.14159 26536' ],
-                     [ 'Reciprocal Fibonacci', 'ψ', '3.35988 56662' ],
-                   ]
-      def render ( )
-        my_mm = @y_mm - @h_mm / 2
-        w_mm = @fs_mm * 2.5
-        #h_mm = 1.4 * @fs_mm
-        h_mm = @h_mm / 12
-        fs_mm = h_mm / 1.6
-        style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => fs_mm } )
-        spacing = @fs_mm * 0.2
-        tables = []
-        table = Io::Creat::Slipstick::Graphics::Table.new( @img, @x_mm, @y_mm, spacing, style )
-        CONSTANTS.each do | constant |
-          tr = table.tr( h_mm )
-            td = tr.td( constant[0], 5 * w_mm )
-            td = tr.td( constant[1], 1 * w_mm )
-            td = tr.td( constant[2], 4 * w_mm )
-        end
-        tables << table
-        tables.each do | table |
-          table.render()
-        end
-      end
-
-      end # ConstantsBackprint
-
-      class SinCosBackprint < Backprint
-      end # SinCosBackprint
 
     end # A
 
