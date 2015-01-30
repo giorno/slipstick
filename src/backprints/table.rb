@@ -60,8 +60,8 @@ module Io::Creat::Slipstick
       ORIENT_LANDSCAPE = 1
 
       public
-      def initialize ( img, x_mm, y_mm, spacing = 0, orient = ORIENT_PORTRAIT, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
-        super( style.merge( { Io::Creat::Slipstick::Key::FONT_SPACING => -0.15 } ) )
+      def initialize ( img, x_mm, y_mm, spacing = 0, orient = ORIENT_PORTRAIT, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE] )
+        super( style )
         @text_style = @text_style.merge( { "text-anchor" => "start" } )
         @img        = img
         @x_mm       = x_mm

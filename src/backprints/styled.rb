@@ -10,7 +10,7 @@ module Io::Creat::Slipstick
     class Styled
 
       public
-      def initialize ( style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
+      def initialize ( style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE] )
         @line_style =  { "stroke" => style[Io::Creat::Slipstick::Key::LINE_COLOR],
                         "stroke-width" => style[Io::Creat::Slipstick::Key::LINE_WIDTH],
                         "stroke-linecap" => "round",
@@ -19,7 +19,7 @@ module Io::Creat::Slipstick
                         "font-size" => style[Io::Creat::Slipstick::Key::FONT_SIZE],
                         "font-family" => style[Io::Creat::Slipstick::Key::FONT_FAMILY],
                         "font-style" => style[Io::Creat::Slipstick::Key::FONT_STYLE],
-                        "letter-spacing" => "%gpx" % style[Io::Creat::Slipstick::Key::FONT_SPACING],
+                        "letter-spacing" => "%gem" % style[Io::Creat::Slipstick::Key::FONT_SPACING],
                         "text-anchor" => "middle" }
       end
 
