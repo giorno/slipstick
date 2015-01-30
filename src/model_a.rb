@@ -104,7 +104,7 @@ module Io::Creat::Slipstick
               scale.set_overflow( 1.0 )
 
           # backprints
-          @bp_border_mm = 15.0
+          @bp_border_mm = 12.0
           @bp_y_mm = @y_mm + @hl_mm + @t_mm + @bp_border_mm
           @bp_h_mm = @h_mm - 2 * @bp_border_mm
           @bp_x_mm = @x_mm + @bp_border_mm / 2
@@ -115,9 +115,9 @@ module Io::Creat::Slipstick
             @bp_x_mm += @bp_border_mm / 2 + lo.getw()
 
           # sin-cos help
-          gr = Trigonometric.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
-            @bprints << gr
-            @bp_x_mm += @bp_border_mm / 2 + gr.getw()
+          #gr = Trigonometric.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
+          #  @bprints << gr
+          #  @bp_x_mm += @bp_border_mm / 2 + gr.getw()
 
           # table of scale labels
           cbp = ConstantsBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )

@@ -21,62 +21,67 @@ module Io::Creat::Slipstick
                [ '',                 "\u221b5", "\u00a02.2360679775" ],
                [ 'Euler',                  'e', "\u00a02.7182818285" ],
                [ 'Archimedes',             'π', "\u00a03.1415926536" ],
-               [ 'Reciprocal Fibonacci',   'ψ', "\u00a03.3598856662" ],
+               [ 'reciprocal Fibonacci',   'ψ', "\u00a03.3598856662" ],
              ]
-      PHYS = [ [ 'Astronomical unit',      'au', '149,597,870,700 m' ],
-               [ 'Speed of light',         'c', '299,792,458 m·s⁻¹' ],
-               [ 'Gravitational',          'G', '6.67384(80)×10⁻¹¹ m³·kg⁻¹·s⁻²' ],
-               [ 'Planck',                 'ℎ', '6.626 069 57(29) × 10⁻³⁴ J·s' ],
-               [ 'reduced Planck',         'ℏ', '1.054 571 726(47) × 10⁻³⁴ J·s' ],
-               [ 'permeability (vacuum)', 'µ0', '1.256 637 061... × 10−6 N·A−2' ],
-               [ 'permitivity (vacuum)',  'ε0', '8.854 187 817... × 10−12 F·m−1' ],
-               [ 'impedance (vacuum)',    'Z0', '376.730 313 461... Ω' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
-               [ '',             '', '' ],
+      PHYS = [ [ 'astronomical unit',      'au', '1.4960×10¹¹ m' ],
+               [ 'speed of light',         'c', '2.9979×10¹⁰ m·s⁻¹' ],
+               [ 'gravitational',          'G', '6.6738×10⁻¹¹ m³·kg⁻¹·s⁻²' ],
+               [ 'Planck',                 'ℎ', '6.6261×10⁻³⁴ J·s' ],
+               [ 'reduced Planck',         'ℏ', '1.0546×10⁻³⁴ J·s' ],
+               [ 'permeability (vacuum)', 'µ0', '1.2566×10−6 N·A⁻²' ],
+               [ 'permitivity (vacuum)',  'ε0', '8.8542×10⁻¹² F·m⁻¹' ],
+               [ 'impedance (vacuum)',    'Z0', '3.7673×10² Ω' ],
+               [ 'Coulomb',               'ke', '8.9876×10+9 N·m²·C⁻²' ],
+               [ 'elementary charge',     'e',  '1.6022×10−19 C' ],
+               [ 'Bohr magneton',         'µB', '9.2740×10−24 J·T−1' ],
+               [ 'Boltzmann',             'k', '1.3806×10−23 J·K−1' ],
+               [ 'molar gas',             'R', '8.3145 J·K−1·mol−1' ],
+               [ 'Avogadro',             'NA', '6.0221 x 1023 mol-1' ],
+               [ 'Faraday',      'F', '96 485.3365(21)C·mol−1' ],
+               [ 'electron mass',      'me', '9.1094×10−31 kg' ],
+               [ 'proton mass',             'mp', '1.6726×10−27 kg' ],
+               [ 'neutron mass',             'mn', '1.6749×10−27 kg' ],
+               [ 'atomic mass',             'u', '1.6605×10−27 kg' ],
+               [ 'Stefan-Boltzmann',       'σ', '5.6704×10−8 W·m−2·K−4' ],
+               [ 'Rydberg',             'Roo', '10 973 731.568 539(55) m−1' ],
+               [ 'flux quantum',             'Φ', '2.0678×10−15 Wb' ],
+               [ 'atmosphere',             'atm', '101325 Pa' ],
+               [ 'Wien displacement',             'b', '2.8978×10−3 m·K' ],
+               [ 'Bohr radius',             'a0', '5.2918×10−11 m' ],
              ]
 
       def render ( )
         my_mm = @y_mm - @h_mm / 2
         w_mm = @fs_mm * 2.5
         h_mm = @h_mm / 14
-        fs_mm = h_mm / 1.6
+        fs_mm = h_mm / 1.8
+        w1_mm = 0.50 * @h_mm
+        w2_mm = 0.10 * @h_mm
+        w3_mm = 0.40 * @h_mm
         style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => fs_mm } )
         spacing = @fs_mm * 0.2
         tables = []
         table = Table.new( @img, @x_mm, @y_mm, spacing, Table::ORIENT_LANDSCAPE, style )
           tr = table.tr( h_mm )
-            td = tr.td( 'MATHEMATICAL CONSTANTS', 8.5 * w_mm, Td::MID )
+            td = tr.td( 'MATHEMATICAL CONSTANTS', @h_mm, Td::MID )
         MATH.each do | constant |
           tr = table.tr( h_mm )
-            td = tr.td( constant[0], 4.5 * w_mm )
-            td = tr.td( constant[1], 1 * w_mm, Td::MID )
-            td = tr.td( constant[2], 3 * w_mm )
+            td = tr.td( constant[0], w1_mm )
+            td = tr.td( constant[1], w2_mm, Td::MID )
+            td = tr.td( constant[2], w3_mm )
         end
+        #tables << table
+        #w1_mm = 0.50 * @h_mm
+        #w2_mm = 0.10 * @h_mm
+        #w3_mm = 0.60 * @h_mm
+        #table = Table.new( @img, @x_mm + @h_mm + h_mm, @y_mm, spacing, Table::ORIENT_PORTRAIT, style )
           tr = table.tr( h_mm )
-            td = tr.td( 'PHYSICAL CONSTANTS', 8.5 * w_mm, Td::MID )
+            td = tr.td( 'PHYSICAL CONSTANTS', w1_mm + w2_mm + w3_mm, Td::MID )
         PHYS.each do | constant |
           tr = table.tr( h_mm )
-            td = tr.td( constant[0], 4.5 * w_mm )
-            td = tr.td( constant[1], 1 * w_mm, Td::MID )
-            td = tr.td( constant[2], 3 * w_mm )
+            td = tr.td( constant[0], w1_mm )
+            td = tr.td( constant[1], w2_mm, Td::MID )
+            td = tr.td( constant[2], w3_mm )
         end
         tables << table
         tables.each do | table |
