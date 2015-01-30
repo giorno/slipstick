@@ -16,6 +16,7 @@ module Io::Creat::Slipstick
         @cells = []
       end
 
+      # build a table cell entity
       public
       def td ( content, w_mm = 1, hal = Td::LEF )
         cell = Td.new( content, w_mm, hal )
@@ -52,22 +53,27 @@ module Io::Creat::Slipstick
 
     end # Td
 
-    # Basic functionality for any x*y table
+    # basic functionality for any x*y table
     class Table < Styled
 
+      ORIENT_PORTRAIT = 0
+      ORIENT_LANDSCAPE = 1
+
       public
-      def initialize ( img, x_mm, y_mm, spacing = 0, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
+      def initialize ( img, x_mm, y_mm, spacing = 0, orient = ORIENT_PORTRAIT, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK] )
         super( style.merge( { Io::Creat::Slipstick::Key::FONT_SPACING => -0.15 } ) )
         @text_style = @text_style.merge( { "text-anchor" => "start" } )
-        @img   = img
-        @x_mm  = x_mm
-        @y_mm  = y_mm
-        @rows  = []
-        @h_mm  = 0
-        @w_mm  = 0
-        @spacing = spacing
+        @img        = img
+        @x_mm       = x_mm
+        @y_mm       = y_mm
+        @rows       = []
+        @h_mm       = 0
+        @w_mm       = 0
+        @spacing    = spacing
+        @orient     = orient
       end
 
+      # build a table row entity
       public
       def tr ( h_mm )
         row = Tr.new( h_mm )
@@ -76,30 +82,61 @@ module Io::Creat::Slipstick
         return row
       end
 
+      # compute values for rendering
+      private
+      def reorient ( )
+        @w_mm = 0
+        @rows.each do | row |
+          @w_mm = [ @w_mm, row.getw() ].max
+        end
+
+        if @orient == ORIENT_LANDSCAPE
+          @y_mm += @w_mm # move Y-coord to fix left top corner
+        end
+      end
+
+      def line( x1_mm, y1_mm, x2_mm, y2_mm )
+        if @orient == ORIENT_LANDSCAPE
+          @img.line( @x_mm + y1_mm, @y_mm - x1_mm, @x_mm + y2_mm, @y_mm - x2_mm, @line_style )
+        else
+          @img.line( @x_mm + x1_mm, @y_mm + y1_mm, @x_mm + x2_mm, @y_mm + y2_mm, @line_style )
+        end
+      end
+
+      def text( x_mm, y_mm, label, style )
+        if @orient == ORIENT_LANDSCAPE
+          @img.rtext( @x_mm + y_mm, @y_mm - x_mm, -90, label, style )
+        else
+          @img.text( @x_mm + x_mm, @y_mm + y_mm, label, style )
+        end
+      end
+
       public
       def render ( )
-        w_mm = 0
-        @rows.each do | row |
-          w_mm = [ w_mm, row.getw() ].max
-        end
+        reorient()
         h_mm = 0
         @rows.each_with_index do | row, index |
           cells = row.getc()
           if index > 0
-            @img.line( @x_mm, @y_mm + h_mm, @x_mm + w_mm, @y_mm + h_mm, @line_style )
+            line( 0, h_mm, @w_mm, h_mm )
           end
           j_mm = 0
           cells.each_with_index do | cell, jndex |
             if jndex > 0
-              @img.line( @x_mm + j_mm, @y_mm + h_mm, @x_mm + j_mm, @y_mm + h_mm + row.geth(), @line_style )
+              line( j_mm, h_mm, j_mm, h_mm + row.geth() )
             end
             hal = cell.geta()
-            @img.text( @x_mm + j_mm + ( hal == Td::MID ? cell.getw / 2 : @spacing ), @y_mm + h_mm + row.geth - ( row.geth() + @spacing - Io::Creat::Slipstick::Dim::DEFAULT[Io::Creat::Slipstick::Key::VERT_CORR][1] * @text_style["font-size"] ) / 2, cell.gett(), hal == Td::MID ? @text_style.merge( { 'text-anchor' => 'middle' } ): @text_style )
+            text( j_mm + ( hal == Td::MID ? cell.getw / 2 : @spacing ), h_mm + row.geth - ( row.geth() + @spacing - Io::Creat::Slipstick::Dim::DEFAULT[Io::Creat::Slipstick::Key::VERT_CORR][1] * @text_style["font-size"] ) / 2, cell.gett(), hal == Td::MID ? @text_style.merge( { 'text-anchor' => 'middle' } ): @text_style )
             j_mm += cell.getw()
           end
           h_mm += row.geth()
         end
-        @img.rectangle( @x_mm, @y_mm, w_mm, @h_mm, @line_style )
+
+        if @orient == ORIENT_LANDSCAPE
+          @img.rectangle( @x_mm, @y_mm - @w_mm, @h_mm, @w_mm, @line_style )
+        else
+          @img.rectangle( @x_mm, @y_mm, @w_mm, @h_mm, @line_style )
+        end
       end
 
     end # Table

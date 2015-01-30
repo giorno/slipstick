@@ -24,20 +24,30 @@ module Io::Creat::Slipstick
                [ 'Reciprocal Fibonacci',   'ψ', "\u00a03.3598856662" ],
              ]
       PHYS = [ [ 'Astronomical unit', 'au', '149,597,870,700 m' ],
-               [ 'Speed of light',     'c', '299,792,458 m·s ⁻¹' ],
-               [ 'Gravitational',      'G', '6.67384(80)×10 ⁻¹¹ m³·kg ⁻¹·s ⁻²' ],
+               [ 'Speed of light',     'c', '299,792,458 m·s⁻¹' ],
+               [ 'Gravitational',      'G', '6.67384(80)×10⁻¹¹ m³·kg⁻¹·s⁻²' ],
                [ 'Planck',             'h', '6.626 069 57(29) × 10⁻³⁴ J·s' ],
              ]
 
       def render ( )
         my_mm = @y_mm - @h_mm / 2
         w_mm = @fs_mm * 2.5
-        h_mm = @h_mm / 12
+        h_mm = @h_mm / 14
         fs_mm = h_mm / 1.6
         style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => fs_mm } )
         spacing = @fs_mm * 0.2
         tables = []
-        table = Table.new( @img, @x_mm, @y_mm, spacing, style )
+        table = Table.new( @img, @x_mm, @y_mm, spacing, Table::ORIENT_LANDSCAPE, style )
+          tr = table.tr( h_mm )
+            td = tr.td( 'MATHEMATICAL CONSTANTS', 8.5 * w_mm, Td::MID )
+        MATH.each do | constant |
+          tr = table.tr( h_mm )
+            td = tr.td( constant[0], 4.5 * w_mm )
+            td = tr.td( constant[1], 1 * w_mm, Td::MID )
+            td = tr.td( constant[2], 3 * w_mm )
+        end
+          tr = table.tr( h_mm )
+            td = tr.td( 'PHYSICAL CONSTANTS', 8.5 * w_mm, Td::MID )
         PHYS.each do | constant |
           tr = table.tr( h_mm )
             td = tr.td( constant[0], 4.5 * w_mm )
