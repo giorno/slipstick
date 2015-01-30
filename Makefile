@@ -58,10 +58,10 @@ model_a :
 	@src/model_a.rb stock reverse | xmllint --format - > build/model_a_stock_reverse.svg 
 	@src/model_a.rb slide face | xmllint --format - > build/model_a_slide_face.svg
 	@src/model_a.rb slide reverse | xmllint --format - > build/model_a_slide_reverse.svg 
-	@$(INKSCAPE) -z -A build/model_a_stock_face.pdf build/model_a_stock_face.svg
-	@$(INKSCAPE) -z -A build/model_a_stock_reverse.pdf build/model_a_stock_reverse.svg
-	@$(INKSCAPE) -z -A build/model_a_slide_face.pdf build/model_a_slide_face.svg
-	@$(INKSCAPE) -z -A build/model_a_slide_reverse.pdf build/model_a_slide_reverse.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_stock_face.pdf $(shell pwd)/build/model_a_stock_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_stock_reverse.pdf $(shell pwd)/build/model_a_stock_reverse.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_slide_face.pdf $(shell pwd)/build/model_a_slide_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_slide_reverse.pdf $(shell pwd)/build/model_a_slide_reverse.svg
 	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=build/model_a.pdf build/model_a_stock_face.pdf build/model_a_stock_reverse.pdf build/model_a_slide_face.pdf build/model_a_slide_reverse.pdf
 	@echo "Result PDF's are in directory 'build'"
 
