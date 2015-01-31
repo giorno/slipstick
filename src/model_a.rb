@@ -115,9 +115,9 @@ module Io::Creat::Slipstick
             @bp_x_mm += @bp_border_mm / 2 + lo.getw()
 
           # sin-cos help
-          #gr = Trigonometric.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
-          #  @bprints << gr
-          #  @bp_x_mm += @bp_border_mm / 2 + gr.getw()
+          gr = Trigonometric.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
+            @bprints << gr
+            @bp_x_mm += @bp_border_mm / 2 + gr.getw()
 
           # table of scale labels
           cbp = ConstantsBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )

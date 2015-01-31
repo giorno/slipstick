@@ -28,26 +28,26 @@ module Io::Creat::Slipstick
                [ 'gravitational',          'G', '6.6738×10⁻¹¹ m³·kg⁻¹·s⁻²' ],
                [ 'Planck',                 'ℎ', '6.6261×10⁻³⁴ J·s' ],
                [ 'reduced Planck',         'ℏ', '1.0546×10⁻³⁴ J·s' ],
-               [ 'permeability (vacuum)', 'µ0', '1.2566×10−6 N·A⁻²' ],
-               [ 'permitivity (vacuum)',  'ε0', '8.8542×10⁻¹² F·m⁻¹' ],
-               [ 'impedance (vacuum)',    'Z0', '3.7673×10² Ω' ],
+               [ 'permeability (vac.)', 'µ0', '1.2566×10−6 N·A⁻²' ],
+               [ 'permitivity (vac.)',  'ε0', '8.8542×10⁻¹² F·m⁻¹' ],
+               [ 'impedance (vac.)',    'Z0', '3.7673×10² Ω' ],
                [ 'Coulomb',               'ke', '8.9876×10+9 N·m²·C⁻²' ],
-               [ 'elementary charge',     'e',  '1.6022×10−19 C' ],
-               [ 'Bohr magneton',         'µB', '9.2740×10−24 J·T−1' ],
-               [ 'Boltzmann',             'k', '1.3806×10−23 J·K−1' ],
-               [ 'molar gas',             'R', '8.3145 J·K−1·mol−1' ],
-               [ 'Avogadro',             'NA', '6.0221 x 1023 mol-1' ],
-               [ 'Faraday',      'F', '96 485.3365(21)C·mol−1' ],
+               [ 'elementary charge',     'e',  '1.6022×10⁻¹9 C' ],
+               [ 'Bohr magneton',         'µB', '9.2740×10−24 J·T⁻¹' ],
+               [ 'Boltzmann',             'k', '1.3806×10−23 J·K⁻¹' ],
+               [ 'molar gas',             'R', '8.3145 J·K⁻¹·mol⁻¹' ],
+               [ 'Avogadro',             'NA', '6.0221 x 1023 mol⁻¹' ],
+               [ 'Faraday',      'F', '9.6485×104 C·mol⁻¹' ],
                [ 'electron mass',      'me', '9.1094×10−31 kg' ],
                [ 'proton mass',             'mp', '1.6726×10−27 kg' ],
                [ 'neutron mass',             'mn', '1.6749×10−27 kg' ],
                [ 'atomic mass',             'u', '1.6605×10−27 kg' ],
                [ 'Stefan-Boltzmann',       'σ', '5.6704×10−8 W·m−2·K−4' ],
-               [ 'Rydberg',             'Roo', '10 973 731.568 539(55) m−1' ],
-               [ 'flux quantum',             'Φ', '2.0678×10−15 Wb' ],
+               [ 'Rydberg',             'Roo', '1.09737×107 m⁻¹' ],
+               [ 'flux quantum',             'Φ', '2.0678×10⁻¹5 Wb' ],
                [ 'atmosphere',             'atm', '101325 Pa' ],
                [ 'Wien displacement',             'b', '2.8978×10−3 m·K' ],
-               [ 'Bohr radius',             'a0', '5.2918×10−11 m' ],
+               [ 'Bohr radius',             'a0', '5.2918×10⁻¹¹ m' ],
              ]
 
       def render ( )
@@ -55,9 +55,9 @@ module Io::Creat::Slipstick
         w_mm = @fs_mm * 2.5
         h_mm = @h_mm / 14
         fs_mm = h_mm / 1.8
-        w1_mm = 0.50 * @h_mm
+        w1_mm = 0.40 * @h_mm
         w2_mm = 0.10 * @h_mm
-        w3_mm = 0.40 * @h_mm
+        w3_mm = 0.50 * @h_mm
         style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => fs_mm } )
         spacing = @fs_mm * 0.2
         tables = []
