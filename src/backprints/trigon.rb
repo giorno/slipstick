@@ -12,9 +12,12 @@ module Io::Creat::Slipstick
       RADS  = [          "0",        "π/6",        "π/4",        "π/3",        "π/2" ]
       COS   = [  "\u221b0/2",  "\u221b1/2",  "\u221b2/2",  "\u221b3/2",  "\u221b4/2" ]
       SIN   = [  "\u221b4/2",  "\u221b3/2",  "\u221b2/2",  "\u221b1/2",  "\u221b0/2" ]
+      SCALE  = 0.8
 
       public
       def initialize ( img, x_mm, y_mm, h_mm )
+        y_mm += ( 1 - SCALE ) * h_mm / 2
+        h_mm *= SCALE
         @r_step_mm  = h_mm / 5
         super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @r_step_mm / 3.5 } ) )
         @img        = img
