@@ -128,6 +128,13 @@ module Io::Creat::Slipstick
 
         # sides of the slide
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) == 0 )
+          strip = create_strip( @x_mm, @y_mm + @hs_mm / 4, @hs_mm / 2, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°C", 0.5, true )
+              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+              scale.set_params( -50.0, 200.0, 1.0, true )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°F", 0.5 )
+              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+              scale.set_params( -58.0, 392.0, 1.0 )
           strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e⁰·⁰¹ˣ", 0.5 )
               scale.set_params( 100 )
