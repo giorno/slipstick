@@ -19,7 +19,7 @@ module Io::Creat::Slipstick
         y_mm += ( 1 - SCALE ) * h_mm / 2
         h_mm *= SCALE
         @r_step_mm  = h_mm / 5
-        super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @r_step_mm / 3.5 } ) )
+        super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @r_step_mm / 3.5 } ) )
         @img        = img
         @overlap_mm = @r_step_mm * 0.1
         @output     = @img.instance_variable_get( :@output )

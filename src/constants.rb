@@ -66,7 +66,7 @@ module Io
                                                                    10.0 => [ 2 ],
                                                                     5  => [ ],
                                                                     2  => [ ] },
-                    Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.10, 0.90 ], # corrections to workaround lack of support for dominant-baseline
+                    Io::Creat::Slipstick::Key::VERT_CORR     => [ -0.15, 0.85 ], # corrections to workaround lack of support for dominant-baseline
                   }
       end
 

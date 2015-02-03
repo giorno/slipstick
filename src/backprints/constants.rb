@@ -70,11 +70,6 @@ module Io::Creat::Slipstick
             td = tr.td( constant[1], w2_mm, Td::MID )
             td = tr.td( constant[2], w3_mm )
         end
-        #tables << table
-        #w1_mm = 0.50 * @h_mm
-        #w2_mm = 0.10 * @h_mm
-        #w3_mm = 0.60 * @h_mm
-        #table = Table.new( @img, @x_mm + @h_mm + h_mm, @y_mm, spacing, Table::ORIENT_PORTRAIT, style )
           tr = table.tr( h_mm )
             td = tr.td( 'PHYSICAL CONSTANTS', w1_mm + w2_mm + w3_mm, Td::MID )
         PHYS.each do | constant |
