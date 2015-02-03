@@ -9,11 +9,17 @@ module Io::Creat::Slipstick::Backprints
   # standards
   class ConversionBackprint < Backprint
 
+    # length
     CM_INCH = { :scale => 2.54, :bigger => [ "inch", "inches" ], :smaller => [ "cm", "cm" ], :real => 25.4 }
     FOOT_M  = { :scale => 1 / 0.3048, :bigger => [ "m", "m" ], :smaller => [ "foot", "feet" ], :real => 25 }
     YARD_M = { :scale => 1 / 0.9144, :bigger => [ "m", "m" ], :smaller => [ "yard", "yards" ], :real => 25 }
     KM_MILE = { :scale => 1.609, :bigger => [ "mile", "miles" ], :smaller => [ "km", "km" ], :real => 40.1125 }
     KM_NMILE = { :scale => 1.853184, :bigger => [ "nautical mile", "nautical miles" ], :smaller => [ "km", "km" ], :real => 185.3184 / 4 }
+
+    # weight
+    OZ_G = { :scale => 28.3495, :bigger => [ "ounce", "ounces" ], :smaller => [ "g", "g" ], :real => 28.3495 }
+    POUND_KG = { :scale => 1 / 0.45359, :bigger => [ "kg", "kg" ], :smaller => [ "pound", "pounds" ], :real => 25 }
+    KG_STONE = { :scale => 6.3503, :bigger => [ "stone", "stones" ], :smaller => [ "kg", "kg" ], :real => 31.5 }
 
     def set_scale ( scale, w_mm )
       @scale = scale

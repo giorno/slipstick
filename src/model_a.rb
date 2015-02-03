@@ -185,6 +185,30 @@ module Io::Creat::Slipstick
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
               scale.add_constants( )
+
+          x_mm = @x_mm + 25
+          y_mm = @y_mm + ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm
+
+          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+            m.set_scale( ConversionBackprint::OZ_G, 1 )
+            @bprints << m
+            x_mm += m.getw() + 10
+          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+            m.set_scale( ConversionBackprint::POUND_KG, 1 )
+            @bprints << m
+            x_mm += m.getw() + 10
+          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+            m.set_scale( ConversionBackprint::KG_STONE, 1 )
+            @bprints << m
+            x_mm += m.getw() + 10
+#          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+#            m.set_scale( ConversionBackprint::KM_MILE, 1 )
+#            @bprints << m
+#            x_mm += m.getw() + 10
+#          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+#            m.set_scale( ConversionBackprint::KM_NMILE, 1 )
+#            @bprints << m
+#            x_mm += m.getw() + 10
         end
       end
       
