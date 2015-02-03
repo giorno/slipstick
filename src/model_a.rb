@@ -5,6 +5,7 @@
 require_relative 'qr'
 require_relative 'sheet'
 require_relative 'backprints/constants'
+require_relative 'backprints/conv'
 require_relative 'backprints/scales'
 require_relative 'backprints/trigon'
 
@@ -135,6 +136,7 @@ module Io::Creat::Slipstick
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°F", 0.5 )
               scale.set_style( Io::Creat::Slipstick::Style::SMALL )
               scale.set_params( -58.0, 392.0, 1.0 )
+
           strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e⁰·⁰¹ˣ", 0.5 )
               scale.set_params( 100 )
@@ -145,6 +147,22 @@ module Io::Creat::Slipstick
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e¹ˣ", 0.5, true )
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
+
+          x_mm = @x_mm + 10
+          y_mm = @y_mm + ( ( @h_mm + @hs_mm ) / 2 ) + @hs_mm / 1.5
+
+          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+            m.set_scale( ConversionBackprint::CM_INCH, 1 )
+            @bprints << m
+            x_mm += m.getw() + 10
+          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+            m.set_scale( ConversionBackprint::FOOT_M, 1 )
+            @bprints << m
+            x_mm += m.getw() + 10
+          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+            m.set_scale( ConversionBackprint::KM_MILE, 1 )
+            @bprints << m
+            x_mm += m.getw() + 10
 
           strip = create_strip( @x_mm, ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm + @hl_mm, @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5 )
@@ -210,14 +228,14 @@ module Io::Creat::Slipstick
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
-            # backprints
-            @bprints.each do | bp |
-              bp.render()
-            end
             # QR code
             # TODO refactor to inherit from Backprint
             qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
           end
+        end
+        # backprints
+        @bprints.each do | bp |
+          bp.render()
         end
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           # cutting guidelines for the slipstick
