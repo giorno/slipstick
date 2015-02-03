@@ -148,7 +148,7 @@ module Io::Creat::Slipstick
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
 
-          x_mm = @x_mm + 10
+          x_mm = @x_mm + 25
           y_mm = @y_mm + ( ( @h_mm + @hs_mm ) / 2 ) + @hs_mm / 1.5
 
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
@@ -160,7 +160,15 @@ module Io::Creat::Slipstick
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+            m.set_scale( ConversionBackprint::YARD_M, 1 )
+            @bprints << m
+            x_mm += m.getw() + 10
+          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
             m.set_scale( ConversionBackprint::KM_MILE, 1 )
+            @bprints << m
+            x_mm += m.getw() + 10
+          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
+            m.set_scale( ConversionBackprint::KM_NMILE, 1 )
             @bprints << m
             x_mm += m.getw() + 10
 
