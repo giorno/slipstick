@@ -1,5 +1,7 @@
 #!/usr/bin/ruby
 
+# vim; et
+#
 require 'rasem'
 
 module Io
@@ -45,6 +47,19 @@ module Io
       def move ( x_mm, y_mm )
         assert_in_path
         @output << %Q{M#{x_mm},#{y_mm} }
+      end
+
+      # render line with pattern
+      public
+      def pline( x1, y1, x2, y2, style=DefaultStyles[:line], pattern = nil )
+        # fallback
+        if pattern.nil?
+          line( x1, y1, x2, y2, style )
+          return
+        end
+        @output << %Q{<line stroke-dasharray="#{pattern}" x1="#{x1}" y1="#{y1}" x2="#{x2}" y2="#{y2}"}
+        write_style(style)
+        @output << %Q{/>}
       end
 
       # render line segment using relative coordinates

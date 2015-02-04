@@ -29,6 +29,7 @@ module Io::Creat::Slipstick
                         "text-anchor" => "middle" }
       # QR code style
       STYLE_QR      = { :fill => "black", :stroke_width => "0.01", :stroke => "black" }
+      PATTERN_BEND  = "2, 3" # line pattern for bent edges
 
       public
       def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
@@ -187,25 +188,6 @@ module Io::Creat::Slipstick
         return strip
       end
 
-      private
-      def rect ( x, y, w, h )
-        @img.rectangle( "%g" % x, "%g" % y, "%g" % w, "%g" % h, @style )
-      end
-
-      private
-      def line ( x1, y1, x2, y2 )
-        @img.line( "%g" % x1, "%g" % y1, "%g" % x2, "%g" % y2, @style )
-      end
-
-      private
-      def text ( x, y, string, style )
-        @img.text( "%g" % x, "%g" % y, string, style )
-      end
-
-      private
-      def qr ( label )
-      end
-
       # render strips and edges for cutting/bending
       public
       def render()
@@ -214,15 +196,15 @@ module Io::Creat::Slipstick
         if ( @layers & LAYER_STOCK ) != 0
           if ( @layers & LAYER_REVERSE ) != 0
             # cutting guidelines for the stator
-            rect( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm ), @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm )
+            @img.rectangle( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm ), @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm, @style )
             # bending guidelines for the stator
-            line( @x_mm, @sh_mm - ( @y_mm + @hu_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm ) )
-            line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ) )
-            line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ) )
-            line( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ) )
+            @img.pline( @x_mm, @sh_mm - ( @y_mm + @hu_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm ), @style, PATTERN_BEND )
+            @img.pline( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ), @style, PATTERN_BEND )
+            @img.pline( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ), @style, PATTERN_BEND )
+            @img.pline( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @style, PATTERN_BEND )
           else
             # branding texts
-            text( @x_mm + 174, @y_mm + 106, "creat.io MODEL A", STYLE_BRAND )
+            @img.text( @x_mm + 174, @y_mm + 106, "creat.io MODEL A", STYLE_BRAND )
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
@@ -237,9 +219,9 @@ module Io::Creat::Slipstick
         end
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           # cutting guidelines for the slipstick
-          line( 0, @y_mm + @cs_mm, 297, @y_mm + @cs_mm )
-          line( 0, @y_mm + @h_mm - @cs_mm, 297, @y_mm + @h_mm - @cs_mm )
-          line( 0, @y_mm + 2 * ( @h_mm - @cs_mm ), 297, @y_mm + 2 * ( @h_mm - @cs_mm ) )
+          @img.line( 0, @y_mm + @cs_mm, 297, @y_mm + @cs_mm, @style )
+          @img.pline( 0, @y_mm + @h_mm - @cs_mm, 297, @y_mm + @h_mm - @cs_mm, @style, PATTERN_BEND )
+          @img.line( 0, @y_mm + 2 * ( @h_mm - @cs_mm ), 297, @y_mm + 2 * ( @h_mm - @cs_mm ), @style )
         end
         # strips
         super( true )
