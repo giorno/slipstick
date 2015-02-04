@@ -44,7 +44,7 @@ module Io::Creat::Slipstick
                [ 'atomic mass',            'u', '1.6605×10⁻²⁷ kg' ],
                [ 'Stefan-Boltzmann',       'σ', '5.6704×10⁻⁸ W·m⁻²·K⁻⁴' ],
                [ 'Rydberg',          "R\u1d02", '1.09737×10⁷ m⁻¹' ],
-               [ 'flux quantum',           'Φ', '2.0678×10⁻¹5 Wb' ],
+               [ 'flux quantum',           'Φ', '2.0678×10⁻¹⁵ Wb' ],
                [ 'atmosphere',           'atm', '101325 Pa' ],
                [ 'Wien displacement',      'b', '2.8978×10⁻³ m·K' ],
                [ 'Bohr radius',           'a₀', '5.2918×10⁻¹¹ m' ],
