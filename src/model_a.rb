@@ -188,6 +188,25 @@ module Io::Creat::Slipstick
         return strip
       end
 
+      private
+      def render_cursor ( y_mm )
+        w_mm = 40.0
+        h_mm = @h_mm + @b_mm
+        s_mm = @t_mm + @b_mm
+        b_mm = 10.0 # overlap
+        ww_mm = w_mm / 1.5
+        # contour
+        @img.rectangle( @x_mm, y_mm, 2 * h_mm + b_mm + 2 * s_mm, w_mm, @style )
+        # bending edges
+        x_mm = @x_mm
+        [ b_mm, s_mm, h_mm, s_mm ].each do | w |
+          x_mm += w
+          @img.pline( x_mm, y_mm, x_mm, y_mm + w_mm, @style, PATTERN_BEND )
+        end
+        # front window
+        @img.rectangle( @x_mm + b_mm + s_mm, y_mm + ( w_mm - ww_mm ) / 2, h_mm, ww_mm, @style )
+      end
+
       # render strips and edges for cutting/bending
       public
       def render()
@@ -202,6 +221,8 @@ module Io::Creat::Slipstick
             @img.pline( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm ), @style, PATTERN_BEND )
             @img.pline( @x_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + @t_mm + @h_mm ), @style, PATTERN_BEND )
             @img.pline( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @style, PATTERN_BEND )
+
+            render_cursor( @y_mm ) # upside-down
           else
             # branding texts
             @img.text( @x_mm + 174, @y_mm + 106, "creat.io MODEL A", STYLE_BRAND )
