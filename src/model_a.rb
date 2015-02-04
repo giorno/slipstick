@@ -152,23 +152,23 @@ module Io::Creat::Slipstick
           y_mm = @y_mm + ( ( @h_mm + @hs_mm ) / 2 ) + @hs_mm / 1.5
 
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::CM_INCH, 1 )
+            m.set_scale( ConversionBackprint::CM_INCH )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::FOOT_M, 1 )
+            m.set_scale( ConversionBackprint::FOOT_M )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::YARD_M, 1 )
+            m.set_scale( ConversionBackprint::YARD_M )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::KM_MILE, 1 )
+            m.set_scale( ConversionBackprint::KM_MILE )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::KM_NMILE, 1 )
+            m.set_scale( ConversionBackprint::KM_NMILE )
             @bprints << m
             x_mm += m.getw() + 10
 
@@ -190,23 +190,23 @@ module Io::Creat::Slipstick
           y_mm = @y_mm + ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm
 
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::OZ_G, 1 )
+            m.set_scale( ConversionBackprint::OZ_G )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::POUND_KG, 1 )
+            m.set_scale( ConversionBackprint::POUND_KG )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::KG_STONE, 1 )
+            m.set_scale( ConversionBackprint::KG_STONE )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::ACRE_HA, 1 )
+            m.set_scale( ConversionBackprint::ACRE_HA )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::SQFT_M2, 1 )
+            m.set_scale( ConversionBackprint::SQFT_M2 )
             @bprints << m
             x_mm += m.getw() + 10
 
@@ -214,15 +214,15 @@ module Io::Creat::Slipstick
           y_mm = @y_mm + ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm + 2.5 * @hs_mm
 
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::PINT_L, 1 )
+            m.set_scale( ConversionBackprint::PINT_L )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::L_QUART, 1 )
+            m.set_scale( ConversionBackprint::L_QUART )
             @bprints << m
             x_mm += m.getw() + 10
           m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::L_GALLON, 1 )
+            m.set_scale( ConversionBackprint::L_GALLON )
             @bprints << m
             x_mm += m.getw() + 10
         end
