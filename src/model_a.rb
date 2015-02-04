@@ -130,7 +130,9 @@ module Io::Creat::Slipstick
         # sides of the slide
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) == 0 )
 
-          strip = create_strip( @x_mm, @y_mm + @hs_mm / 4, @hs_mm / 2, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          # temperature conversion scale
+          bp_off_mm = 9 # offset of conversion scales from the edge of slide
+          strip = create_strip( @x_mm, @y_mm + bp_off_mm - @hu_mm / 4 , @hu_mm / 2, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°C", 0.5, true )
               scale.set_style( Io::Creat::Slipstick::Style::SMALL )
               scale.set_params( -50.0, 200.0, 1.0, true )
@@ -138,6 +140,7 @@ module Io::Creat::Slipstick
               scale.set_style( Io::Creat::Slipstick::Style::SMALL )
               scale.set_params( -58.0, 392.0, 1.0 )
 
+          # power scales
           strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "e⁰·⁰¹ˣ", 0.5 )
               scale.set_params( 100 )
@@ -149,15 +152,13 @@ module Io::Creat::Slipstick
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
 
-          bp_off_mm = 10 # offset of conversion scales from the edge of slide
+          # length units conversion scales
           bp_w_mm = w_m_mm + w_l_mm + w_s_mm + w_a_mm # width reserved for the 
           bp_gap_mm = 10 # space between conversion scales
+          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - bp_off_mm, bp_gap_mm, ConversionBackprint::LENGTHS )
 
-          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + ( ( @h_mm + @hs_mm ) / 2 ) + @hs_mm / 1.5, bp_gap_mm, ConversionBackprint::LENGTHS )
-          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm, bp_gap_mm, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
-          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm + 2.5 * @hs_mm, bp_gap_mm, ConversionBackprint::VOLUMES )
-
-          strip = create_strip( @x_mm, ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm + @hl_mm, @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          # log scales
+          strip = create_strip( @x_mm, @y_mm + @h_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5 )
               scale.set_params( 2 )
               scale.set_overflow( 4.0 )
@@ -170,6 +171,10 @@ module Io::Creat::Slipstick
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
               scale.add_constants( )
+
+          # rest of units conversion scales
+          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - @cs_mm + bp_off_mm, bp_gap_mm, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
+          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + 2 * ( @h_mm - @cs_mm ) - bp_off_mm, bp_gap_mm, ConversionBackprint::VOLUMES )
         end
       end
       
@@ -234,8 +239,7 @@ module Io::Creat::Slipstick
           # cutting guidelines for the slipstick
           line( 0, @y_mm + @cs_mm, 297, @y_mm + @cs_mm )
           line( 0, @y_mm + @h_mm - @cs_mm, 297, @y_mm + @h_mm - @cs_mm )
-          line( 0, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @cs_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm + @cs_mm )
-          line( 0, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm - @cs_mm, 297, @y_mm + @hu_mm + 2 * @t_mm + 2 * @h_mm + @hl_mm - @cs_mm )
+          line( 0, @y_mm + 2 * ( @h_mm - @cs_mm ), 297, @y_mm + 2 * ( @h_mm - @cs_mm ) )
         end
         # strips
         super( true )
