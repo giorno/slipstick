@@ -129,6 +129,7 @@ module Io::Creat::Slipstick
 
         # sides of the slide
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) == 0 )
+
           strip = create_strip( @x_mm, @y_mm + @hs_mm / 4, @hs_mm / 2, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°C", 0.5, true )
               scale.set_style( Io::Creat::Slipstick::Style::SMALL )
@@ -148,29 +149,13 @@ module Io::Creat::Slipstick
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
 
-          x_mm = @x_mm + 25
-          y_mm = @y_mm + ( ( @h_mm + @hs_mm ) / 2 ) + @hs_mm / 1.5
+          bp_off_mm = 10 # offset of conversion scales from the edge of slide
+          bp_w_mm = w_m_mm + w_l_mm + w_s_mm + w_a_mm # width reserved for the 
+          bp_gap_mm = 10 # space between conversion scales
 
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::CM_INCH )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::FOOT_M )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::YARD_M )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::KM_MILE )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::KM_NMILE )
-            @bprints << m
-            x_mm += m.getw() + 10
+          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + ( ( @h_mm + @hs_mm ) / 2 ) + @hs_mm / 1.5, bp_gap_mm, ConversionBackprint::LENGTHS )
+          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm, bp_gap_mm, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
+          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm + 2.5 * @hs_mm, bp_gap_mm, ConversionBackprint::VOLUMES )
 
           strip = create_strip( @x_mm, ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm + @hl_mm, @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5 )
@@ -185,46 +170,6 @@ module Io::Creat::Slipstick
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
               scale.add_constants( )
-
-          x_mm = @x_mm + 25
-          y_mm = @y_mm + ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm
-
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::OZ_G )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::POUND_KG )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::KG_STONE )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::ACRE_HA )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::SQFT_M2 )
-            @bprints << m
-            x_mm += m.getw() + 10
-
-          x_mm = @x_mm + 25
-          y_mm = @y_mm + ( ( @h_mm - @hs_mm ) / 2 ) + @y_mm + 2 * @t_mm + @h_mm + @hu_mm + 2.5 * @hs_mm
-
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::PINT_L )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::L_QUART )
-            @bprints << m
-            x_mm += m.getw() + 10
-          m = ConversionBackprint.new( @img, x_mm, y_mm, 0 )
-            m.set_scale( ConversionBackprint::L_GALLON )
-            @bprints << m
-            x_mm += m.getw() + 10
         end
       end
       

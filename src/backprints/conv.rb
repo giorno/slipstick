@@ -31,6 +31,12 @@ module Io::Creat::Slipstick::Backprints
     L_QUART  = { :scale => 1.13652, :bigger => [ "quart", "quarts" ], :smaller => [ "l", "l" ], :real => 20 * 1.13652 }
     L_GALLON = { :scale => 4.54609, :bigger => [ "gallon", "gallons" ], :smaller => [ "l", "l" ], :real => 5 * 4.54609 }
 
+    # collections
+    LENGTHS = [ CM_INCH, FOOT_M, YARD_M, KM_MILE, KM_NMILE ]
+    WEIGHTS = [ OZ_G, POUND_KG, KG_STONE ]
+    AREAS   = [ ACRE_HA, SQFT_M2 ]
+    VOLUMES = [ PINT_L, L_QUART, L_GALLON ]
+
     public
     def set_scale ( scale, fs_mm = 1.8 )
       @scale = scale
@@ -82,11 +88,55 @@ module Io::Creat::Slipstick::Backprints
     end
 
     public
+    def setx ( x_mm )
+      @x_mm = x_mm
+    end
+
+    public
+    def getx ( )
+      return @x_mm
+    end
+
+    public
     def getw()
       return @scale[:real] + 0.6 * @tw_mm * @fs_mm
     end
 
   end # ConversionBackprint
+
+  # collection of conversion scales manipulated as single object
+  # positioned in the middle of horizontal range
+  class ConversionBackprints
+
+    public
+    def initialize ( img, left_mm, right_mm, y_mm, gap_mm, scales = [] )
+      raise "No conversion scales" unless scales.length > 0
+      @scales = scales
+      @bprints = []
+      x_mm = left_mm
+      scales.each do | scale |
+        bp = ConversionBackprint.new( img, x_mm, y_mm, 0 )
+        bp.set_scale( scale )
+        x_mm += bp.getw() + gap_mm
+        @bprints << bp
+      end
+      # adjust positions to make the whole collection centered
+      x_mm -= gap_mm
+      w_mm = x_mm - left_mm
+      adj_mm = ( ( right_mm - left_mm ) - w_mm ) / 2
+      @bprints.each do | bp |
+        bp.setx( bp.getx() + adj_mm )
+      end
+    end
+
+    public
+    def render ( )
+      @bprints.each do | bprint |
+        bprint.render()
+      end
+    end
+
+  end # ConversionBackprints
 
 end # Io::Creat::Slipstick::Backprints
 
