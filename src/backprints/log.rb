@@ -17,7 +17,7 @@ module Io::Creat::Slipstick::Backprints
         @img.arc( x_mm + w_mm / 2 - r_mm, y_mm + h_mm, r_mm )
         @img.rline( x_mm - w_mm / 2 + r_mm, y_mm + h_mm )
       @img.pend( @line_style )
-      @img.text( x_mm, y_mm + 0.8 * h_mm, content, @text_style.merge( { 'text-anchor' => 'middle' } ) )
+      @img.text( x_mm, y_mm + 0.75 * h_mm, content, @text_style.merge( { 'text-anchor' => 'middle' } ) )
     end
 
     def arrow ( x_mm, y_mm, w_mm, h_mm, arrow = nil )
@@ -33,21 +33,26 @@ module Io::Creat::Slipstick::Backprints
         @img.rline( x_mm + w_mm, y_mm + h_mm )
       @img.pend( @line_style )
       if not arrow.nil?
-        @img.pbeing()
-        @img.pend( @line_style )
+        @img.pbegin()
+          @img.move( x_mm, y_mm )
+          @img.rline( x_mm - r_mm / 3, y_mm + inv_y * r_mm )
+          @img.rline( x_mm + r_mm / 3, y_mm + inv_y * r_mm )
+          @img.rline( x_mm, y_mm )
+        @img.pend( @line_style.merge( { 'fill' => 'black', 'stroke-linecap' => 'square' } ) )
       end
     end
 
     def render()
+      @y_mm -= @h_mm # correct back
       w_mm = @h_mm / 2
       @img.text( @x_mm, @y_mm + 3 * @fs_mm, "x", @text_style.merge( { 'text-anchor' => 'start' } ) )
       arrow( @x_mm + 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 2 * @fs_mm, ( w_mm / 2 ) - 2.7 * FONT_WH_RATIO * @fs_mm, - 1.3 * @fs_mm )
       oval( @x_mm + w_mm / 2, @y_mm, 4 * FONT_WH_RATIO * @fs_mm, 1.4 * @fs_mm, "aˣ" )
-      arrow( @x_mm + w_mm - 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 2 * @fs_mm, -( ( w_mm / 2 ) - 2.7 * FONT_WH_RATIO * @fs_mm), - 1.3 * @fs_mm )
+      arrow( @x_mm + w_mm - 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 2 * @fs_mm, -( ( w_mm / 2 ) - 2.7 * FONT_WH_RATIO * @fs_mm), - 1.3 * @fs_mm, true )
       @img.text( @x_mm + w_mm, @y_mm + 3 * @fs_mm, "y", @text_style.merge( { 'text-anchor' => 'end' } ) )
       arrow( @x_mm + w_mm - 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 3.5 * @fs_mm, -( ( w_mm / 2 ) - 4.2 * FONT_WH_RATIO * @fs_mm), 1.2 * @fs_mm )
       oval( @x_mm + w_mm / 2, @y_mm + 4 * @fs_mm, 7 * FONT_WH_RATIO * @fs_mm, 1.4 * @fs_mm, "logₐy" )
-      arrow( @x_mm + 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 3.5 * @fs_mm, ( w_mm / 2 ) - 4.2 * FONT_WH_RATIO * @fs_mm,  1.2 * @fs_mm )
+      arrow( @x_mm + 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 3.5 * @fs_mm, ( w_mm / 2 ) - 4.2 * FONT_WH_RATIO * @fs_mm,  1.2 * @fs_mm, true )
     end
 
   end # LogBackprint
