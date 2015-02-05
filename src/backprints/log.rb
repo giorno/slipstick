@@ -53,6 +53,11 @@ module Io::Creat::Slipstick::Backprints
       arrow( @x_mm + w_mm - 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 3.5 * @fs_mm, -( ( w_mm / 2 ) - 4.2 * FONT_WH_RATIO * @fs_mm), 1.2 * @fs_mm )
       oval( @x_mm + w_mm / 2, @y_mm + 4 * @fs_mm, 7 * FONT_WH_RATIO * @fs_mm, 1.4 * @fs_mm, "logₐy" )
       arrow( @x_mm + 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 3.5 * @fs_mm, ( w_mm / 2 ) - 4.2 * FONT_WH_RATIO * @fs_mm,  1.2 * @fs_mm, true )
+
+      @text_style = @text_style.merge( { 'text-anchor' => 'begin' } )
+      @img.text( @x_mm, @y_mm + 7 * @fs_mm , "log m × n = log m + log n", @text_style )
+      @img.text( @x_mm, @y_mm + 8 * @fs_mm , "log m ÷ n = log m - log n", @text_style )
+      @img.text( @x_mm, @y_mm + 9 * @fs_mm , "log mˣ = x × log m", @text_style )
     end
 
   end # LogBackprint
