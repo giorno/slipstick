@@ -6,6 +6,7 @@ require_relative 'qr'
 require_relative 'sheet'
 require_relative 'backprints/constants'
 require_relative 'backprints/conv'
+require_relative 'backprints/log'
 require_relative 'backprints/scales'
 require_relative 'backprints/trigon'
 
@@ -117,7 +118,12 @@ module Io::Creat::Slipstick
             @bp_x_mm += @bp_border_mm / 2 + lo.getw()
 
           # sin-cos help
-          gr = Trigonometric.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
+          gr = TrigonometricBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
+            @bprints << gr
+            @bp_x_mm += @bp_border_mm / 2 + gr.getw()
+
+          # log help
+          gr = LogBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
             @bprints << gr
             @bp_x_mm += @bp_border_mm / 2 + gr.getw()
 

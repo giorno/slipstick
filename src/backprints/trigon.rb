@@ -7,7 +7,7 @@ module Io::Creat::Slipstick
   module Backprints
 
     # renders sin-cos help graphics
-    class Trigonometric < Backprint
+    class TrigonometricBackprint < Backprint
       STEPS = [ Math::PI / 2, Math::PI / 3, Math::PI / 4, Math::PI / 6,           0  ]
       RADS  = [          "0",        "π/6",        "π/4",        "π/3",        "π/2" ]
       COS   = [  "\u221b0/2",  "\u221b1/2",  "\u221b2/2",  "\u221b3/2",  "\u221b4/2" ]
@@ -19,7 +19,8 @@ module Io::Creat::Slipstick
         y_mm += ( 1 - SCALE ) * h_mm / 2
         h_mm *= SCALE
         @r_step_mm  = h_mm / 5
-        super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @r_step_mm / 3.5 } ) )
+        @fs_mm = @r_step_mm / 3.5
+        super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @fs_mm } ) )
         @img        = img
         @overlap_mm = @r_step_mm * 0.1
         @output     = @img.instance_variable_get( :@output )
