@@ -99,7 +99,7 @@ module Io::Creat::Slipstick::Backprints
 
     public
     def getw()
-      return @scale[:real] + 0.6 * @tw_mm * @fs_mm
+      return @scale[:real] + 0.45 * @tw_mm * @fs_mm
     end
 
   end # ConversionBackprint
