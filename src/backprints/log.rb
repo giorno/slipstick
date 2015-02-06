@@ -44,7 +44,7 @@ module Io::Creat::Slipstick::Backprints
 
     def render()
       @y_mm -= @h_mm # correct back
-      w_mm = @h_mm / 2
+      w_mm = getw()
       @img.text( @x_mm, @y_mm + 3 * @fs_mm, "x", @text_style.merge( { 'text-anchor' => 'start' } ) )
       arrow( @x_mm + 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 2 * @fs_mm, ( w_mm / 2 ) - 2.7 * FONT_WH_RATIO * @fs_mm, - 1.3 * @fs_mm )
       oval( @x_mm + w_mm / 2, @y_mm, 4 * FONT_WH_RATIO * @fs_mm, 1.4 * @fs_mm, "aˣ" )
@@ -54,10 +54,20 @@ module Io::Creat::Slipstick::Backprints
       oval( @x_mm + w_mm / 2, @y_mm + 4 * @fs_mm, 7 * FONT_WH_RATIO * @fs_mm, 1.4 * @fs_mm, "logₐy" )
       arrow( @x_mm + 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 3.5 * @fs_mm, ( w_mm / 2 ) - 4.2 * FONT_WH_RATIO * @fs_mm,  1.2 * @fs_mm, true )
 
-      @text_style = @text_style.merge( { 'text-anchor' => 'begin' } )
-      @img.text( @x_mm, @y_mm + 7 * @fs_mm , "log m × n = log m + log n", @text_style )
-      @img.text( @x_mm, @y_mm + 8 * @fs_mm , "log m ÷ n = log m - log n", @text_style )
-      @img.text( @x_mm, @y_mm + 9 * @fs_mm , "log mˣ = x × log m", @text_style )
+      # logarithmic rules
+      [ "log m·n = log m + log n", # product
+        "log m/n = log m - log n", # quotient
+        "\u00a0log mⁿ = n·log m", # power
+        "\u00a0logₐ n = 1/logₙ a", # base switch
+        "\u00a0logₐ x = logₙ x/logₙ a", # base change
+      ].each_with_index do | rule, index |
+        @img.text( @x_mm, @y_mm + ( 7 + index ) * @fs_mm, rule, @text_style.merge( { 'text-anchor' => 'begin' } ) )
+      end
+    end
+
+    public
+    def getw ( )
+      return 26.7 * @fs_mm * FONT_WH_RATIO
     end
 
   end # LogBackprint
