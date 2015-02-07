@@ -57,9 +57,12 @@ module Io::Creat::Slipstick::Backprints
       # logarithmic rules
       [ "log m·n = log m + log n", # product
         "log m/n = log m - log n", # quotient
+        "logₙ xⁿ = x",
         "\u00a0log mⁿ = n·log m", # power
         "\u00a0logₐ n = 1/logₙ a", # base switch
         "\u00a0logₐ x = logₙ x/logₙ a", # base change
+        "\u00a0logₐ 1 = 0", # log of 1
+        "\u00a0logₐ a = 1", # log of base
       ].each_with_index do | rule, index |
         @img.text( @x_mm, @y_mm + ( 7 + index ) * @fs_mm, rule, @text_style.merge( { 'text-anchor' => 'begin' } ) )
       end
