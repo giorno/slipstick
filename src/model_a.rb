@@ -30,7 +30,7 @@ module Io::Creat::Slipstick
                         "text-anchor" => "middle" }
       # QR code style
       STYLE_QR      = { :fill => "black", :stroke_width => "0.01", :stroke => "black" }
-      PATTERN_BEND  = "2, 3" # line pattern for bent edges
+      PATTERN_BEND  = "1, 1" # line pattern for bent edges
 
       public
       def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
