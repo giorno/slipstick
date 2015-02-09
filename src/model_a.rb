@@ -229,7 +229,8 @@ module Io::Creat::Slipstick
             @img.pline( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm ), @style, PATTERN_BEND )
 
             render_cursor( @y_mm ) # upside-down
-          else
+          end
+          if ( @layers & LAYER_FACE ) != 0
             # branding texts
             @img.text( @x_mm + 174, @y_mm + 106, "creat.io MODEL A", STYLE_BRAND )
             bottom_off_mm = 15.0
@@ -284,8 +285,9 @@ if ARGV.length > 1
     layers |= Io::Creat::Slipstick::Model::A::LAYER_FACE
   elsif ARGV[1] == 'reverse'
     layers |= Io::Creat::Slipstick::Model::A::LAYER_REVERSE
-  elsif ARGV[1] != 'both'
+  elsif ARGV[1] == 'both'
     layers |= Io::Creat::Slipstick::Model::A::LAYER_FACE | Io::Creat::Slipstick::Model::A::LAYER_REVERSE
+  else
     $stderr.puts "Usage: #{$0} <stator|slide>> [both|face|reverse]\n\nOutputs SVG for requested side of the slide rule printout."
     exit
   end
