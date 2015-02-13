@@ -6,6 +6,7 @@ require_relative 'qr'
 require_relative 'sheet'
 require_relative 'backprints/constants'
 require_relative 'backprints/conv'
+require_relative 'backprints/instr'
 require_relative 'backprints/log'
 require_relative 'backprints/scales'
 require_relative 'backprints/trigon'
@@ -131,8 +132,8 @@ module Io::Creat::Slipstick
           cbp = ConstantsBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
             @bprints << cbp
             @bp_x_mm += @bp_border_mm / 2 + cbp.getw()
-         
-        end
+
+       end
 
         # sides of the slide
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) == 0 )
@@ -208,6 +209,11 @@ module Io::Creat::Slipstick
         @img.rectangle( x_mm, y_mm, rw_mm, w_mm, @style )
         # front window
         @img.rectangle( x_mm + b_mm + s_mm, y_mm + ( w_mm - ww_mm ) / 2, h_mm, ww_mm, @style )
+        # instructions
+        off = 0.05
+        csr = InstructionsBackprint.new( @img, x_mm + rw_mm - h_mm + h_mm * off, y_mm + h_mm * off, h_mm * ( 1 - 2 * off ) )
+        csr.setw( w_mm - h_mm * 2 * off )
+        csr.render()
         # bending edges
         [ b_mm, s_mm, h_mm, s_mm ].each do | w |
           x_mm += w
