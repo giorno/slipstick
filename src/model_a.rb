@@ -205,19 +205,23 @@ module Io::Creat::Slipstick
         ww_mm = w_mm / 1.5
         rw_mm = 2 * h_mm + b_mm + 2 * s_mm # projected width of rectangle
         x_mm = @x_mm + ( @w_mm - rw_mm ) / 2
-        # contour
-        @img.rectangle( x_mm, y_mm, rw_mm, w_mm, @style )
-        # front window
-        @img.rectangle( x_mm + b_mm + s_mm, y_mm + ( w_mm - ww_mm ) / 2, h_mm, ww_mm, @style )
-        # instructions
-        off = 0.05
-        csr = InstructionsBackprint.new( @img, x_mm + rw_mm - h_mm + h_mm * off, y_mm + h_mm * off, h_mm * ( 1 - 2 * off ) )
-        csr.setw( w_mm - h_mm * 2 * off )
-        csr.render()
-        # bending edges
-        [ b_mm, s_mm, h_mm, s_mm ].each do | w |
-          x_mm += w
-          @img.pline( x_mm, y_mm, x_mm, y_mm + w_mm, @style, PATTERN_BEND )
+        if ( @layers & LAYER_FACE ) != 0
+          # instructions
+          off = 0.05
+          csr = InstructionsBackprint.new( @img, x_mm + rw_mm - h_mm + h_mm * off, y_mm + h_mm * off, h_mm * ( 1 - 2 * off ) )
+          csr.setw( w_mm - h_mm * 2 * off )
+          csr.render()
+        end
+        if ( @layers & LAYER_REVERSE ) != 0
+          # contour
+          @img.rectangle( x_mm, y_mm, rw_mm, w_mm, @style )
+          # front window
+          @img.rectangle( x_mm + b_mm + s_mm, y_mm + ( w_mm - ww_mm ) / 2, h_mm, ww_mm, @style )
+          # bending edges
+          [ b_mm, s_mm, h_mm, s_mm ].each do | w |
+            x_mm += w
+            @img.pline( x_mm, y_mm, x_mm, y_mm + w_mm, @style, PATTERN_BEND )
+          end
         end
       end
 
@@ -227,10 +231,10 @@ module Io::Creat::Slipstick
         @style = { :stroke_width => "0.1", :stroke => "#aaaaaa", :stroke_cap => "square", :fill => "none" }
         # stock lines are intentionally positioned upside down (in landscape)
         if ( @layers & LAYER_STOCK ) != 0
+          # both on same sheet?
+          rh_mm = @hu_mm + 2 * @t_mm + @h_mm + @hl_mm # height of rectangle
+          dir, y_mm = ( @layers & LAYER_FACE ) == 0 ? [ -1, @sh_mm - @y_mm - rh_mm ] : [ 1, @y_mm ]
           if ( @layers & LAYER_REVERSE ) != 0
-            # both on same sheet?
-            rh_mm = @hu_mm + 2 * @t_mm + @h_mm + @hl_mm # height of rectangle
-            dir, y_mm = ( @layers & LAYER_FACE ) == 0 ? [ -1, @sh_mm - @y_mm - rh_mm ] : [ 1, @y_mm ]
             # cutting guidelines for the stator
             #@img.rectangle( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm ), @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm, @style )
             @img.rectangle( @x_mm, y_mm, @w_mm, rh_mm, @style )
@@ -239,8 +243,6 @@ module Io::Creat::Slipstick
             @img.pline( @x_mm, y_mm + ( @hu_mm + @t_mm ), @x_mm + @w_mm, y_mm + ( @hu_mm + @t_mm ), @style, PATTERN_BEND )
             @img.pline( @x_mm, y_mm + ( @hu_mm + @t_mm + @h_mm ), @x_mm + @w_mm, y_mm + ( @hu_mm + @t_mm + @h_mm ), @style, PATTERN_BEND )
             @img.pline( @x_mm, y_mm + ( @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, y_mm + ( @hu_mm + 2 * @t_mm + @h_mm ), @style, PATTERN_BEND )
-            if dir < 0 then rh_mm = 0 end
-            render_cursor( y_mm + dir * ( rh_mm + @y_mm ), dir )
           end
           if ( @layers & LAYER_FACE ) != 0
             # branding texts
@@ -252,6 +254,8 @@ module Io::Creat::Slipstick
             # TODO refactor to inherit from Backprint
             qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
           end
+          if dir < 0 then rh_mm = 0 end
+          render_cursor( y_mm + dir * ( rh_mm + @y_mm ), dir )
         end
         # backprints
         @bprints.each do | bp |
