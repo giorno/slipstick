@@ -8,6 +8,7 @@ require_relative 'backprints/constants'
 require_relative 'backprints/conv'
 require_relative 'backprints/instr'
 require_relative 'backprints/log'
+require_relative 'backprints/pageno'
 require_relative 'backprints/scales'
 require_relative 'backprints/trigon'
 
@@ -133,6 +134,11 @@ module Io::Creat::Slipstick
             @bprints << cbp
             @bp_x_mm += @bp_border_mm / 2 + cbp.getw()
 
+          # page number
+          pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
+            pn.sett( 'STOCK + CURSOR (210 g/m²)' )
+            @bprints << pn
+
        end
 
         # sides of the slide
@@ -164,6 +170,11 @@ module Io::Creat::Slipstick
           bp_w_mm = w_m_mm + w_l_mm + w_s_mm + w_a_mm # width reserved for the 
           bp_gap_mm = 10 # space between conversion scales
           @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - bp_off_mm, bp_gap_mm, ConversionBackprint::LENGTHS )
+
+          # page number
+          pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
+            pn.sett( 'SLIDE (210 g/m²)' )
+            @bprints << pn
 
           # log scales
           strip = create_strip( @x_mm, @y_mm + @h_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
