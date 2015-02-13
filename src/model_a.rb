@@ -216,7 +216,7 @@ module Io::Creat::Slipstick
           # contour
           @img.rectangle( x_mm, y_mm, rw_mm, w_mm, @style )
           # front window
-          @img.rectangle( x_mm + b_mm + s_mm, y_mm + ( w_mm - ww_mm ) / 2, h_mm, ww_mm, @style )
+          @img.rectangle( x_mm + b_mm + s_mm, y_mm + ( w_mm - ww_mm ) / 2, h_mm, ww_mm, w_mm / 5, @style )
           # bending edges
           [ b_mm, s_mm, h_mm, s_mm ].each do | w |
             x_mm += w
