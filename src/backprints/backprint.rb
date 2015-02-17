@@ -11,7 +11,7 @@ module Io::Creat::Slipstick
     # back of the stock
     class Backprint < Styled
 
-      FONT_WH_RATIO = 0.45 # ratio between Slipstick Sans Mono Regular width and height
+      FONT_WH_RATIO = 0.48 # ratio between Slipstick Sans Mono Regular width and height
 
       public
       def initialize ( img, x_mm, y_mm, h_mm, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE] )
