@@ -142,7 +142,7 @@ module Io::Creat::Slipstick
        end
 
         # sides of the slide
-        if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) == 0 )
+        if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
 
           # temperature conversion scale
           bp_off_mm = 9 # offset of conversion scales from the edge of slide
@@ -247,7 +247,6 @@ module Io::Creat::Slipstick
           dir, y_mm = ( @layers & LAYER_FACE ) == 0 ? [ -1, @sh_mm - @y_mm - rh_mm ] : [ 1, @y_mm ]
           if ( @layers & LAYER_REVERSE ) != 0
             # cutting guidelines for the stator
-            #@img.rectangle( @x_mm, @sh_mm - ( @y_mm + @hu_mm + 2 * @t_mm + @h_mm + @hl_mm ), @w_mm, @hu_mm + 2 * @t_mm + @h_mm + @hl_mm, @style )
             @img.rectangle( @x_mm, y_mm, @w_mm, rh_mm, @style )
             # bending guidelines for the stator
             @img.pline( @x_mm, y_mm + @hu_mm, @x_mm + @w_mm, y_mm + @hu_mm, @style, PATTERN_BEND )
@@ -272,11 +271,12 @@ module Io::Creat::Slipstick
         @bprints.each do | bp |
           bp.render()
         end
-        if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
+        if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) != 0 )
           # cutting guidelines for the slipstick
-          @img.line( 0, @y_mm + @cs_mm, 297, @y_mm + @cs_mm, @style )
-          @img.pline( 0, @y_mm + @h_mm - @cs_mm, 297, @y_mm + @h_mm - @cs_mm, @style, PATTERN_BEND )
-          @img.line( 0, @y_mm + 2 * ( @h_mm - @cs_mm ), 297, @y_mm + 2 * ( @h_mm - @cs_mm ), @style )
+          y_mm = ( @layers & LAYER_FACE ) == 0 ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
+          @img.line( 0, y_mm + @cs_mm, 297, y_mm + @cs_mm, @style )
+          @img.pline( 0, y_mm + @h_mm - @cs_mm, 297, y_mm + @h_mm - @cs_mm, @style, PATTERN_BEND )
+          @img.line( 0, y_mm + 2 * ( @h_mm - @cs_mm ), 297, y_mm + 2 * ( @h_mm - @cs_mm ), @style )
         end
         # strips
         super( true )
