@@ -42,7 +42,7 @@ module Io::Creat::Slipstick
         @hu_mm = 22.0 # height of upper half of stator strip
         @hl_mm = 22.0 # height of lower half of stator strip
         @hs_mm = 18.0 # height of slipstick strip
-        @t_mm  = 2.0 # thickness of the slipstick
+        @t_mm  = 1.0 # thickness of the slipstick
         @sh_mm = @h_mm # sheet height
         @h_mm  = @hu_mm + @hl_mm + @hs_mm
         @x_mm  = 5.0
