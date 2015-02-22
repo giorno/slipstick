@@ -239,7 +239,7 @@ module Io::Creat::Slipstick
       # render strips and edges for cutting/bending
       public
       def render()
-        @style = { :stroke_width => "0.1", :stroke => "#aaaaaa", :stroke_cap => "square", :fill => "none" }
+        @style = { :stroke_width => "0.1", :stroke => "black", :stroke_cap => "square", :fill => "none" }
         # stock lines are intentionally positioned upside down (in landscape)
         if ( @layers & LAYER_STOCK ) != 0
           # both on same sheet?
