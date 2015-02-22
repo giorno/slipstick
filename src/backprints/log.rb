@@ -64,7 +64,7 @@ module Io::Creat::Slipstick::Backprints
         "\u00a0logₐ 1 = 0", # log of 1
         "\u00a0logₐ a = 1", # log of base
       ].each_with_index do | rule, index |
-        @img.text( @x_mm, @y_mm + ( 7 + index ) * @fs_mm, rule, @text_style.merge( { 'text-anchor' => 'begin' } ) )
+        @img.text( @x_mm, @y_mm + ( 7 + index * 1.4 ) * @fs_mm, rule, @text_style.merge( { 'text-anchor' => 'begin' } ) )
       end
     end
 
