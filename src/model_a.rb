@@ -28,7 +28,7 @@ module Io::Creat::Slipstick
       STYLE_BRAND   = { "font-size" => "2.4",
                         "font-family" => "Slipstick Sans Mono",
                         "font-weight" => "normal",
-                        "fill" => "#f57900",
+                        "fill" => "#102a87",
                         "text-anchor" => "middle" }
       # QR code style
       STYLE_QR      = { :fill => "black", :stroke_width => "0.01", :stroke => "black" }
@@ -256,7 +256,7 @@ module Io::Creat::Slipstick
           end
           if ( @layers & LAYER_FACE ) != 0
             # branding texts
-            @img.text( @x_mm + 174, @y_mm + 106, "creat.io MODEL A", STYLE_BRAND )
+            @img.text( @x_mm + 174, @y_mm + 104, "creat.io MODEL A", STYLE_BRAND )
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
