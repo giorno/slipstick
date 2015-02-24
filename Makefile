@@ -65,6 +65,13 @@ model_a :
 	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=build/model_a.pdf build/model_a_stock_face.pdf build/model_a_stock_reverse.pdf build/model_a_slide_face.pdf build/model_a_slide_reverse.pdf
 	@echo "Result PDF's are in directory 'build'"
 
+model_a_debug :
+	@echo "Generating debug (all layers) SVG's of Model A"
+	@src/model_a.rb stock both | xmllint --format - > build/model_a_stock_both.svg
+	@src/model_a.rb slide both | xmllint --format - > build/model_a_slide_both.svg
+	@echo "Result SVG's are in directory 'build', suffixed '_both.svg'"
+	@echo "Use 'ls -la build/*_both.svg' to list them"
+
 prerequisites : print_os check_ruby check_rasem check_xmllint check_inkscape check_gs
 
 prepare:
