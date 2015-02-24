@@ -177,7 +177,7 @@ module Io::Creat::Slipstick
             @bprints << pn
 
           # log scales
-          strip = create_strip( @x_mm, @y_mm + @h_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          strip = create_strip( @x_mm, @y_mm + @h_mm - @cs_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "x²", 0.5 )
               scale.set_params( 2 )
               scale.set_overflow( 4.0 )
