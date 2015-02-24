@@ -225,9 +225,16 @@ module Io::Creat::Slipstick
         end
         if ( @layers & LAYER_REVERSE ) != 0
           # contour
-          @img.rectangle( x_mm, y_mm, rw_mm, w_mm, @style )
-          # front window
-          @img.rectangle( x_mm + b_mm + s_mm, y_mm + ( w_mm - ww_mm ) / 2, h_mm, ww_mm, w_mm / 5, @style )
+          @img.pbegin()
+            @img.move( x_mm, y_mm )
+            @img.rline( x_mm + b_mm + s_mm, y_mm )
+            # circular cutout
+            @img.arc( x_mm + b_mm + s_mm + h_mm, y_mm, 0.75 * h_mm, "0,0" )
+            @img.rline( x_mm + rw_mm, y_mm )
+            @img.rline( x_mm + rw_mm, y_mm + w_mm )
+            @img.rline( x_mm, y_mm + w_mm )
+            @img.rline( x_mm, y_mm )
+          @img.pend( @style )
           # bending edges
           [ b_mm, s_mm, h_mm, s_mm ].each do | w |
             x_mm += w
