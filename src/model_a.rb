@@ -37,6 +37,7 @@ module Io::Creat::Slipstick
       public
       def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
         super()
+        @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
         @layers = layers
         @bprints = [] # backprints
         @hu_mm = 22.0 # height of upper half of stator strip
@@ -138,7 +139,6 @@ module Io::Creat::Slipstick
           pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
             pn.sett( 'STOCK + CURSOR (210 g/m²)' )
             @bprints << pn
-
        end
 
         # sides of the slide
@@ -263,6 +263,7 @@ module Io::Creat::Slipstick
             # QR code
             # TODO refactor to inherit from Backprint
             qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
+            @img.rtext( @x_mm + @w_mm - 5, @y_mm + @hl_mm + @t_mm + @h_mm / 2, -90, @version, STYLE_BRAND )
           end
           if dir < 0 then rh_mm = 0 end
           render_cursor( y_mm + dir * ( rh_mm + @y_mm ), dir )
