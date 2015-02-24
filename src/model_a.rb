@@ -281,10 +281,20 @@ module Io::Creat::Slipstick
         end
         if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) != 0 )
           # cutting guidelines for the slipstick
-          y_mm = ( @layers & LAYER_FACE ) == 0 ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
+          both = ( @layers & LAYER_FACE ) != 0
+          y_mm = !both ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
           @img.line( 0, y_mm + @cs_mm, 297, y_mm + @cs_mm, @style )
           @img.pline( 0, y_mm + @h_mm - @cs_mm, 297, y_mm + @h_mm - @cs_mm, @style, PATTERN_BEND )
           @img.line( 0, y_mm + 2 * ( @h_mm - @cs_mm ), 297, y_mm + 2 * ( @h_mm - @cs_mm ), @style )
+          # debugging mode, outline borders of area visible in the stock
+          if both
+            # power scales side
+            @img.line( 0, y_mm + @hu_mm, 297, y_mm + @hu_mm, @style )
+            @img.line( 0, y_mm + @hu_mm + @hs_mm, 297, y_mm + @hu_mm + @hs_mm, @style )
+            # decimal scales side
+            @img.line( 0, y_mm + @hu_mm + @h_mm - @cs_mm, 297, y_mm + @hu_mm + @h_mm - @cs_mm, @style )
+            @img.line( 0, y_mm + @hu_mm + @h_mm - @cs_mm + @hs_mm, 297, y_mm + @hu_mm + @h_mm - @cs_mm + @hs_mm, @style )
+          end
         end
         # strips
         super( true )
