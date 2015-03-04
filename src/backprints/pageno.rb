@@ -5,6 +5,7 @@ require_relative 'backprint'
 
 module Io::Creat::Slipstick::Backprints
 
+  # renders page number like feature on a printout
   class PageNoBackprint < Backprint
 
     public

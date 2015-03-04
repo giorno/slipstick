@@ -106,6 +106,7 @@ module Io::Creat::Slipstick::Backprints
 
   # collection of conversion scales manipulated as single object
   # positioned in the middle of horizontal range
+  # TODO move to another .rb file
   class ConversionBackprints
 
     public
