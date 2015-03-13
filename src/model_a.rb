@@ -43,13 +43,15 @@ module Io::Creat::Slipstick
         @hu_mm = 22.0 # height of upper half of stator strip
         @hl_mm = 22.0 # height of lower half of stator strip
         @hs_mm = 18.0 # height of slipstick strip
-        @t_mm  = 1.0 # thickness of the slipstick
+        @t_mm  = 1.5 # thickness of the slipstick
         @sh_mm = @h_mm # sheet height
         @h_mm  = @hu_mm + @hl_mm + @hs_mm
         @x_mm  = 5.0
         @y_mm  = 10.0
         @w_mm  = 287.0
         @b_mm  = 0.1 # bending radius (approximated)
+        @ct_mm = 2.0 # thickness of cursor
+        @cc_mm = 6.0 # compensation to add to cursor height
         @cs_mm = 0.5 # correction for slide height
 
         w_m_mm = 250.0
@@ -210,8 +212,8 @@ module Io::Creat::Slipstick
       def render_cursor ( y_mm, dir )
         w_mm = 40.0
         if dir == -1 then y_mm -= w_mm end
-        h_mm = @h_mm + @b_mm
-        s_mm = @t_mm + @b_mm
+        h_mm = @cc_mm + @h_mm + @b_mm
+        s_mm = @ct_mm + @b_mm
         b_mm = 10.0 # overlap
         ww_mm = w_mm / 1.5
         rw_mm = 2 * h_mm + b_mm + 2 * s_mm # projected width of rectangle
@@ -263,7 +265,7 @@ module Io::Creat::Slipstick
           end
           if ( @layers & LAYER_FACE ) != 0
             # branding texts
-            @img.text( @x_mm + 174, @y_mm + 104, "creat.io MODEL A", STYLE_BRAND )
+            @img.text( @x_mm + 174, @y_mm + 105, "creat.io MODEL A", STYLE_BRAND )
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
