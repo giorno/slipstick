@@ -64,10 +64,10 @@ module Io::Creat::Slipstick
         @img.rtext( @x_mm - 2 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "cosec = 1/sin", @text_style.merge( { "text-anchor" => "start" } ) )
         @img.text( @x_mm + @h_mm, @y_mm - @h_mm + @text_style["font-size"], "1 = sin² + cos²", @text_style.merge( { "text-anchor" => "end" } ) )
         # cute little graphs
-        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, -90, "sin", @text_style )
-        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, -90, "cos", @text_style )
-        graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::sin( a ) } )
-        graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::cos( a ) } )
+        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, -90, "cos", @text_style )
+        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, -90, "sin", @text_style )
+        graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::cos( a ) } )
+        graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::sin( a ) } )
 
         for i in 2..5
           @img.pbegin()
