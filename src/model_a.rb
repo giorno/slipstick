@@ -4,6 +4,7 @@
 
 require_relative 'qr'
 require_relative 'sheet'
+require_relative 'backprints/bu_scales'
 require_relative 'backprints/constants'
 require_relative 'backprints/conv'
 require_relative 'backprints/instr'
@@ -51,7 +52,7 @@ module Io::Creat::Slipstick
         @w_mm  = 287.0
         @b_mm  = 0.1 # bending radius (approximated)
         @ct_mm = 2.0 # thickness of cursor
-        @cc_mm = 2.0 # compensation to add to cursor height
+        @cc_mm = 1.5 # compensation to add to cursor height
         @cs_mm = 0.5 # correction for slide height
 
         w_m_mm = 250.0
@@ -238,6 +239,9 @@ module Io::Creat::Slipstick
           logo_w_mm = 17
           logo_h_mm = 18 * logo_w_mm / 15
           @img.import( 'logo.svg', x_mm + b_mm + s_mm + ( h_mm + logo_h_mm ) / 2, y_mm + w_mm - 1.37 * logo_w_mm, logo_w_mm, logo_h_mm, 90 )
+          # mini-scales
+          BottomUpCmScale.new( @img, x_mm + b_mm + s_mm + h_mm, y_mm + w_mm, w_mm - 5, 5 ).render()
+          BottomUpInchScale.new( @img, x_mm + b_mm + s_mm, y_mm + w_mm, w_mm - 5, 5 ).render()
           if ( @layers & LAYER_REVERSE ) == 0
             # bending edges
             [ b_mm, s_mm, h_mm, s_mm ].each do | w |
