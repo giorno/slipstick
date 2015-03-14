@@ -51,7 +51,7 @@ module Io::Creat::Slipstick
         @w_mm  = 287.0
         @b_mm  = 0.1 # bending radius (approximated)
         @ct_mm = 2.0 # thickness of cursor
-        @cc_mm = 6.0 # compensation to add to cursor height
+        @cc_mm = 2.0 # compensation to add to cursor height
         @cs_mm = 0.5 # correction for slide height
 
         w_m_mm = 250.0
@@ -214,8 +214,7 @@ module Io::Creat::Slipstick
         if dir == -1 then y_mm -= w_mm end
         h_mm = @cc_mm + @h_mm + @b_mm
         s_mm = @ct_mm + @b_mm
-        b_mm = 10.0 # overlap
-        ww_mm = w_mm / 1.5
+        b_mm = 15.0 # overlap
         rw_mm = 2 * h_mm + b_mm + 2 * s_mm # projected width of rectangle
         x_mm = @x_mm + ( @w_mm - rw_mm ) / 2
         if ( @layers & LAYER_FACE ) != 0
@@ -224,8 +223,6 @@ module Io::Creat::Slipstick
           csr = InstructionsBackprint.new( @img, x_mm + rw_mm - h_mm + h_mm * off, y_mm + h_mm * off, h_mm * ( 1 - 2 * off ) )
           csr.setw( w_mm - h_mm * 2 * off )
           csr.render()
-        end
-        if ( @layers & LAYER_REVERSE ) != 0
           # contour
           @img.pbegin()
             @img.move( x_mm, y_mm )
@@ -237,10 +234,19 @@ module Io::Creat::Slipstick
             @img.rline( x_mm, y_mm + w_mm )
             @img.rline( x_mm, y_mm )
           @img.pend( @style )
-          # bending edges
-          [ b_mm, s_mm, h_mm, s_mm ].each do | w |
-            x_mm += w
-            @img.pline( x_mm, y_mm, x_mm, y_mm + w_mm, @style, PATTERN_BEND )
+          if ( @layers & LAYER_REVERSE ) == 0
+            # bending edges
+            [ b_mm, s_mm, h_mm, s_mm ].each do | w |
+              x_mm += w
+              @img.pline( x_mm, y_mm, x_mm, y_mm + 2.0, @style )
+              @img.pline( x_mm, y_mm + w_mm, x_mm, y_mm + w_mm - 2.0, @style )
+            end
+          else # debug mode
+            # bending edges
+            [ b_mm, s_mm, h_mm, s_mm ].each do | w |
+              x_mm += w
+              @img.pline( x_mm, y_mm, x_mm, y_mm + w_mm, @style, PATTERN_BEND )
+            end
           end
         end
       end
@@ -255,8 +261,6 @@ module Io::Creat::Slipstick
           rh_mm = @hu_mm + 2 * @t_mm + @h_mm + @hl_mm # height of rectangle
           dir, y_mm = ( @layers & LAYER_FACE ) == 0 ? [ -1, @sh_mm - @y_mm - rh_mm ] : [ 1, @y_mm ]
           if ( @layers & LAYER_REVERSE ) != 0
-            # cutting guidelines for the stator
-            @img.rectangle( @x_mm, y_mm, @w_mm, rh_mm, @style )
             # bending guidelines for the stator
             @img.pline( @x_mm, y_mm + @hu_mm, @x_mm + @w_mm, y_mm + @hu_mm, @style, PATTERN_BEND )
             @img.pline( @x_mm, y_mm + ( @hu_mm + @t_mm ), @x_mm + @w_mm, y_mm + ( @hu_mm + @t_mm ), @style, PATTERN_BEND )
@@ -264,6 +268,8 @@ module Io::Creat::Slipstick
             @img.pline( @x_mm, y_mm + ( @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, y_mm + ( @hu_mm + 2 * @t_mm + @h_mm ), @style, PATTERN_BEND )
           end
           if ( @layers & LAYER_FACE ) != 0
+            # cutting guidelines for the stator
+            @img.rectangle( @x_mm, y_mm, @w_mm, rh_mm, @style )
             # branding texts
             @img.text( @x_mm + 174, @y_mm + 105, "creat.io MODEL A", STYLE_BRAND )
             bottom_off_mm = 15.0

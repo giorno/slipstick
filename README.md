@@ -48,4 +48,6 @@ In the project directory:
 make
 ```
 
+Size scale for PDF printing: 99.6% (use Adobe Reader)
+
 PDF export will fail if prerequisite applications are not installed. Exported PDF's are put in directory `build` (created in the process).
