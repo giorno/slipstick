@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="15mm"
+   height="18mm"
+   viewBox="0 0 53.149606 63.779527"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91pre4 r13712"
+   sodipodi:docname="hornedwheel.plain.svg">
+  <g
+     inkscape:label="Layer1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="scale(0.352782) translate(0,-988.58268)">
+    <path
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.4619503;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 4.2568049,990.53494 a 24.36584,24.36584 0 0 0 7.7401901,9.74616 24.36584,24.36584 0 0 0 -9.7881201,19.4924 24.36584,24.36584 0 0 0 4.04886,13.4255 l -5.52679002,5.5268 6.89163022,6.8916 5.5286599,-5.5287 a 24.36584,24.36584 0 0 0 2.54487,1.4559 l -2.02671,7.564 9.41421,2.5226 2.02698,-7.5651 a 24.36584,24.36584 0 0 0 1.46422,0.073 24.36584,24.36584 0 0 0 1.46987,-0.052 l 2.02134,7.5438 9.4142,-2.5225 -2.02161,-7.5447 a 24.36584,24.36584 0 0 0 2.54165,-1.4733 l 5.52679,5.5268 6.89162,-6.8917 -5.52866,-5.5286 a 24.36584,24.36584 0 0 0 4.05073,-13.4236 24.36584,24.36584 0 0 0 -9.81148,-19.5045 24.36584,24.36584 0 0 0 7.74502,-9.73408 l -11.42372,0 a 14.619503,14.619503 0 0 1 -10.87575,4.87297 14.619503,14.619503 0 0 1 -10.87305,-4.87297 l -11.4449501,0 z m 19.8813801,14.82596 0,10.1924 -8.82378,-5.0943 a 14.619503,14.619503 0 0 1 8.82378,-5.0981 z m 4.87324,0.014 a 14.619503,14.619503 0 0 1 8.81841,5.0871 l -8.81841,5.0913 0,-10.1784 z m 11.25718,9.306 a 14.619503,14.619503 0 0 1 0.92565,5.0927 14.619503,14.619503 0 0 1 -0.93317,5.0884 l -8.81331,-5.0884 8.82083,-5.0927 z m -27.38007,0 8.8133,5.0884 -8.82083,5.0924 a 14.619503,14.619503 0 0 1 -0.92565,-5.0927 14.619503,14.619503 0 0 1 0.93318,-5.0881 z m 11.24965,9.3086 0,10.1781 a 14.619503,14.619503 0 0 1 -8.81841,-5.087 l 8.81841,-5.0911 z m 4.87324,0 8.82352,5.0943 a 14.619503,14.619503 0 0 1 -8.82352,5.0978 l 0,-10.1921 z"
+       id="path4136"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

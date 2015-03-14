@@ -17,6 +17,7 @@ module Io
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg viewBox="0 0 #{width} #{height}" width="#{width}mm" height="#{height}mm" version="1.1"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
   xmlns="http://www.w3.org/2000/svg">
         HEADER
         @in_path = false # as good place as any
@@ -92,6 +93,13 @@ module Io
           @output << "</tspan>"
         end
         @output << "</text>"
+      end
+
+      # embed external SVG at specified position
+      public
+      def import ( path, x, y, w, h, deg = 0 )
+        # hack to bypass Inkscape resistance to accept mm units
+        @output << %Q{<use x="#{x}" y="#{y}" width="#{w}" height="#{h*2}" xlink:href="#{path}#layer1" transform="rotate(#{deg}, #{x}, #{y})"/>}
       end
 
     end # Svg

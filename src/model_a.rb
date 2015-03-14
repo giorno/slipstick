@@ -234,6 +234,10 @@ module Io::Creat::Slipstick
             @img.rline( x_mm, y_mm + w_mm )
             @img.rline( x_mm, y_mm )
           @img.pend( @style )
+          # logo
+          logo_w_mm = 17
+          logo_h_mm = 18 * logo_w_mm / 15
+          @img.import( 'logo.svg', x_mm + b_mm + s_mm + ( h_mm + logo_h_mm ) / 2, y_mm + w_mm - 1.37 * logo_w_mm, logo_w_mm, logo_h_mm, 90 )
           if ( @layers & LAYER_REVERSE ) == 0
             # bending edges
             [ b_mm, s_mm, h_mm, s_mm ].each do | w |
