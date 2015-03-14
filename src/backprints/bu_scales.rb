@@ -79,7 +79,7 @@ module Io::Creat::Slipstick::Backprints
       setparams( 0.1, FODDERS, false, 10, 'cm' )
     end
 
-  end
+  end # BottomUpLinearScale
 
   class BottomUpInchScale < BottomUpLinearScale
     FODDERS = { 1.0 => 0, 0.5 => 2, 0.25 => 3, 0.125 => 4, 0.0625 => 5 }
@@ -89,7 +89,7 @@ module Io::Creat::Slipstick::Backprints
       setparams( 0.0625, FODDERS, true, 25.4, 'inch' )
     end
 
-  end
+  end # BottomUpInchScale
 
 end # Io::Creat::Slipstick::Backprints
 
