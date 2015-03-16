@@ -58,17 +58,22 @@ model_a :
 	@src/model_a.rb stock reverse | xmllint --format - > build/model_a_stock_reverse.svg 
 	@src/model_a.rb slide face | xmllint --format - > build/model_a_slide_face.svg
 	@src/model_a.rb slide reverse | xmllint --format - > build/model_a_slide_reverse.svg 
+	@src/model_a.rb transp face | xmllint --format - > build/model_a_transp_face.svg
+	@src/model_a.rb transp reverse | xmllint --format - > build/model_a_transp_reverse.svg 
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_stock_face.pdf $(shell pwd)/build/model_a_stock_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_stock_reverse.pdf $(shell pwd)/build/model_a_stock_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_slide_face.pdf $(shell pwd)/build/model_a_slide_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_slide_reverse.pdf $(shell pwd)/build/model_a_slide_reverse.svg
-	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=build/model_a.pdf build/model_a_stock_face.pdf build/model_a_stock_reverse.pdf build/model_a_slide_face.pdf build/model_a_slide_reverse.pdf
+	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_transp_face.pdf $(shell pwd)/build/model_a_transp_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_transp_reverse.pdf $(shell pwd)/build/model_a_transp_reverse.svg
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/model_a.pdf build/model_a_stock_face.pdf build/model_a_stock_reverse.pdf build/model_a_slide_face.pdf build/model_a_slide_reverse.pdf build/model_a_transp_face.pdf build/model_a_transp_reverse.pdf
 	@echo "Result PDF's are in directory 'build'"
 
 model_a_debug :
 	@echo "Generating debug (all layers) SVG's of Model A"
 	@src/model_a.rb stock both | xmllint --format - > build/model_a_stock_both.svg
 	@src/model_a.rb slide both | xmllint --format - > build/model_a_slide_both.svg
+	@src/model_a.rb transp both | xmllint --format - > build/model_a_transp_both.svg
 	@echo "Result SVG's are in directory 'build', suffixed '_both.svg'"
 	@echo "Use 'ls -la build/*_both.svg' to list them"
 

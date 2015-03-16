@@ -21,9 +21,11 @@ module Io::Creat::Slipstick
     # model A inspired by layout of LOGAREX 27403-II
     class A < Io::Creat::Slipstick::Layout::Sheet
       # layers to generate
-      LAYER_FACE    = 0x1 # front side (page) of a printout list
-      LAYER_REVERSE = 0x2 # reverse side of the printout`
-      LAYER_STOCK   = 0x4 # generate stator if set, slide if not set
+      LAYER_FACE    = 0x1  # front side (page) of printout sheet
+      LAYER_REVERSE = 0x2  # reverse side of printout
+      LAYER_STOCK   = 0x4  # generate stator and cursor elements
+      LAYER_SLIDE   = 0x8  # generate slide element
+      LAYER_TRANSP  = 0x10 # gneerate transparent elements
 
       # branding/version texts on the stock face
       STYLE_BRAND   = { "font-size" => "2.4",
@@ -36,8 +38,9 @@ module Io::Creat::Slipstick
       PATTERN_BEND  = "1, 1" # line pattern for bent edges
 
       public
-      def initialize ( layers = LAYER_FACE | LAYER_REVERSE )
+      def initialize ( layers )
         super()
+        raise "Layer must be one of LAYER_STOCK, LAYER_SLIDE or LAYER_TRANSP" unless ( layers & 0x1c ) != 0
         @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
         @layers = layers
         @bprints = [] # backprints
@@ -46,6 +49,7 @@ module Io::Creat::Slipstick
         @hs_mm = 18.0 # height of slipstick strip
         @t_mm  = 1.5 # thickness of the slipstick
         @sh_mm = @h_mm # sheet height
+        @sw_mm = @w_mm # sheet width
         @h_mm  = @hu_mm + @hl_mm + @hs_mm
         @x_mm  = 5.0
         @y_mm  = 10.0
@@ -54,6 +58,8 @@ module Io::Creat::Slipstick
         @ct_mm = 2.0 # thickness of cursor
         @cc_mm = 1.5 # compensation to add to cursor height
         @cs_mm = 0.5 # correction for slide height
+        @cw_mm = 40.0 # cursor width
+        @ch_mm = @cc_mm + @h_mm + @b_mm # cursor height
 
         w_m_mm = 250.0
         w_l_mm = 7.0
@@ -145,7 +151,7 @@ module Io::Creat::Slipstick
        end
 
         # sides of the slide
-        if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
+        if ( ( @layers & LAYER_SLIDE ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
 
           # temperature conversion scale
           bp_off_mm = 9 # offset of conversion scales from the edge of slide
@@ -198,6 +204,15 @@ module Io::Creat::Slipstick
           @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - @cs_mm + bp_off_mm, bp_gap_mm, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
           @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + 2 * ( @h_mm - @cs_mm ) - bp_off_mm, bp_gap_mm, ConversionBackprint::VOLUMES )
         end
+
+        # page number only on transparent elements
+        if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
+          # page number
+          pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
+            pn.sett( 'TRANSPARENT (tracing paper)' )
+            @bprints << pn
+       end
+
       end
       
       # allows to create strip with absolute positioning
@@ -211,50 +226,50 @@ module Io::Creat::Slipstick
 
       private
       def render_cursor ( y_mm, dir )
-        w_mm = 40.0
-        if dir == -1 then y_mm -= w_mm end
-        h_mm = @cc_mm + @h_mm + @b_mm
+        if dir == -1 then y_mm -= @cw_mm end
         s_mm = @ct_mm + @b_mm
         b_mm = 15.0 # overlap
-        rw_mm = 2 * h_mm + b_mm + 2 * s_mm # projected width of rectangle
+        rw_mm = 2 * @ch_mm + b_mm + 2 * s_mm # projected width of rectangle
         x_mm = @x_mm + ( @w_mm - rw_mm ) / 2
         if ( @layers & LAYER_FACE ) != 0
           # instructions
           off = 0.05
-          csr = InstructionsBackprint.new( @img, x_mm + rw_mm - h_mm + h_mm * off, y_mm + h_mm * off, h_mm * ( 1 - 2 * off ) )
-          csr.setw( w_mm - h_mm * 2 * off )
+          csr = InstructionsBackprint.new( @img, x_mm + rw_mm - @ch_mm + @ch_mm * off, y_mm + @ch_mm * off, @ch_mm * ( 1 - 2 * off ) )
+          csr.setw( @cw_mm - @ch_mm * 2 * off )
           csr.render()
           # contour
           @img.pbegin()
             @img.move( x_mm, y_mm )
             @img.rline( x_mm + b_mm + s_mm, y_mm )
             # circular cutout
-            @img.arc( x_mm + b_mm + s_mm + h_mm, y_mm, 0.75 * h_mm, "0,0" )
+            @img.arc( x_mm + b_mm + s_mm + @ch_mm, y_mm, 0.75 * @ch_mm, "0,0" )
             @img.rline( x_mm + rw_mm, y_mm )
-            @img.rline( x_mm + rw_mm, y_mm + w_mm )
-            @img.rline( x_mm, y_mm + w_mm )
+            @img.rline( x_mm + rw_mm, y_mm + @cw_mm )
+            @img.rline( x_mm, y_mm + @cw_mm )
             @img.rline( x_mm, y_mm )
           @img.pend( @style )
           # logo
           logo_w_mm = 17
           logo_h_mm = 18 * logo_w_mm / 15
-          @img.import( 'logo.svg', x_mm + b_mm + s_mm + ( h_mm + logo_h_mm ) / 2, y_mm + w_mm - 1.37 * logo_w_mm, logo_w_mm, logo_h_mm, 90 )
+          @img.import( 'logo.svg', x_mm + b_mm + s_mm + ( @ch_mm + logo_h_mm ) / 2, y_mm + @cw_mm - 1.37 * logo_w_mm, logo_w_mm, logo_h_mm, 90 )
           # mini-scales
-          BottomUpCmScale.new( @img, x_mm + b_mm + s_mm + h_mm, y_mm + w_mm, w_mm - 5, 5 ).render()
-          BottomUpInchScale.new( @img, x_mm + b_mm + s_mm, y_mm + w_mm, w_mm - 5, 5 ).render()
+          BottomUpCmScale.new( @img, x_mm + b_mm + s_mm + @ch_mm, y_mm + @cw_mm, @cw_mm - 5, 5 ).render()
+          BottomUpInchScale.new( @img, x_mm + b_mm + s_mm, y_mm + @cw_mm, @cw_mm - 5, 5 ).render()
           if ( @layers & LAYER_REVERSE ) == 0
             # bending edges
-            [ b_mm, s_mm, h_mm, s_mm ].each do | w |
+            [ b_mm, s_mm, @ch_mm, s_mm ].each do | w |
               x_mm += w
               @img.pline( x_mm, y_mm, x_mm, y_mm + 2.0, @style )
-              @img.pline( x_mm, y_mm + w_mm, x_mm, y_mm + w_mm - 2.0, @style )
+              @img.pline( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm - 2.0, @style )
             end
-          else # debug mode
-            # bending edges
-            [ b_mm, s_mm, h_mm, s_mm ].each do | w |
-              x_mm += w
-              @img.pline( x_mm, y_mm, x_mm, y_mm + w_mm, @style, PATTERN_BEND )
-            end
+          end
+        end
+        # debug mode
+        if ( @layers & LAYER_REVERSE ) != 0
+          # bending edges
+          [ b_mm, s_mm, @ch_mm, s_mm ].each do | w |
+            x_mm += w
+            @img.pline( x_mm, y_mm, x_mm, y_mm + @cw_mm, @style, PATTERN_BEND )
           end
         end
       end
@@ -263,7 +278,7 @@ module Io::Creat::Slipstick
       public
       def render()
         @style = { :stroke_width => "0.1", :stroke => "black", :stroke_cap => "square", :fill => "none" }
-        # stock lines are intentionally positioned upside down (in landscape)
+        # [stock] lines are intentionally positioned upside down (in landscape)
         if ( @layers & LAYER_STOCK ) != 0
           # both on same sheet?
           rh_mm = @hu_mm + 2 * @t_mm + @h_mm + @hl_mm # height of rectangle
@@ -291,11 +306,9 @@ module Io::Creat::Slipstick
           if dir < 0 then rh_mm = 0 end
           render_cursor( y_mm + dir * ( rh_mm + @y_mm ), dir )
         end
-        # backprints
-        @bprints.each do | bp |
-          bp.render()
-        end
-        if ( ( @layers & LAYER_STOCK ) == 0 ) and ( ( @layers & LAYER_REVERSE ) != 0 )
+
+        # [slide] element
+        if ( ( @layers & LAYER_SLIDE ) != 0 ) and ( ( @layers & LAYER_REVERSE ) != 0 )
           # cutting guidelines for the slipstick
           both = ( @layers & LAYER_FACE ) != 0
           y_mm = !both ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
@@ -312,7 +325,20 @@ module Io::Creat::Slipstick
             @img.line( 0, y_mm + @hu_mm + @h_mm - @cs_mm + @hs_mm, 297, y_mm + @hu_mm + @h_mm - @cs_mm + @hs_mm, @style )
           end
         end
-        # strips
+
+        # [transparent] elements cutting lines
+        if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
+          @img.line( 0, @y_mm, @sw_mm, @y_mm, @style )
+          @img.line( 0, @y_mm + @h_mm, @sw_mm, @y_mm + @h_mm, @style )
+          @img.rectangle( ( @sw_mm - @ch_mm ) / 2, 2 * @y_mm + @h_mm, @ch_mm, @cw_mm, @style )
+        end
+
+        # backprints
+        @bprints.each do | bp |
+          bp.render()
+        end
+
+        # strips of scales
         super( true )
         @img.close()
         return @img.output
@@ -324,7 +350,10 @@ module Io::Creat::Slipstick
 end # Io::Creat::Slipstick
 
 def usage ( )
-  $stderr.puts "Usage: #{$0} <stator|slide>> [both|face|reverse]\n\nOutputs SVG for requested side of the slide rule printout."
+  $stderr.puts "Usage: #{$0} <stator|slide|transp> [both|face|reverse]\n\nOutputs SVG for given element and printout side.\n"
+  $stderr.puts " stator .. stock element of slide rule (static)"
+  $stderr.puts " slide  .. sliding element of slide rule"
+  $stderr.puts " transp .. transparent elements (tracing paper)"
 end
 
 layers = 0
@@ -336,8 +365,12 @@ end
 if ARGV.length >= 1
   if ARGV[0] == 'stock'
     layers = Io::Creat::Slipstick::Model::A::LAYER_STOCK
-  elsif ARGV[0] != 'slide'
-    usage( )
+  elsif ARGV[0] == 'slide'
+    layers = Io::Creat::Slipstick::Model::A::LAYER_SLIDE
+  elsif ARGV[0] == 'transp'
+    layers = Io::Creat::Slipstick::Model::A::LAYER_TRANSP
+  else
+    usage
   end
 end
 
@@ -349,7 +382,7 @@ if ARGV.length > 1
   elsif ARGV[1] == 'both'
     layers |= Io::Creat::Slipstick::Model::A::LAYER_FACE | Io::Creat::Slipstick::Model::A::LAYER_REVERSE
   else
-    $stderr.puts "Usage: #{$0} <stator|slide>> [both|face|reverse]\n\nOutputs SVG for requested side of the slide rule printout."
+    usage
     exit
   end
 end
