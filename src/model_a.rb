@@ -41,6 +41,7 @@ module Io::Creat::Slipstick
       def initialize ( layers )
         super()
         raise "Layer must be one of LAYER_STOCK, LAYER_SLIDE or LAYER_TRANSP" unless ( layers & 0x1c ) != 0
+        @img.pattern( 'glued', 2 )
         @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
         @layers = layers
         @bprints = [] # backprints
@@ -255,6 +256,7 @@ module Io::Creat::Slipstick
           # mini-scales
           BottomUpCmScale.new( @img, x_mm + b_mm + s_mm + @ch_mm, y_mm + @cw_mm, @cw_mm - 5, 5 ).render()
           BottomUpInchScale.new( @img, x_mm + b_mm + s_mm, y_mm + @cw_mm, @cw_mm - 5, 5 ).render()
+          @img.rectangle( x_mm, y_mm, b_mm, @cw_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
           if ( @layers & LAYER_REVERSE ) == 0
             # bending edges
             [ b_mm, s_mm, @ch_mm, s_mm ].each do | w |
@@ -264,9 +266,21 @@ module Io::Creat::Slipstick
             end
           end
         end
-        # debug mode
         if ( @layers & LAYER_REVERSE ) != 0
-          # bending edges
+          # reset
+          x_mm = @x_mm + ( @w_mm - rw_mm ) / 2
+          gy_mm = dir != -1 ? y_mm : y_mm + @cw_mm
+          # see-through edge of cursor
+          @img.pbegin( )
+            @img.move( x_mm + b_mm + s_mm, gy_mm )
+            @img.arc( x_mm + b_mm + s_mm + @ch_mm, gy_mm, 0.75 * @ch_mm, dir != -1 ? "0,0" : "0,1" )
+            @img.rline( x_mm + b_mm + s_mm + @ch_mm, gy_mm + dir * 16 )
+            @img.rline( x_mm + b_mm + s_mm, gy_mm + dir * 16 )
+            @img.rline( x_mm + b_mm + s_mm, gy_mm )
+          @img.pend( @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+          # invisible part of cursor transparent element
+          @img.rectangle( x_mm + b_mm + s_mm, y_mm + ( dir == -1 ? 2 : @cw_mm - 6 ), @ch_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+          # debug mode bending edges
           [ b_mm, s_mm, @ch_mm, s_mm ].each do | w |
             x_mm += w
             @img.pline( x_mm, y_mm, x_mm, y_mm + @cw_mm, @style, PATTERN_BEND )
@@ -289,6 +303,11 @@ module Io::Creat::Slipstick
             @img.pline( @x_mm, y_mm + ( @hu_mm + @t_mm ), @x_mm + @w_mm, y_mm + ( @hu_mm + @t_mm ), @style, PATTERN_BEND )
             @img.pline( @x_mm, y_mm + ( @hu_mm + @t_mm + @h_mm ), @x_mm + @w_mm, y_mm + ( @hu_mm + @t_mm + @h_mm ), @style, PATTERN_BEND )
             @img.pline( @x_mm, y_mm + ( @hu_mm + 2 * @t_mm + @h_mm ), @x_mm + @w_mm, y_mm + ( @hu_mm + 2 * @t_mm + @h_mm ), @style, PATTERN_BEND )
+            # strengthened back glue area
+            @img.rectangle( @x_mm, y_mm + @hu_mm + @t_mm, @w_mm, @h_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+            # transparent window glue area
+            @img.rectangle( @x_mm, y_mm + 1, @w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+            @img.rectangle( @x_mm, y_mm + rh_mm - 5, @w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
           end
           if ( @layers & LAYER_FACE ) != 0
             # cutting guidelines for the stator
