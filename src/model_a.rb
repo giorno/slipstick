@@ -334,7 +334,7 @@ module Io::Creat::Slipstick
           @img.line( 0, @y_mm + @h_mm, @sw_mm, @y_mm + @h_mm, style )
           # cursor part
           x_mm = ( @sw_mm - @ch_mm ) / 2
-          y_mm = 2 * @y_mm + @h_mm
+          y_mm = 3 * @y_mm + @h_mm
           @img.line( x_mm, y_mm, x_mm - @hint_mm, y_mm, style )
           @img.line( x_mm, y_mm, x_mm, y_mm - @hint_mm, style )
           @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm + @hint_mm, y_mm, style )
@@ -342,7 +342,8 @@ module Io::Creat::Slipstick
           @img.line( x_mm - @hint_mm, y_mm + @cw_mm, x_mm + @ch_mm + @hint_mm, y_mm + @cw_mm, style )
           @img.line( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm + @hint_mm, style )
           @img.line( x_mm + @ch_mm, y_mm + @cw_mm, x_mm + @ch_mm, y_mm + @cw_mm + @hint_mm, style )
-          #@img.rectangle( ( @sw_mm - @ch_mm ) / 2, 2 * @y_mm + @h_mm, @ch_mm, @cw_mm, style )
+          @img.text( x_mm + @ch_mm / 2, y_mm + @cw_mm + 5, "CURSOR W%gmm H%gmm" % [ @ch_mm, @cw_mm ], STYLE_BRAND )
+          @img.text( @sw_mm / 2, @y_mm + @h_mm + 5, "STOCK W%gmm H%gmm" % [ @sw_mm, @h_mm ], STYLE_BRAND )
         end
 
         # backprints
