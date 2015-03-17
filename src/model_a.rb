@@ -41,7 +41,7 @@ module Io::Creat::Slipstick
       def initialize ( layers )
         super()
         raise "Layer must be one of LAYER_STOCK, LAYER_SLIDE or LAYER_TRANSP" unless ( layers & 0x1c ) != 0
-        @img.pattern( 'glued', 2 )
+        @img.pattern( 'glued', 3 )
         @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
         @layers = layers
         @bprints = [] # backprints

@@ -29,7 +29,7 @@ module Io
         @output << %Q{<defs>}
         @output << %Q{<pattern id="#{name}" patternUnits="userSpaceOnUse" width="#{size}" height="#{size}">}
         @output << %Q{<path d="M-1,1 l2,-2 M0,#{size} l#{size},-#{size} M#{size - 1},#{size + 1} l2,-2}
-        @output << %Q{ M1,-1 l#{size},#{size} M#{size},#{size} l-2,-2 M1,#{size + 1} l-2,-2"}
+        @output << %Q{ M#{size},#{size} l-#{size},-#{size} M1,#{size + 1} l-2,-2"}
         @output << %Q{ style="stroke: black; stroke-width: 0.02"/>}
         @output << %Q{</pattern>}
         @output << %Q{</defs>}
