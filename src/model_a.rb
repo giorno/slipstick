@@ -277,7 +277,7 @@ module Io::Creat::Slipstick
       # render strips and edges for cutting/bending
       public
       def render()
-        @style = { :stroke_width => "0.1", :stroke => "black", :stroke_cap => "square", :fill => "none" }
+        @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
         # [stock] lines are intentionally positioned upside down (in landscape)
         if ( @layers & LAYER_STOCK ) != 0
           # both on same sheet?
@@ -328,9 +328,10 @@ module Io::Creat::Slipstick
 
         # [transparent] elements cutting lines
         if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
-          @img.line( 0, @y_mm, @sw_mm, @y_mm, @style )
-          @img.line( 0, @y_mm + @h_mm, @sw_mm, @y_mm + @h_mm, @style )
-          @img.rectangle( ( @sw_mm - @ch_mm ) / 2, 2 * @y_mm + @h_mm, @ch_mm, @cw_mm, @style )
+          style = @style.merge( { :stroke_width => @style[:stroke_width] * 2 } )
+          @img.line( 0, @y_mm, @sw_mm, @y_mm, style )
+          @img.line( 0, @y_mm + @h_mm, @sw_mm, @y_mm + @h_mm, style )
+          @img.rectangle( ( @sw_mm - @ch_mm ) / 2, 2 * @y_mm + @h_mm, @ch_mm, @cw_mm, style )
         end
 
         # backprints
