@@ -60,7 +60,7 @@ module Io::Creat::Slipstick
         @cs_mm = 0.5 # correction for slide height
         @cw_mm = 40.0 # cursor width
         @ch_mm = @cc_mm + @h_mm + @b_mm # cursor height
-
+        @hint_mm = 2.0 # bending/cutting edges hints (incomplete cut lines)
         w_m_mm = 250.0
         w_l_mm = 7.0
         w_s_mm = 23.0
@@ -259,8 +259,8 @@ module Io::Creat::Slipstick
             # bending edges
             [ b_mm, s_mm, @ch_mm, s_mm ].each do | w |
               x_mm += w
-              @img.pline( x_mm, y_mm, x_mm, y_mm + 2.0, @style )
-              @img.pline( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm - 2.0, @style )
+              @img.pline( x_mm, y_mm, x_mm, y_mm + @hint_mm, @style )
+              @img.pline( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm - @hint_mm, @style )
             end
           end
         end
@@ -329,9 +329,20 @@ module Io::Creat::Slipstick
         # [transparent] elements cutting lines
         if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           style = @style.merge( { :stroke_width => @style[:stroke_width] * 2 } )
+          # stock part
           @img.line( 0, @y_mm, @sw_mm, @y_mm, style )
           @img.line( 0, @y_mm + @h_mm, @sw_mm, @y_mm + @h_mm, style )
-          @img.rectangle( ( @sw_mm - @ch_mm ) / 2, 2 * @y_mm + @h_mm, @ch_mm, @cw_mm, style )
+          # cursor part
+          x_mm = ( @sw_mm - @ch_mm ) / 2
+          y_mm = 2 * @y_mm + @h_mm
+          @img.line( x_mm, y_mm, x_mm - @hint_mm, y_mm, style )
+          @img.line( x_mm, y_mm, x_mm, y_mm - @hint_mm, style )
+          @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm + @hint_mm, y_mm, style )
+          @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm, y_mm - @hint_mm, style )
+          @img.line( x_mm - @hint_mm, y_mm + @cw_mm, x_mm + @ch_mm + @hint_mm, y_mm + @cw_mm, style )
+          @img.line( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm + @hint_mm, style )
+          @img.line( x_mm + @ch_mm, y_mm + @cw_mm, x_mm + @ch_mm, y_mm + @cw_mm + @hint_mm, style )
+          #@img.rectangle( ( @sw_mm - @ch_mm ) / 2, 2 * @y_mm + @h_mm, @ch_mm, @cw_mm, style )
         end
 
         # backprints
