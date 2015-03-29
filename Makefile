@@ -1,4 +1,4 @@
-.PHONY: fonts
+.PHONY: fonts tex
 
 OS=$(shell uname -s)
 ifeq ($(OS),Darwin)
@@ -7,7 +7,7 @@ else
 	INKSCAPE=$(shell which inkscape 2> /dev/null)
 endif
 
-all : prerequisites prepare fonts model_a
+all : prerequisites prepare fonts model_a tex
 
 clean :
 	@rm -rf build
@@ -50,6 +50,10 @@ ifneq ($(OS),Darwin)
 else
 	$(warning Fonts are not generated on Mac OS X)
 endif
+
+tex :
+	@$(MAKE) -C tex all
+
 
 # Builds printouts for Model A
 model_a :
