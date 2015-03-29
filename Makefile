@@ -7,7 +7,7 @@ else
 	INKSCAPE=$(shell which inkscape 2> /dev/null)
 endif
 
-all : prerequisites prepare fonts model_a tex
+all : prerequisites prepare fonts tex model_a
 
 clean :
 	@rm -rf build
@@ -70,7 +70,7 @@ model_a :
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_slide_reverse.pdf $(shell pwd)/build/model_a_slide_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_transp_face.pdf $(shell pwd)/build/model_a_transp_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_transp_reverse.pdf $(shell pwd)/build/model_a_transp_reverse.svg
-	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/model_a.pdf build/model_a_stock_face.pdf build/model_a_stock_reverse.pdf build/model_a_slide_face.pdf build/model_a_slide_reverse.pdf build/model_a_transp_face.pdf build/model_a_transp_reverse.pdf
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/model_a.pdf build/model_a_stock_face.pdf build/model_a_stock_reverse.pdf build/model_a_slide_face.pdf build/model_a_slide_reverse.pdf build/model_a_transp_face.pdf build/model_a_transp_reverse.pdf build/making_en.pdf build/using_en.pdf
 	@echo "Result PDF's are in directory 'build'"
 
 model_a_debug :
