@@ -7,6 +7,19 @@ all: prepare check_xelatex tex
 clean:
 	@rm -rf ../build/making_*
 
+fonts:
+	$(info Installing Google Fonts for TEX sources)
+	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Oswald/Oswald-Bold.ttf -O ../build/Oswald-Bold.ttf
+	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Oswald/Oswald-Light.ttf -O ../build/Oswald-Light.ttf
+	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Oswald/Oswald-Regular.ttf -O ../build/Oswald-Regular.ttf
+	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Roboto_Slab/RobotoSlab-Bold.ttf -O ../build/RobotoSlab-Bold.ttf
+	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Roboto_Slab/RobotoSlab-Light.ttf -O ../build/RobotoSlab-Light.ttf
+	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Roboto_Slab/RobotoSlab-Regular.ttf -O ../build/RobotoSlab-Regular.ttf
+	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Roboto_Slab/RobotoSlab-Thin.ttf -O ../build/RobotoSlab-Thin.ttf
+	@cp ../build/Oswald*.ttf ~/.fonts
+	@cp ../build/Roboto*.ttf ~/.fonts
+	@fc-cache -f -v > /dev/null
+
 tex:
 	$(info Building PDF documents from TEX sources)
 	@$(XELATEX) -interaction=batchmode -output-directory=../build/ making_en.tex > /dev/null

@@ -47,6 +47,7 @@ endif
 fonts :
 ifneq ($(OS),Darwin)
 	@$(MAKE) -C fonts install
+	@$(MAKE) -C tex fonts
 else
 	$(warning Fonts are not generated on Mac OS X)
 endif
