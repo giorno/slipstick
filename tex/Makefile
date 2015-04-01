@@ -16,6 +16,8 @@ fonts:
 	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Roboto_Slab/RobotoSlab-Light.ttf -O ../build/RobotoSlab-Light.ttf
 	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Roboto_Slab/RobotoSlab-Regular.ttf -O ../build/RobotoSlab-Regular.ttf
 	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Roboto_Slab/RobotoSlab-Thin.ttf -O ../build/RobotoSlab-Thin.ttf
+	@wget https://dl.dropboxusercontent.com/u/29576433/fonts/Roboto/Roboto-Medium.ttf -O ../build/Roboto-Medium.ttf
+	@wget http://dl.dropboxusercontent.com/u/29576433/fonts/Roboto/Roboto-MediumItalic.ttf -O ../build/Roboto-MediumItalic.ttf
 	@cp ../build/Oswald*.ttf ~/.fonts
 	@cp ../build/Roboto*.ttf ~/.fonts
 	@fc-cache -f -v > /dev/null
