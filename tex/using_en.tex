@@ -16,6 +16,8 @@
 
 % title formatting
 \newfontfamily\headingfont[]{Oswald}
+\newfontfamily\constfont[]{Roboto}
+\newcommand{\constt}[1]{{\constfont\selectfont{\textit{#1}}}}
 \renewcommand{\maketitlehooka}{\headingfont}
 \setlength{\droptitle}{-5em}
 
@@ -76,11 +78,11 @@
 
   The Slide Rule slides inside the Stock and the Cursor slides on the top of the Stock. By sliding these parts, aligning the scales to appropriate positions and reading them, mathematical operations are performed.
 
-  \textbf{Basic Multiplication} \textit{1.2 x 2.3} Move index 1.2 on scale B (\textit{Slide}) to position of index 1 on scale A (\textit{Stock}). Move the \textit{Cursor} to index 2.3 on scale A. The position that the \textit{Cursor} shows on scale B is the result: \textit{2.76}. Use scales C and D for multiplication of bigger numbers.
+  \textbf{Basic Multiplication} \constt{1.2 {\char"00D7} 2.3} Move the leftmost index \constt1 on the scale C (\constt{Slide}) to position of index \constt{1.2} on the scale D (\constt{Stock}). Move the \constt{Cursor} to index \constt{2.3} on scale D. The position that the \constt{Cursor} shows on scale C is the result: \constt{2.76}. Use the scales A and B for multiplication of bigger numbers.
 
-  \textbf{Wrap-around Multiplication}
+  \textbf{Wrap-around Multiplication} \constt{2.4 {\char"00D7} 4.6} Move the rightmost index \constt1 on the scale C to \constt{2.4} on the scale D. Slide the \constt{Cursor} toindex \constt{4.6} on the scale C. Value on the scale D is is at \constt{1.104}. Mental calculation of approximate values \constt{2.5 {\char"00D7} 5} gives result of \constt{12.5}. The result is therefore greater than 10. Adjusting decimal place gives the result: \constt{11.04}. 
 
-  \textbf{Basic Division} 5.5 / 2 
+  \textbf{Basic Division} \constt{5.5 / 2} Move the rightmost index \constt{1} on the scale C to the index \constt{5.5} on the scale D. The leftmost index \constt{1} on the scale D is at the index 
 
   \end{multicols*}
   
