@@ -5,6 +5,7 @@
 \usepackage{titling}
 \usepackage{fancyhdr}
 \usepackage{paralist}
+\usepackage{gensymb}
 
 \setmainfont{Roboto Slab Light}
 
@@ -76,25 +77,80 @@
 
   The Slide Rule slides inside the Stock and the Cursor slides on the top of the Stock. By sliding these parts, aligning the scales to appropriate positions and reading them, mathematical operations are performed.
 
-  \textbf{Basic Multiplication} \constt{1.2 {\char"00D7} 2.3} Move the leftmost index \constt1 on the scale C (\constt{Slide}) to position of index \constt{1.2} on the scale D (\constt{Stock}). Move the \constt{Cursor} to index \constt{2.3} on scale D. The position that the \constt{Cursor} shows on scale C is the result: \constt{2.76}. Use the scales A and B for multiplication of bigger numbers.
+  \textbf{Basic Multiplication} \constt{1.2 {\char"00D7} 2.3}
+Move index \constt1 on the scale C (\constt{Slide}) to position of index \constt{1.2} on the scale D (\constt{Stock}).
+Move the \constt{Cursor} to index \constt{2.3} on scale D.
+The position that the \constt{Cursor} shows on scale C is the result: \constt{2.76}.
+Use the scales A and B for multiplication of bigger numbers.
 
-  \textbf{Wrap-around Multiplication} \constt{2.4 {\char"00D7} 4.6} Move the rightmost index \constt1 on the scale C to \constt{2.4} on the scale D. Slide the \constt{Cursor} toindex \constt{4.6} on the scale C. Value on the scale D is is at \constt{1.104}. Mental calculation of approximate values \constt{2.5 {\char"00D7} 5} gives result of \constt{12.5}. The result is therefore greater than 10. Adjusting decimal place gives the result: \constt{11.04}. 
+  \textbf{Wrap-around Multiplication} \constt{2.4 {\char"00D7} 4.6}
+Move index \constt10 on the scale C to \constt{2.4} on the scale D.
+Slide the \constt{Cursor} to index \constt{4.6} on the scale C.
+Value on the scale D is is at \constt{1.105}.
+Mental calculation of approximate values \constt{2.5 {\char"00D7} 5} gives result of \constt{12.5}.
+The result is therefore greater than 10.
+Adjusting decimal place gives the result: \constt{11.05}. 
 
-  \textbf{Basic Division} \constt{5.5 / 2} Move the rightmost index \constt{1} on the scale C to the index \constt{5.5} on the scale D. The leftmost index \constt{1} on the scale D is at the index
+  \textbf{Basic Division} \constt{4.6 / 7.7}
+Move the Cursor index 4.6 on the scale D.
+Slide index 7.7 on the scale C to the Cursor.
+Move the Cursor to either index 1 or index 10 on the scale C, whichever is in range. In this case, index 10.
+The Cursor is now at index 5.97. The correct answer is near 4 / 8 = 0.5. Adjusting decimal place gives the result: 0.597.
 
-  \textbf{Reciprocal Value}
+  \textbf{Reciprocal Value} 1 / 7.6
+Move the Cursor to index 7.8 on the scale CI (inverse scale on the Slide).
+The cursor is now at 1.132 on the scale C.
+The correct answer is near 1 / 10 = 0.1. Adjusting decimal place gives the result: 0.1132.
 
-  \textbf{Powers of 10}
+  \textbf{Square Number} 4.2\textsuperscript{2}
+Move the Cursor to index 4.2 on the scale C.
+The Cursor is at result index 17.6 on the scale B.
+
+  \textbf{Square Root} 4400\textsuperscript{0.5}
+\constt{For square root of numbers with odd number of digits, use range [1, 10] on the scale B. For square root of numbers with even number of digits, use range [10, 100] on the scale B.}
+Move the Cursor to index 44 on the scale B (4400 has even number of digits).
+The Cursor is at index 6.65 on the scale C. The correct answer is near 70, as 70\textsuperscript{2} = 4900. Adjusting decimal places gives the result: 66.5.
+
+  \textbf{Cube} 4.8\textsuperscript{3}
+Move the Cursor to index 4.8 on the scale D.
+The position of the Cursor on the scale K gives the result: 110.
+
+  \textbf{Cube Root} 4400\textsuperscript{0.33}
+\constt{Range [1, 10] on the scale K is used for cube roots of one-digit numbers, range [10, 100] for two-digit numbers, [100, 1000] for three-digit numbers. Four digit numbers again the first range, five digit the second range, etc.}
+Move the Cursor to index 4.4 on the scale K (4400 has 4 digits).
+The Cursor is now at 1.655 on the scale D.
+The correct answer is between 10 and 20 as 10\textsuperscript{3} = 1000 and 20\textsuperscript{3} = 8000. Adjusting decimal place gives the result: 16.55.
+
+  \textbf{Raising to Powers of 10} 1.36\textsuperscript{10}
+Move the Cursor to index 1.36 on the scale LL2 (on the other side of the Slide).
+The Cursor is now at 21.5 on the scale LL3, which is the result.
+
+1.02\textsuperscript{100}
+Move the Cursor to index 1.02 on the scale LL1 (on the other side of the Slide).
+The Cursor is now at 7.25 on the scale LL3, which is the result.
+
+  \textbf{10\textsuperscript{th} Root}
+
+  \textbf{100\textsuperscript{th} Root}
 
   \textbf{Arbitrary Power}
 
-  \textbf{Sine}
+  \textbf{Sine} sin(33\textdegree)
+Use scale S for finding sine of angles between 5\textdegree and 90\textdegree, and scale ST for angles between 30' and 6\textdegree.
+Move the Cursor to index 33 on the scale S.
+The Cursor is at index 5.45 on the scale C.
+The correct answer is between 0.1 and 1. Adjusting decimal place gives the result: 0.545.
 
-  \textbf{Cosine}
+  \textbf{Cosine} cos(33\textdegree)
+Use scale S for finding sine of angles between 5\textdegree and 90\textdegree, and scale ST for angles between 30' and 6\textdegree.
+Move the Cursor to index 33 on the scale S.
+The Cursor is at index 0.83 on the scale P (it is an inverse scale), which gives the result.
 
-  \textbf{Tangent}
-
-  \textbf{Small Angle Sine and Tangent}
+  \textbf{Tangent} tan(33\textdegree)
+Use scale T for finding sine of angles between 5\textdegree and 45\textdegree, and scale ST for angles between 30' and 6\textdegree.
+Move the Cursor to index 33 on the scale S.
+The Cursor is at index 6.5 on the scale C.
+The correct answer is between 0.1 and 1. Adjusting decimal place gives the result: 0.65.
 
   \end{multicols*}
   
