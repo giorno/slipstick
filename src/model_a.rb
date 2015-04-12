@@ -319,7 +319,7 @@ module Io::Creat::Slipstick
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
             # QR code
             # TODO refactor to inherit from Backprint
-            qr = Qr.new( @img, 'http://www.creat.io/slipstick', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
+            qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
             @img.rtext( @x_mm + @w_mm - 5, @y_mm + @hl_mm + @t_mm + @h_mm / 2, -90, @version, STYLE_BRAND )
           end
           if dir < 0 then rh_mm = 0 end
