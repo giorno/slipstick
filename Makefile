@@ -59,12 +59,12 @@ tex :
 # Builds printouts for Model A
 model_a :
 	$(info Generating Model A)
-	@src/model_a.rb stock face | xmllint --format - > build/model_a_stock_face.svg
-	@src/model_a.rb stock reverse | xmllint --format - > build/model_a_stock_reverse.svg 
-	@src/model_a.rb slide face | xmllint --format - > build/model_a_slide_face.svg
-	@src/model_a.rb slide reverse | xmllint --format - > build/model_a_slide_reverse.svg 
-	@src/model_a.rb transp face | xmllint --format - > build/model_a_transp_face.svg
-	@src/model_a.rb transp reverse | xmllint --format - > build/model_a_transp_reverse.svg 
+	@src/model_a.rb en stock face | xmllint --format - > build/model_a_stock_face.svg
+	@src/model_a.rb en stock reverse | xmllint --format - > build/model_a_stock_reverse.svg 
+	@src/model_a.rb en slide face | xmllint --format - > build/model_a_slide_face.svg
+	@src/model_a.rb en slide reverse | xmllint --format - > build/model_a_slide_reverse.svg 
+	@src/model_a.rb en transp face | xmllint --format - > build/model_a_transp_face.svg
+	@src/model_a.rb en transp reverse | xmllint --format - > build/model_a_transp_reverse.svg 
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_stock_face.pdf $(shell pwd)/build/model_a_stock_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_stock_reverse.pdf $(shell pwd)/build/model_a_stock_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_slide_face.pdf $(shell pwd)/build/model_a_slide_face.svg
@@ -76,9 +76,9 @@ model_a :
 
 model_a_debug :
 	@echo "Generating debug (all layers) SVG's of Model A"
-	@src/model_a.rb stock both | xmllint --format - > build/model_a_stock_both.svg
-	@src/model_a.rb slide both | xmllint --format - > build/model_a_slide_both.svg
-	@src/model_a.rb transp both | xmllint --format - > build/model_a_transp_both.svg
+	@src/model_a.rb en stock both | xmllint --format - > build/model_a_stock_both.svg
+	@src/model_a.rb en slide both | xmllint --format - > build/model_a_slide_both.svg
+	@src/model_a.rb en transp both | xmllint --format - > build/model_a_transp_both.svg
 	@echo "Result SVG's are in directory 'build', suffixed '_both.svg'"
 	@echo "Use 'ls -la build/*_both.svg' to list them"
 

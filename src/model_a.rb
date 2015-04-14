@@ -2,6 +2,7 @@
 
 # vim: et
 
+require_relative 'i18n'
 require_relative 'qr'
 require_relative 'sheet'
 require_relative 'backprints/bu_scales'
@@ -41,6 +42,7 @@ module Io::Creat::Slipstick
       def initialize ( layers )
         super()
         raise "Layer must be one of LAYER_STOCK, LAYER_SLIDE or LAYER_TRANSP" unless ( layers & 0x1c ) != 0
+        @i18n = Io::Creat::Slipstick::I18N.instance
         @img.pattern( 'glued', 3 )
         @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
         @layers = layers
@@ -147,7 +149,7 @@ module Io::Creat::Slipstick
 
           # page number
           pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
-            pn.sett( 'STOCK + CURSOR (210 g/m²)' )
+            pn.sett( '%s + %s (210 g/m²)' % [ @i18n.string( 'part_stock' ), @i18n.string( 'part_cursor' )  ] )
             @bprints << pn
        end
 
@@ -183,7 +185,7 @@ module Io::Creat::Slipstick
 
           # page number
           pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
-            pn.sett( 'SLIDE (210 g/m²)' )
+            pn.sett( '%s (210 g/m²)' % @i18n.string( 'part_slide' ) )
             @bprints << pn
 
           # log scales
@@ -210,7 +212,7 @@ module Io::Creat::Slipstick
         if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           # page number
           pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
-            pn.sett( 'TRANSPARENT (tracing paper)' )
+            pn.sett( '%s (%s)' % [ @i18n.string( 'part_transp' ), @i18n.string( 'tracing_paper' ) ] )
             @bprints << pn
        end
 
@@ -361,8 +363,8 @@ module Io::Creat::Slipstick
           @img.line( x_mm - @hint_mm, y_mm + @cw_mm, x_mm + @ch_mm + @hint_mm, y_mm + @cw_mm, style )
           @img.line( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm + @hint_mm, style )
           @img.line( x_mm + @ch_mm, y_mm + @cw_mm, x_mm + @ch_mm, y_mm + @cw_mm + @hint_mm, style )
-          @img.text( x_mm + @ch_mm / 2, y_mm + @cw_mm + 5, "CURSOR W%gmm H%gmm" % [ @ch_mm, @cw_mm ], STYLE_BRAND )
-          @img.text( @sw_mm / 2, @y_mm + @h_mm + 5, "STOCK W%gmm H%gmm" % [ @sw_mm, @h_mm ], STYLE_BRAND )
+          @img.text( x_mm + @ch_mm / 2, y_mm + @cw_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_cursor' ), @ch_mm, @cw_mm ], STYLE_BRAND )
+          @img.text( @sw_mm / 2, @y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], STYLE_BRAND )
         end
 
         # backprints
@@ -382,36 +384,38 @@ module Io::Creat::Slipstick
 end # Io::Creat::Slipstick
 
 def usage ( )
-  $stderr.puts "Usage: #{$0} <stator|slide|transp> [both|face|reverse]\n\nOutputs SVG for given element and printout side.\n"
+  $stderr.puts "Usage: #{$0} <lang> <stator|slide|transp> [both|face|reverse]\n\nOutputs SVG for given element and printout side.\n"
+  $stderr.puts " lang   .. language code for internationalized strings, supported: en"
   $stderr.puts " stator .. stock element of slide rule (static)"
   $stderr.puts " slide  .. sliding element of slide rule"
   $stderr.puts " transp .. transparent elements (tracing paper)"
 end
 
 layers = 0
-if ARGV.length == 0
+if ARGV.length <= 1
   usage( )
-  raise "Requires either 'stock' or 'slide' as first parameter"
+  raise "Requires language code as the first parameter and either 'stock' or 'slide' as the second"
 end
 
-if ARGV.length >= 1
-  if ARGV[0] == 'stock'
+if ARGV.length >= 2
+  lang = ARGV[0]
+  if ARGV[1] == 'stock'
     layers = Io::Creat::Slipstick::Model::A::LAYER_STOCK
-  elsif ARGV[0] == 'slide'
+  elsif ARGV[1] == 'slide'
     layers = Io::Creat::Slipstick::Model::A::LAYER_SLIDE
-  elsif ARGV[0] == 'transp'
+  elsif ARGV[1] == 'transp'
     layers = Io::Creat::Slipstick::Model::A::LAYER_TRANSP
   else
     usage
   end
 end
 
-if ARGV.length > 1
-  if ARGV[1] == 'face'
+if ARGV.length > 2
+  if ARGV[2] == 'face'
     layers |= Io::Creat::Slipstick::Model::A::LAYER_FACE
-  elsif ARGV[1] == 'reverse'
+  elsif ARGV[2] == 'reverse'
     layers |= Io::Creat::Slipstick::Model::A::LAYER_REVERSE
-  elsif ARGV[1] == 'both'
+  elsif ARGV[2] == 'both'
     layers |= Io::Creat::Slipstick::Model::A::LAYER_FACE | Io::Creat::Slipstick::Model::A::LAYER_REVERSE
   else
     usage
@@ -419,6 +423,7 @@ if ARGV.length > 1
   end
 end
 
+Io::Creat::Slipstick::I18N.instance.load( 'src/model_a.yml', lang )
 a = Io::Creat::Slipstick::Model::A.new( layers )
 puts a.render()
 
