@@ -26,6 +26,7 @@ tex:
 	$(info Building PDF documents from TEX sources)
 	@$(XELATEX) -interaction=batchmode -output-directory=../build/ making_en.tex > /dev/null
 	@$(XELATEX) -interaction=batchmode -output-directory=../build/ using_en.tex > /dev/null
+	@$(XELATEX) -interaction=batchmode -output-directory=../build/ printing_en.tex > /dev/null
 
 check_xelatex:
 	$(info Checking if XELATEX is installed)

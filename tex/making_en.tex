@@ -1,42 +1,7 @@
-\documentclass[a4paper,9pt]{article}
-\usepackage{fontspec}
-\usepackage[margin=1.5cm,bottom=2cm,top=2cm]{geometry}
-\usepackage{multicol}
-\usepackage{titling}
-\usepackage{fancyhdr}
-\usepackage{paralist}
-
-\setmainfont{Roboto Slab Light}
-
-% section without title
-\newcommand{\nosection}[1]{%
-  \refstepcounter{section}%
-  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
-  \markright{#1}}
-
-% title formatting
-\newfontfamily\headingfont[]{Oswald}
-\renewcommand{\maketitlehooka}{\headingfont}
-\setlength{\droptitle}{-5em}
-
-% custom page number
-\fancypagestyle{plain}{% title page
-  \renewcommand{\headrulewidth}{0pt}%
-  \fancyhf{}%
-  \fancyfoot[L]{\headingfont{http://wheel.creat.io/sr}}%
-  \fancyfoot[R]{\headingfont{How To Make The Slide Rule \textbf{\thepage}}}%
-  \renewcommand{\headrulewidth}{0pt}
-}
-\pagestyle{fancy}% other pages
-\fancyhf{}
-\lfoot{\headingfont{http://wheel.creat.io/sr}}
-\rfoot{\headingfont{How To Make The Slide Rule \textbf{\thepage}}}
-\renewcommand{\headrulewidth}{0pt}
-
-% paragraph spacing
-\setlength{\parindent}{0em}
-\setlength{\parskip}{1em}
-
+\input{preamble.tex}
+\newcommand{\makefulltitle}{How To Make The Slide Rule }
+\input{makefooters.tex}
+\input{makeperex_en.tex}
 
 \title{\fontsize{60}{60}\selectfont THE SLIDE RULE}
 \preauthor{}\postauthor{}\author{}
@@ -49,7 +14,7 @@
 
   {\let\newpage\relax\maketitle}% no new line before title
   \nosection{}
-  \large\textbf{Slide Rule is an analog computer, a device that you can use to perform all basic and some advanced mathematical operations. It is not as precise as pocket calculator, but does not require electrical power. It was commonly used even 50 years ago, the time when they started being replaced by pocket calculators. Slide rules were one of many instruments used by engineers and astronauts in space missions for flight parameters calculation. This guide describes how to make a paper made Slide Rule designated as Model A.}
+  \large\textbf{\makeperex This guide describes how to make a paper made Slide Rule designated as Model A.}
 
   \begin{multicols*}{3}
   \normalsize{Before you start, you will need to get your hands on the following:
@@ -76,7 +41,7 @@
       \item do not delay pressing glued parts together after the glue is applied.
     \end{inparaenum}
 
-  This booklet contains two sheets printed on thick paper, labeled \textbf{STOCK + CURSOR} and \textbf{SLIPSTICK}, and one on tracing paper, labeled \textbf{TRANSPARENT}. From them you will cut out, pre-bend, fold and glue together \textbf{the components} of the Slide Rule:
+  This booklet contains two sheets printed on thick paper, labeled \textbf{STOCK + CURSOR} and \textbf{SLIDE}, and one on tracing paper, labeled \textbf{TRANSPARENT}. From them you will cut out, pre-bend, fold and glue together \textbf{the components} of the Slide Rule:
     \begin{inparaenum}[\itshape a\upshape)]
       \item Stock;
       \item Slide; and
@@ -87,7 +52,7 @@
 
   \textbf{Step 2 Strengthen the back of the Stock} From the card paper cut out a strip with dimensions 62x277 mm. Put thin layer of the glue on the big cross-hatched area of the Stock part and place the cardboard strip onto it precisely. Smooth the paper down with your fingers. Put the glued parts between two sheets of scrap paper and weight them under books for a day.
 
-  \textbf{Step 3 Make the Slide part} The Slide component is printed on paper sheet labeled \textbf{SLIPSTICK}. Cut along the two continuous lines on the reverse of the sheet from one edge of the sheet to the other. Score the part along the dashed line with the knife. Fold the part along that line. The Slide part is finished now. One out of the three!
+  \textbf{Step 3 Make the Slide part} The Slide component is printed on paper sheet labeled \textbf{SLIDE}. Cut along the two continuous lines on the reverse of the sheet from one edge of the sheet to the other. Score the part along the dashed line with the knife. Fold the part along that line. The Slide part is finished now. One out of the three!
 
   \textbf{Step 4 Begin the Cursor part} Cut out the Cursor body from the sheet labeled \textbf{STOCK + CURSOR} using the knife and the ruler along the outer lines. Use the scissors to cut out the arc window. Turn the cursor overleaf and score the paper along the dotted lines. Fold the cursor.
 

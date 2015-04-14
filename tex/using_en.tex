@@ -1,45 +1,7 @@
-\documentclass[a4paper,9pt]{article}
-\usepackage{fontspec}
-\usepackage[margin=1.5cm,bottom=2cm,top=2cm]{geometry}
-\usepackage{multicol}
-\usepackage{titling}
-\usepackage{fancyhdr}
-\usepackage{paralist}
-\usepackage{gensymb}
-
-\setmainfont{Roboto Slab Light}
-
-% section without title
-\newcommand{\nosection}[1]{%
-  \refstepcounter{section}%
-  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
-  \markright{#1}}
-
-% title formatting
-\newfontfamily\headingfont[]{Oswald}
-\newfontfamily\constfont[]{Roboto}
-\newcommand{\constt}[1]{{\constfont\selectfont{\textit{#1}}}}
-\renewcommand{\maketitlehooka}{\headingfont}
-\setlength{\droptitle}{-5em}
-
-% custom page number
-\fancypagestyle{plain}{% title page
-  \renewcommand{\headrulewidth}{0pt}%
-  \fancyhf{}%
-  \fancyfoot[L]{\headingfont{http://wheel.creat.io/sr}}%
-  \fancyfoot[R]{\headingfont{How To Use The Slide Rule \textbf{\thepage}}}%
-  \renewcommand{\headrulewidth}{0pt}
-}
-\pagestyle{fancy}% other pages
-\fancyhf{}
-\lfoot{\headingfont{http://wheel.creat.io/sr}}
-\rfoot{\headingfont{How To Use The Slide Rule \textbf{\thepage}}}
-\renewcommand{\headrulewidth}{0pt}
-
-% paragraph spacing
-\setlength{\parindent}{0em}
-\setlength{\parskip}{0.5em}
-
+\input{preamble.tex}
+\newcommand{\makefulltitle}{How To Use The Slide Rule }
+\input{makefooters.tex}
+\input{makeperex_en.tex}
 
 \title{\fontsize{60}{60}\selectfont THE SLIDE RULE}
 \preauthor{}\postauthor{}\author{}
@@ -52,7 +14,7 @@
 
   {\let\newpage\relax\maketitle}% no new line before title
   \nosection{}
-  \large\textbf{Slide Rule is an analog computer, a device that you can use to perform all basic and some advanced mathematical operations. It is not as precise as pocket calculator, but does not require electrical power. It was commonly used even 50 years ago, the time when they started being replaced by pocket calculators. Slide rules were one of many instruments used by engineers and astronauts in space missions for flight parameters calculation. This guide describes how to use a paper made Slide Rule designated as Model A.}
+  \large\textbf{\makeperex This guide describes how to use a paper made Slide Rule designated as Model A.}
 
   \begin{multicols*}{3}
   \normalsize{

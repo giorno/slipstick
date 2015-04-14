@@ -1,0 +1,30 @@
+% common packages, fonts, styles and commands
+% unlocalised content
+\documentclass[a4paper,9pt]{article}
+\usepackage{fontspec}
+\usepackage[lmargin=2cm,rmargin=2cm,bottom=2cm,top=2cm]{geometry}
+\usepackage{multicol}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{paralist}
+\usepackage{gensymb}
+
+\setmainfont{Roboto Slab Light}
+
+% section without title
+\newcommand{\nosection}[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \markright{#1}}
+
+% title formatting
+\newfontfamily\headingfont[]{Oswald}
+\newfontfamily\constfont[]{Roboto}
+\newcommand{\constt}[1]{{\constfont\selectfont{\textit{#1}}}}
+\renewcommand{\maketitlehooka}{\headingfont}
+\setlength{\droptitle}{-5em}
+
+% paragraph spacing
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+

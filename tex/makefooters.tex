@@ -1,0 +1,14 @@
+% custom page number
+\fancypagestyle{plain}{% title page
+  \renewcommand{\headrulewidth}{0pt}%
+  \fancyhf{}%
+  \fancyfoot[L]{\headingfont{http://wheel.creat.io/sr}}%
+  \fancyfoot[R]{\headingfont{\makefulltitle \textbf{\thepage}}}%
+  \renewcommand{\headrulewidth}{0pt}
+}
+\pagestyle{fancy}% other pages
+\fancyhf{}
+\lfoot{\headingfont{http://wheel.creat.io/sr}}
+\rfoot{\headingfont{\makefulltitle \textbf{\thepage}}}
+\renewcommand{\headrulewidth}{0pt}
+
