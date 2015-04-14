@@ -15,7 +15,7 @@ module Io::Creat::Slipstick::Backprints
     FOOT_M   = { :scale => 1 / 0.3048, :bigger => [ "m", "m" ], :smaller => [ "foot", "feet" ], :real => 25 }
     YARD_M   = { :scale => 1 / 0.9144, :bigger => [ "m", "m" ], :smaller => [ "yard", "yards" ], :real => 25 }
     KM_MILE  = { :scale => 1.609, :bigger => [ "mile", "miles" ], :smaller => [ "km", "km" ], :real => 40.1125 }
-    KM_NMILE = { :scale => 1.853184, :bigger => [ "nautical mile", "nautical miles" ], :smaller => [ "km", "km" ], :real => 185.3184 / 4 }
+    KM_NMILE = { :scale => 1.853184, :bigger => [ "nautical_mile", "nautical_miles" ], :smaller => [ "km", "km" ], :real => 185.3184 / 4 }
 
     # SI vs. imperial weight units
     OZ_G     = { :scale => 28.3495, :bigger => [ "ounce", "ounces" ], :smaller => [ "g", "g" ], :real => 28.3495 }
@@ -24,7 +24,7 @@ module Io::Creat::Slipstick::Backprints
 
     # SI vs. imperial area units
     ACRE_HA  = { :scale => 10 / 4.0468564, :bigger => [ "ha", "ha" ], :smaller => [ "acre", "acres" ], :real => 25 }
-    SQFT_M2  = { :scale => 1 / 0.09290, :bigger => [ "m²", "m²" ], :smaller => [ "square foot", "square feet" ], :real => 25 }
+    SQFT_M2  = { :scale => 1 / 0.09290, :bigger => [ "m²", "m²" ], :smaller => [ "square_foot", "square_feet" ], :real => 25 }
 
     # SI vs. imperial volume units
     PINT_L   = { :scale => 1 / 0.56826, :bigger => [ "l", "l" ], :smaller => [ "pint", "pints" ], :real => 25 }
@@ -43,10 +43,11 @@ module Io::Creat::Slipstick::Backprints
       @dim   = Io::Creat::Slipstick::Dim::DEFAULT
       @fs_mm = fs_mm
       @tw_mm = 0
-      @labels = [ "1 %s" % @scale[:bigger][0],
-                  "%.4g %s" % [ @scale[:scale], @scale[:smaller][1] ],
-                  "1 %s" % @scale[:smaller][0],
-                  "%.4g %s" % [ 1 / @scale[:scale], @scale[:bigger][1] ]
+      @i18n = Io::Creat::Slipstick::I18N.instance
+      @labels = [ "1 %s" % @i18n.string( @scale[:bigger][0] ),
+                  "%.4g %s" % [ @scale[:scale], @i18n.string( @scale[:smaller][1] ) ],
+                  "1 %s" % @i18n.string( @scale[:smaller][0] ),
+                  "%.4g %s" % [ 1 / @scale[:scale], @i18n.string( @scale[:bigger][1] ) ]
                 ]
       # calculate max text width
       @labels[0..1].each do | label |
