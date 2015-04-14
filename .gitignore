@@ -1,2 +1,6 @@
 build
 *.swp
+*.aux
+*.log
+tex/*.pdf
+/*.pdf
