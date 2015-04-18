@@ -28,11 +28,16 @@ module Io::Creat::Slipstick
       LAYER_SLIDE   = 0x8  # generate slide element
       LAYER_TRANSP  = 0x10 # gneerate transparent elements
 
-      # branding/version texts on the stock face
+      # branding/version texts
+      RELEASE       = false
+      BRAND         = "CREAT.IO"
+      MODEL         = "INSTRUMENT A"
+      VERSION       = "v.1.0"
+      HEIGHT_BRAND  = 2.2
       STYLE_BRAND   = { "font-size" => "2.4",
                         "font-family" => "Slipstick Sans Mono",
                         "font-weight" => "normal",
-                        "fill" => "#102a87",
+                        "fill" => "black",
                         "text-anchor" => "middle" }
       # QR code style
       STYLE_QR      = { :fill => "black", :stroke_width => "0.01", :stroke => "black" }
@@ -44,7 +49,11 @@ module Io::Creat::Slipstick
         raise "Layer must be one of LAYER_STOCK, LAYER_SLIDE or LAYER_TRANSP" unless ( layers & 0x1c ) != 0
         @i18n = Io::Creat::Slipstick::I18N.instance
         @img.pattern( 'glued', 3 )
-        @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
+        if RELEASE
+          @version = "%s %s" % [ MODEL, VERSION ]
+        else
+          @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
+        end
         @layers = layers
         @bprints = [] # backprints
         @hu_mm = 22.0 # height of upper half of stator strip
@@ -315,7 +324,14 @@ module Io::Creat::Slipstick
             # cutting guidelines for the stator
             @img.rectangle( @x_mm, y_mm, @w_mm, rh_mm, @style )
             # branding texts
-            @img.text( @x_mm + 174, @y_mm + 105, "creat.io MODEL A", STYLE_BRAND )
+            brand = PageNoBackprint.new( @img, @x_mm + 168, @y_mm + 6, HEIGHT_BRAND )
+              brand.sett( BRAND, true )
+              brand.render()
+            brand = PageNoBackprint.new( @img, @x_mm + 174, @y_mm + 105, HEIGHT_BRAND )
+              brand.sett( "%s %s" % [ MODEL, VERSION ], true )
+              brand.render()
+            #@img.text( @x_mm + 168, @y_mm + 6, BRAND, STYLE_BRAND )
+            #@img.text( @x_mm + 174, @y_mm + 105, "%s %s" % [ MODEL, VERSION ], STYLE_BRAND )
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
@@ -329,21 +345,31 @@ module Io::Creat::Slipstick
         end
 
         # [slide] element
-        if ( ( @layers & LAYER_SLIDE ) != 0 ) and ( ( @layers & LAYER_REVERSE ) != 0 )
-          # cutting guidelines for the slipstick
-          both = ( @layers & LAYER_FACE ) != 0
-          y_mm = !both ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
-          @img.line( 0, y_mm + @cs_mm, @sw_mm, y_mm + @cs_mm, @style )
-          @img.pline( 0, y_mm + @h_mm - @cs_mm, @sw_mm, y_mm + @h_mm - @cs_mm, @style, PATTERN_BEND )
-          @img.line( 0, y_mm + 2 * ( @h_mm - @cs_mm ), @sw_mm, y_mm + 2 * ( @h_mm - @cs_mm ), @style )
-          # debugging mode, outline borders of area visible in the stock
-          if both
-            # power scales side
-            @img.line( 0, y_mm + @hu_mm, @sw_mm, y_mm + @hu_mm, @style )
-            @img.line( 0, y_mm + @hu_mm + @hs_mm, @sw_mm, y_mm + @hu_mm + @hs_mm, @style )
-            # decimal scales side
-            @img.line( 0, y_mm + @hu_mm + @h_mm - @cs_mm, @sw_mm, y_mm + @hu_mm + @h_mm - @cs_mm, @style )
-            @img.line( 0, y_mm + @hu_mm + @h_mm - @cs_mm + @hs_mm, @sw_mm, y_mm + @hu_mm + @h_mm - @cs_mm + @hs_mm, @style )
+        if ( ( @layers & LAYER_SLIDE ) != 0 )
+          if ( ( @layers & LAYER_REVERSE ) != 0 )
+            # cutting guidelines for the slipstick
+            both = ( @layers & LAYER_FACE ) != 0
+            y_mm = !both ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
+            @img.line( 0, y_mm + @cs_mm, @sw_mm, y_mm + @cs_mm, @style )
+            @img.pline( 0, y_mm + @h_mm - @cs_mm, @sw_mm, y_mm + @h_mm - @cs_mm, @style, PATTERN_BEND )
+            @img.line( 0, y_mm + 2 * ( @h_mm - @cs_mm ), @sw_mm, y_mm + 2 * ( @h_mm - @cs_mm ), @style )
+            # debugging mode, outline borders of area visible in the stock
+            if not RELEASE
+              @img.text( @sw_mm / 2, y_mm + @cs_mm + @h_mm / 2, @version, STYLE_BRAND )
+            end
+            if both
+              # power scales side
+              @img.line( 0, y_mm + @hu_mm, @sw_mm, y_mm + @hu_mm, @style )
+              @img.line( 0, y_mm + @hu_mm + @hs_mm, @sw_mm, y_mm + @hu_mm + @hs_mm, @style )
+              # decimal scales side
+              @img.line( 0, y_mm + @hu_mm + @h_mm - @cs_mm, @sw_mm, y_mm + @hu_mm + @h_mm - @cs_mm, @style )
+              @img.line( 0, y_mm + @hu_mm + @h_mm - @cs_mm + @hs_mm, @sw_mm, y_mm + @hu_mm + @h_mm - @cs_mm + @hs_mm, @style )
+            end
+          end
+          if ( ( @layers & LAYER_FACE ) != 0 )
+            brand = PageNoBackprint.new( @img, @sw_mm - 25, @y_mm + 2 * ( @h_mm - @cs_mm ) - 4, HEIGHT_BRAND )
+              brand.sett( "%s %s %s" % [ BRAND, MODEL, VERSION ], true )
+              brand.render()
           end
         end
 
@@ -354,6 +380,9 @@ module Io::Creat::Slipstick
           @img.line( 0, @y_mm, @sw_mm, @y_mm, style )
           @img.line( 0, @y_mm + @h_mm, @sw_mm, @y_mm + @h_mm, style )
           @img.text( @sw_mm / 2, @y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], STYLE_BRAND )
+          if not RELEASE
+            @img.text( @sw_mm / 2, @y_mm + @h_mm - 4 , @version, STYLE_BRAND )
+          end
           # cursor part
           x_mm = ( @sw_mm - @ch_mm ) / 2
           y_mm = 3 * @y_mm + @h_mm
