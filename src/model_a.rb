@@ -353,18 +353,26 @@ module Io::Creat::Slipstick
           # stock part
           @img.line( 0, @y_mm, @sw_mm, @y_mm, style )
           @img.line( 0, @y_mm + @h_mm, @sw_mm, @y_mm + @h_mm, style )
+          @img.text( @sw_mm / 2, @y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], STYLE_BRAND )
           # cursor part
           x_mm = ( @sw_mm - @ch_mm ) / 2
           y_mm = 3 * @y_mm + @h_mm
           @img.line( x_mm, y_mm, x_mm - @hint_mm, y_mm, style )
+          @img.rtext( x_mm - 2 * @hint_mm, y_mm, -90, '1', STYLE_BRAND )
           @img.line( x_mm, y_mm, x_mm, y_mm - @hint_mm, style )
+          @img.text( x_mm, y_mm - 2 * @hint_mm, '2', STYLE_BRAND )
           @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm + @hint_mm, y_mm, style )
+          @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm, -90, '1', STYLE_BRAND )
           @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm, y_mm - @hint_mm, style )
+          @img.text( x_mm + @ch_mm, y_mm - 2 * @hint_mm, '3', STYLE_BRAND )
           @img.line( x_mm - @hint_mm, y_mm + @cw_mm, x_mm + @ch_mm + @hint_mm, y_mm + @cw_mm, style )
+          @img.text( x_mm, y_mm + @cw_mm + 3 * @hint_mm, '2', STYLE_BRAND )
+          @img.rtext( x_mm - 2 * @hint_mm, y_mm + @cw_mm, -90, '4', STYLE_BRAND )
           @img.line( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm + @hint_mm, style )
+          @img.text( x_mm + @ch_mm, y_mm + @cw_mm + 3 * @hint_mm, '3', STYLE_BRAND )
           @img.line( x_mm + @ch_mm, y_mm + @cw_mm, x_mm + @ch_mm, y_mm + @cw_mm + @hint_mm, style )
+          @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm + @cw_mm, -90, '4', STYLE_BRAND )
           @img.text( x_mm + @ch_mm / 2, y_mm + @cw_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_cursor' ), @ch_mm, @cw_mm ], STYLE_BRAND )
-          @img.text( @sw_mm / 2, @y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], STYLE_BRAND )
         end
 
         # backprints
