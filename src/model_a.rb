@@ -176,7 +176,8 @@ module Io::Creat::Slipstick
               scale.set_params( -58.0, 392.0, 1.0 )
 
           # power scales
-          strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          ll_off_mm = 4 # shift LL scales to the left to make room for the last (too wide) tick label
+          strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm - ll_off_mm, w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL1", 0.5 )
               scale.set_params( 100 )
               scale.set_overflow( 4.0 )
