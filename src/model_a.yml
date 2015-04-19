@@ -8,6 +8,7 @@ en:
   paper:                "paper"
   tracing_paper:        "tracing paper"
   # mathematical constants
+  math_constants:       "MATHEMATICAL CONSTANTS"
   empty:                ""
   imaginary:            "imaginary"
   meissel_mertens:      "Meissel-Mertens"
@@ -22,6 +23,7 @@ en:
   archimedes:           "Archimedes"
   recipr_fibonacci:     "recipr. Fibonacci"
   # physical constants
+  physical_constants:   "PHYSICAL CONSTANTS"
   astronomical_unit:    "astronomical unit"
   speed_of_light:       "speed of light"
   gravitational:        "gravitational"

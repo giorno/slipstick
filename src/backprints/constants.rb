@@ -63,7 +63,7 @@ module Io::Creat::Slipstick
         tables = []
         table = Table.new( @img, @x_mm, @y_mm, spacing, Table::ORIENT_LANDSCAPE, style )
           tr = table.tr( h_mm )
-            td = tr.td( 'MATHEMATICAL CONSTANTS', @h_mm, Td::MID )
+            td = tr.td( i18n.string( 'math_constants' ), @h_mm, Td::MID )
         MATH.each do | constant |
           tr = table.tr( h_mm )
             td = tr.td( i18n.string( constant[0] ), w1_mm )
@@ -71,7 +71,7 @@ module Io::Creat::Slipstick
             td = tr.td( constant[2], w3_mm )
         end
           tr = table.tr( h_mm )
-            td = tr.td( 'PHYSICAL CONSTANTS', w1_mm + w2_mm + w3_mm, Td::MID )
+            td = tr.td( i18n.string( 'physical_constants' ), w1_mm + w2_mm + w3_mm, Td::MID )
         PHYS.each do | constant |
           tr = table.tr( h_mm )
             td = tr.td( i18n.string( constant[0] ), w1_mm )
