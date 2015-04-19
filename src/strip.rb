@@ -1,5 +1,6 @@
 
 require_relative 'constants'
+require_relative 'custom'
 require_relative 'decimal'
 require_relative 'linear'
 require_relative 'pythag'
@@ -8,15 +9,19 @@ require_relative 'temp'
 require_relative 'trigon'
 
 module Io::Creat::Slipstick::ScaleType
-  LOG_DECIMAL = 0
-  LIN_DECIMAL = 10
-  LIN_INCH    = 20
-  LIN_TEMP    = 30 # temperature scales
-  TGN_SIN     = 40
-  TGN_TAN     = 50
-  TGN_SINTAN  = 60
-  TGN_PYTHAG  = 70
-  LOG_POWER   = 80
+  LOG_DECIMAL =   0
+  LIN_DECIMAL =  10
+  LIN_INCH    =  20
+  LIN_TEMP    =  30 # temperature scales
+  TGN_SIN     =  40
+  TGN_TAN     =  50
+  TGN_SINTAN  =  60
+  TGN_PYTHAG  =  70
+  LOG_POWER   =  80
+  CUST_DEC    =  90
+  CUST_HEX    = 100
+  CUST_OCT    = 110
+  CUST_BIN    = 120
 end
 
 module Io::Creat::Slipstick::Layout
@@ -56,6 +61,14 @@ module Io::Creat::Slipstick::Layout
           return Io::Creat::Slipstick::PowerScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::LIN_TEMP
           return Io::Creat::Slipstick::TempScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::CUST_HEX
+          return Io::Creat::Slipstick::HexGradeScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::CUST_DEC
+          return Io::Creat::Slipstick::DecGradeScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::CUST_OCT
+          return Io::Creat::Slipstick::OctGradeScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::CUST_BIN
+          return Io::Creat::Slipstick::BinGradeScale.new( self, label, 0, 0, h_ratio, flipped )
         else
           raise "Unrecognized scale type"
       end

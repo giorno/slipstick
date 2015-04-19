@@ -163,59 +163,86 @@ module Io::Creat::Slipstick
        end
 
         # sides of the slide
-        if ( ( @layers & LAYER_SLIDE ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
-
-          # temperature conversion scale
+        if ( ( @layers & LAYER_SLIDE ) != 0 )
           bp_off_mm = 9 # offset of conversion scales from the edge of slide
-          strip = create_strip( @x_mm, @y_mm + bp_off_mm - @hu_mm / 4 , @hu_mm / 2, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°C", 0.5, true )
-              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
-              scale.set_params( -50.0, 200.0, 1.0, true )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°F", 0.5 )
-              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
-              scale.set_params( -58.0, 392.0, 1.0 )
+          if ( ( @layers & LAYER_FACE ) != 0 )
 
-          # power scales
-          ll_off_mm = 4 # shift LL scales to the left to make room for the last (too wide) tick label
-          strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm - ll_off_mm, w_a_mm )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL1", 0.5 )
-              scale.set_params( 100 )
-              scale.set_overflow( 4.0 )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL2", 0.33, true )
-              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
-              scale.set_params( 10 )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL3", 0.5, true )
-              scale.set_params( 1 )
-              scale.set_overflow( 4.0 )
+            # temperature conversion scale
+            strip = create_strip( @x_mm, @y_mm + bp_off_mm - @hu_mm / 4 , @hu_mm / 2, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°C", 0.5, true )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( -50.0, 200.0, 1.0, true )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°F", 0.5 )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( -58.0, 392.0, 1.0 )
 
-          # length units conversion scales
-          bp_w_mm = w_m_mm + w_l_mm + w_s_mm + w_a_mm # width reserved for the 
-          bp_gap_mm = 10 # space between conversion scales
-          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - bp_off_mm, bp_gap_mm, ConversionBackprint::LENGTHS )
+            # power scales
+            ll_off_mm = 4 # shift LL scales to the left to make room for the last (too wide) tick label
+            strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm - ll_off_mm, w_a_mm )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL1", 0.5 )
+                scale.set_params( 100 )
+                scale.set_overflow( 4.0 )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL2", 0.33, true )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 10 )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL3", 0.5, true )
+                scale.set_params( 1 )
+                scale.set_overflow( 4.0 )
 
-          # page number
-          pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
-            pn.sett( '%s (210 g/m²)' % @i18n.string( 'part_slide' ) )
-            @bprints << pn
+            # length units conversion scales
+            bp_w_mm = w_m_mm + w_l_mm + w_s_mm + w_a_mm # width reserved for the 
+            bp_gap_mm = 10 # space between conversion scales
+            @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - bp_off_mm, bp_gap_mm, ConversionBackprint::LENGTHS )
 
-          # log scales
-          strip = create_strip( @x_mm, @y_mm + @h_mm - @cs_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "B", 0.5 )
-              scale.set_params( 2 )
-              scale.set_overflow( 4.0 )
-              scale.add_constants( )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "CI", 0.33, true )
-              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
-              scale.set_params( 1, true )
-              scale.add_constants( )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "C", 0.5, true )
-              scale.set_params( 1 )
-              scale.set_overflow( 4.0 )
-              scale.add_constants( )
+            # page number
+            pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
+              pn.sett( '%s (210 g/m²)' % @i18n.string( 'part_slide' ) )
+              @bprints << pn
 
-          # rest of units conversion scales
-          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - @cs_mm + bp_off_mm, bp_gap_mm, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
-          @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + 2 * ( @h_mm - @cs_mm ) - bp_off_mm, bp_gap_mm, ConversionBackprint::VOLUMES )
+            # log scales
+            strip = create_strip( @x_mm, @y_mm + @h_mm - @cs_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "B", 0.5 )
+                scale.set_params( 2 )
+                scale.set_overflow( 4.0 )
+                scale.add_constants( )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "CI", 0.33, true )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 1, true )
+                scale.add_constants( )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "C", 0.5, true )
+                scale.set_params( 1 )
+                scale.set_overflow( 4.0 )
+                scale.add_constants( )
+
+            # rest of units conversion scales
+            @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - @cs_mm + bp_off_mm, bp_gap_mm, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
+            @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + 2 * ( @h_mm - @cs_mm ) - bp_off_mm, bp_gap_mm, ConversionBackprint::VOLUMES )
+          end
+
+          if ( ( @layers & LAYER_REVERSE ) != 0 )
+            both = ( @layers & LAYER_FACE ) != 0
+            y_mm = !both ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
+            # temperature conversion scale
+            strip = create_strip( @x_mm, y_mm + 2 * bp_off_mm, 5 * @hu_mm / 4, w_m_mm + w_s_mm, w_l_mm, 0, w_a_mm )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_HEX, "", 0.5, true )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, 256, 1.0, true )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_DEC, "", 0.5 )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, 256, 1.0 )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_DEC, "", 0.5, true )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, 256, 1.0, true, false )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_OCT, "", 0.5 )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, 256, 1.0 )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_OCT, "", 0.5, true )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, 256, 1.0, true, false )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_BIN, "", 0.5 )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, 256, 1.0 )
+          end
         end
 
         # page number only on transparent elements
@@ -356,7 +383,7 @@ module Io::Creat::Slipstick
             @img.line( 0, y_mm + 2 * ( @h_mm - @cs_mm ), @sw_mm, y_mm + 2 * ( @h_mm - @cs_mm ), @style )
             # debugging mode, outline borders of area visible in the stock
             if not RELEASE
-              @img.text( @sw_mm / 2, y_mm + @cs_mm + @h_mm / 2, @version, STYLE_BRAND )
+              @img.text( @sw_mm / 2, y_mm + @h_mm - @cs_mm - 4, @version, STYLE_BRAND )
             end
             if both
               # power scales side
