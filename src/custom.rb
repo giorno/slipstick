@@ -122,5 +122,60 @@ module Io::Creat::Slipstick
 
   end # BinGradeScale
 
+  class DegGradeScale < CustomScale
+
+    def label ( val )
+      if not @labels
+        return nil
+      end
+      return val == 0 ? "DEG 0\u00b0\u00a0\u00a0\u00a0" : ( val % 15 == 0 ? "\u00a0%d\u00b0" % val : nil )
+    end
+
+    def height_index ( val )
+      return val % 15 == 0 ? 0 : ( val % 5 == 0 ? 1 : 3 )
+    end
+
+  end # DegGradeScale
+
+  class RadGradeScale < CustomScale
+
+    def label ( val )
+      if not @labels
+        return nil
+      end
+      return val == 0 ? "RAD 0\u00a0\u00a0\u00a0\u00a0" : ( val % 1 == 0 ? "%d" % val : nil )
+    end
+
+    def height_index ( val )
+      return val % 1 == 0 ? 0 : ( val % 0.5 == 0 ? 1 : ( ( val * 10 ).round( 1 ) % 1 == 0 ? 3 : 5 ) )
+    end
+
+    def render ( )
+      super()
+      val = Math::PI
+      x_mm = @start_mm + ( ( val - @start_val ) * @scale )
+      render_tick( x_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], @labels ? "\u03c0" : nil )
+      val = 2 * Math::PI
+      x_mm = @start_mm + ( ( val - @start_val ) * @scale )
+      render_tick( x_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], @labels ? "2\u03c0" : nil )
+    end
+
+  end # RadGradeScale
+
+  class GradGradeScale < CustomScale
+
+    def label ( val )
+      if not @labels
+        return nil
+      end
+      return val == 0 ? "GRAD 0\u00a0\u00a0\u00a0\u00a0\u00a0" : ( val % 10 == 0 ? "%d" % val : nil )
+    end
+
+    def height_index ( val )
+      return val % 10 == 0 ? 0 : ( val % 5 == 0 ? 1 : 3 )
+    end
+
+  end # GradGradeScale
+
 end # Io::Creat::Slipstick
 

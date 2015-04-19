@@ -22,6 +22,9 @@ module Io::Creat::Slipstick::ScaleType
   CUST_HEX    = 100
   CUST_OCT    = 110
   CUST_BIN    = 120
+  CUST_DEG    = 130
+  CUST_RAD    = 140
+  CUST_GRAD   = 150
 end
 
 module Io::Creat::Slipstick::Layout
@@ -69,6 +72,12 @@ module Io::Creat::Slipstick::Layout
           return Io::Creat::Slipstick::OctGradeScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::CUST_BIN
           return Io::Creat::Slipstick::BinGradeScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::CUST_DEG
+          return Io::Creat::Slipstick::DegGradeScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::CUST_RAD
+          return Io::Creat::Slipstick::RadGradeScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::CUST_GRAD
+          return Io::Creat::Slipstick::GradGradeScale.new( self, label, 0, 0, h_ratio, flipped )
         else
           raise "Unrecognized scale type"
       end

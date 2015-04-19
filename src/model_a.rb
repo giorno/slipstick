@@ -222,7 +222,7 @@ module Io::Creat::Slipstick
           if ( ( @layers & LAYER_REVERSE ) != 0 )
             both = ( @layers & LAYER_FACE ) != 0
             y_mm = !both ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
-            # temperature conversion scale
+            # number system conversion scale
             strip = create_strip( @x_mm, y_mm + 2 * bp_off_mm, 5 * @hu_mm / 4, w_m_mm + w_s_mm, w_l_mm, 0, w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_HEX, "", 0.5, true )
                 scale.set_style( Io::Creat::Slipstick::Style::SMALL )
@@ -242,6 +242,20 @@ module Io::Creat::Slipstick
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_BIN, "", 0.5 )
                 scale.set_style( Io::Creat::Slipstick::Style::SMALL )
                 scale.set_params( 0.0, 256, 1.0 )
+            # angles conversion scale
+            strip = create_strip( @x_mm, y_mm + @h_mm - @cs_mm + 2 * bp_off_mm + @hu_mm / 6, 10 * @hu_mm / 12, w_m_mm + w_s_mm, w_l_mm, 0, w_a_mm )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_DEG, "", 0.5, true )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, 360, 1.0, true )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_RAD, "", 0.5 )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, ( 2 * Math::PI ), 0.05 )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_RAD, "", 0.5, true )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, ( 2 * Math::PI ), 0.05, true, false )
+              scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_GRAD, "", 0.5 )
+                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_params( 0.0, 400, 1 )
           end
         end
 
