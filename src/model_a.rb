@@ -359,8 +359,8 @@ module Io::Creat::Slipstick
             # strengthened back glue area
             @img.rectangle( @x_mm, y_mm + @hu_mm + @t_mm, @w_mm, @h_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
             # transparent window glue area
-            @img.rectangle( @x_mm, y_mm + 1, @w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
-            @img.rectangle( @x_mm, y_mm + rh_mm - 5, @w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+            @img.rectangle( @x_mm, y_mm + 2, @w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+            @img.rectangle( @x_mm, y_mm + rh_mm - 6, @w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
           end
           if ( @layers & LAYER_FACE ) != 0
             # cutting guidelines for the stator
