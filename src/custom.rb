@@ -152,12 +152,10 @@ module Io::Creat::Slipstick
 
     def render ( )
       super()
-      val = Math::PI
-      x_mm = @start_mm + ( ( val - @start_val ) * @scale )
-      render_tick( x_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], @labels ? "\u03c0" : nil )
-      val = 2 * Math::PI
-      x_mm = @start_mm + ( ( val - @start_val ) * @scale )
-      render_tick( x_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], @labels ? "2\u03c0" : nil )
+      { Math::PI / 2 => 'π/2', Math::PI => 'π', 2 * Math::PI => '2π' }.each do | val, label |
+        x_mm = @start_mm + ( ( val - @start_val ) * @scale )
+        render_tick( x_mm, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], @labels ? label : nil )
+      end
     end
 
   end # RadGradeScale
