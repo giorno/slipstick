@@ -68,7 +68,7 @@ module Io::Creat::Slipstick
       if not @labels
         return nil
       end
-      return val == 0 ? "HEX 0\u00a0\u00a0\u00a0\u00a0" : ( val % 8 == 0 ? "%x" % val : nil )
+      return val == 0 ? "HEX 0\u00a0\u00a0\u00a0\u00a0\u00a0" : ( val % 8 == 0 ? "%x" % val : nil )
     end
 
     def height_index ( val )
@@ -83,7 +83,7 @@ module Io::Creat::Slipstick
       if not @labels
         return nil
       end
-      return val == 0 ? "DEC 0\u00a0\u00a0\u00a0\u00a0" : ( val % 10 == 0 ? "%d" % val : nil )
+      return val == 0 ? "DEC 0\u00a0\u00a0\u00a0\u00a0\u00a0" : ( val % 10 == 0 ? "%d" % val : nil )
     end
 
     def height_index ( val )
@@ -98,7 +98,7 @@ module Io::Creat::Slipstick
       if not @labels
         return nil
       end
-      return val == 0 ? "OCT 0\u00a0\u00a0\u00a0\u00a0" : ( val % 8 == 0 ? "%d" % val.round.to_s( 8 ) : nil )
+      return val == 0 ? "OCT 0\u00a0\u00a0\u00a0\u00a0\u00a0" : ( val % 8 == 0 ? "%d" % val.round.to_s( 8 ) : nil )
     end
 
     def height_index ( val )
@@ -113,7 +113,7 @@ module Io::Creat::Slipstick
       if not @labels
         return nil
       end
-      return val == 0 ? "BIN 0\u00a0\u00a0\u00a0\u00a0" : ( val % 16 == 0 ? "%d" % val.round.to_s( 2 ) : nil )
+      return val == 0 ? "BIN 0\u00a0\u00a0\u00a0\u00a0\u00a0" : ( val % 16 == 0 ? "%d" % val.round.to_s( 2 ) : nil )
     end
 
     def height_index ( val )
@@ -128,7 +128,7 @@ module Io::Creat::Slipstick
       if not @labels
         return nil
       end
-      return val == 0 ? "DEG 0\u00b0\u00a0\u00a0\u00a0" : ( val % 15 == 0 ? "\u00a0%d\u00b0" % val : nil )
+      return val == 0 ? "DEG 0\u00b0\u00a0\u00a0\u00a0\u00a0" : ( val % 15 == 0 ? "\u00a0%d\u00b0" % val : nil )
     end
 
     def height_index ( val )
@@ -143,7 +143,7 @@ module Io::Creat::Slipstick
       if not @labels
         return nil
       end
-      return val == 0 ? "RAD 0\u00a0\u00a0\u00a0\u00a0" : ( val % 1 == 0 ? "%d" % val : nil )
+      return val == 0 ? "RAD 0\u00a0\u00a0\u00a0\u00a0\u00a0" : ( val % 1 == 0 ? "%d" % val : nil )
     end
 
     def height_index ( val )
@@ -168,7 +168,7 @@ module Io::Creat::Slipstick
       if not @labels
         return nil
       end
-      return val == 0 ? "GRAD 0\u00a0\u00a0\u00a0\u00a0\u00a0" : ( val % 10 == 0 ? "%d" % val : nil )
+      return val == 0 ? "GRAD 0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0" : ( val % 10 == 0 ? "%d" % val : nil )
     end
 
     def height_index ( val )
