@@ -12,7 +12,7 @@ module Io
         include Singleton
 
         def load ( file, lang = 'en' )
-          @strings = YAML.load_file( file )['en']
+          @strings = YAML.load_file( file )[lang]
         end
 
         def string ( key )
