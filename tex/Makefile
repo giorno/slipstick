@@ -22,11 +22,12 @@ fonts:
 	@cp ../build/Roboto*.ttf ~/.fonts
 	@fc-cache -f -v > /dev/null
 
-tex:
-	$(info Building PDF documents from TEX sources)
-	@$(XELATEX) -interaction=batchmode -output-directory=../build/ making_en.tex > /dev/null
-	@$(XELATEX) -interaction=batchmode -output-directory=../build/ using_en.tex > /dev/null
-	@$(XELATEX) -interaction=batchmode -output-directory=../build/ printing_en.tex > /dev/null
+tex: en_tex
+%_tex:
+	$(info Building PDF documents from TEX sources, localization $*)
+	@$(XELATEX) -interaction=batchmode -output-directory=../build/ making_$*.tex > /dev/null
+	@$(XELATEX) -interaction=batchmode -output-directory=../build/ using_$*.tex > /dev/null
+	@$(XELATEX) -interaction=batchmode -output-directory=../build/ printing_$*.tex > /dev/null
 
 check_xelatex:
 	$(info Checking if XELATEX is installed)

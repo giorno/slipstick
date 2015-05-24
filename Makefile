@@ -55,27 +55,30 @@ endif
 tex :
 	@$(MAKE) -C tex all
 
+LANGUAGES = en sk
 
-# Builds printouts for Model A
-model_a :
-	$(info Generating Model A)
-	@src/model_a.rb en stock face | xmllint --format - > build/model_a_stock_face.svg
-	@src/model_a.rb en stock reverse | xmllint --format - > build/model_a_stock_reverse.svg 
-	@src/model_a.rb en slide face | xmllint --format - > build/model_a_slide_face.svg
-	@src/model_a.rb en slide reverse | xmllint --format - > build/model_a_slide_reverse.svg 
-	@src/model_a.rb en transp face | xmllint --format - > build/model_a_transp_face.svg
-	@src/model_a.rb en transp reverse | xmllint --format - > build/model_a_transp_reverse.svg 
-	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_stock_face.pdf $(shell pwd)/build/model_a_stock_face.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_stock_reverse.pdf $(shell pwd)/build/model_a_stock_reverse.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_slide_face.pdf $(shell pwd)/build/model_a_slide_face.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_slide_reverse.pdf $(shell pwd)/build/model_a_slide_reverse.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_transp_face.pdf $(shell pwd)/build/model_a_transp_face.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/model_a_transp_reverse.pdf $(shell pwd)/build/model_a_transp_reverse.svg
-	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/model_a.pdf build/model_a_stock_face.pdf build/model_a_stock_reverse.pdf build/model_a_slide_face.pdf build/model_a_slide_reverse.pdf build/model_a_transp_face.pdf build/model_a_transp_reverse.pdf build/making_en.pdf build/using_en.pdf
-	@echo "Result PDF's are in directory 'build'"
+# Builds printouts for Instrument A
+model_a : en_model_a sk_model_a
+
+%_model_a :
+	$(info Generating Instrument A, localization $* )
+	@src/model_a.rb $* stock face | xmllint --format - > build/$*_model_a_stock_face.svg
+	@src/model_a.rb $* stock reverse | xmllint --format - > build/$*_model_a_stock_reverse.svg 
+	@src/model_a.rb $* slide face | xmllint --format - > build/$*_model_a_slide_face.svg
+	@src/model_a.rb $* slide reverse | xmllint --format - > build/$*_model_a_slide_reverse.svg 
+	@src/model_a.rb $* transp face | xmllint --format - > build/$*_model_a_transp_face.svg
+	@src/model_a.rb $* transp reverse | xmllint --format - > build/$*_model_a_transp_reverse.svg 
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_stock_face.pdf $(shell pwd)/build/$*_model_a_stock_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_stock_reverse.pdf $(shell pwd)/build/$*_model_a_stock_reverse.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_face.pdf $(shell pwd)/build/$*_model_a_slide_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_reverse.pdf $(shell pwd)/build/$*_model_a_slide_reverse.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_transp_face.pdf $(shell pwd)/build/$*_model_a_transp_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_transp_reverse.pdf $(shell pwd)/build/$*_model_a_transp_reverse.svg
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a.pdf build/$*_model_a_stock_face.pdf build/$*_model_a_stock_reverse.pdf build/$*_model_a_slide_face.pdf build/$*_model_a_slide_reverse.pdf build/$*_model_a_transp_face.pdf build/$*_model_a_transp_reverse.pdf build/making_en.pdf build/using_en.pdf
+	@echo "Result PDF: build/$*_model_a.pdf"
 
 model_a_debug :
-	@echo "Generating debug (all layers) SVG's of Model A"
+	@echo "Generating debug (all layers) SVG's of Instrument A"
 	@src/model_a.rb en stock both | xmllint --format - > build/model_a_stock_both.svg
 	@src/model_a.rb en slide both | xmllint --format - > build/model_a_slide_both.svg
 	@src/model_a.rb en transp both | xmllint --format - > build/model_a_transp_both.svg
