@@ -62,7 +62,7 @@ en:
   nautical_miles:       "nautical miles"
   ounce:                "ounce"
   ounces:               "ounces"
-  pound:                 "pound"
+  pound:                "pound"
   pounds:               "pounds"
   stone:                "stone"
   stones:               "stones"
@@ -85,6 +85,15 @@ en:
   ha:                   "ha"
   l:                    "l"
   m²:                   "m²"
+  # operation
+  multiply_divide:      "multiply, divide"
+  recipr_division:      "reciprocal division"
+  power_radix:          "power, radix"
+  cube_root:            "cube root"
+  logarithm:            "logarithm"
+  sine:                 "sine"
+  tangent:              "tangent"
+  cosine:               "cosine"
   
 sk:
   # page numbers
@@ -172,4 +181,13 @@ sk:
   ha:                   "ha"
   l:                    "l"
   m²:                   "m²"
+  # operation
+  multiply_divide:      "násobenie, delenie"
+  recipr_division:      "recipročné delenie"
+  power_radix:          "mocnina, odmocnina"
+  cube_root:            "tretia odmocnina"
+  logarithm:            "logaritmus"
+  sine:                 "sínus"
+  tangent:              "tangens"
+  cosine:               "kosínus"
 
