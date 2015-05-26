@@ -22,7 +22,7 @@ fonts:
 	@cp ../build/Roboto*.ttf ~/.fonts
 	@fc-cache -f -v > /dev/null
 
-tex: en_tex
+tex: en_tex sk_tex
 %_tex:
 	$(info Building PDF documents from TEX sources, localization $*)
 	@$(XELATEX) -interaction=batchmode -output-directory=../build/ making_$*.tex > /dev/null
