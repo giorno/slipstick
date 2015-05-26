@@ -1,5 +1,6 @@
 ---
 en:
+  slide_rule:           "SLIDE RULE"
   # page numbers
   part_stock:           "STOCK"
   part_cursor:          "CURSOR"
@@ -96,6 +97,7 @@ en:
   cosine:               "cosine"
   
 sk:
+  slide_rule:           "LOG. PRAVÍTKO"
   # page numbers
   part_stock:           "PEVNÁ ČASŤ"
   part_cursor:          "BEŽEC"

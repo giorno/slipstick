@@ -31,8 +31,7 @@ module Io::Creat::Slipstick
       # branding/version texts
       RELEASE       = false
       BRAND         = "CREAT.IO"
-      MODEL         = "INSTRUMENT A"
-      VERSION       = "v.1.0"
+      MODEL         = "SR-M1A0"
       HEIGHT_BRAND  = 2.2
       STYLE_BRAND   = { "font-size" => "2.4",
                         "font-family" => "Slipstick Sans Mono",
@@ -50,7 +49,7 @@ module Io::Creat::Slipstick
         @i18n = Io::Creat::Slipstick::I18N.instance
         @img.pattern( 'glued', 3 )
         if RELEASE
-          @version = "%s %s" % [ MODEL, VERSION ]
+          @version = "%s %s" % [ @i18n.string( 'slide_rule'), MODEL ]
         else
           @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
         end
@@ -370,10 +369,8 @@ module Io::Creat::Slipstick
               brand.sett( BRAND, true )
               brand.render()
             brand = PageNoBackprint.new( @img, @x_mm + 174, @y_mm + 105, HEIGHT_BRAND )
-              brand.sett( "%s %s" % [ MODEL, VERSION ], true )
+              brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), MODEL ], true )
               brand.render()
-            #@img.text( @x_mm + 168, @y_mm + 6, BRAND, STYLE_BRAND )
-            #@img.text( @x_mm + 174, @y_mm + 105, "%s %s" % [ MODEL, VERSION ], STYLE_BRAND )
             bottom_off_mm = 15.0
             bottom_mm = @y_mm + bottom_off_mm + @hl_mm + @t_mm
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
@@ -410,7 +407,7 @@ module Io::Creat::Slipstick
           end
           if ( ( @layers & LAYER_FACE ) != 0 )
             brand = PageNoBackprint.new( @img, @sw_mm - 25, @y_mm + 2 * ( @h_mm - @cs_mm ) - 4, HEIGHT_BRAND )
-              brand.sett( "%s %s %s" % [ BRAND, MODEL, VERSION ], true )
+              brand.sett( "%s %s %s" % [ BRAND, @i18n.string( 'slide_rule'), MODEL ], true )
               brand.render()
           end
         end
