@@ -1,6 +1,8 @@
 .PHONY: fonts tex
 
 OS=$(shell uname -s)
+BRAND="creat.io-sr-m1a0"
+
 ifeq ($(OS),Darwin)
 	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
 else
@@ -75,7 +77,8 @@ model_a : en_model_a sk_model_a
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_transp_face.pdf $(shell pwd)/build/$*_model_a_transp_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_transp_reverse.pdf $(shell pwd)/build/$*_model_a_transp_reverse.svg
 	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a.pdf build/$*_model_a_stock_face.pdf build/$*_model_a_stock_reverse.pdf build/$*_model_a_slide_face.pdf build/$*_model_a_slide_reverse.pdf build/$*_model_a_transp_face.pdf build/$*_model_a_transp_reverse.pdf build/printing_$*.pdf build/making_$*.pdf build/using_$*.pdf
-	@echo "Result PDF: build/$*_model_a.pdf"
+	@cp build/$*_model_a.pdf build/$(BRAND)-$*.pdf
+	@echo "Result PDF: build/$(BRAND)-$*.pdf"
 
 model_a_debug :
 	@echo "Generating debug (all layers) SVG's of Instrument A"
