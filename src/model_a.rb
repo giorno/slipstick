@@ -29,7 +29,7 @@ module Io::Creat::Slipstick
       LAYER_TRANSP  = 0x10 # gneerate transparent elements
 
       # branding/version texts
-      RELEASE       = false
+      RELEASE       = true
       BRAND         = "CREAT.IO"
       MODEL         = "SR-M1A0"
       HEIGHT_BRAND  = 2.2
