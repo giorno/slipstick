@@ -29,9 +29,9 @@ module Io::Creat::Slipstick
       LAYER_TRANSP  = 0x10 # gneerate transparent elements
 
       # branding/version texts
-      RELEASE       = true
+      RELEASE       = false
       BRAND         = "CREAT.IO"
-      MODEL         = "SR-M1A0"
+      MODEL         = "SR-M1A1"
       HEIGHT_BRAND  = 2.2
       STYLE_BRAND   = { "font-size" => "2.4",
                         "font-family" => "Slipstick Sans Mono",
