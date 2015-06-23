@@ -1,7 +1,7 @@
 .PHONY: fonts tex
 
 OS=$(shell uname -s)
-BRAND="creat.io-sr-m1a0"
+BRAND="creat.io-sr-m1a1"
 
 ifeq ($(OS),Darwin)
 	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
