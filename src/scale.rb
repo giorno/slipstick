@@ -91,7 +91,13 @@ module Io::Creat::Slipstick
                  { "stroke" => @style[style][Io::Creat::Slipstick::Key::LINE_COLOR],
                    "stroke-width" => "%f" % @style[style][Io::Creat::Slipstick::Key::LINE_WIDTH],
                    "stroke-linecap" => "butt" } )
+      render_tick_label( x_mm, h_mm, label, style )
+    end
+
+    protected
+    def render_tick_label ( x_mm, h_mm, label = nil, style = Io::Creat::Slipstick::Entity::TICK )
       if not label.nil?
+        flip = @flipped ? -1 : 1
         font_size_mm = @style[style][Io::Creat::Slipstick::Key::FONT_SIZE]
         @img.text( "%f" % ( @off_x_mm + x_mm + ( style == Io::Creat::Slipstick::Entity::CONSTANT ? -font_size_mm * 0.05 : 0 ) ),
                    "%f" % ( flip * h_mm + @off_y_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ), # compensation for ignored (by viewers) vertical alignments

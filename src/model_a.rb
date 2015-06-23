@@ -222,7 +222,7 @@ module Io::Creat::Slipstick
             both = ( @layers & LAYER_FACE ) != 0
             y_mm = !both ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
             # number system conversion scale
-            strip = create_strip( @x_mm, y_mm + 2 * bp_off_mm, 5 * @hu_mm / 4, w_m_mm + w_s_mm, w_l_mm, 0, w_a_mm )
+            strip = create_strip( @x_mm, y_mm + 1.5 * bp_off_mm, 5 * @hu_mm / 4, w_m_mm + w_s_mm, w_l_mm, 0, w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_HEX, "", 0.5, true )
                 scale.set_style( Io::Creat::Slipstick::Style::SMALL )
                 scale.set_params( 0.0, 256, 1.0, true )

@@ -108,16 +108,37 @@ module Io::Creat::Slipstick
   end # OctGradeScale
 
   class BinGradeScale < CustomScale
+    GROUP_SIZE = 4.0
 
     def label ( val )
-      if not @labels
-        return nil
-      end
-      return val == 0 ? "BIN 0\u00a0\u00a0\u00a0\u00a0\u00a0" : ( val % 16 == 0 ? "%d" % val.round.to_s( 2 ) : nil )
+      bin = val.round.to_s( 2 )
+      return bin.rjust( GROUP_SIZE * ( bin.length / GROUP_SIZE ).ceil(), '0' )
     end
 
     def height_index ( val )
-      return val % 16 == 0 ? 0 : ( val % 8 == 0 ? 1 : 3 )
+      return 0
+    end
+
+    # label is a sequence of zeros and ones
+    def render_tick( x_mm, h_mm, label )
+      if label == '0000'
+        render_tick_label( x_mm, h_mm, "BIN\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0" )
+      end
+      step_mm = @scale * @step_val
+      w_mm = step_mm * 0.6
+      
+      label.split( "" ).reverse.each_with_index do | digit, i |
+        if digit == '1'
+          fill = "black"
+        else
+          fill = "none"
+        end
+        groups = ( i / GROUP_SIZE ).floor()
+        # square boxes
+        @img.rectangle( @off_x_mm + x_mm - w_mm / 2, @off_y_mm + ( groups * step_mm / 4 ) + i * step_mm + w_mm, w_mm, w_mm, { "fill" => fill, "stroke" => "black", "stroke-width" => "0.1" } )
+        # circular boxes
+        #@img.circle( @off_x_mm + x_mm, @off_y_mm + ( groups * step_mm / 4 ) + i * step_mm + w_mm, w_mm / 2, { "fill" => fill, "stroke" => "black", "stroke-width" => "0.1" } )
+      end
     end
 
   end # BinGradeScale
