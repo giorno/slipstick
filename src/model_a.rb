@@ -415,32 +415,36 @@ module Io::Creat::Slipstick
         # [transparent] elements cutting lines
         if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           style = @style.merge( { :stroke_width => @style[:stroke_width] * 2 } )
-          # stock part
-          @img.line( 0, @y_mm, @sw_mm, @y_mm, style )
-          @img.line( 0, @y_mm + @h_mm, @sw_mm, @y_mm + @h_mm, style )
-          @img.text( @sw_mm / 2, @y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], STYLE_BRAND )
-          if not RELEASE
-            @img.text( @sw_mm / 2, @y_mm + @h_mm - 4 , @version, STYLE_BRAND )
+          # two stock part
+          [ @y_mm, @y_mm + @h_mm + 10 ].each do | y_mm |
+            @img.line( 0, y_mm, @sw_mm, y_mm, style )
+            @img.line( 0, y_mm + @h_mm, @sw_mm, y_mm + @h_mm, style )
+            @img.text( @sw_mm / 2, y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], STYLE_BRAND )
+            if not RELEASE
+              @img.text( @sw_mm / 2, y_mm + @h_mm - 4 , @version, STYLE_BRAND )
+            end
           end
-          # cursor part
-          x_mm = ( @sw_mm - @ch_mm ) / 2
-          y_mm = 3 * @y_mm + @h_mm
-          @img.line( x_mm, y_mm, x_mm - @hint_mm, y_mm, style )
-          @img.rtext( x_mm - 2 * @hint_mm, y_mm, -90, '1', STYLE_BRAND )
-          @img.line( x_mm, y_mm, x_mm, y_mm - @hint_mm, style )
-          @img.text( x_mm, y_mm - 2 * @hint_mm, '2', STYLE_BRAND )
-          @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm + @hint_mm, y_mm, style )
-          @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm, -90, '1', STYLE_BRAND )
-          @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm, y_mm - @hint_mm, style )
-          @img.text( x_mm + @ch_mm, y_mm - 2 * @hint_mm, '3', STYLE_BRAND )
-          @img.line( x_mm - @hint_mm, y_mm + @cw_mm, x_mm + @ch_mm + @hint_mm, y_mm + @cw_mm, style )
-          @img.text( x_mm, y_mm + @cw_mm + 3 * @hint_mm, '2', STYLE_BRAND )
-          @img.rtext( x_mm - 2 * @hint_mm, y_mm + @cw_mm, -90, '4', STYLE_BRAND )
-          @img.line( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm + @hint_mm, style )
-          @img.text( x_mm + @ch_mm, y_mm + @cw_mm + 3 * @hint_mm, '3', STYLE_BRAND )
-          @img.line( x_mm + @ch_mm, y_mm + @cw_mm, x_mm + @ch_mm, y_mm + @cw_mm + @hint_mm, style )
-          @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm + @cw_mm, -90, '4', STYLE_BRAND )
-          @img.text( x_mm + @ch_mm / 2, y_mm + @cw_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_cursor' ), @ch_mm, @cw_mm ], STYLE_BRAND )
+          # two cursor parts
+          y_mm = @y_mm + 2 * @h_mm + 22.5
+          [ ( @sw_mm / 4 ) - ( @ch_mm / 2 ), ( 3 * @sw_mm / 4 ) - ( @ch_mm / 2 ) ].each do | x_mm |
+            #x_mm = ( @sw_mm - @ch_mm ) / 2
+            @img.line( x_mm, y_mm, x_mm - @hint_mm, y_mm, style )
+            @img.rtext( x_mm - 2 * @hint_mm, y_mm, -90, '1', STYLE_BRAND )
+            @img.line( x_mm, y_mm, x_mm, y_mm - @hint_mm, style )
+            @img.text( x_mm, y_mm - 2 * @hint_mm, '2', STYLE_BRAND )
+            @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm + @hint_mm, y_mm, style )
+            @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm, -90, '1', STYLE_BRAND )
+            @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm, y_mm - @hint_mm, style )
+            @img.text( x_mm + @ch_mm, y_mm - 2 * @hint_mm, '3', STYLE_BRAND )
+            @img.line( x_mm - @hint_mm, y_mm + @cw_mm, x_mm + @ch_mm + @hint_mm, y_mm + @cw_mm, style )
+            @img.text( x_mm, y_mm + @cw_mm + 3 * @hint_mm, '2', STYLE_BRAND )
+            @img.rtext( x_mm - 2 * @hint_mm, y_mm + @cw_mm, -90, '4', STYLE_BRAND )
+            @img.line( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm + @hint_mm, style )
+            @img.text( x_mm + @ch_mm, y_mm + @cw_mm + 3 * @hint_mm, '3', STYLE_BRAND )
+            @img.line( x_mm + @ch_mm, y_mm + @cw_mm, x_mm + @ch_mm, y_mm + @cw_mm + @hint_mm, style )
+            @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm + @cw_mm, -90, '4', STYLE_BRAND )
+            @img.text( x_mm + @ch_mm / 2, y_mm + @cw_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_cursor' ), @ch_mm, @cw_mm ], STYLE_BRAND )
+          end
         end
 
         # backprints
