@@ -1,7 +1,7 @@
 
 require_relative 'constants'
 require_relative 'strip'
-require_relative 'svg'
+require_relative '../svg/src/svg'
 
 module Io::Creat::Slipstick::Layout
 
