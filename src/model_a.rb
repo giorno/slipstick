@@ -465,16 +465,19 @@ end # Io::Creat::Slipstick
 
 def usage ( )
   $stderr.puts "Usage: #{$0} <lang> <stator|slide|transp> [both|face|reverse]\n\nOutputs SVG for given element and printout side.\n"
-  $stderr.puts " lang   .. language code for internationalized strings, supported: en"
-  $stderr.puts " stator .. stock element of slide rule (static)"
-  $stderr.puts " slide  .. sliding element of slide rule"
-  $stderr.puts " transp .. transparent elements (tracing paper)"
+  $stderr.puts " lang    .. language code for internationalized strings, supported: en, sk"
+  $stderr.puts " stator  .. stock element of slide rule (static)"
+  $stderr.puts " slide   .. sliding element of slide rule"
+  $stderr.puts " transp  .. transparent elements (tracing paper)"
+  $stderr.puts " both    .. generate both sides of the printout"
+  $stderr.puts " face    .. generate face side of the printout"
+  $stderr.puts " reverse .. generate reverse side of the printout"
 end
 
 layers = 0
 if ARGV.length <= 1
   usage( )
-  raise "Requires language code as the first parameter and either 'stock' or 'slide' as the second"
+  exit
 end
 
 if ARGV.length >= 2
