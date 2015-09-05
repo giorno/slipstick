@@ -47,8 +47,8 @@ module Io::Creat::Slipstick::Backprints
                  y_mm,
                  @x_mm,
                  y_mm,
-                 { :stroke => @style[Io::Creat::Slipstick::Key::LINE_COLOR],
-                   :stroke_width => @style[Io::Creat::Slipstick::Key::LINE_WIDTH],
+                 { :stroke => @style[:stroke],
+                   :stroke_width => @style[:stroke_width],
                    :stroke_linecap => 'butt' } )
 
       if label.nil? then return end
@@ -56,17 +56,17 @@ module Io::Creat::Slipstick::Backprints
         label = "\u00a0" + label
       end
       label = label + ' ' + @suffix
-      @img.rtext( @x_mm + ( @l2r ? 1 + h_mm : - h_mm - @style[Io::Creat::Slipstick::Key::FONT_SIZE] ),
+      @img.rtext( @x_mm + ( @l2r ? 1 + h_mm : - h_mm - @style[:font_size] ),
                   y_mm,
                   90,
                   label,
-                  { :fill => @style[Io::Creat::Slipstick::Key::FONT_COLOR],
-                    :font_size => "%f" % @style[Io::Creat::Slipstick::Key::FONT_SIZE],
-                    :font_family => @style[Io::Creat::Slipstick::Key::FONT_FAMILY],
-                    :font_style => @style[Io::Creat::Slipstick::Key::FONT_STYLE],
+                  { :fill => @style[:fill],
+                    :font_size => "%f" % @style[:font_size],
+                    :font_family => @style[:font_family],
+                    :font_style => @style[:font_style],
                     :text_anchor => "middle",
-                    :letter_spacing => "%gem" % @style[Io::Creat::Slipstick::Key::FONT_SPACING],
-                    :font_weight => @style[Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
+                    :letter_spacing => "%gem" % @style[:letter_spacing],
+                    :font_weight => @style[:font_weight] } )
     end
   
   end # BottomUpLinearScale

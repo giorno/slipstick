@@ -15,15 +15,15 @@ module Io::Creat::Slipstick::Layout
     public
     def render ( )
         @img.text( "%f" % @off_x_mm,
-                   "%f" % ( @off_y_mm + @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] ),
+                   "%f" % ( @off_y_mm + @style[Io::Creat::Slipstick::Entity::TICK][:font_size] ),
                    "%s" % @label,
-                   { "fill" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_COLOR],
-                     "font-size" => "%f" % @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE],
-                     "font-family" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_FAMILY],
-                     "font-style" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_STYLE],
-                     "text-anchor" => "left",
+                   { :fill => @style[Io::Creat::Slipstick::Entity::TICK][:fill],
+                     :font_size => "%f" % @style[Io::Creat::Slipstick::Entity::TICK][:font_size],
+                     :font_family => @style[Io::Creat::Slipstick::Entity::TICK][:font_family],
+                     :font_style => @style[Io::Creat::Slipstick::Entity::TICK][:font_style],
+                     :text_anchor => "left",
                      #"dominant-baseline" => "hanging", # seems to be ignored by viewers
-                     "font-weight" => @style[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_WEIGHT] } )
+                     :font_weight => @style[Io::Creat::Slipstick::Entity::TICK][:font_weight] } )
       
     end
   end
@@ -53,7 +53,7 @@ module Io::Creat::Slipstick::Layout
     public
     def create_label ( label )
       caption = Caption.new( self, 0, @y_tracker_mm, label )
-      @y_tracker_mm += caption.instance_variable_get( :@style )[Io::Creat::Slipstick::Entity::TICK][Io::Creat::Slipstick::Key::FONT_SIZE] + @spacing_y_mm
+      @y_tracker_mm += caption.instance_variable_get( :@style )[Io::Creat::Slipstick::Entity::TICK][:font_size] + @spacing_y_mm
       return caption
     end
 

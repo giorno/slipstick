@@ -53,7 +53,7 @@ module Io::Creat::Slipstick::Backprints
       @labels[0..1].each do | label |
         @tw_mm = [ @tw_mm, label.length ].max
       end
-      @text_style["font-size"] = @fs_mm
+      @text_style[:font_size] = @fs_mm
     end
 
     # adds number of unbreakable spaces in front of the test to make first

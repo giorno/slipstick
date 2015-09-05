@@ -33,11 +33,11 @@ module Io::Creat::Slipstick
       BRAND         = "CREAT.IO"
       MODEL         = "SR-M1A1"
       HEIGHT_BRAND  = 2.2
-      STYLE_BRAND   = { "font-size" => "2.4",
-                        "font-family" => "Slipstick Sans Mono",
-                        "font-weight" => "normal",
-                        "fill" => "black",
-                        "text-anchor" => "middle" }
+      STYLE_BRAND   = { :font_size => "2.4",
+                        :font_family => "Slipstick Sans Mono",
+                        :font_weight => "normal",
+                        :fill => "black",
+                        :text_anchor => "middle" }
       # QR code style
       STYLE_QR      = { :fill => "black", :stroke_width => "0.01", :stroke => "black" }
       PATTERN_BEND  = "1, 1" # line pattern for bent edges

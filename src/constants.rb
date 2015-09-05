@@ -5,14 +5,6 @@ module Io
     module Slipstick
 
       module Key
-        LINE_WIDTH    = 10
-        LINE_COLOR    = 20
-        FONT_FAMILY   = 100
-        FONT_WEIGHT   = 110
-        FONT_STYLE    = 120
-        FONT_COLOR    = 130
-        FONT_SIZE     = 140
-        FONT_SPACING  = 150 # SVG letter-spacing property
         TICK_HEIGHT   = 210 # relative height of a tick, depending on the range subdivision
         TICK_OVERFLOW = 220 # how far beyond the scale border the tick shall overlap
         TICK_CLEARING = 230 # minimal distance between neighbouring ticks
@@ -33,23 +25,23 @@ module Io
 
       module Style
         # style is associated with entity (per entity)
-        ENTITY = { Io::Creat::Slipstick::Key::LINE_WIDTH   => 0.11, # mm
-                   Io::Creat::Slipstick::Key::LINE_COLOR   => 'black',
-                   Io::Creat::Slipstick::Key::FONT_FAMILY  => 'Slipstick Sans Mono,Arial,Sans-serif',
-                   Io::Creat::Slipstick::Key::FONT_WEIGHT  => 'normal',
-                   Io::Creat::Slipstick::Key::FONT_STYLE   => 'normal',
-                   Io::Creat::Slipstick::Key::FONT_COLOR   => 'black',
-                   Io::Creat::Slipstick::Key::FONT_SPACING => -0.15, # em, Inkscape does not support anything else
-                   Io::Creat::Slipstick::Key::FONT_SIZE    => 3.0, # mm
+        ENTITY = { :stroke_width   => 0.11, # mm
+                   :stroke   => 'black',
+                   :font_family  => 'Slipstick Sans Mono,Arial,Sans-serif',
+                   :font_weight  => 'normal',
+                   :font_style   => 'normal',
+                   :fill   => 'black',
+                   :letter_spacing => -0.15, # em, Inkscape does not support anything else
+                   :font_size   => 3.0, # mm
                  }
         # per scale style
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,
-                    Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } ),
-                    Io::Creat::Slipstick::Entity::SCALE    => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.4, Io::Creat::Slipstick::Key::FONT_SPACING => -0.10 } ),
-                    Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { Io::Creat::Slipstick::Key::FONT_STYLE => 'oblique', Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } )
+                    Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { :font_size => 2.4 } ),
+                    Io::Creat::Slipstick::Entity::SCALE    => ENTITY.merge( { :font_size => 2.4, :letter_spacing => -0.10 } ),
+                    Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { :font_style => 'oblique', :font_size => 2.4 } )
                   }
 
-        SMALL = DEFAULT.merge( Io::Creat::Slipstick::Entity::TICK => DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => 2.4 } ) )
+        SMALL = DEFAULT.merge( Io::Creat::Slipstick::Entity::TICK => DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { "font-size" => 2.4 } ) )
       end
 
       # dimensions controlling rendering of a scale (per scale)

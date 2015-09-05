@@ -11,16 +11,16 @@ module Io::Creat::Slipstick
 
       public
       def initialize ( style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE] )
-        @line_style =  { "stroke" => style[Io::Creat::Slipstick::Key::LINE_COLOR],
-                        "stroke-width" => style[Io::Creat::Slipstick::Key::LINE_WIDTH],
-                        "stroke-linecap" => "round",
-                        "fill" => "none" }
-        @text_style = { "fill" => style[Io::Creat::Slipstick::Key::FONT_COLOR],
-                        "font-size" => style[Io::Creat::Slipstick::Key::FONT_SIZE],
-                        "font-family" => style[Io::Creat::Slipstick::Key::FONT_FAMILY],
-                        "font-style" => style[Io::Creat::Slipstick::Key::FONT_STYLE],
-                        "letter-spacing" => "%gem" % style[Io::Creat::Slipstick::Key::FONT_SPACING],
-                        "text-anchor" => "middle" }
+        @line_style =  { :stroke => style[:stroke],
+                        :stroke_width => style[:stroke_width],
+                        :stroke_linecap => "round",
+                        :fill => "none" }
+        @text_style = { :fill => style[:fill],
+                        :font_size => style[:font_size],
+                        :font_family => style[:font_family],
+                        :font_style => style[:font_style],
+                        :letter_spacing => "%gem" % style[:letter_spacing],
+                        :text_anchor => "middle" }
       end
 
     end # Scaled

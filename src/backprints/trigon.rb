@@ -20,7 +20,7 @@ module Io::Creat::Slipstick
         h_mm *= SCALE
         @r_step_mm  = h_mm / 5
         @fs_mm = @r_step_mm / 3.5
-        super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { Io::Creat::Slipstick::Key::FONT_SIZE => @fs_mm } ) )
+        super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { :font_size => @fs_mm } ) )
         @img        = img
         @overlap_mm = @r_step_mm * 0.1
         @output     = @img.instance_variable_get( :@output )
@@ -35,7 +35,7 @@ module Io::Creat::Slipstick
           rtext( alpha, r_mlp, text[div+1], 0.92 )
           return
         end
-        fh = corr * @text_style["font-size"] # font height
+        fh = corr * @text_style[:font_size] # font height
         @img.rtext( @x_mm + Math::sin( alpha ) * ( r_mlp * @r_step_mm ) + Math::cos( alpha ) * fh, @y_mm - Math::cos( alpha ) * ( r_mlp * @r_step_mm ) + Math::sin( alpha ) * fh, ( alpha * 180 / Math::PI ) - 90, text, @text_style )
       end
 
@@ -56,18 +56,18 @@ module Io::Creat::Slipstick
       def render ( )
 
         # correct the horizontal offset
-        @x_mm += 5 * @text_style["font-size"]
+        @x_mm += 5 * @text_style[:font_size]
 
-        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "\u00a0\u00a0tan = sin/cos", @text_style.merge( { "text-anchor" => "start" } ) )
-        @img.rtext( @x_mm - 4 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "cotan = cos/sin", @text_style.merge( { "text-anchor" => "start" } ) )
-        @img.rtext( @x_mm - 3 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "\u00a0\u00a0sec = 1/cos", @text_style.merge( { "text-anchor" => "start" } ) )
-        @img.rtext( @x_mm - 2 * @text_style["font-size"], @y_mm - 0 * @r_step_mm, -90, "cosec = 1/sin", @text_style.merge( { "text-anchor" => "start" } ) )
-        @img.text( @x_mm + @h_mm, @y_mm - @h_mm + @text_style["font-size"], "1 = sin² + cos²", @text_style.merge( { "text-anchor" => "end" } ) )
+        @img.rtext( @x_mm - 5 * @text_style[:font_size], @y_mm - 0 * @r_step_mm, -90, "\u00a0\u00a0tan = sin/cos", @text_style.merge( { "text-anchor" => "start" } ) )
+        @img.rtext( @x_mm - 4 * @text_style[:font_size], @y_mm - 0 * @r_step_mm, -90, "cotan = cos/sin", @text_style.merge( { "text-anchor" => "start" } ) )
+        @img.rtext( @x_mm - 3 * @text_style[:font_size], @y_mm - 0 * @r_step_mm, -90, "\u00a0\u00a0sec = 1/cos", @text_style.merge( { "text-anchor" => "start" } ) )
+        @img.rtext( @x_mm - 2 * @text_style[:font_size], @y_mm - 0 * @r_step_mm, -90, "cosec = 1/sin", @text_style.merge( { "text-anchor" => "start" } ) )
+        @img.text( @x_mm + @h_mm, @y_mm - @h_mm + @text_style[:font_size], "1 = sin² + cos²", @text_style.merge( { "text-anchor" => "end" } ) )
         # cute little graphs
-        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, -90, "cos", @text_style )
-        @img.rtext( @x_mm - 5 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, -90, "sin", @text_style )
-        graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 3.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::cos( a ) } )
-        graph( @x_mm - 4 * @text_style["font-size"], @y_mm - 4.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::sin( a ) } )
+        @img.rtext( @x_mm - 5 * @text_style[:font_size], @y_mm - 3.5 * @r_step_mm, -90, "cos", @text_style )
+        @img.rtext( @x_mm - 5 * @text_style[:font_size], @y_mm - 4.5 * @r_step_mm, -90, "sin", @text_style )
+        graph( @x_mm - 4 * @text_style[:font_size], @y_mm - 3.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::cos( a ) } )
+        graph( @x_mm - 4 * @text_style[:font_size], @y_mm - 4.5 * @r_step_mm, @r_step_mm / 1.8, @r_step_mm * 0.8, Proc.new{ | a | Math::sin( a ) } )
 
         for i in 2..5
           @img.pbegin()
@@ -95,7 +95,7 @@ module Io::Creat::Slipstick
 
       public
       def getw ( )
-        return super() + 5 * @text_style["font-size"]
+        return super() + 5 * @text_style[:font_size]
       end
 
     end # Trigonometric
