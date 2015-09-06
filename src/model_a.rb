@@ -31,7 +31,7 @@ module Io::Creat::Slipstick
       # branding/version texts
       RELEASE       = true
       BRAND         = "CREAT.IO"
-      MODEL         = "SR-M1A1"
+      MODEL         = "SR-M1A2"
       HEIGHT_BRAND  = 2.2
       STYLE_BRAND   = { :font_size => "2.4",
                         :font_family => "Slipstick Sans Mono",
