@@ -11,16 +11,8 @@ module Io::Creat::Slipstick
 
       public
       def initialize ( style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE] )
-        @line_style =  { :stroke => style[:stroke],
-                        :stroke_width => style[:stroke_width],
-                        :stroke_linecap => "round",
-                        :fill => "none" }
-        @text_style = { :fill => style[:fill],
-                        :font_size => style[:font_size],
-                        :font_family => style[:font_family],
-                        :font_style => style[:font_style],
-                        :letter_spacing => "%gem" % style[:letter_spacing],
-                        :text_anchor => "middle" }
+        @line_style = style.merge( { :stroke_linecap => 'round', :fill => 'none' } )
+        @text_style = Io::Creat::svg_dec_style_units( style.merge( { :text_anchor => 'middle' } ), Io::Creat::SVG_STYLE_TEXT )
       end
 
     end # Scaled

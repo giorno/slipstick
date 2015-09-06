@@ -47,9 +47,7 @@ module Io::Creat::Slipstick::Backprints
                  y_mm,
                  @x_mm,
                  y_mm,
-                 { :stroke => @style[:stroke],
-                   :stroke_width => @style[:stroke_width],
-                   :stroke_linecap => 'butt' } )
+                 @style.merge( { :stroke_linecap => 'butt' } ) )
 
       if label.nil? then return end
       for space in 0..@suffix.length do
@@ -60,13 +58,7 @@ module Io::Creat::Slipstick::Backprints
                   y_mm,
                   90,
                   label,
-                  { :fill => @style[:fill],
-                    :font_size => "%f" % @style[:font_size],
-                    :font_family => @style[:font_family],
-                    :font_style => @style[:font_style],
-                    :text_anchor => "middle",
-                    :letter_spacing => "%gem" % @style[:letter_spacing],
-                    :font_weight => @style[:font_weight] } )
+                  Io::Creat::svg_dec_style_units( @style.merge( { :text_anchor => 'middle' } ) ) )
     end
   
   end # BottomUpLinearScale

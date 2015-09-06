@@ -1,4 +1,6 @@
 
+# vim: et
+
 # also initializes basic namespaces
 module Io
   module Creat
@@ -26,13 +28,13 @@ module Io
       module Style
         # style is associated with entity (per entity)
         ENTITY = { :stroke_width   => 0.11, # mm
-                   :stroke   => 'black',
-                   :font_family  => 'Slipstick Sans Mono,Arial,Sans-serif',
-                   :font_weight  => 'normal',
-                   :font_style   => 'normal',
-                   :fill   => 'black',
+                   :stroke         => 'black',
+                   :font_family    => 'Slipstick Sans Mono,Arial,Sans-serif',
+                   :font_weight    => 'normal',
+                   :font_style     => 'normal',
+                   :fill           => 'black',
                    :letter_spacing => -0.15, # em, Inkscape does not support anything else
-                   :font_size   => 3.0, # mm
+                   :font_size      => 3.0, # mm
                  }
         # per scale style
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,

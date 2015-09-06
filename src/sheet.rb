@@ -2,6 +2,7 @@
 require_relative 'constants'
 require_relative 'strip'
 require_relative '../svg/src/svg'
+require_relative '../svg/src/style'
 
 module Io::Creat::Slipstick::Layout
 
@@ -17,13 +18,7 @@ module Io::Creat::Slipstick::Layout
         @img.text( "%f" % @off_x_mm,
                    "%f" % ( @off_y_mm + @style[Io::Creat::Slipstick::Entity::TICK][:font_size] ),
                    "%s" % @label,
-                   { :fill => @style[Io::Creat::Slipstick::Entity::TICK][:fill],
-                     :font_size => "%f" % @style[Io::Creat::Slipstick::Entity::TICK][:font_size],
-                     :font_family => @style[Io::Creat::Slipstick::Entity::TICK][:font_family],
-                     :font_style => @style[Io::Creat::Slipstick::Entity::TICK][:font_style],
-                     :text_anchor => "left",
-                     #"dominant-baseline" => "hanging", # seems to be ignored by viewers
-                     :font_weight => @style[Io::Creat::Slipstick::Entity::TICK][:font_weight] } )
+                   Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::TICK] ) )
       
     end
   end
