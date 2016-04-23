@@ -1,6 +1,8 @@
 
 # vim: et
 
+require_relative '../svg/src/style'
+
 # also initializes basic namespaces
 module Io
   module Creat
@@ -26,21 +28,11 @@ module Io
       end
 
       module Style
-        # style is associated with entity (per entity)
-        ENTITY = { :stroke_width   => 0.11, # mm
-                   :stroke         => 'black',
-                   :font_family    => 'Slipstick Sans Mono,Arial,Sans-serif',
-                   :font_weight    => 'normal',
-                   :font_style     => 'normal',
-                   :fill           => 'black',
-                   :letter_spacing => -0.15, # em, Inkscape does not support anything else
-                   :font_size      => 3.0, # mm
-                 }
         # per scale style
-        DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => ENTITY,
-                    Io::Creat::Slipstick::Entity::LOTICK   => ENTITY.merge( { :font_size => 2.4 } ),
-                    Io::Creat::Slipstick::Entity::SCALE    => ENTITY.merge( { :font_size => 2.4, :letter_spacing => -0.10 } ),
-                    Io::Creat::Slipstick::Entity::CONSTANT => ENTITY.merge( { :font_style => 'oblique', :font_size => 2.4 } )
+        DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => Io::Creat::SVG_STYLE,
+                    Io::Creat::Slipstick::Entity::LOTICK   => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4 } ),
+                    Io::Creat::Slipstick::Entity::SCALE    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :letter_spacing => -0.10 } ),
+                    Io::Creat::Slipstick::Entity::CONSTANT => Io::Creat::SVG_STYLE.merge( { :font_style => 'oblique', :font_size => 2.4 } )
                   }
 
         SMALL = DEFAULT.merge( Io::Creat::Slipstick::Entity::TICK => DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { "font-size" => 2.4 } ) )
@@ -64,6 +56,7 @@ module Io
                   }
       end
 
+      
       module Flag
         RENDER_SUBSCALE   = 1
         RENDER_AFTERSCALE = 2
