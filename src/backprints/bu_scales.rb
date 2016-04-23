@@ -58,7 +58,7 @@ module Io::Creat::Slipstick::Backprints
                   y_mm,
                   90,
                   label,
-                  Io::Creat::svg_dec_style_units( @style.merge( { :text_anchor => 'middle' } ) ) )
+                  Io::Creat::svg_dec_style_units( @style.merge( { :text_anchor => 'middle' } ), Io::Creat::SVG_STYLE_TEXT ) )
     end
   
   end # BottomUpLinearScale
