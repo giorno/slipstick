@@ -14,6 +14,7 @@ require_relative 'backprints/pageno'
 require_relative 'backprints/scales'
 require_relative 'backprints/trigon'
 
+include Io::Creat
 include Io::Creat::Slipstick::Backprints
 
 module Io::Creat::Slipstick
@@ -33,11 +34,6 @@ module Io::Creat::Slipstick
       BRAND         = "CREAT.IO"
       MODEL         = "SR-M1A2"
       HEIGHT_BRAND  = 2.2
-      STYLE_BRAND   = { :font_size => "2.4",
-                        :font_family => "Slipstick Sans Mono",
-                        :font_weight => "normal",
-                        :fill => "black",
-                        :text_anchor => "middle" }
       # QR code style
       STYLE_QR      = { :fill => "black", :stroke_width => "0.01", :stroke => "black" }
       PATTERN_BEND  = "1, 1" # line pattern for bent edges
@@ -76,6 +72,10 @@ module Io::Creat::Slipstick
         w_l_mm = 7.0
         w_s_mm = 23.0
         w_a_mm = 7.0
+
+        @style_branding = @style[Io::Creat::Slipstick::Entity::BRANDING]
+        @style_pageno = @style[Io::Creat::Slipstick::Entity::PAGENO]
+        @style_aux = Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::AUX], SVG_STYLE_TEXT )
 
         # scales of the stator
         if ( ( @layers & LAYER_STOCK ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
@@ -156,7 +156,7 @@ module Io::Creat::Slipstick
             @bp_x_mm += @bp_border_mm / 2 + cbp.getw()
 
           # page number
-          pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
+          pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6, @style_pageno )
             pn.sett( '%s + %s (210 g/m²)' % [ @i18n.string( 'part_stock' ), @i18n.string( 'part_cursor' )  ] )
             @bprints << pn
        end
@@ -194,7 +194,7 @@ module Io::Creat::Slipstick
             @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - bp_off_mm, bp_gap_mm, ConversionBackprint::LENGTHS )
 
             # page number
-            pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
+            pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6, @style_pageno )
               pn.sett( '%s (210 g/m²)' % @i18n.string( 'part_slide' ) )
               @bprints << pn
 
@@ -261,7 +261,7 @@ module Io::Creat::Slipstick
         # page number only on transparent elements
         if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           # page number
-          pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6 )
+          pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6, @style_pageno )
             pn.sett( '%s (%s)' % [ @i18n.string( 'part_transp' ), @i18n.string( 'tracing_paper' ) ] )
             @bprints << pn
        end
@@ -365,10 +365,10 @@ module Io::Creat::Slipstick
             # cutting guidelines for the stator
             @img.rectangle( @x_mm, y_mm, @w_mm, rh_mm, @style )
             # branding texts
-            brand = PageNoBackprint.new( @img, @x_mm + 168, @y_mm + 6, HEIGHT_BRAND )
+            brand = PageNoBackprint.new( @img, @x_mm + 168, @y_mm + 6, HEIGHT_BRAND, @style_branding )
               brand.sett( BRAND, true )
               brand.render()
-            brand = PageNoBackprint.new( @img, @x_mm + 174, @y_mm + 105, HEIGHT_BRAND )
+            brand = PageNoBackprint.new( @img, @x_mm + 174, @y_mm + 105, HEIGHT_BRAND, @style_branding )
               brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), MODEL ], true )
               brand.render()
             bottom_off_mm = 15.0
@@ -377,7 +377,7 @@ module Io::Creat::Slipstick
             # QR code
             # TODO refactor to inherit from Backprint
             qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
-            @img.rtext( @x_mm + @w_mm - 5, @y_mm + @hl_mm + @t_mm + @h_mm / 2, -90, @version, STYLE_BRAND )
+            @img.rtext( @x_mm + @w_mm - 5, @y_mm + @hl_mm + @t_mm + @h_mm / 2, -90, @version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
           end
           if dir < 0 then rh_mm = 0 end
           render_cursor( y_mm + dir * ( rh_mm + @y_mm ), dir )
@@ -394,7 +394,7 @@ module Io::Creat::Slipstick
             @img.line( 0, y_mm + 2 * ( @h_mm - @cs_mm ), @sw_mm, y_mm + 2 * ( @h_mm - @cs_mm ), @style )
             # debugging mode, outline borders of area visible in the stock
             if not RELEASE
-              @img.text( @sw_mm / 2, y_mm + @h_mm - @cs_mm - 4, @version, STYLE_BRAND )
+              @img.text( @sw_mm / 2, y_mm + @h_mm - @cs_mm - 4, @version, @style_branding )
             end
             if both
               # power scales side
@@ -406,7 +406,7 @@ module Io::Creat::Slipstick
             end
           end
           if ( ( @layers & LAYER_FACE ) != 0 )
-            brand = PageNoBackprint.new( @img, @sw_mm - 25, @y_mm + 2 * ( @h_mm - @cs_mm ) - 4, HEIGHT_BRAND )
+            brand = PageNoBackprint.new( @img, @sw_mm - 25, @y_mm + 2 * ( @h_mm - @cs_mm ) - 4, HEIGHT_BRAND, @style_branding )
               brand.sett( "%s %s %s" % [ BRAND, @i18n.string( 'slide_rule'), MODEL ], true )
               brand.render()
           end
@@ -419,9 +419,9 @@ module Io::Creat::Slipstick
           [ @y_mm, @y_mm + @h_mm + 10 ].each do | y_mm |
             @img.line( 0, y_mm, @sw_mm, y_mm, style )
             @img.line( 0, y_mm + @h_mm, @sw_mm, y_mm + @h_mm, style )
-            @img.text( @sw_mm / 2, y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], STYLE_BRAND )
+            @img.text( @sw_mm / 2, y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], @style_aux )
             if not RELEASE
-              @img.text( @sw_mm / 2, y_mm + @h_mm - 4 , @version, STYLE_BRAND )
+              @img.text( @sw_mm / 2, y_mm + @h_mm - 4 , @version, @style_aux )
             end
           end
           # two cursor parts
@@ -429,21 +429,21 @@ module Io::Creat::Slipstick
           [ ( @sw_mm / 4 ) - ( @ch_mm / 2 ), ( 3 * @sw_mm / 4 ) - ( @ch_mm / 2 ) ].each do | x_mm |
             #x_mm = ( @sw_mm - @ch_mm ) / 2
             @img.line( x_mm, y_mm, x_mm - @hint_mm, y_mm, style )
-            @img.rtext( x_mm - 2 * @hint_mm, y_mm, -90, '1', STYLE_BRAND )
+            @img.rtext( x_mm - 2 * @hint_mm, y_mm, -90, '1', @style_aux )
             @img.line( x_mm, y_mm, x_mm, y_mm - @hint_mm, style )
-            @img.text( x_mm, y_mm - 2 * @hint_mm, '2', STYLE_BRAND )
+            @img.text( x_mm, y_mm - 2 * @hint_mm, '2', @style_aux )
             @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm + @hint_mm, y_mm, style )
-            @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm, -90, '1', STYLE_BRAND )
+            @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm, -90, '1', @style_aux )
             @img.line( x_mm + @ch_mm, y_mm, x_mm + @ch_mm, y_mm - @hint_mm, style )
-            @img.text( x_mm + @ch_mm, y_mm - 2 * @hint_mm, '3', STYLE_BRAND )
+            @img.text( x_mm + @ch_mm, y_mm - 2 * @hint_mm, '3', @style_aux )
             @img.line( x_mm - @hint_mm, y_mm + @cw_mm, x_mm + @ch_mm + @hint_mm, y_mm + @cw_mm, style )
-            @img.text( x_mm, y_mm + @cw_mm + 3 * @hint_mm, '2', STYLE_BRAND )
-            @img.rtext( x_mm - 2 * @hint_mm, y_mm + @cw_mm, -90, '4', STYLE_BRAND )
+            @img.text( x_mm, y_mm + @cw_mm + 3 * @hint_mm, '2', @style_aux )
+            @img.rtext( x_mm - 2 * @hint_mm, y_mm + @cw_mm, -90, '4', @style_aux )
             @img.line( x_mm, y_mm + @cw_mm, x_mm, y_mm + @cw_mm + @hint_mm, style )
-            @img.text( x_mm + @ch_mm, y_mm + @cw_mm + 3 * @hint_mm, '3', STYLE_BRAND )
+            @img.text( x_mm + @ch_mm, y_mm + @cw_mm + 3 * @hint_mm, '3', @style_aux )
             @img.line( x_mm + @ch_mm, y_mm + @cw_mm, x_mm + @ch_mm, y_mm + @cw_mm + @hint_mm, style )
-            @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm + @cw_mm, -90, '4', STYLE_BRAND )
-            @img.text( x_mm + @ch_mm / 2, y_mm + @cw_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_cursor' ), @ch_mm, @cw_mm ], STYLE_BRAND )
+            @img.rtext( x_mm + @ch_mm + 3 * @hint_mm, y_mm + @cw_mm, -90, '4', @style_aux )
+            @img.text( x_mm + @ch_mm / 2, y_mm + @cw_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_cursor' ), @ch_mm, @cw_mm ], @style_aux )
           end
         end
 
