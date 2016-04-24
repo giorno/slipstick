@@ -19,6 +19,7 @@ module Io::Creat::Slipstick::Backprints
 
     # SI vs. imperial weight units
     OZ_G     = { :scale => 28.3495, :bigger => [ "ounce", "ounces" ], :smaller => [ "g", "g" ], :real => 28.3495 }
+    TOZ_G    = { :scale => 31.1034768, :bigger => [ "troy_ounce", "troy_ounces" ], :smaller => [ "g", "g" ], :real => 31.1034768 }
     POUND_KG = { :scale => 1 / 0.45359, :bigger => [ "kg", "kg" ], :smaller => [ "pound", "pounds" ], :real => 25 }
     KG_STONE = { :scale => 6.3503, :bigger => [ "stone", "stones" ], :smaller => [ "kg", "kg" ], :real => 31.5 }
 
@@ -33,7 +34,7 @@ module Io::Creat::Slipstick::Backprints
 
     # collections
     LENGTHS = [ CM_INCH, FOOT_M, YARD_M, KM_MILE, KM_NMILE ]
-    WEIGHTS = [ OZ_G, POUND_KG, KG_STONE ]
+    WEIGHTS = [ OZ_G, TOZ_G, POUND_KG, KG_STONE ]
     AREAS   = [ ACRE_HA, SQFT_M2 ]
     VOLUMES = [ PINT_L, L_QUART, L_GALLON ]
 
@@ -45,9 +46,9 @@ module Io::Creat::Slipstick::Backprints
       @tw_mm = 0
       @i18n = Io::Creat::Slipstick::I18N.instance
       @labels = [ "1 %s" % @i18n.string( @scale[:bigger][0] ),
-                  "%.4g %s" % [ @scale[:scale], @i18n.string( @scale[:smaller][1] ) ],
+                  "%0.7g %s" % [ @scale[:scale], @i18n.string( @scale[:smaller][1] ) ],
                   "1 %s" % @i18n.string( @scale[:smaller][0] ),
-                  "%.4g %s" % [ 1 / @scale[:scale], @i18n.string( @scale[:bigger][1] ) ]
+                  "%0.7g %s" % [ 1 / @scale[:scale], @i18n.string( @scale[:bigger][1] ) ]
                 ]
       # calculate max text width
       @labels[0..1].each do | label |
