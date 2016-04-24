@@ -28,6 +28,7 @@ module Io
         BRANDING = 50 # branding tags (rounded rectangle, white text on color)
         PAGENO   = 60 # page numbers
         AUX      = 70 # auxilliary lines (content not present in the product, such as cutting lines, comments)
+        QR       = 80 # QR code style
       end
 
       module Style
@@ -39,9 +40,8 @@ module Io
                     Io::Creat::Slipstick::Entity::BRANDING => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :fill => 'black' } ),
                     Io::Creat::Slipstick::Entity::PAGENO   => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :fill => 'black', :stroke_width => 0.22 } ),
                     Io::Creat::Slipstick::Entity::AUX      => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :text_anchor => 'middle', :letter_spacing => 0 } ),
+                    Io::Creat::Slipstick::Entity::QR       => { :fill => "black", :stroke_width => "0.01mm", :stroke => "black" },
                   }
-
-        SMALL = DEFAULT.merge( Io::Creat::Slipstick::Entity::TICK => DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { "font-size" => 2.4 } ) )
       end
 
       # dimensions controlling rendering of a scale (per scale)

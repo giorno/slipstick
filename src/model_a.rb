@@ -34,8 +34,6 @@ module Io::Creat::Slipstick
       BRAND         = "CREAT.IO"
       MODEL         = "SR-M1A2"
       HEIGHT_BRAND  = 2.2
-      # QR code style
-      STYLE_QR      = { :fill => "black", :stroke_width => "0.01", :stroke => "black" }
       PATTERN_BEND  = "1, 1" # line pattern for bent edges
 
       public
@@ -73,6 +71,8 @@ module Io::Creat::Slipstick
         w_s_mm = 23.0
         w_a_mm = 7.0
 
+        # prepare style for smaller scales
+        @style_small = @style.merge( { Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::LOTICK] } )
         @style_branding = @style[Io::Creat::Slipstick::Entity::BRANDING]
         @style_pageno = @style[Io::Creat::Slipstick::Entity::PAGENO]
         @style_aux = Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::AUX], SVG_STYLE_TEXT )
@@ -86,15 +86,15 @@ module Io::Creat::Slipstick
               scale.add_constants( )
               scale.set_overflow( 1.0 )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_SIN, "S", 0.33, true )
-              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+              scale.set_style( @style_small )
               scale.set_params( 90, 5, [ 1, 5, 10, 20 ] )
               scale.set_flags( 0 )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_TAN, "T", 0.33, true )
-              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+              scale.set_style( @style_small )
               scale.set_params( 45, 5, [ 1, 5, 10, 20 ] )
               scale.set_flags( 0 )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_SINTAN, "ST", 0.33, true )
-              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+              scale.set_style( @style_small )
               scale.set_params( 6, 0.5, [ 1.0 / 12.0, 0.5 ], 8 )
               scale.set_flags( 0 )
               scale.set_overflow( @b_mm )
@@ -117,10 +117,10 @@ module Io::Creat::Slipstick
               scale.set_params( 10 )
               scale.set_overflow( @b_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::TGN_PYTHAG, "P", 0.33 )
-              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+              scale.set_style( @style_small )
               scale.set_params( )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "K", 0.33 )
-              scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+              scale.set_style( @style_small )
               scale.set_params( 3 )
               scale.set_flags( 0 )
               scale.add_constants( )
@@ -169,10 +169,10 @@ module Io::Creat::Slipstick
             # temperature conversion scale
             strip = create_strip( @x_mm, @y_mm + bp_off_mm - @hu_mm / 4 , @hu_mm / 2, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°C", 0.5, true )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( -50.0, 200.0, 1.0, true )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°F", 0.5 )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( -58.0, 392.0, 1.0 )
 
             # power scales
@@ -182,7 +182,7 @@ module Io::Creat::Slipstick
                 scale.set_params( 100 )
                 scale.set_overflow( 4.0 )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL2", 0.33, true )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 10 )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL3", 0.5, true )
                 scale.set_params( 1 )
@@ -205,7 +205,7 @@ module Io::Creat::Slipstick
                 scale.set_overflow( 4.0 )
                 scale.add_constants( )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "CI", 0.33, true )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 1, true )
                 scale.add_constants( )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "C", 0.5, true )
@@ -224,36 +224,36 @@ module Io::Creat::Slipstick
             # number system conversion scale
             strip = create_strip( @x_mm, y_mm + 1.5 * bp_off_mm, 5 * @hu_mm / 4, w_m_mm + w_s_mm, w_l_mm, 0, w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_HEX, "", 0.5, true )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, 256, 1.0, true )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_DEC, "", 0.5 )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, 256, 1.0 )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_DEC, "", 0.5, true )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, 256, 1.0, true, false )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_OCT, "", 0.5 )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, 256, 1.0 )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_OCT, "", 0.5, true )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, 256, 1.0, true, false )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_BIN, "", 0.5 )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, 256, 1.0 )
             # angles conversion scale
             strip = create_strip( @x_mm, y_mm + @h_mm - @cs_mm + 2 * bp_off_mm + @hu_mm / 6, 10 * @hu_mm / 12, w_m_mm + w_s_mm, w_l_mm, 0, w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_DEG, "", 0.5, true )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, 360, 1.0, true )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_RAD, "", 0.5 )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, ( 2 * Math::PI ), 0.05 )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_RAD, "", 0.5, true )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, ( 2 * Math::PI ), 0.05, true, false )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_GRAD, "", 0.5 )
-                scale.set_style( Io::Creat::Slipstick::Style::SMALL )
+                scale.set_style( @style_small )
                 scale.set_params( 0.0, 400, 1 )
           end
         end
@@ -343,6 +343,7 @@ module Io::Creat::Slipstick
       # render strips and edges for cutting/bending
       public
       def render()
+        qr_style = @style[Io::Creat::Slipstick::Entity::QR]
         @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
         # [stock] lines are intentionally positioned upside down (in landscape)
         if ( @layers & LAYER_STOCK ) != 0
@@ -376,7 +377,7 @@ module Io::Creat::Slipstick
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
             # QR code
             # TODO refactor to inherit from Backprint
-            qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, STYLE_QR )
+            qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, qr_style )
             @img.rtext( @x_mm + @w_mm - 5, @y_mm + @hl_mm + @t_mm + @h_mm / 2, -90, @version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
           end
           if dir < 0 then rh_mm = 0 end
