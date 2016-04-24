@@ -306,8 +306,12 @@ module Io::Creat::Slipstick
           logo_h_mm = 18 * logo_w_mm / 15
           @img.import( 'logo.svg', x_mm + b_mm + s_mm + ( @ch_mm + logo_h_mm ) / 2, y_mm + @cw_mm - 1.37 * logo_w_mm, logo_w_mm, logo_h_mm, 90 )
           # mini-scales
-          BottomUpCmScale.new( @img, x_mm + b_mm + s_mm + @ch_mm, y_mm + @cw_mm, @cw_mm - 5, 5 ).render()
-          BottomUpInchScale.new( @img, x_mm + b_mm + s_mm, y_mm + @cw_mm, @cw_mm - 5, 5 ).render()
+          cm = BottomUpCmScale.new( @img, x_mm + b_mm + s_mm + @ch_mm, y_mm + @cw_mm, @cw_mm - 5, 5 )
+            cm.style = @style_cursor
+            cm.render()
+          inch = BottomUpInchScale.new( @img, x_mm + b_mm + s_mm, y_mm + @cw_mm, @cw_mm - 5, 5 )
+            inch.style = @style_cursor
+            inch.render()
           @img.rectangle( x_mm, y_mm, b_mm, @cw_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
           if ( @layers & LAYER_REVERSE ) == 0
             # bending edges
@@ -343,7 +347,8 @@ module Io::Creat::Slipstick
       # render strips and edges for cutting/bending
       public
       def render()
-        qr_style = @style[Io::Creat::Slipstick::Entity::QR]
+        @style_qr = @style[Io::Creat::Slipstick::Entity::QR]
+        @style_cursor = @style[Io::Creat::Slipstick::Entity::LOTICK]
         @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
         # [stock] lines are intentionally positioned upside down (in landscape)
         if ( @layers & LAYER_STOCK ) != 0
@@ -377,7 +382,7 @@ module Io::Creat::Slipstick
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
             # QR code
             # TODO refactor to inherit from Backprint
-            qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, qr_style )
+            qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, @style_qr )
             @img.rtext( @x_mm + @w_mm - 5, @y_mm + @hl_mm + @t_mm + @h_mm / 2, -90, @version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
           end
           if dir < 0 then rh_mm = 0 end

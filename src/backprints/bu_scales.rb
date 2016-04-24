@@ -6,6 +6,7 @@ module Io::Creat::Slipstick::Backprints
 
   # common functionality of small scales rendered on the front of the cursor
   class BottomUpLinearScale
+    attr_writer :style
 
     def initialize ( img, x_mm, y_mm, l_mm, h_mm, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::TICK] )
       @img   = img
