@@ -37,7 +37,7 @@ module Io
                     Io::Creat::Slipstick::Entity::LOTICK   => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::CONSTANT => Io::Creat::SVG_STYLE.merge( { :font_style => 'oblique', :font_size => 2.4, :fill => 'black' } ),
-                    Io::Creat::Slipstick::Entity::BRANDING => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :fill => 'black' } ),
+                    Io::Creat::Slipstick::Entity::BRANDING => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :fill => 'black', :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::PAGENO   => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :fill => 'black', :stroke_width => 0.22 } ),
                     Io::Creat::Slipstick::Entity::AUX      => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :text_anchor => 'middle', :letter_spacing => 0 } ),
                     Io::Creat::Slipstick::Entity::QR       => { :fill => "black", :stroke_width => "0.01mm", :stroke => "black" },
