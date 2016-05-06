@@ -1,4 +1,6 @@
 
+# vim: et
+
 require_relative 'scale'
 
 module Io::Creat::Slipstick
@@ -47,7 +49,7 @@ module Io::Creat::Slipstick
       deg = @upper_deg
       last = @start_mm + Math.log10( compute( @upper_deg ) * @precision ) * @scale
       # rightmost tick
-      render_tick( last, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], "\u00a0%d°" % deg )
+      render_tick( last, @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][0], fmt_label( deg )[1] )
       i = 0
       while i < MAX_LOOPS and deg > @lower_deg do
         i += 1
@@ -131,10 +133,12 @@ module Io::Creat::Slipstick
     protected
     def fmt_label ( val )
       label = "\u00a0%g°" % val
-      if val < 1.0
+      if val < 1.0 # minutes resolution
         label = "\u00a0%d'" % ( val * 60 ).round( 1 )
-      elsif ( val * 10 ) % 10 != 0
+      elsif ( val * 10 ) % 10 != 0 # hald-degrees resolution
         label = "\u00a0\u00a0\u00a0\u00a0%d°%d'" % [ val, 6 * ( val * 10 % 10 ) ]
+      elsif val == 6 # special case to indent
+        label = "%g°\u00a0" % val
       end
       return [ ( 10 * val ) % 10 == 0 ? Io::Creat::Slipstick::Entity::TICK : Io::Creat::Slipstick::Entity::LOTICK, label ]
     end
