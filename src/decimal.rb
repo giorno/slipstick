@@ -1,4 +1,6 @@
 
+# vim: et
+
 require_relative 'constants'
 require_relative 'scale'
 
@@ -24,7 +26,12 @@ module Io::Creat::Slipstick
       end
       # by default values between 1 and 2 in single range scale are labeled
       if @size == 1
-        add_extra_labels( [ 1.1, 1.2, 1.3, 1.5, 1.7, 1.8, 1.9 ] )
+        @extra_labels = [ 1.1, 1.2, 1.3, 1.5, 1.7, 1.8, 1.9 ]
+	@special_labels = [ 1, 10 ]
+      elsif @size == 2
+	@special_labels = [ 1, 10, 100 ]
+      elsif @size == 3
+	@special_labels = [ 1, 10, 100, 1000 ]
       end
       @fodders = FODDERS[ @size ]
       @initialized = true
@@ -35,21 +42,26 @@ module Io::Creat::Slipstick
       @constants = constants
     end
 
-    # adds values that will be rendered regardless their cardinality
-    # in the scale
-    public
-    def add_extra_labels ( labels = [] )
-      @extra_labels = labels
-    end
-
+    # check if the value is supposed to be set in small type
     protected
     def is_extra_label ( value )
       return instance_variable_defined?( :@extra_labels ) && @extra_labels.include?( value )
     end
 
+    # check if the value is supposed to be set in bold type
+    protected
+    def is_special_label ( value )
+      return instance_variable_defined?( :@special_labels ) && @special_labels.include?( value )
+    end
+
     protected
     def compute ( val )
       return val
+    end
+    
+    protected
+    def calc_style( value )
+      return is_special_label( value ) ? Io::Creat::Slipstick::Entity::HITICK : ( is_extra_label( value ) ? Io::Creat::Slipstick::Entity::LOTICK : Io::Creat::Slipstick::Entity::TICK )
     end
 
     public
@@ -67,7 +79,7 @@ module Io::Creat::Slipstick
           h_idx = ( j == 0 ? 0 : ( j % 2 == 0 ? 1 : 2 ) )
           h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
           if j < 18 # last one is not rendered, but is required for small ticks calculation
-            render_tick( x, h, ( j % 2 == 0 or is_extra_label( value ) ) ? "%g" % ( is_extra_label( value ) ? value * 10 : value ) : nil, is_extra_label( value ) ? Io::Creat::Slipstick::Entity::LOTICK : Io::Creat::Slipstick::Entity::TICK )
+            render_tick( x, h, ( j % 2 == 0 or is_extra_label( value ) ) ? "%g" % ( is_extra_label( value ) ? value * 10 : value ) : nil, calc_style( value ) )
           end
 
           if j > 0
@@ -77,7 +89,9 @@ module Io::Creat::Slipstick
         end
       end
       # last tick
-      render_tick( @start_mm + @dir * @w_mainscale_mm, @h_mm, "%d" % ( 10 ** @size ) )
+      value = "%d" % ( 10 ** @size )
+      if value == '1000' then value = "\u00a0\u00a01000" end
+      render_tick( @start_mm + @dir * @w_mainscale_mm, @h_mm, value, calc_style( 10 ** @size ) )
 
       render_label( )
       render_constants()

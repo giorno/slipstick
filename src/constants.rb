@@ -22,18 +22,20 @@ module Io
 
       module Entity
         TICK     = 10 # regular tick for a calculated value
-        LOTICK   = 20 # small font tick for a calculated value
-        SCALE    = 30 # single scale
-        CONSTANT = 40 # tick for a pre-defined constant
-        BRANDING = 50 # branding tags (rounded rectangle, white text on color)
-        PAGENO   = 60 # page numbers
-        AUX      = 70 # auxilliary lines (content not present in the product, such as cutting lines, comments)
-        QR       = 80 # QR code style
+        HITICK   = 20 # regular tick with bold font (supermajor indexes)
+        LOTICK   = 30 # small font tick for a calculated value
+        SCALE    = 40 # single scale
+        CONSTANT = 50 # tick for a pre-defined constant
+        BRANDING = 60 # branding tags (rounded rectangle, white text on color)
+        PAGENO   = 70 # page numbers
+        AUX      = 80 # auxilliary lines (content not present in the product, such as cutting lines, comments)
+        QR       = 90 # QR code style
       end
 
       module Style
         # per scale style
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => Io::Creat::SVG_STYLE,
+                    Io::Creat::Slipstick::Entity::HITICK   => Io::Creat::SVG_STYLE.merge( { :font_weight => 'bold' } ),
                     Io::Creat::Slipstick::Entity::LOTICK   => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::CONSTANT => Io::Creat::SVG_STYLE.merge( { :font_style => 'oblique', :font_size => 2.4, :fill => 'black' } ),
