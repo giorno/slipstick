@@ -21,15 +21,16 @@ module Io
       CONST_MATH = { "e" => Math::E, "π" => Math::PI, "√2" => Math.sqrt( 2 ), "φ" => 1.61803398874 }
 
       module Entity
-        TICK     = 10 # regular tick for a calculated value
-        HITICK   = 20 # regular tick with bold font (supermajor indexes)
-        LOTICK   = 30 # small font tick for a calculated value
-        SCALE    = 40 # single scale
-        CONSTANT = 50 # tick for a pre-defined constant
-        BRANDING = 60 # branding tags (rounded rectangle, white text on color)
-        PAGENO   = 70 # page numbers
-        AUX      = 80 # auxilliary lines (content not present in the product, such as cutting lines, comments)
-        QR       = 90 # QR code style
+        TICK     = 0x10 # regular tick for a calculated value
+        HITICK   = 0x20 # regular tick with bold font (supermajor indexes)
+        LOTICK   = 0x30 # small font tick for a calculated value
+        LABEL    = 0x40 # scale label
+        SCALE    = 0x50 # single scale (deprecated as it is abused in so many places)
+        CONSTANT = 0x60 # tick for a pre-defined constant
+        BRANDING = 0x70 # branding tags (rounded rectangle, white text on color)
+        PAGENO   = 0x80 # page numbers
+        AUX      = 0x90 # auxilliary lines (content not present in the product, such as cutting lines, comments)
+        QR       = 0xa0 # QR code style
       end
 
       module Style
@@ -37,6 +38,7 @@ module Io
         DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => Io::Creat::SVG_STYLE,
                     Io::Creat::Slipstick::Entity::HITICK   => Io::Creat::SVG_STYLE.merge( { :font_weight => 'bold' } ),
                     Io::Creat::Slipstick::Entity::LOTICK   => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4 } ),
+                    Io::Creat::Slipstick::Entity::LABEL    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :font_weight => 'bold', :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::CONSTANT => Io::Creat::SVG_STYLE.merge( { :font_style => 'oblique', :font_size => 2.4, :fill => 'black' } ),
                     Io::Creat::Slipstick::Entity::BRANDING => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :fill => 'black', :letter_spacing => -0.10 } ),

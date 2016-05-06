@@ -68,12 +68,12 @@ module Io::Creat::Slipstick
     protected
     def render_label ( )
       if not @label.nil? and @w_label_mm > 0
-        font_size_mm = @style[Io::Creat::Slipstick::Entity::SCALE][:font_size]
+        font_size_mm = @style[Io::Creat::Slipstick::Entity::LABEL][:font_size]
         dy_mm = ( @flipped ? -@h_mm : @h_mm ) / 2
         @img.text( "%f" % ( @off_x_mm + @dim[Io::Creat::Slipstick::Key::CLEARING] ),
                    "%f" % ( @off_y_mm + dy_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ),
                    "\u00a0\u00a0%s" % @label,
-                   Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::SCALE], Io::Creat::SVG_STYLE_TEXT ) )
+                   Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::LABEL], Io::Creat::SVG_STYLE_TEXT ) )
       end
     end
 
