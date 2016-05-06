@@ -30,6 +30,7 @@ endif
 # Builds printouts for Model A
 fonts :
 	@$(FONTFORGE) -lang=ff -c 'Open("SlipstickSansMono-Regular.sfd"); Generate("../build/SlipstickSansMono-Regular.ttf");' 2> /dev/null
+	@$(FONTFORGE) -lang=ff -c 'Open("SlipstickSansMono-Bold.sfd"); Generate("../build/SlipstickSansMono-Bold.ttf");' 2> /dev/null
 	@$(FONTFORGE) -lang=ff -c 'Open("SlipstickSansMono-Italic.sfd"); Generate("../build/SlipstickSansMono-Italic.ttf");' 2> /dev/null
 
 install : fonts
