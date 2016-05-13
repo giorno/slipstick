@@ -37,8 +37,9 @@ module Io::Creat::Slipstick
       PATTERN_BEND  = "1, 1" # line pattern for bent edges
 
       public
-      def initialize ( layers )
+      def initialize ( layers, style )
         super()
+        set_style( style )
         raise "Layer must be one of LAYER_STOCK, LAYER_SLIDE or LAYER_TRANSP" unless ( layers & 0x1c ) != 0
         @i18n = Io::Creat::Slipstick::I18N.instance
         @img.pattern( 'glued', 3 )
@@ -470,7 +471,8 @@ module Io::Creat::Slipstick
 end # Io::Creat::Slipstick
 
 def usage ( )
-  $stderr.puts "Usage: #{$0} <lang> <stator|slide|transp> [both|face|reverse]\n\nOutputs SVG for given element and printout side.\n"
+  $stderr.puts "Usage: #{$0} <style> <lang> <stator|slide|transp> [both|face|reverse]\n\nOutputs SVG for given element and printout side.\n"
+  $stderr.puts " style   .. name of the style to use, supported: default, trip"
   $stderr.puts " lang    .. language code for internationalized strings, supported: en, sk"
   $stderr.puts " stator  .. stock element of slide rule (static)"
   $stderr.puts " slide   .. sliding element of slide rule"
@@ -481,30 +483,40 @@ def usage ( )
 end
 
 layers = 0
-if ARGV.length <= 1
+if ARGV.length <= 2
   usage( )
   exit
 end
 
 if ARGV.length >= 2
-  lang = ARGV[0]
-  if ARGV[1] == 'stock'
+  if ARGV[0] == 'trip'
+    style = Io::Creat::Slipstick::Style::TRIP
+  elsif ARGV[0] == 'default'
+    style = Io::Creat::Slipstick::Style::DEFAULT
+  else
+    usage
+  end
+end
+
+if ARGV.length >= 3
+  lang = ARGV[1]
+  if ARGV[2] == 'stock'
     layers = Io::Creat::Slipstick::Model::A::LAYER_STOCK
-  elsif ARGV[1] == 'slide'
+  elsif ARGV[2] == 'slide'
     layers = Io::Creat::Slipstick::Model::A::LAYER_SLIDE
-  elsif ARGV[1] == 'transp'
+  elsif ARGV[2] == 'transp'
     layers = Io::Creat::Slipstick::Model::A::LAYER_TRANSP
   else
     usage
   end
 end
 
-if ARGV.length > 2
-  if ARGV[2] == 'face'
+if ARGV.length > 3
+  if ARGV[3] == 'face'
     layers |= Io::Creat::Slipstick::Model::A::LAYER_FACE
-  elsif ARGV[2] == 'reverse'
+  elsif ARGV[3] == 'reverse'
     layers |= Io::Creat::Slipstick::Model::A::LAYER_REVERSE
-  elsif ARGV[2] == 'both'
+  elsif ARGV[3] == 'both'
     layers |= Io::Creat::Slipstick::Model::A::LAYER_FACE | Io::Creat::Slipstick::Model::A::LAYER_REVERSE
   else
     usage
@@ -512,7 +524,8 @@ if ARGV.length > 2
   end
 end
 
+
 Io::Creat::Slipstick::I18N.instance.load( 'src/model_a.yml', lang )
-a = Io::Creat::Slipstick::Model::A.new( layers )
+a = Io::Creat::Slipstick::Model::A.new( layers, style )
 puts a.render()
 

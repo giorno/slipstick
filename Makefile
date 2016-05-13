@@ -60,16 +60,16 @@ tex :
 LANGUAGES = en sk
 
 # Builds printouts for Instrument A
-model_a : en_model_a sk_model_a
+model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
 
-%_model_a :
-	$(info Generating Instrument A, localization $* )
-	@src/model_a.rb $* stock face | xmllint --format - > build/$*_model_a_stock_face.svg
-	@src/model_a.rb $* stock reverse | xmllint --format - > build/$*_model_a_stock_reverse.svg 
-	@src/model_a.rb $* slide face | xmllint --format - > build/$*_model_a_slide_face.svg
-	@src/model_a.rb $* slide reverse | xmllint --format - > build/$*_model_a_slide_reverse.svg 
-	@src/model_a.rb $* transp face | xmllint --format - > build/$*_model_a_transp_face.svg
-	@src/model_a.rb $* transp reverse | xmllint --format - > build/$*_model_a_transp_reverse.svg 
+%_model_a_default :
+	$(info Generating Instrument A, localization $, style default )
+	@src/model_a.rb default $* stock face | xmllint --format - > build/$*_model_a_stock_face.svg
+	@src/model_a.rb default $* stock reverse | xmllint --format - > build/$*_model_a_stock_reverse.svg 
+	@src/model_a.rb default $* slide face | xmllint --format - > build/$*_model_a_slide_face.svg
+	@src/model_a.rb default $* slide reverse | xmllint --format - > build/$*_model_a_slide_reverse.svg 
+	@src/model_a.rb default $* transp face | xmllint --format - > build/$*_model_a_transp_face.svg
+	@src/model_a.rb default $* transp reverse | xmllint --format - > build/$*_model_a_transp_reverse.svg 
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_stock_face.pdf $(shell pwd)/build/$*_model_a_stock_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_stock_reverse.pdf $(shell pwd)/build/$*_model_a_stock_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_face.pdf $(shell pwd)/build/$*_model_a_slide_face.svg
@@ -79,6 +79,24 @@ model_a : en_model_a sk_model_a
 	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a.pdf build/$*_model_a_stock_face.pdf build/$*_model_a_stock_reverse.pdf build/$*_model_a_stock_face.pdf build/$*_model_a_stock_reverse.pdf build/$*_model_a_slide_face.pdf build/$*_model_a_slide_reverse.pdf build/$*_model_a_slide_face.pdf build/$*_model_a_slide_reverse.pdf build/$*_model_a_transp_face.pdf build/$*_model_a_transp_reverse.pdf build/printing_$*.pdf build/making_$*.pdf build/using_$*.pdf build/using_$*.pdf
 	@cp build/$*_model_a.pdf build/$(BRAND)-$*.pdf
 	@echo "Result PDF: build/$(BRAND)-$*.pdf"
+
+%_model_a_trip :
+	$(info Generating Instrument A, localization $, style trip )
+	@src/model_a.rb trip $* stock face | xmllint --format - > build/$*_model_a_trip_stock_face.svg
+	@src/model_a.rb trip $* stock reverse | xmllint --format - > build/$*_model_a_trip_stock_reverse.svg 
+	@src/model_a.rb trip $* slide face | xmllint --format - > build/$*_model_a_trip_slide_face.svg
+	@src/model_a.rb trip $* slide reverse | xmllint --format - > build/$*_model_a_trip_slide_reverse.svg 
+	@src/model_a.rb trip $* transp face | xmllint --format - > build/$*_model_a_trip_transp_face.svg
+	@src/model_a.rb trip $* transp reverse | xmllint --format - > build/$*_model_a_trip_transp_reverse.svg 
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_stock_face.pdf $(shell pwd)/build/$*_model_a_trip_stock_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_stock_reverse.pdf $(shell pwd)/build/$*_model_a_trip_stock_reverse.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_slide_face.pdf $(shell pwd)/build/$*_model_a_trip_slide_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_slide_reverse.pdf $(shell pwd)/build/$*_model_a_trip_slide_reverse.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_transp_face.pdf $(shell pwd)/build/$*_model_a_trip_transp_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_transp_reverse.pdf $(shell pwd)/build/$*_model_a_trip_transp_reverse.svg
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a_trip.pdf build/$*_model_a_trip_stock_face.pdf build/$*_model_a_trip_stock_reverse.pdf build/$*_model_a_trip_stock_face.pdf build/$*_model_a_trip_stock_reverse.pdf build/$*_model_a_trip_slide_face.pdf build/$*_model_a_trip_slide_reverse.pdf build/$*_model_a_trip_slide_face.pdf build/$*_model_a_trip_slide_reverse.pdf build/$*_model_a_trip_transp_face.pdf build/$*_model_a_trip_transp_reverse.pdf build/printing_$*.pdf build/making_$*.pdf build/using_$*.pdf build/using_$*.pdf
+	@cp build/$*_model_a_trip.pdf build/$(BRAND)-$*-trip.pdf
+	@echo "Result PDF: build/$(BRAND)-$*-trip.pdf"
 
 model_a_debug :
 	@echo "Generating debug (all layers) SVG's of Instrument A"

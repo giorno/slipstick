@@ -28,6 +28,7 @@ module Io::Creat::Slipstick
       @children = []
     end
 
+    # todo accessor
     public
     def set_style ( style )
       @style = style
