@@ -63,7 +63,7 @@ LANGUAGES = en sk
 model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
 
 %_model_a_default :
-	$(info Generating Instrument A, localization $, style default )
+	$(info Generating Instrument A, localization $*, style default )
 	@src/model_a.rb default $* stock face | xmllint --format - > build/$*_model_a_stock_face.svg
 	@src/model_a.rb default $* stock reverse | xmllint --format - > build/$*_model_a_stock_reverse.svg 
 	@src/model_a.rb default $* slide face | xmllint --format - > build/$*_model_a_slide_face.svg
@@ -81,7 +81,7 @@ model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
 	@echo "Result PDF: build/$(BRAND)-$*.pdf"
 
 %_model_a_trip :
-	$(info Generating Instrument A, localization $, style trip )
+	$(info Generating Instrument A, localization $*, style trip )
 	@src/model_a.rb trip $* stock face | xmllint --format - > build/$*_model_a_trip_stock_face.svg
 	@src/model_a.rb trip $* stock reverse | xmllint --format - > build/$*_model_a_trip_stock_reverse.svg 
 	@src/model_a.rb trip $* slide face | xmllint --format - > build/$*_model_a_trip_slide_face.svg
