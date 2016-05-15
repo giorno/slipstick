@@ -112,13 +112,13 @@ module Io::Creat::Slipstick::Backprints
   class ConversionBackprints
 
     public
-    def initialize ( img, left_mm, right_mm, y_mm, gap_mm, scales = [] )
+    def initialize ( img, left_mm, right_mm, y_mm, gap_mm, style, scales = [] )
       raise "No conversion scales" unless scales.length > 0
       @scales = scales
       @bprints = []
       x_mm = left_mm
       scales.each do | scale |
-        bp = ConversionBackprint.new( img, x_mm, y_mm, 0 )
+        bp = ConversionBackprint.new( img, x_mm, y_mm, 0, style[Io::Creat::Slipstick::Entity::CONSTANT] )
         bp.set_scale( scale )
         x_mm += bp.getw() + gap_mm
         @bprints << bp

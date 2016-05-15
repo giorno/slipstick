@@ -192,7 +192,7 @@ module Io::Creat::Slipstick
             # length units conversion scales
             bp_w_mm = w_m_mm + w_l_mm + w_s_mm + w_a_mm # width reserved for the 
             bp_gap_mm = 10 # space between conversion scales
-            @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - bp_off_mm, bp_gap_mm, ConversionBackprint::LENGTHS )
+            @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - bp_off_mm, bp_gap_mm, @style, ConversionBackprint::LENGTHS )
 
             # page number
             pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6, @style_pageno )
@@ -215,8 +215,8 @@ module Io::Creat::Slipstick
                 scale.add_constants( )
 
             # rest of units conversion scales
-            @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - @cs_mm + bp_off_mm, bp_gap_mm, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
-            @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + 2 * ( @h_mm - @cs_mm ) - bp_off_mm, bp_gap_mm, ConversionBackprint::VOLUMES )
+            @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - @cs_mm + bp_off_mm, bp_gap_mm, @style, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
+            @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + 2 * ( @h_mm - @cs_mm ) - bp_off_mm, bp_gap_mm, @style, ConversionBackprint::VOLUMES )
           end
 
           if ( ( @layers & LAYER_REVERSE ) != 0 )
