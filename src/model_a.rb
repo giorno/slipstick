@@ -53,7 +53,7 @@ module Io::Creat::Slipstick
         @hu_mm = 22.0 # height of upper half of stator strip
         @hl_mm = 22.0 # height of lower half of stator strip
         @hs_mm = 18.0 # height of slipstick strip
-        @t_mm  = 1.5 # thickness of the slipstick
+        @t_mm  = 2.5 # thickness of the slipstick
         @sh_mm = @h_mm # sheet height
         @sw_mm = @w_mm # sheet width
         @h_mm  = @hu_mm + @hl_mm + @hs_mm
@@ -402,7 +402,7 @@ module Io::Creat::Slipstick
             brand = PageNoBackprint.new( @img, @x_mm + 168, @y_mm + 6, HEIGHT_BRAND, @style_branding )
               brand.sett( BRAND, true )
               brand.render()
-            brand = PageNoBackprint.new( @img, @x_mm + 174, @y_mm + 105, HEIGHT_BRAND, @style_branding )
+            brand = PageNoBackprint.new( @img, @x_mm + 174, @y_mm + 102 + 2 * @t_mm, HEIGHT_BRAND, @style_branding )
               brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), MODEL ], true )
               brand.render()
             bottom_off_mm = 15.0
