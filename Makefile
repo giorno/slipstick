@@ -76,7 +76,7 @@ model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_reverse.pdf $(shell pwd)/build/$*_model_a_slide_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_transp_face.pdf $(shell pwd)/build/$*_model_a_transp_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_transp_reverse.pdf $(shell pwd)/build/$*_model_a_transp_reverse.svg
-	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a.pdf build/$*_model_a_stock_face.pdf build/$*_model_a_stock_reverse.pdf build/$*_model_a_stock_face.pdf build/$*_model_a_stock_reverse.pdf build/$*_model_a_slide_face.pdf build/$*_model_a_slide_reverse.pdf build/$*_model_a_slide_face.pdf build/$*_model_a_slide_reverse.pdf build/$*_model_a_transp_face.pdf build/$*_model_a_transp_reverse.pdf build/printing_$*.pdf build/making_$*.pdf build/using_$*.pdf build/using_$*.pdf
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a.pdf build/$*_model_a_stock_face.pdf build/$*_model_a_stock_reverse.pdf build/$*_model_a_slide_face.pdf build/$*_model_a_slide_reverse.pdf build/$*_model_a_transp_face.pdf build/$*_model_a_transp_reverse.pdf build/printing_$*.pdf build/making_$*.pdf build/using_$*.pdf
 	@cp build/$*_model_a.pdf build/$(BRAND)-$*.pdf
 	@echo "Result PDF: build/$(BRAND)-$*.pdf"
 
@@ -94,7 +94,7 @@ model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_slide_reverse.pdf $(shell pwd)/build/$*_model_a_trip_slide_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_transp_face.pdf $(shell pwd)/build/$*_model_a_trip_transp_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_transp_reverse.pdf $(shell pwd)/build/$*_model_a_trip_transp_reverse.svg
-	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a_trip.pdf build/$*_model_a_trip_stock_face.pdf build/$*_model_a_trip_stock_reverse.pdf build/$*_model_a_trip_stock_face.pdf build/$*_model_a_trip_stock_reverse.pdf build/$*_model_a_trip_slide_face.pdf build/$*_model_a_trip_slide_reverse.pdf build/$*_model_a_trip_slide_face.pdf build/$*_model_a_trip_slide_reverse.pdf build/$*_model_a_trip_transp_face.pdf build/$*_model_a_trip_transp_reverse.pdf build/printing_$*.pdf build/making_$*.pdf build/using_$*.pdf build/using_$*.pdf
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a_trip.pdf build/$*_model_a_trip_stock_face.pdf build/$*_model_a_trip_stock_reverse.pdf build/$*_model_a_trip_slide_face.pdf build/$*_model_a_trip_slide_reverse.pdf build/$*_model_a_trip_transp_face.pdf build/$*_model_a_trip_transp_reverse.pdf build/printing_$*.pdf build/making_$*.pdf build/using_$*.pdf
 	@cp build/$*_model_a_trip.pdf build/$(BRAND)-$*-trip.pdf
 	@echo "Result PDF: build/$(BRAND)-$*-trip.pdf"
 
