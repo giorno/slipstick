@@ -374,7 +374,14 @@ module Io::Creat::Slipstick
             @img.pbegin()
               @img.move( @x_mm, y_mm )
               @img.rline( @x_mm + @w_mm, y_mm )
+              # right static cursor window
+              rww_mm = @w_a_mm + 5
+              @img.rline( @x_mm + @w_mm, y_mm + 2 * @hl_mm + @t_mm )
+              @img.rline( @x_mm + @w_mm - rww_mm, y_mm + 2 * @hl_mm + @t_mm )
+              @img.rline( @x_mm + @w_mm - rww_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
+              @img.rline( @x_mm + @w_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
               @img.rline( @x_mm + @w_mm, y_mm + rh_mm )
+              # bottom edge
               @img.rline( @x_mm, y_mm + rh_mm )
               # left static cursor window
               lww_mm = @w_l_mm + @w_s_mm + 5
@@ -397,7 +404,7 @@ module Io::Creat::Slipstick
             # QR code
             # TODO refactor to inherit from Backprint
             qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, @bp_x_mm, bottom_mm, gr_size_mm, @style_qr )
-            @img.rtext( @x_mm + @w_mm - 5, @y_mm + @hl_mm + @t_mm + @h_mm / 2, -90, @version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
+            @img.rtext( @x_mm + @w_mm - rww_mm - 5, @y_mm + @hl_mm + @t_mm + @h_mm / 2, -90, @version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
           end
           if dir < 0 then rh_mm = 0 end
           render_cursor( y_mm + dir * ( rh_mm + @y_mm ), dir )
