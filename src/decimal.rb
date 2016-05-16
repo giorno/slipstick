@@ -181,6 +181,9 @@ module Io::Creat::Slipstick
               round = ( value * 10 ).round( 2 ) % 10 ** ( @size ) == 0
               h_idx -= round ? 2 : 1
               label = round ? "%g" % value : nil
+              # a special case of the 110 value being too much to the right
+              # todo fix it by moving the decision outside the class (a member variable?)
+              if label == "110" then label = "110\u00a0\u00a0" end
           end
           h = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
           render_tick( x, h, label, Io::Creat::Slipstick::Entity::LOTICK )
