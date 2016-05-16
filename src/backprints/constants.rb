@@ -86,7 +86,7 @@ module Io::Creat::Slipstick
 
       public
       def getw ( )
-        return 8.5 * @fs_mm * 2.5
+        return ( MATH.length + PHYS.length + 2 ) * @h_mm / 14 / 0.99
       end
 
     end # ConstantsBackprint

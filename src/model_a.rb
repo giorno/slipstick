@@ -134,12 +134,7 @@ module Io::Creat::Slipstick
           @bp_border_mm = 12.0
           @bp_y_mm = @y_mm + @hl_mm + @t_mm + @bp_border_mm
           @bp_h_mm = @h_mm - 2 * @bp_border_mm
-          @bp_x_mm = @x_mm + @bp_border_mm / 2
-
-          # scales layout
-          lo = ScalesBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
-            @bprints << lo
-            @bp_x_mm += @bp_border_mm / 2 + lo.getw()
+          @bp_x_mm = @x_mm + 3.5 * @bp_border_mm
 
           # sin-cos help
           gr = TrigonometricBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
@@ -151,10 +146,15 @@ module Io::Creat::Slipstick
             @bprints << gr
             @bp_x_mm += @bp_border_mm / 2 + gr.getw()
 
-          # table of scale labels
+          # table of mathematical and physical constants
           cbp = ConstantsBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
             @bprints << cbp
             @bp_x_mm += @bp_border_mm / 2 + cbp.getw()
+
+          # scales layout
+#          lo = ScalesBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
+#            @bprints << lo
+#            @bp_x_mm += @bp_border_mm / 2 + lo.getw()
 
           # page number
           pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6, @style_pageno )
@@ -383,7 +383,7 @@ module Io::Creat::Slipstick
             gr_size_mm = @h_mm - ( 2 * bottom_off_mm )
             # QR code
             # TODO refactor to inherit from Backprint
-            qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, @x_mm + @w_mm - gr_size_mm - bottom_off_mm, bottom_mm, gr_size_mm, @style_qr )
+            qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, @bp_x_mm, bottom_mm, gr_size_mm, @style_qr )
             @img.rtext( @x_mm + @w_mm - 5, @y_mm + @hl_mm + @t_mm + @h_mm / 2, -90, @version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
           end
           if dir < 0 then rh_mm = 0 end

@@ -13,7 +13,7 @@ module Io::Creat::Slipstick
 
       def render ( )
         my_mm = @y_mm - @h_mm / 2
-        w_mm = @fs_mm * 2.5
+        w_mm = @fs_mm * 1.5
         h_mm = @h_mm / 14
         fs_mm = h_mm / 1.6
         style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::LOTICK].merge( { :font_size => fs_mm } )
@@ -84,7 +84,7 @@ module Io::Creat::Slipstick
 
       public
       def getw()
-        return @fs_mm * 6.5 * 2.5
+        return @fs_mm * 7 * 1.5
       end
 
     end # ScalesBackprint
