@@ -67,10 +67,10 @@ module Io::Creat::Slipstick
         @cw_mm = 40.0 # cursor width
         @ch_mm = @cc_mm + @h_mm + @b_mm # cursor height
         @hint_mm = 2.0 # bending/cutting edges hints (incomplete cut lines)
-        w_m_mm = 250.0
-        w_l_mm = 7.0
-        w_s_mm = 23.0
-        w_a_mm = 7.0
+        @w_m_mm = 250.0
+        @w_l_mm = 7.0
+        @w_s_mm = 23.0
+        @w_a_mm = 7.0
 
         # prepare style for smaller scales
         @style_small = @style.merge( { Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::LOTICK] } )
@@ -81,7 +81,7 @@ module Io::Creat::Slipstick
         # scales of the stator
         if ( ( @layers & LAYER_STOCK ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           # bottom stock strip
-          strip = create_strip( @x_mm, @y_mm, @hl_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          strip = create_strip( @x_mm, @y_mm, @hl_mm, @w_m_mm, @w_l_mm, @w_s_mm, @w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "D", 0.5 )
               scale.set_params( 1 )
               scale.add_constants( )
@@ -101,19 +101,19 @@ module Io::Creat::Slipstick
               scale.set_overflow( @b_mm )
 
           # top of the stock back
-          strip = create_strip( @x_mm, @y_mm + @t_mm + @hl_mm, 8, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          strip = create_strip( @x_mm, @y_mm + @t_mm + @hl_mm, 8, @w_m_mm, @w_l_mm, @w_s_mm, @w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "cm", 0.33 )
               scale.set_params( 25 )
               scale.set_overflow( @b_mm )
 
           # bottom of the stock back
-          strip = create_strip( @x_mm, @y_mm + @t_mm + @h_mm + @hl_mm - 8, 8, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          strip = create_strip( @x_mm, @y_mm + @t_mm + @h_mm + @hl_mm - 8, 8, @w_m_mm, @w_l_mm, @w_s_mm, @w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_INCH, "inches", 0.33, true )
               scale.set_params( 10 )
               scale.set_overflow( @b_mm )
 
           # top stock strip
-          strip = create_strip( @x_mm, @y_mm + 2 * @t_mm + @h_mm + @hu_mm, @hu_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+          strip = create_strip( @x_mm, @y_mm + 2 * @t_mm + @h_mm + @hu_mm, @hu_mm, @w_m_mm, @w_l_mm, @w_s_mm, @w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "L", 0.33 )
               scale.set_params( 10 )
               scale.set_overflow( @b_mm )
@@ -168,7 +168,7 @@ module Io::Creat::Slipstick
           if ( ( @layers & LAYER_FACE ) != 0 )
 
             # temperature conversion scale
-            strip = create_strip( @x_mm, @y_mm + bp_off_mm - @hu_mm / 4 , @hu_mm / 2, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+            strip = create_strip( @x_mm, @y_mm + bp_off_mm - @hu_mm / 4 , @hu_mm / 2, @w_m_mm, @w_l_mm, @w_s_mm, @w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°C", 0.5, true )
                 scale.set_style( @style_small )
                 scale.set_params( -50.0, 200.0, 1.0, true )
@@ -178,7 +178,7 @@ module Io::Creat::Slipstick
 
             # power scales
             ll_off_mm = 4 # shift LL scales to the left to make room for the last (too wide) tick label
-            strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm - ll_off_mm, w_a_mm )
+            strip = create_strip( @x_mm, @y_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, @w_m_mm, @w_l_mm, @w_s_mm - ll_off_mm, @w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL1", 0.5 )
                 scale.set_params( 100 )
                 scale.set_overflow( 4.0 )
@@ -190,7 +190,7 @@ module Io::Creat::Slipstick
                 scale.set_overflow( 4.0 )
 
             # length units conversion scales
-            bp_w_mm = w_m_mm + w_l_mm + w_s_mm + w_a_mm # width reserved for the 
+            bp_w_mm = @w_m_mm + @w_l_mm + @w_s_mm + @w_a_mm # width reserved for the 
             bp_gap_mm = 10 # space between conversion scales
             @bprints << ConversionBackprints.new( @img, @x_mm, @x_mm + bp_w_mm, @y_mm + @h_mm - bp_off_mm, bp_gap_mm, @style, ConversionBackprint::LENGTHS )
 
@@ -200,7 +200,7 @@ module Io::Creat::Slipstick
               @bprints << pn
 
             # log scales
-            strip = create_strip( @x_mm, @y_mm + @h_mm - @cs_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, w_m_mm, w_l_mm, w_s_mm, w_a_mm )
+            strip = create_strip( @x_mm, @y_mm + @h_mm - @cs_mm + ( ( @h_mm - @hs_mm ) / 2 ), @hs_mm, @w_m_mm, @w_l_mm, @w_s_mm, @w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "B", 0.5 )
                 scale.set_params( 2 )
                 scale.set_overflow( 4.0 )
@@ -223,7 +223,7 @@ module Io::Creat::Slipstick
             both = ( @layers & LAYER_FACE ) != 0
             y_mm = !both ? @sh_mm - @y_mm - 2 * ( @h_mm - @cs_mm ) : @y_mm
             # number system conversion scale
-            strip = create_strip( @x_mm, y_mm + 1.5 * bp_off_mm, 5 * @hu_mm / 4, w_m_mm + w_s_mm, w_l_mm, 0, w_a_mm )
+            strip = create_strip( @x_mm, y_mm + 1.5 * bp_off_mm, 5 * @hu_mm / 4, @w_m_mm + @w_s_mm, @w_l_mm, 0, @w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_HEX, "", 0.5, true )
                 scale.set_style( @style_small )
                 scale.set_params( 0.0, 256, 1.0, true )
@@ -243,7 +243,7 @@ module Io::Creat::Slipstick
                 scale.set_style( @style_small )
                 scale.set_params( 0.0, 256, 1.0 )
             # angles conversion scale
-            strip = create_strip( @x_mm, y_mm + @h_mm - @cs_mm + 2 * bp_off_mm + @hu_mm / 6, 10 * @hu_mm / 12, w_m_mm + w_s_mm, w_l_mm, 0, w_a_mm )
+            strip = create_strip( @x_mm, y_mm + @h_mm - @cs_mm + 2 * bp_off_mm + @hu_mm / 6, 10 * @hu_mm / 12, @w_m_mm + @w_s_mm, @w_l_mm, 0, @w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::CUST_DEG, "", 0.5, true )
                 scale.set_style( @style_small )
                 scale.set_params( 0.0, 360, 1.0, true )
@@ -370,7 +370,20 @@ module Io::Creat::Slipstick
           end
           if ( @layers & LAYER_FACE ) != 0
             # cutting guidelines for the stator
-            @img.rectangle( @x_mm, y_mm, @w_mm, rh_mm, @style )
+            #@img.rectangle( @x_mm, y_mm, @w_mm, rh_mm, @style )
+            @img.pbegin()
+              @img.move( @x_mm, y_mm )
+              @img.rline( @x_mm + @w_mm, y_mm )
+              @img.rline( @x_mm + @w_mm, y_mm + rh_mm )
+              @img.rline( @x_mm, y_mm + rh_mm )
+              # left static cursor window
+              lww_mm = @w_l_mm + @w_s_mm + 5
+              @img.rline( @x_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
+              @img.rline( @x_mm + lww_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
+              @img.rline( @x_mm + lww_mm, y_mm + 2 * @hl_mm + @t_mm )
+              @img.rline( @x_mm, y_mm + 2 * @hl_mm + @t_mm )
+              @img.rline( @x_mm, y_mm )
+            @img.pend( @style )
             # branding texts
             brand = PageNoBackprint.new( @img, @x_mm + 168, @y_mm + 6, HEIGHT_BRAND, @style_branding )
               brand.sett( BRAND, true )
