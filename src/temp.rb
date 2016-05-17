@@ -23,6 +23,10 @@ module Io::Creat::Slipstick
     public
     def render ( )
       last_mm = @start_mm
+      @style = @style.merge( {
+          Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::CONSTANT].merge( { :font_style => 'normal' } ),
+          Io::Creat::Slipstick::Entity::LABEL => @style[Io::Creat::Slipstick::Entity::LABEL].merge( { :fill => @style[Io::Creat::Slipstick::Entity::CONSTANT][:fill] } ),
+          } )
       ( @start_val..@end_val ).step( @step_val ) do | temp |
         x_mm = @start_mm + ( ( temp - @start_val ) * @scale )
 	h_idx = temp % 10 == 0 ? 0 : ( temp % 5 == 0 ? 1 : 3 )
@@ -32,8 +36,8 @@ module Io::Creat::Slipstick
       end
       if @line
         y_mm = @off_y_mm
-        style = Io::Creat::Slipstick::Entity::TICK
-        @img.line( @off_x_mm, y_mm, @off_x_mm + @start_mm + @w_mainscale_mm, y_mm, { "stroke" => @style[style][:stroke], "stroke-width" => "%f" % @style[style][:stroke_width], "stroke-linecap" => "butt" } )
+        style = Io::Creat::Slipstick::Entity::CONSTANT
+        @img.line( @off_x_mm, y_mm, @off_x_mm + @start_mm + @w_mainscale_mm, y_mm, { :font_style => 'normal', :stroke => @style[style][:stroke], :stroke_width => "%f" % @style[style][:stroke_width], :stroke_linecap => "butt" } )
       end
       render_label( )
     end
