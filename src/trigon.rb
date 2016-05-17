@@ -18,7 +18,7 @@ module Io::Creat::Slipstick
       @initialized = true
       @precision   = 10
 
-      @fodders     = { 90 => 8, 70 => 20, 60 => 10, 40 => 15, 20 => 6, 10 => 12 }
+      @fodders     = { 90 => 5, 80 => 10, 70 => 20, 60 => 10, 40 => 15, 20 => 6, 10 => 12 }
     end
 
     protected
@@ -41,7 +41,13 @@ module Io::Creat::Slipstick
 
     protected
     def fmt_label ( val )
-      return [ val % 10 == 0 ? Io::Creat::Slipstick::Entity::TICK : Io::Creat::Slipstick::Entity::LOTICK, "\u00a0%d°" % val ]
+      if val == 80
+        return [ Io::Creat::Slipstick::Entity::TICK, "80°\u00a0" ]
+      elsif val == 90
+        return [ Io::Creat::Slipstick::Entity::TICK, "\u00a0\u00a0\u00a090°" ]
+      else
+        return [ val % 10 == 0 ? Io::Creat::Slipstick::Entity::TICK : Io::Creat::Slipstick::Entity::LOTICK, "\u00a0%d°" % val ]
+      end
     end
 
     public
@@ -57,7 +63,7 @@ module Io::Creat::Slipstick
           try_deg = deg - step
           x = @start_mm + Math.log10( compute( try_deg ) * @precision ) * @scale
           delta_mm = last - x
-          if delta_mm.abs >= @clear_mm
+          if delta_mm.abs >= @clear_mm or try_deg.round() == 80
             delta_deg = deg - try_deg
             h_idx = ( ( @precision * try_deg ) % 100 == 0 ) ? 0 : ( ( ( @precision * try_deg ) % 50 == 0 ) ? 1 : 2 )
             h_mm = @h_mm * @dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][h_idx]
