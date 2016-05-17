@@ -351,6 +351,7 @@ module Io::Creat::Slipstick
       def render()
         @style_qr = @style[Io::Creat::Slipstick::Entity::QR]
         @style_cursor = @style[Io::Creat::Slipstick::Entity::LOTICK]
+        @style_label = @style[Io::Creat::Slipstick::Entity::LABEL]
         @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
         rww_mm = @w_a_mm + @ww_off_mm
         lww_mm = @w_l_mm + @w_s_mm + @ww_off_mm
@@ -395,9 +396,11 @@ module Io::Creat::Slipstick
             # left static cursor hints
             @img.line( @x_mm + lww_mm - @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm, @x_mm + lww_mm - @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm - @ww_off_mm / 2, @style )
             @img.line( @x_mm + lww_mm - @ww_off_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm, @x_mm + lww_mm - @ww_off_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm + @ww_off_mm / 2, @style )
+            @img.text( @x_mm + lww_mm - @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm - @ww_off_mm / 1.5, 'eˣ', Io::Creat::svg_dec_style_units( @style_label.merge( { :text_anchor => 'middle' } ), SVG_STYLE_TEXT ) )
             # right static cursor hints
             @img.line( @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm, @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm - @ww_off_mm / 2, @style )
             @img.line( @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm, @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm + @ww_off_mm / 2, @style )
+            @img.text( @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm - @ww_off_mm / 1.5, 'eˣ', Io::Creat::svg_dec_style_units( @style_label.merge( { :text_anchor => 'middle' } ), SVG_STYLE_TEXT ) )
             # branding texts
             brand = PageNoBackprint.new( @img, @x_mm + 168, @y_mm + 6, HEIGHT_BRAND, @style_branding )
               brand.sett( BRAND, true )
