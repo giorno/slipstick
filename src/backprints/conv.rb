@@ -118,7 +118,7 @@ module Io::Creat::Slipstick::Backprints
       @bprints = []
       x_mm = left_mm
       scales.each do | scale |
-        bp = ConversionBackprint.new( img, x_mm, y_mm, 0, style[Io::Creat::Slipstick::Entity::CONSTANT] )
+        bp = ConversionBackprint.new( img, x_mm, y_mm, 0, style[Io::Creat::Slipstick::Entity::UNITS] )
         bp.set_scale( scale )
         x_mm += bp.getw() + gap_mm
         @bprints << bp

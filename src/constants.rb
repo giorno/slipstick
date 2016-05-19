@@ -26,11 +26,12 @@ module Io
         LOTICK   = 0x30 # small font tick for a calculated value
         LABEL    = 0x40 # scale label
         SCALE    = 0x50 # single scale (deprecated as it is abused in so many places)
-        CONSTANT = 0x60 # tick for a pre-defined constant
-        BRANDING = 0x70 # branding tags (rounded rectangle, white text on color)
-        PAGENO   = 0x80 # page numbers
-        AUX      = 0x90 # auxilliary lines (content not present in the product, such as cutting lines, comments)
-        QR       = 0xa0 # QR code style
+        UNITS    = 0x60 # units conversion scales
+        CONSTANT = 0x70 # tick for a pre-defined constant
+        BRANDING = 0x80 # branding tags (rounded rectangle, white text on color)
+        PAGENO   = 0x90 # page numbers
+        AUX      = 0xa0 # auxilliary lines (content not present in the product, such as cutting lines, comments)
+        QR       = 0xb0 # QR code style
       end
 
       module Style
@@ -41,6 +42,7 @@ module Io
                     Io::Creat::Slipstick::Entity::LABEL    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :font_weight => 'bold', :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::CONSTANT => Io::Creat::SVG_STYLE.merge( { :font_style => 'oblique', :font_size => 2.4, :fill => 'black' } ),
+                    Io::Creat::Slipstick::Entity::UNITS    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :fill => 'black' } ),
                     Io::Creat::Slipstick::Entity::BRANDING => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :fill => 'black', :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::PAGENO   => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :fill => 'black', :stroke_width => 0.22 } ),
                     Io::Creat::Slipstick::Entity::AUX      => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :text_anchor => 'middle', :letter_spacing => 0 } ),
@@ -52,6 +54,7 @@ module Io
                     Io::Creat::Slipstick::Entity::LABEL    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :fill => '#971c1c', :font_weight => 'bold', :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::SCALE    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::CONSTANT => Io::Creat::SVG_STYLE.merge( { :font_style => 'oblique', :font_size => 2.4, :fill => '#283593', :stroke => '#283593' } ),
+                    Io::Creat::Slipstick::Entity::UNITS    => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :fill => '#878787', :stroke => '#878787' } ),
                     Io::Creat::Slipstick::Entity::BRANDING => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :stroke => '#971c1c', :letter_spacing => -0.10 } ),
                     Io::Creat::Slipstick::Entity::PAGENO   => Io::Creat::SVG_STYLE.merge( { :text_anchor => 'middle', :fill => 'black', :stroke_width => 0.22 } ),
                     Io::Creat::Slipstick::Entity::AUX      => Io::Creat::SVG_STYLE.merge( { :font_size => 2.4, :text_anchor => 'middle', :letter_spacing => 0 } ),

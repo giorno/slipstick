@@ -75,6 +75,7 @@ module Io::Creat::Slipstick
 
         # prepare style for smaller scales
         @style_small = @style.merge( { Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::LOTICK] } )
+        @style_units = @style.merge( { Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::UNITS] } )
         @style_branding = @style[Io::Creat::Slipstick::Entity::BRANDING]
         @style_pageno = @style[Io::Creat::Slipstick::Entity::PAGENO]
         @style_aux = Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::AUX], SVG_STYLE_TEXT )
@@ -171,10 +172,10 @@ module Io::Creat::Slipstick
             # temperature conversion scale
             strip = create_strip( @x_mm, @y_mm + bp_off_mm - @hu_mm / 4 , @hu_mm / 2, @w_m_mm, @w_l_mm, @w_s_mm, @w_a_mm )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°C", 0.5, true )
-                scale.set_style( @style_small )
+                scale.set_style( @style_units )
                 scale.set_params( -50.0, 200.0, 1.0, true )
               scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_TEMP, "°F", 0.5 )
-                scale.set_style( @style_small )
+                scale.set_style( @style_units )
                 scale.set_params( -58.0, 392.0, 1.0 )
 
             # power scales
