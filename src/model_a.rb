@@ -353,8 +353,6 @@ module Io::Creat::Slipstick
         @style_qr = @style[Io::Creat::Slipstick::Entity::QR]
         @style_cursor = @style[Io::Creat::Slipstick::Entity::LOTICK]
         @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
-        rww_mm = @w_a_mm + @ww_off_mm
-        lww_mm = @w_l_mm + @w_s_mm + @ww_off_mm
         # [stock] lines are intentionally positioned upside down (in landscape)
         if ( @layers & LAYER_STOCK ) != 0
           # both on same sheet?
@@ -379,6 +377,7 @@ module Io::Creat::Slipstick
               @img.move( @x_mm, y_mm )
               @img.rline( @x_mm + @w_mm, y_mm )
               # right static cursor window
+              rww_mm = @w_a_mm + @ww_off_mm
               @img.rline( @x_mm + @w_mm, y_mm + 2 * @hl_mm + @t_mm )
               @img.rline( @x_mm + @w_mm - rww_mm, y_mm + 2 * @hl_mm + @t_mm )
               @img.rline( @x_mm + @w_mm - rww_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
@@ -387,6 +386,7 @@ module Io::Creat::Slipstick
               # bottom edge
               @img.rline( @x_mm, y_mm + rh_mm )
               # left static cursor window
+              lww_mm = @w_l_mm + @w_s_mm + @ww_off_mm
               @img.rline( @x_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
               @img.rline( @x_mm + lww_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
               @img.rline( @x_mm + lww_mm, y_mm + 2 * @hl_mm + @t_mm )
@@ -450,28 +450,18 @@ module Io::Creat::Slipstick
         # [transparent] elements cutting lines
         if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
           style = @style.merge( { :stroke_width => @style[:stroke_width] * 2 } )
-          # stock part
-          y_mm = @y_mm
-          @img.line( 0, y_mm, @sw_mm, y_mm, style )
-          @img.line( 0, y_mm + @h_mm, @sw_mm, y_mm + @h_mm, style )
-          @img.text( @sw_mm / 2, y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], @style_aux )
-          if not RELEASE
-            @img.text( @sw_mm / 2, y_mm + @h_mm - 4 , @version, @style_aux )
+          # two stock part
+          [ @y_mm, @y_mm + @h_mm + 10 ].each do | y_mm |
+            @img.line( 0, y_mm, @sw_mm, y_mm, style )
+            @img.line( 0, y_mm + @h_mm, @sw_mm, y_mm + @h_mm, style )
+            @img.text( @sw_mm / 2, y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @sw_mm, @h_mm ], @style_aux )
+            if not RELEASE
+              @img.text( @sw_mm / 2, y_mm + @h_mm - 4 , @version, @style_aux )
+            end
           end
-          # static cursors window
-          y_mm = @y_mm + @h_mm + 10
-          @img.rectangle( @x_mm, y_mm, @w_mm, @h_mm, @style )
-          # left static cursor hints
-          @img.line( @x_mm + lww_mm - @ww_off_mm, y_mm + 5, @x_mm + lww_mm - @ww_off_mm, y_mm + @h_mm - 5, @style )
-          # right static cursor hints
-          @img.line( @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + 5, @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + @h_mm - 5, @style )
-          @img.text( @sw_mm / 2, y_mm + @h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @w_mm, @h_mm ], @style_aux )
-          if not RELEASE
-            @img.text( @sw_mm / 2, y_mm + @h_mm - 4 , @version, @style_aux )
-          end
-          # cursor window part
+          # two cursor parts
           y_mm = @y_mm + 2 * @h_mm + 22.5
-          [ ( @sw_mm / 4 ) - ( @ch_mm / 2 ) ].each do | x_mm |
+          [ ( @sw_mm / 4 ) - ( @ch_mm / 2 ), ( 3 * @sw_mm / 4 ) - ( @ch_mm / 2 ) ].each do | x_mm |
             #x_mm = ( @sw_mm - @ch_mm ) / 2
             @img.line( x_mm, y_mm, x_mm - @hint_mm, y_mm, style )
             @img.rtext( x_mm - 2 * @hint_mm, y_mm, -90, '1', @style_aux )
