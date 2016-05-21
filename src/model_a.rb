@@ -67,7 +67,6 @@ module Io::Creat::Slipstick
         @cw_mm = 40.0 # cursor width
         @ch_mm = @cc_mm + @h_mm + @b_mm # cursor height
         @hint_mm = 2.0 # bending/cutting edges hints (incomplete cut lines)
-        @ww_off_mm = 5.0 # offset of stock windows for static cursors on the bacl
         @w_m_mm = 250.0
         @w_l_mm = 7.0
         @w_s_mm = 23.0
@@ -377,7 +376,7 @@ module Io::Creat::Slipstick
               @img.move( @x_mm, y_mm )
               @img.rline( @x_mm + @w_mm, y_mm )
               # right static cursor window
-              rww_mm = @w_a_mm + @ww_off_mm
+              rww_mm = @w_a_mm + 5
               @img.rline( @x_mm + @w_mm, y_mm + 2 * @hl_mm + @t_mm )
               @img.rline( @x_mm + @w_mm - rww_mm, y_mm + 2 * @hl_mm + @t_mm )
               @img.rline( @x_mm + @w_mm - rww_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
@@ -386,19 +385,13 @@ module Io::Creat::Slipstick
               # bottom edge
               @img.rline( @x_mm, y_mm + rh_mm )
               # left static cursor window
-              lww_mm = @w_l_mm + @w_s_mm + @ww_off_mm
+              lww_mm = @w_l_mm + @w_s_mm + 5
               @img.rline( @x_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
               @img.rline( @x_mm + lww_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm )
               @img.rline( @x_mm + lww_mm, y_mm + 2 * @hl_mm + @t_mm )
               @img.rline( @x_mm, y_mm + 2 * @hl_mm + @t_mm )
               @img.rline( @x_mm, y_mm )
             @img.pend( @style )
-            # left static cursor hints
-            @img.line( @x_mm + lww_mm - @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm, @x_mm + lww_mm - @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm - @ww_off_mm / 2, @style )
-            @img.line( @x_mm + lww_mm - @ww_off_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm, @x_mm + lww_mm - @ww_off_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm + @ww_off_mm / 2, @style )
-            # right static cursor hints
-            @img.line( @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm, @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + 2 * @hl_mm + @t_mm - @ww_off_mm / 2, @style )
-            @img.line( @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm, @x_mm + @w_mm - rww_mm + @ww_off_mm, y_mm + rh_mm - 2 * @hu_mm - @t_mm + @ww_off_mm / 2, @style )
             # branding texts
             brand = PageNoBackprint.new( @img, @x_mm + 168, @y_mm + 6, HEIGHT_BRAND, @style_branding )
               brand.sett( BRAND, true )
