@@ -135,7 +135,12 @@ module Io::Creat::Slipstick
           @bp_border_mm = 12.0
           @bp_y_mm = @y_mm + @hl_mm + @t_mm + @bp_border_mm
           @bp_h_mm = @h_mm - 2 * @bp_border_mm
-          @bp_x_mm = @x_mm + 3.5 * @bp_border_mm
+          @bp_x_mm = @x_mm + 0.5 * @bp_border_mm
+
+          # scales layout
+          lo = ScalesBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
+            @bprints << lo
+            @bp_x_mm += @bp_border_mm / 2 + lo.getw()
 
           # sin-cos help
           gr = TrigonometricBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
@@ -151,11 +156,6 @@ module Io::Creat::Slipstick
           cbp = ConstantsBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
             @bprints << cbp
             @bp_x_mm += @bp_border_mm / 2 + cbp.getw()
-
-          # scales layout
-#          lo = ScalesBackprint.new( @img, @bp_x_mm, @bp_y_mm, @bp_h_mm )
-#            @bprints << lo
-#            @bp_x_mm += @bp_border_mm / 2 + lo.getw()
 
           # page number
           pn = PageNoBackprint.new( @img, @x_mm + @w_mm / 2, @sh_mm - @y_mm, 6, @style_pageno )
