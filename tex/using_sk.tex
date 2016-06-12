@@ -5,6 +5,9 @@
 \usepackage{background}
 \usetikzlibrary{calc}
 \usepackage{fixltx2e}
+\usepackage{unicode-math}
+\usepackage{fancybox}
+\usepackage{amsmath}
 
 % lines for cutting and bending for folded book like manual
 \backgroundsetup{
@@ -61,13 +64,15 @@ contents={\tikz\draw[line width=0.1mm, gray]
 a
   Posuvná časť sa pohybuje vo vnútri Pevnej časti a Bežec po jej povrchu. Matematické operácie sa vykonávajú vzájomným posúvaním častí, zarovnaním indexov stupníc a odčítaním hodnôt. Niektoré operácie vyžadujú drobnú konverziu desatinných miest.
 
+  \makeop{2mm}{{x}\cdot{y}}
   \textbf{Jednoduché násobenie}
+
 \constt{1.2{\char"00D7}2.3:}
 Posuň index 1 stupnice C na pozíciu indexu 1.2 stupnice D.
 Posuň Bežec na index 2.3 stupnice D.
 Hodnota, ktorú Bežec ukazuje na stupnici C je výsledok: \constt{2.76}.
-\footnotesize Použi stupnice A a B pre násobenie a delenie väčších čísel.
-\normalsize
+
+\footnotesize Použi stupnice A a B pre násobenie a delenie väčších čísel.\normalsize
 
   \textbf{Násobenie s prechodom}
 \constt{2.4{\char"00D7}4.6}
@@ -78,65 +83,91 @@ Z pamäti vypočítaj, že súčin približných hodnôt 2.5{\char"00D7}5 je 12.
 Výsledok je teda väčší ako 10.
 Úpravou desatinného miesta získaš výsledok: \constt{11.05}. 
 
+  \makeop{2mm}{{x}/{y}}
   \textbf{Jednoduché delenie}
+
 \constt{4.6/7.7:}
 Posuň Bežec na index 4.6 stupnice D.
 Posuň index 7.7 stupnice C na Bežec.
 Posuň Bežec buď na index 1 alebo index 10 stupnice C, podľa toho, ktorý je bližšie. V tomto prípade index 10.
 Bežec je teraz na indexe 5.97 na stupnici D. Správna odpoveď je približne 4 / 8 = 0.5. Úpravou desatinného miesta získaš výsledok: \constt{0.597}.
 
+  \makeop{2mm}{{1}/{x}}
   \textbf{Recipročná hodnota}
-\constt{1/7.6:}
+
 \footnotesize Stupnica CI je inverzná stupnica, hodnoty indexov stúpajú zprava doľava. \normalsize
+
+\constt{1/7.6:}
 Posuň Bežec na index 7.8 stupnice CI.
 Bežec je teraz na indexe 1.132 na stupnici C.
 Správna odpoveď je približne 1 / 10 = 0.1. Úpravou desatinného miesta získaš výsledok: \constt{0.1132}.
 
+  \makeop{3mm}{x^2}
   \textbf{Druhá mocnina}
+
 \constt{4.2\textsuperscript{2}:}
 Posuň Bežec na index 4.2 stupnice C.
 Bežec ukazuje výsledok \constt{17.6} na stupnici B.
 
+  \makeop{3mm}{\sqrt{x}}
   \textbf{Druhá odmocnina}
+
 \footnotesize Pre počítanie druhej odmociny čísel s nepárnym počnom číslic použi rozsah [1, 10] stupnice B. Pre druhú mocninu čísel s párnym počtom číslic použi rozsah [10, 100] stupnice B. \normalsize
+
 \constt{4400\textsuperscript{0.5}:}
 Posuň Bežec na index 44 stupnice B (4400 má párny počet číslic).
 Bežec je na indexe 6.65 na strupnici C. Správna odpoveď je približne 70, keďźe 70\textsuperscript{2} = 4900. Úpravout desatinného miesta získaš výsledok: \constt{66.5}.
 
+  \makeop{3mm}{x^3}
   \textbf{Tretia mocnina}
+
 \constt{4.8\textsuperscript{3}:}
 Posuň Bežec na index 4.8 stupnice D.
 Bežec ukazuje výsledok \constt{110} na stupnici K.
 
+  \makeop{3mm}{\sqrt[\leftroot{5}\uproot{2}3]{x}}
   \textbf{Tretia odmocnina}
+
 \footnotesize Rozsah [1, 10] stupnice K sa používa pre tretie odmocniny čísel s jednou číslicou, rozsah [10, 100] pre čísla s dvoma číslicami, [100, 1000] pre trojmiestne čísla. Čísla so štyrmi číslicami opäť prvý rozsah, päť číslic druhý rozsah, atď. \normalsize
+
 \constt{4400\textsuperscript{0.33}:}
 Posuň Bežec na index 4.4 stupnice K (4400 má 4 číslice).
 Bežec je na indexe 1.655 na stupnici D.
 Správna odpoveď je medzi 10 a 20 pretože 10\textsuperscript{3} = 1000 a 20\textsuperscript{3} = 8000. Úpravou desatinného miesta získaš výsledok: \constt{16.55}.
 
+  \makeop{3mm}{{x}^{10}}
   \textbf{Desiata mocnina}
-\constt{1.36\textsuperscript{10}:}
+
 \footnotesize Mocnenie na mocniny čísla 10 a všeobecné mocniny (vrátane odmocnín) sa počítajú na stupniciach LL, ktoré sú umiestnené na opačnej strane Posuvnej časti. \normalsize
+
+\constt{1.36\textsuperscript{10}:}
 Posuň Bežec na index 1.36 stupnice LL2.
 Bežec sa nachádza na indexe \constt{21.5} na stupnici LL3, čo je výsledok operácie.
 
-  \textbf{Stá mocnina}
-\constt{1.02\textsuperscript{100}:}
-Posuň Bežec na index 1.02 stupnice LL1.
-Bežec sa nachádza na indexe \constt{7.25} na stupnici LL3, čo je výsledok operácie.
-
+  \makeop{3mm}{\sqrt[\leftroot{6}\uproot{2}10]{x}}
   \textbf{Desiata odmocnina}
+
 \constt{5\textsuperscript{0.1}:}
 Posuň Bežec na index 5 stupnice LL3.
 Bežec sa nachádza na indexe \constt{1.175} na stupnici LL2, čo je výsledok operácie.
 
+  \makeop{3mm}{{x}^{100}}
+  \textbf{Stá mocnina}
+
+\constt{1.02\textsuperscript{100}:}
+Posuň Bežec na index 1.02 stupnice LL1.
+Bežec sa nachádza na indexe \constt{7.25} na stupnici LL3, čo je výsledok operácie.
+
+  \makeop{3mm}{\sqrt[\leftroot{7}\uproot{2}100]{x}}
   \textbf{Stá odmocnina}
+
 \constt{5\textsuperscript{0.01}:}
 Posuň Bežec na index 5 stupnice LL3.
 Bežec sa nachádza na indexe \constt{1.022} na stupnici LL1, čo je výsledok operácie.
 
+  \makeop{3mm}{x^y}
   \textbf{Všeobecná mocnina}
+
 \constt{9.1\textsuperscript{2.3}:}
 Posuň index 9.1 stupnice LL3 na pozíciu indexu 1 stupnice D.
 Posuň Bežec na index 2.3 stupnice D.
@@ -163,26 +194,36 @@ Posuň Bežec na index 5.6 stupnice C.
 Bežec sa nachádza na indexe 3.6 na stupnici LL3.
 Pretože si použil/použila jednu stotinu exponentu, úpravou hodnoty o dve desatinné miesta získaš výsledok: \constt{0.036}.
 
+  \makeop{3mm}{\sin{x}}
   \textbf{Sínus}
+
 \footnotesize Použi stupnicu S pre výpočet sínusu uhlov medzi 5\textdegree a 90\textdegree, a stupnicu ST pre uhly medzi 30' a 6\textdegree. \normalsize
+
 \constt{sin(33\textdegree):}
 Posuň Bežec na 33 stupnice S.
 Bežec sa nachádza na indexe 5.45 na stupnici C.
 Správna odpoveď je medzi 0.1 a 1. Úpravou desatinného miesta získaš výsledok: \constt{0.545}.
 
+  \makeop{3mm}{\cos{x}}
   \textbf{Kosínus}
+
 \constt{cos(33\textdegree):}
 Posuň Bežec na index 33 stupnici S.
 Bežec sa nachádza na indexe výsledku \constt{0.83} na stupnici P (inverzná stupnica).
 
+  \makeop{3mm}{\tan{x}}
   \textbf{Tangens}
+
 \footnotesize Použi stupnicu T pre výpočet tangensu uhlov medzi 5\textdegree a 45\textdegree, a stupnicu ST pre uhly medzi 30' a 6\textdegree. \normalsize
+
 \constt{tan(33\textdegree):}
 Posuň Bežec na index 33 stupnice S.
 Bežec sa nachádza na indexe 6.5 na stupnici C.
 Správny výsledok je medzi 0.1 a 1. Úpravou desatinného miesta získaš výsledok: \constt{0.65}.
 
+  \makeop{3mm}{\log_{10}{x}}
   \textbf{Dekadický logaritmus}
+
 \constt{log\textsubscript{10}2.6:}
 Posuň Bežec na index 2.6 stupnice C.
 Bežec sa nachádza na indexe 4.14 na stupnici L.
