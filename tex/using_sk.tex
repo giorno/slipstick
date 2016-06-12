@@ -1,3 +1,4 @@
+% vim: et
 \input{preamble.tex}
 \usepackage{polyglossia}
 \setdefaultlanguage{slovak}
@@ -21,6 +22,11 @@ contents={\tikz\draw[line width=0.1mm, gray]
 }
 
 \newcommand{\makefulltitle}{Ako používať Logaritmické pravítko }
+% localisation strings used in the templates
+\newcommand{\tabstockupper}{Horná polovica Pevnej časti }
+\newcommand{\tabslidefront}{Predná strana Posuvnej časti }
+\newcommand{\tabslideback}{Zadná strana Posuvnej časti }
+\newcommand{\tabstocklower}{Spodná polovica Pevnej časti }
 \input{makefooters.tex}
 \input{makeperex_sk.tex}
 
@@ -30,10 +36,10 @@ contents={\tikz\draw[line width=0.1mm, gray]
 \begin{document}
 
   \begin{center}
-    \headingfont\fontsize{20}{20}\selectfont AKO POUŽÍVAŤ
+    \headingfont\fontsize{28}{28}\selectfont AKO POUŽÍVAŤ LOGARITMICKÉ PRAVÍTKO
   \end{center}
 
-  {\let\newpage\relax\maketitle}% no new line before title
+%  {\let\newpage\relax\maketitle}% no new line before title
   \nosection{}
   \large\textbf{\makeperex Tento návod popisuje ako používať papierové Logaritmické pravítko \modelname.}
 
@@ -46,21 +52,13 @@ contents={\tikz\draw[line width=0.1mm, gray]
       \item Bežca.
     \end{inparaenum}
 
-  Na prednej strane Pevnej časti a oboch stranách Posuvnej časti sú zobrazené logaritmické stupnice, označené veľkými písmenami. Stupnice na Pevnej časti:
-  \begin{inparaenum}[a\upshape)]
-    \item \textbf{L, P, K, A} na hornej polovici; a
-    \item \textbf{D, S, T, ST} na spodnej polovici.
-  \end{inparaenum}
-  Stupnice na Posuvnej časti:
-  \begin{inparaenum}[a\upshape)]
-    \item \textbf{B, CI, C} na jednej strane; a
-    \item \textbf{LL1, LL2, LL3} na opačnej.
-  \end{inparaenum}
+  Na prednej strane Pevnej časti a oboch stranách Posuvnej časti sú zobrazené logaritmické stupnice, označené veľkými písmenami:
 
-  Čiary na stupnici sa nazývajú rysky alebo \textbf{indexy}. Číselné značky na stupnici označujú významné indexy.
+  \input{scalest.tex}
+  Čiary na stupniciach sa nazývajú \textbf{indexy} alebo rysky. Číselné značky na stupnici označujú významné indexy.
 
-  Na zadnej strane Pevnej časti sú tabuľky matematických a fyzikálnych konštánt a ďalšia užitočná grafika\footnote{Metrické a palcové stupnice na zadnej strane Pevnej časti a prednej strane Bežca nemusia merať presne, pretože teplota a vlhkosť spôsobené lepením menia mechanické vlastnosti a rozmery papiera.}, ale tieto sa nepoužívajú v matematických operáciách. Posuvná časť obsahuje prevodné mierky pre imperiálne a metrické (SI) jednotky a na vnútorných stranách prevodné stupnice medzi číselnými sústavami a mierami uhlov.
-
+  Na zadnej strane Pevnej časti sú tabuľky matematických a fyzikálnych konštánt a ďalšia užitočná grafika\footnote{Metrické a palcové stupnice na zadnej strane Pevnej časti a prednej strane Bežca nemusia merať presne, pretože teplota a vlhkosť spôsobené lepením menia mechanické vlastnosti a rozmery papiera.}, ale tieto sa priamo nepoužívajú v matematických operáciách. Posuvná časť  obsahuje prevodné mierky pre imperiálne a metrické (SI) jednotky a na vnútorných stranách prevodné stupnice medzi číselnými sústavami a mierami uhlov.
+a
   Posuvná časť sa pohybuje vo vnútri Pevnej časti a Bežec po jej povrchu. Matematické operácie sa vykonávajú vzájomným posúvaním častí, zarovnaním indexov stupníc a odčítaním hodnôt. Niektoré operácie vyžadujú drobnú konverziu desatinných miest.
 
   \textbf{Jednoduché násobenie}

@@ -19,6 +19,11 @@ contents={\tikz\draw[line width=0.1mm, gray]
 }
 
 \newcommand{\makefulltitle}{How To Use The Slide Rule }
+% localisation strings used in the templates
+\newcommand{\tabstockupper}{Upper half od the Stock }
+\newcommand{\tabslidefront}{Front side of the Slide }
+\newcommand{\tabslideback}{Reverse side of the Slide }
+\newcommand{\tabstocklower}{Lower half of the Stock }
 \input{makefooters.tex}
 \input{makeperex_en.tex}
 
@@ -28,10 +33,10 @@ contents={\tikz\draw[line width=0.1mm, gray]
 \begin{document}
 
   \begin{center}
-    \headingfont\fontsize{20}{20}\selectfont HOW TO USE
+    \headingfont\fontsize{28}{28}\selectfont HOW TO USE THE SLIDE RULE
   \end{center}
 
-  {\let\newpage\relax\maketitle}% no new line before title
+%  {\let\newpage\relax\maketitle}% no new line before title
   \nosection{}
   \large\textbf{\makeperex This guide describes how to use a paper made Slide Rule \modelname.}
 
@@ -44,20 +49,12 @@ contents={\tikz\draw[line width=0.1mm, gray]
       \item Cursor.
     \end{inparaenum}
 
-  On the Stock face and both sides of the Slide Rule there are logarithmic scales marked by capital letters. Scales on the Stock:
-  \begin{inparaenum}[a\upshape)]
-    \item \textbf{L, P, K, A} on the top; and
-    \item \textbf{D, S, T, ST} on the bottom.
-  \end{inparaenum}
-  Scales on the Slide:
-  \begin{inparaenum}[a\upshape)]
-    \item \textbf{B, CI, C} on one side; and
-    \item \textbf{LL1, LL2, LL3} on another.
-  \end{inparaenum}
+  On the Stock face and both sides of the Slide there are logarithmic scales marked by capital letters:
 
-  Lines on the scales are called divisions or \textbf{indexes}. Labels on the scale designate major indexes.
+  \input{scalest.tex}
+  Lines on the scales are called \textbf{indexes} or divisions. Labels on the scale designate major indexes.
 
-  On the back of the Stock there are tables of mathematical and physical constants, and other useful graphics\footnote{The metric and inch scales on the back of the Stock and on the front of the Cursor may not be accurate due to temperatures used by the printer and humidity during glueing that alter the paper properties and dimensions.}, but those are not involved in calculations. The Slide contains, besides the logarithmic scales on both sides, conversion ratios between imperial and metric (SI) units.
+  On the back of the Stock there are located tables of mathematical and physical constants, and other useful graphics\footnote{The metric and inch scales on the back of the Stock and on the front of the Cursor may not be accurate due to temperatures used by the printer and humidity during glueing that alter the paper properties and dimensions.}, but those are not directly involved in calculations. The Slide contains, besides the logarithmic scales on both sides, conversion ratios between imperial and metric (SI) units.
 
   The Slide slides inside the Stock and the Cursor slides on the top of the Stock. By sliding these parts, aligning the scales at appropriate indexes and reading them, mathematical operations are performed. Some operations require little deal of mental arithmetic to sort out decimal places.
 
