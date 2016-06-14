@@ -5,6 +5,7 @@
 \usepackage{unicode-math}
 \usepackage{fancybox}
 \usepackage{amsmath}
+\usepackage{graphicx}
 
 % lines for cutting and bending for folded book like manual
 \backgroundsetup{
@@ -61,6 +62,9 @@ contents={\tikz\draw[line width=0.1mm, gray]
   On the back of the Stock there are located tables of mathematical and physical constants, and other useful graphics\footnote{The metric and inch scales on the back of the Stock and on the front of the Cursor may not be accurate due to temperatures used by the printer and humidity during glueing that alter the paper properties and dimensions.}, but those are not directly involved in calculations. The Slide contains, besides the logarithmic scales on both sides, conversion ratios between imperial and metric (SI) units.
 
   The Slide slides inside the Stock and the Cursor slides on the top of the Stock. By sliding these parts, aligning the scales at appropriate indexes and reading them, mathematical operations are performed. Some operations require a little deal of mental arithmetic to sort out decimal places.
+
+  \centerline{\includegraphics{ops_en}}
+  \vspace*{3mm}
 
   \makeop{2mm}{{x}\cdot{y}}
   \textbf{Basic Multiplication}
@@ -218,7 +222,7 @@ The Cursor is at index \constt{0.83} on the scale P (it is an inverse scale), wh
 
 \constt{tan(33\textdegree):}
 Move the Cursor to index 33 on the scale S.
-The Cursor is at index 6.5 on the scale C.
+The Cursor is at index 6.5 on the scale D.
 The correct answer is between 0.1 and 1. Adjusting decimal place gives the result: \constt{0.65}.
 
   \makeop{3mm}{\log_{10}{x}}
