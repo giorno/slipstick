@@ -22,6 +22,7 @@ module Io::Creat::Slipstick
 
     # Branding information content and rendering
     class Branding
+      attr_accessor :version, :release, :brand, :model, :height, :pattern
     end # Branding
 
     # Crete pattern for communicating model dimensions to the components
@@ -71,6 +72,7 @@ module Io::Creat::Slipstick
         @dm = @parent.dm # instance of class Dimensions
         @style = @parent.style
         @i18n = @parent.i18n
+        @branding = @parent.branding
         @layer = layer
 
         # prepare style for smaller scales
@@ -185,6 +187,36 @@ module Io::Creat::Slipstick
           end
       end # initialize
 
+      def render ( )
+        @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
+          if ( ( @layer & Component::LAYER_REVERSE ) != 0 )
+            # cutting guidelines for the slipstick
+            both = ( @layer & Component::LAYER_FACE ) != 0
+            y_mm = !both ? @dm.sh_mm - @dm.y_mm - 2 * ( @dm.h_mm - @dm.cs_mm ) : @dm.y_mm
+            @img.line( 0, y_mm + @dm.cs_mm, @dm.sw_mm, y_mm + @dm.cs_mm, @style )
+            @img.pline( 0, y_mm + @dm.h_mm - @dm.cs_mm, @dm.sw_mm, y_mm + @dm.h_mm - @dm.cs_mm, @style, @branding.pattern )
+            @img.line( 0, y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ), @dm.sw_mm, y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ), @style )
+            # debugging mode, outline borders of area visible in the stock
+            if not @branding.release
+              @img.text( @dm.sw_mm / 2, y_mm + @dm.h_mm - @dm.cs_mm - 4, @version, @style_branding )
+            end
+            if both
+              # power scales side
+              @img.line( 0, y_mm + @dm.hu_mm, @dm.sw_mm, y_mm + @dm.hu_mm, @style )
+              @img.line( 0, y_mm + @dm.hu_mm + @dm.hs_mm, @dm.sw_mm, y_mm + @dm.hu_mm + @dm.hs_mm, @style )
+              # decimal scales side
+              @img.line( 0, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm, @dm.sw_mm, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm, @style )
+              @img.line( 0, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm + @dm.hs_mm, @dm.sw_mm, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm + @dm.hs_mm, @style )
+            end
+          end
+          if ( ( @layer & Component::LAYER_FACE ) != 0 )
+            brand = PageNoBackprint.new( @img, @dm.sw_mm - 25, @dm.y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ) - 4, @branding.height, @style_branding )
+              brand.sett( "%s %s %s" % [ @branding.brand, @i18n.string( 'slide_rule'), @branding.model ], true )
+              brand.render()
+          end
+
+      end # render
+
     end # Slide
 
     # Static component
@@ -284,23 +316,51 @@ module Io::Creat::Slipstick
         end
       end # initialize
 
+      def render ( )
+        @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
+        # [stock] lines are intentionally positioned upside down (in landscape)
+          # both on same sheet?
+          rh_mm = @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.hl_mm # height of rectangle
+          dir, y_mm = ( @layer & Component::LAYER_FACE ) == 0 ? [ -1, @dm.sh_mm - @dm.y_mm - rh_mm ] : [ 1, @dm.y_mm ]
+          if ( @layer & Component::LAYER_REVERSE ) != 0
+            # bending guidelines for the stator
+            @img.pline( @dm.x_mm, y_mm + @dm.hu_mm, @dm.x_mm + @dm.w_mm, y_mm + @dm.hu_mm, @style, @branding.pattern )
+            @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @style, @branding.pattern )
+            @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @style, @branding.pattern )
+            @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @style, @branding.pattern )
+            # strengthened back glue area
+            @img.rectangle( @dm.x_mm, y_mm + @dm.hu_mm + @dm.t_mm, @dm.w_mm, @dm.h_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+            # transparent window glue area
+            @img.rectangle( @dm.x_mm, y_mm + 2, @dm.w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+            @img.rectangle( @dm.x_mm, y_mm + rh_mm - 6, @dm.w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+          end
+          if ( @layer & Component::LAYER_FACE ) != 0
+            # cutting guidelines for the stator
+            @img.rectangle( @dm.x_mm, y_mm, @dm.w_mm, rh_mm, @style )
+            # branding texts
+            brand = PageNoBackprint.new( @img, @dm.x_mm + 168, @dm.y_mm + 6, @branding.height, @style_branding )
+              brand.sett( @branding.brand, true )
+              brand.render()
+            brand = PageNoBackprint.new( @img, @dm.x_mm + 174, @dm.y_mm + 105, @branding.height, @style_branding )
+              brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), @branding.model ], true )
+              brand.render()
+            @img.rtext( @dm.x_mm + @dm.w_mm - 5, @dm.y_mm + @dm.hl_mm + @dm.t_mm + @dm.h_mm / 2, -90, @branding.version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
+          end
+          if dir < 0 then rh_mm = 0 end
+          @parent.render_cursor( y_mm + dir * ( rh_mm + @dm.y_mm ), dir )
+
+      end # render
+
     end # Stock
 
     # model A inspired by layout of LOGAREX 27403-II
     class A < Io::Creat::Slipstick::Layout::Sheet
-      attr_accessor :dm, :img, :style, :bprints, :i18n
+      attr_accessor :dm, :img, :style, :bprints, :i18n, :branding
 
       # layers to generate
       COMP_STOCK   = 0x4  # generate stator and cursor elements
       COMP_SLIDE   = 0x8  # generate slide element
       COMP_TRANSP  = 0x10 # gneerate transparent elements
-
-      # branding/version texts
-      RELEASE       = true
-      BRAND         = "CREAT.IO"
-      MODEL         = "SR-M1A2"
-      HEIGHT_BRAND  = 2.2
-      PATTERN_BEND  = "1, 1" # line pattern for bent edges
 
       public
       def initialize ( component, layer, style )
@@ -309,11 +369,18 @@ module Io::Creat::Slipstick
         raise "Component must be one of COMP_STOCK, COMP_SLIDE or COMP_TRANSP" unless ( component & 0x1c ) != 0
         @i18n = Io::Creat::Slipstick::I18N.instance
         @img.pattern( 'glued', 3 )
-        if RELEASE
-          @version = "%s %s" % [ @i18n.string( 'slide_rule'), MODEL ]
-        else
-          @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
-        end
+        # branding/version texts
+        @branding = Branding.new
+          @branding.release = true
+          @branding.brand = "CREAT.IO"
+          @branding.model = "SR-M1A2"
+          @branding.height = 2.2
+          @branding.pattern = "1, 1" # line pattern for bent edges
+          if @branding.release
+            @branding.version = "%s %s" % [ @i18n.string( 'slide_rule'), @branding.model ]
+          else
+            @branding.version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
+          end
         @comp = component # todo temporary placeholder
         @layer = layer
         @dm = Dimensions.new( @h_mm, @w_mm )
@@ -350,7 +417,7 @@ module Io::Creat::Slipstick
         return strip
       end
 
-      private
+      public
       def render_cursor ( y_mm, dir )
         if dir == -1 then y_mm -= @dm.cw_mm end
         s_mm = @dm.ct_mm + @dm.b_mm
@@ -412,7 +479,7 @@ module Io::Creat::Slipstick
           # debug mode bending edges
           [ b_mm, s_mm, @dm.ch_mm, s_mm ].each do | w |
             x_mm += w
-            @img.pline( x_mm, y_mm, x_mm, y_mm + @dm.cw_mm, @style, PATTERN_BEND )
+            @img.pline( x_mm, y_mm, x_mm, y_mm + @dm.cw_mm, @style, @branding.pattern )
           end
         end
       end
@@ -422,67 +489,8 @@ module Io::Creat::Slipstick
       def render()
         @style_cursor = @style[Io::Creat::Slipstick::Entity::LOTICK]
         @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
-        # [stock] lines are intentionally positioned upside down (in landscape)
-        if ( @comp == COMP_STOCK )
-          # both on same sheet?
-          rh_mm = @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.hl_mm # height of rectangle
-          dir, y_mm = ( @layer & Component::LAYER_FACE ) == 0 ? [ -1, @dm.sh_mm - @dm.y_mm - rh_mm ] : [ 1, @dm.y_mm ]
-          if ( @layer & Component::LAYER_REVERSE ) != 0
-            # bending guidelines for the stator
-            @img.pline( @dm.x_mm, y_mm + @dm.hu_mm, @dm.x_mm + @dm.w_mm, y_mm + @dm.hu_mm, @style, PATTERN_BEND )
-            @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @style, PATTERN_BEND )
-            @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @style, PATTERN_BEND )
-            @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @style, PATTERN_BEND )
-            # strengthened back glue area
-            @img.rectangle( @dm.x_mm, y_mm + @dm.hu_mm + @dm.t_mm, @dm.w_mm, @dm.h_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
-            # transparent window glue area
-            @img.rectangle( @dm.x_mm, y_mm + 2, @dm.w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
-            @img.rectangle( @dm.x_mm, y_mm + rh_mm - 6, @dm.w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
-          end
-          if ( @layer & Component::LAYER_FACE ) != 0
-            # cutting guidelines for the stator
-            @img.rectangle( @dm.x_mm, y_mm, @dm.w_mm, rh_mm, @style )
-            # branding texts
-            brand = PageNoBackprint.new( @img, @dm.x_mm + 168, @dm.y_mm + 6, HEIGHT_BRAND, @style_branding )
-              brand.sett( BRAND, true )
-              brand.render()
-            brand = PageNoBackprint.new( @img, @dm.x_mm + 174, @dm.y_mm + 105, HEIGHT_BRAND, @style_branding )
-              brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), MODEL ], true )
-              brand.render()
-            @img.rtext( @dm.x_mm + @dm.w_mm - 5, @dm.y_mm + @dm.hl_mm + @dm.t_mm + @dm.h_mm / 2, -90, @version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
-          end
-          if dir < 0 then rh_mm = 0 end
-          render_cursor( y_mm + dir * ( rh_mm + @dm.y_mm ), dir )
-        end
-
         # [slide] element
-        if ( @comp == COMP_SLIDE )
-          if ( ( @layer & Component::LAYER_REVERSE ) != 0 )
-            # cutting guidelines for the slipstick
-            both = ( @layer & Component::LAYER_FACE ) != 0
-            y_mm = !both ? @dm.sh_mm - @dm.y_mm - 2 * ( @dm.h_mm - @dm.cs_mm ) : @dm.y_mm
-            @img.line( 0, y_mm + @dm.cs_mm, @dm.sw_mm, y_mm + @dm.cs_mm, @style )
-            @img.pline( 0, y_mm + @dm.h_mm - @dm.cs_mm, @dm.sw_mm, y_mm + @dm.h_mm - @dm.cs_mm, @style, PATTERN_BEND )
-            @img.line( 0, y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ), @dm.sw_mm, y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ), @style )
-            # debugging mode, outline borders of area visible in the stock
-            if not RELEASE
-              @img.text( @dm.sw_mm / 2, y_mm + @dm.h_mm - @dm.cs_mm - 4, @version, @style_branding )
-            end
-            if both
-              # power scales side
-              @img.line( 0, y_mm + @dm.hu_mm, @dm.sw_mm, y_mm + @dm.hu_mm, @style )
-              @img.line( 0, y_mm + @dm.hu_mm + @dm.hs_mm, @dm.sw_mm, y_mm + @dm.hu_mm + @dm.hs_mm, @style )
-              # decimal scales side
-              @img.line( 0, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm, @dm.sw_mm, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm, @style )
-              @img.line( 0, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm + @dm.hs_mm, @dm.sw_mm, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm + @dm.hs_mm, @style )
-            end
-          end
-          if ( ( @layer & Component::LAYER_FACE ) != 0 )
-            brand = PageNoBackprint.new( @img, @dm.sw_mm - 25, @dm.y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ) - 4, HEIGHT_BRAND, @style_branding )
-              brand.sett( "%s %s %s" % [ BRAND, @i18n.string( 'slide_rule'), MODEL ], true )
-              brand.render()
-          end
-        end
+        if ( !@component.nil? ) then @component.render() end
 
         # [transparent] elements cutting lines
         if ( @comp == COMP_TRANSP ) and ( ( @layer & Component::LAYER_FACE ) != 0 )
@@ -492,7 +500,7 @@ module Io::Creat::Slipstick
             @img.line( 0, y_mm, @dm.sw_mm, y_mm, style )
             @img.line( 0, y_mm + @dm.h_mm, @dm.sw_mm, y_mm + @dm.h_mm, style )
             @img.text( @dm.sw_mm / 2, y_mm + @dm.h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @dm.sw_mm, @dm.h_mm ], @style_aux )
-            if not RELEASE
+            if not @branding.release
               @img.text( @dm.sw_mm / 2, y_mm + @dm.h_mm - 4 , @version, @style_aux )
             end
           end
