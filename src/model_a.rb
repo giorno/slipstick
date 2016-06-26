@@ -31,14 +31,14 @@ module Io::Creat::Slipstick
 
       # layers to generate
       COMP_STOCK   = 0x4  # generate stator and cursor elements
-      COMP_SLIDE   = 0x8  # generate slide element
+      COMP_SLIDE_MATH   = 0x8  # generate slide element
       COMP_TRANSP  = 0x10 # gneerate transparent elements
 
       public
       def initialize ( component, layer, style )
         super()
         set_style( style )
-        raise "Component must be one of COMP_STOCK, COMP_SLIDE or COMP_TRANSP" unless ( component & 0x1c ) != 0
+        raise "Component must be one of COMP_STOCK, COMP_SLIDE_MATH or COMP_TRANSP" unless ( component & 0x1c ) != 0
         @i18n = Io::Creat::Slipstick::I18N.instance
         @img.pattern( 'glued', 3 )
         # branding/version texts
@@ -62,7 +62,7 @@ module Io::Creat::Slipstick
 
         if ( component == COMP_STOCK )
           @component = Stock.new( self, @layer )
-        elsif ( component == COMP_SLIDE )
+        elsif ( component == COMP_SLIDE_MATH )
           @component = Slide.new( self, @layer )
         elsif ( component == COMP_TRANSP )
           @component = Transparent.new( self, @layer )
@@ -200,15 +200,15 @@ module Io::Creat::Slipstick
 end # Io::Creat::Slipstick
 
 def usage ( )
-  $stderr.puts "Usage: #{$0} <style> <lang> <stator|slide|transp> [both|face|reverse]\n\nOutputs SVG for given element and printout side.\n"
-  $stderr.puts " style   .. name of the style to use, supported: default, trip"
-  $stderr.puts " lang    .. language code for internationalized strings, supported: en, sk"
-  $stderr.puts " stator  .. stock element of slide rule (static)"
-  $stderr.puts " slide   .. sliding element of slide rule"
-  $stderr.puts " transp  .. transparent elements (tracing paper)"
-  $stderr.puts " both    .. generate both sides of the printout"
-  $stderr.puts " face    .. generate face side of the printout"
-  $stderr.puts " reverse .. generate reverse side of the printout"
+  $stderr.puts "Usage: #{$0} <style> <lang> <stator|slide-math|transp> [both|face|reverse]\n\nOutputs SVG for given element and printout side.\n"
+  $stderr.puts " style       .. name of the style to use, supported: default, trip"
+  $stderr.puts " lang        .. language code for internationalized strings, supported: en, sk"
+  $stderr.puts " stator      .. stock element of slide rule (static)"
+  $stderr.puts " slide-math  .. sliding element of slide rule for mathematic operations"
+  $stderr.puts " transp      .. transparent elements (tracing paper)"
+  $stderr.puts " both        .. generate both sides of the printout"
+  $stderr.puts " face        .. generate face side of the printout"
+  $stderr.puts " reverse     .. generate reverse side of the printout"
 end
 
 component = 0
@@ -232,8 +232,8 @@ if ARGV.length >= 3
   lang = ARGV[1]
   if ARGV[2] == 'stock'
     component = Io::Creat::Slipstick::Model::A::COMP_STOCK
-  elsif ARGV[2] == 'slide'
-    component = Io::Creat::Slipstick::Model::A::COMP_SLIDE
+  elsif ARGV[2] == 'slide-math'
+    component = Io::Creat::Slipstick::Model::A::COMP_SLIDE_MATH
   elsif ARGV[2] == 'transp'
     component = Io::Creat::Slipstick::Model::A::COMP_TRANSP
   else

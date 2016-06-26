@@ -66,8 +66,8 @@ model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
 	$(info Generating Instrument A, localization $*, style default )
 	@src/model_a.rb default $* stock face | xmllint --format - > build/$*_model_a_stock_face.svg
 	@src/model_a.rb default $* stock reverse | xmllint --format - > build/$*_model_a_stock_reverse.svg 
-	@src/model_a.rb default $* slide face | xmllint --format - > build/$*_model_a_slide_face.svg
-	@src/model_a.rb default $* slide reverse | xmllint --format - > build/$*_model_a_slide_reverse.svg 
+	@src/model_a.rb default $* slide-math face | xmllint --format - > build/$*_model_a_slide_face.svg
+	@src/model_a.rb default $* slide-math reverse | xmllint --format - > build/$*_model_a_slide_reverse.svg 
 	@src/model_a.rb default $* transp face | xmllint --format - > build/$*_model_a_transp_face.svg
 	@src/model_a.rb default $* transp reverse | xmllint --format - > build/$*_model_a_transp_reverse.svg 
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_stock_face.pdf $(shell pwd)/build/$*_model_a_stock_face.svg
@@ -84,8 +84,8 @@ model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
 	$(info Generating Instrument A, localization $*, style trip )
 	@src/model_a.rb trip $* stock face | xmllint --format - > build/$*_model_a_trip_stock_face.svg
 	@src/model_a.rb trip $* stock reverse | xmllint --format - > build/$*_model_a_trip_stock_reverse.svg 
-	@src/model_a.rb trip $* slide face | xmllint --format - > build/$*_model_a_trip_slide_face.svg
-	@src/model_a.rb trip $* slide reverse | xmllint --format - > build/$*_model_a_trip_slide_reverse.svg 
+	@src/model_a.rb trip $* slide-math face | xmllint --format - > build/$*_model_a_trip_slide_face.svg
+	@src/model_a.rb trip $* slide-math reverse | xmllint --format - > build/$*_model_a_trip_slide_reverse.svg 
 	@src/model_a.rb trip $* transp face | xmllint --format - > build/$*_model_a_trip_transp_face.svg
 	@src/model_a.rb trip $* transp reverse | xmllint --format - > build/$*_model_a_trip_transp_reverse.svg 
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_stock_face.pdf $(shell pwd)/build/$*_model_a_trip_stock_face.svg
@@ -101,7 +101,7 @@ model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
 model_a_debug :
 	@echo "Generating debug (all layers) SVG's of Instrument A"
 	@src/model_a.rb en stock both | xmllint --format - > build/model_a_stock_both.svg
-	@src/model_a.rb en slide both | xmllint --format - > build/model_a_slide_both.svg
+	@src/model_a.rb en slide-math both | xmllint --format - > build/model_a_slide_both.svg
 	@src/model_a.rb en transp both | xmllint --format - > build/model_a_transp_both.svg
 	@echo "Result SVG's are in directory 'build', suffixed '_both.svg'"
 	@echo "Use 'ls -la build/*_both.svg' to list them"
