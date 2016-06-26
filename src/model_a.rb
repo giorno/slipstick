@@ -75,6 +75,8 @@ module Io::Creat::Slipstick
         @branding = @parent.branding
         @layer = layer
 
+        @bprints = [] # each component maintains its own backprints
+
         # prepare style for smaller scales
         @style_small = @style.merge( { Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::LOTICK] } )
         @style_units = @style.merge( { Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::UNITS] } )
@@ -83,6 +85,13 @@ module Io::Creat::Slipstick
         @style_aux = Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::AUX], SVG_STYLE_TEXT )
 
       end # initialize
+
+      # expected to be called from subclass.render()
+      def render ( )
+        @bprints.each do | bp |
+          bp.render()
+        end
+      end # render
 
     end # Component
 
@@ -120,12 +129,12 @@ module Io::Creat::Slipstick
             # length units conversion scales
             bp_w_mm = @dm.w_m_mm + @dm.w_l_mm + @dm.w_s_mm + @dm.w_a_mm # width reserved for the 
             bp_gap_mm = 10 # space between conversion scales
-            @parent.bprints << ConversionBackprints.new( @img, @dm.x_mm, @dm.x_mm + bp_w_mm, @dm.y_mm + @dm.h_mm - bp_off_mm, bp_gap_mm, @style, ConversionBackprint::LENGTHS )
+            @bprints << ConversionBackprints.new( @img, @dm.x_mm, @dm.x_mm + bp_w_mm, @dm.y_mm + @dm.h_mm - bp_off_mm, bp_gap_mm, @style, ConversionBackprint::LENGTHS )
 
             # page number
             pn = PageNoBackprint.new( @img, @dm.x_mm + @dm.w_mm / 2, @dm.sh_mm - @dm.y_mm, 6, @style_pageno )
               pn.sett( '%s (210 g/m²)' % @i18n.string( 'part_slide' ) )
-              @parent.bprints << pn
+              @bprints << pn
 
             # log scales
             strip = @parent.create_strip( @dm.x_mm, @dm.y_mm + @dm.h_mm - @dm.cs_mm + ( ( @dm.h_mm - @dm.hs_mm ) / 2 ), @dm.hs_mm, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
@@ -143,8 +152,8 @@ module Io::Creat::Slipstick
                 scale.add_constants( )
 
             # rest of units conversion scales
-            @parent.bprints << ConversionBackprints.new( @img, @dm.x_mm, @dm.x_mm + bp_w_mm, @dm.y_mm + @dm.h_mm - @dm.cs_mm + bp_off_mm, bp_gap_mm, @style, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
-            @parent.bprints << ConversionBackprints.new( @img, @dm.x_mm, @dm.x_mm + bp_w_mm, @dm.y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ) - bp_off_mm, bp_gap_mm, @style, ConversionBackprint::VOLUMES )
+            @bprints << ConversionBackprints.new( @img, @dm.x_mm, @dm.x_mm + bp_w_mm, @dm.y_mm + @dm.h_mm - @dm.cs_mm + bp_off_mm, bp_gap_mm, @style, ConversionBackprint::WEIGHTS + ConversionBackprint::AREAS )
+            @bprints << ConversionBackprints.new( @img, @dm.x_mm, @dm.x_mm + bp_w_mm, @dm.y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ) - bp_off_mm, bp_gap_mm, @style, ConversionBackprint::VOLUMES )
           end
 
           if ( ( @layer & LAYER_REVERSE ) != 0 )
@@ -214,7 +223,7 @@ module Io::Creat::Slipstick
               brand.sett( "%s %s %s" % [ @branding.brand, @i18n.string( 'slide_rule'), @branding.model ], true )
               brand.render()
           end
-
+        super()
       end # render
 
     end # Slide
@@ -283,22 +292,22 @@ module Io::Creat::Slipstick
 
           # scales layout
           lo = ScalesBackprint.new( @img, bp_x_mm, bp_y_mm, bp_h_mm )
-            @parent.bprints << lo
+            @bprints << lo
             bp_x_mm += bp_border_mm / 2 + lo.getw()
 
           # sin-cos help
           gr = TrigonometricBackprint.new( @img, bp_x_mm, bp_y_mm, bp_h_mm )
-            @parent.bprints << gr
+            @bprints << gr
             bp_x_mm += bp_border_mm / 2 + gr.getw()
 
           # log help
           gr = LogBackprint.new( @img, bp_x_mm, bp_y_mm, bp_h_mm )
-            @parent.bprints << gr
+            @bprints << gr
             bp_x_mm += bp_border_mm / 2 + gr.getw()
 
           # table of mathematical and physical constants
           cbp = ConstantsBackprint.new( @img, bp_x_mm, bp_y_mm, bp_h_mm )
-            @parent.bprints << cbp
+            @bprints << cbp
             bp_x_mm += bp_border_mm / 2 + cbp.getw()
 
           # QR code
@@ -307,12 +316,12 @@ module Io::Creat::Slipstick
           bottom_mm = @dm.y_mm + bottom_off_mm + @dm.hl_mm + @dm.t_mm
           gr_size_mm = @dm.h_mm - ( 2 * bottom_off_mm )
           qr = Qr.new( @img, 'http://wheel.creat.io/sr', 4, :h, bp_x_mm, bottom_mm, gr_size_mm, @style[Io::Creat::Slipstick::Entity::QR] )
-            @parent.bprints << qr
+            @bprints << qr
 
           # page number
           pn = PageNoBackprint.new( @img, @dm.x_mm + @dm.w_mm / 2, @dm.sh_mm - @dm.y_mm, 6, @style_pageno )
             pn.sett( '%s + %s (210 g/m²)' % [ @i18n.string( 'part_stock' ), @i18n.string( 'part_cursor' )  ] )
-            @parent.bprints << pn
+            @bprints << pn
         end
       end # initialize
 
@@ -348,10 +357,27 @@ module Io::Creat::Slipstick
           end
           if dir < 0 then rh_mm = 0 end
           @parent.render_cursor( y_mm + dir * ( rh_mm + @dm.y_mm ), dir )
-
+          super()
       end # render
 
     end # Stock
+
+    # Transparent parts
+    class Transparent < Component
+
+      public
+      def initialize ( parent, layer )
+        super( parent, layer )
+        # page number only on transparent elements
+        if ( ( @layer & Component::LAYER_FACE ) != 0 )
+          # page number
+          pn = PageNoBackprint.new( @img, @dm.x_mm + @dm.w_mm / 2, @dm.sh_mm - @dm.y_mm, 6, @style_pageno )
+            pn.sett( '%s (%s)' % [ @i18n.string( 'part_transp' ), @i18n.string( 'tracing_paper' ) ] )
+            @bprints << pn
+        end
+      end # initialize
+
+    end # Transparent
 
     # model A inspired by layout of LOGAREX 27403-II
     class A < Io::Creat::Slipstick::Layout::Sheet
@@ -384,7 +410,6 @@ module Io::Creat::Slipstick
         @comp = component # todo temporary placeholder
         @layer = layer
         @dm = Dimensions.new( @h_mm, @w_mm )
-        @bprints = [] # backprints
 
         # prepare style for smaller scales
         @style_small = @style.merge( { Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::LOTICK] } )
@@ -394,17 +419,11 @@ module Io::Creat::Slipstick
         @style_aux = Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::AUX], SVG_STYLE_TEXT )
 
         if ( component == COMP_STOCK )
-          @component = Stock.new( self, @layer & 0x3 )
+          @component = Stock.new( self, @layer )
         elsif ( component == COMP_SLIDE )
-          @component = Slide.new( self, @layer & 0x3 )
+          @component = Slide.new( self, @layer )
         elsif ( component == COMP_TRANSP )
-          # page number only on transparent elements
-          if ( ( @layer & Component::LAYER_FACE ) != 0 )
-            # page number
-            pn = PageNoBackprint.new( @img, @dm.x_mm + @dm.w_mm / 2, @dm.sh_mm - @dm.y_mm, 6, @style_pageno )
-              pn.sett( '%s (%s)' % [ @i18n.string( 'part_transp' ), @i18n.string( 'tracing_paper' ) ] )
-              @bprints << pn
-          end
+          @component = Transparent.new( self, @layer )
         end
       end
       
@@ -525,11 +544,6 @@ module Io::Creat::Slipstick
             @img.rtext( x_mm + @dm.ch_mm + 3 * @dm.hint_mm, y_mm + @dm.cw_mm, -90, '4', @style_aux )
             @img.text( x_mm + @dm.ch_mm / 2, y_mm + @dm.cw_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_cursor' ), @dm.ch_mm, @dm.cw_mm ], @style_aux )
           end
-        end
-
-        # backprints
-        @bprints.each do | bp |
-          bp.render()
         end
 
         # strips of scales
