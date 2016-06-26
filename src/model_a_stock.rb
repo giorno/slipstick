@@ -11,7 +11,7 @@ module Io::Creat::Slipstick
       def initialize ( parent, layer )
         super( parent, layer )
         if ( ( @layer & LAYER_FACE ) != 0 )
-        # bottom stock strip
+          # bottom stock strip
           strip = @parent.create_strip( @dm.x_mm, @dm.y_mm, @dm.hl_mm, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "D", 0.5 )
               scale.set_params( 1 )
@@ -88,7 +88,6 @@ module Io::Creat::Slipstick
             bp_x_mm += bp_border_mm / 2 + cbp.getw()
 
           # QR code
-          # TODO refactor to inherit from Backprint
           bottom_off_mm = 15.0
           bottom_mm = @dm.y_mm + bottom_off_mm + @dm.hl_mm + @dm.t_mm
           gr_size_mm = @dm.h_mm - ( 2 * bottom_off_mm )
@@ -103,38 +102,38 @@ module Io::Creat::Slipstick
       end # initialize
 
       def render ( )
-        @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
         # [stock] lines are intentionally positioned upside down (in landscape)
-          # both on same sheet?
-          rh_mm = @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.hl_mm # height of rectangle
-          dir, y_mm = ( @layer & Component::LAYER_FACE ) == 0 ? [ -1, @dm.sh_mm - @dm.y_mm - rh_mm ] : [ 1, @dm.y_mm ]
-          if ( @layer & Component::LAYER_REVERSE ) != 0
-            # bending guidelines for the stator
-            @img.pline( @dm.x_mm, y_mm + @dm.hu_mm, @dm.x_mm + @dm.w_mm, y_mm + @dm.hu_mm, @style, @branding.pattern )
-            @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @style, @branding.pattern )
-            @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @style, @branding.pattern )
-            @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @style, @branding.pattern )
-            # strengthened back glue area
-            @img.rectangle( @dm.x_mm, y_mm + @dm.hu_mm + @dm.t_mm, @dm.w_mm, @dm.h_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
-            # transparent window glue area
-            @img.rectangle( @dm.x_mm, y_mm + 2, @dm.w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
-            @img.rectangle( @dm.x_mm, y_mm + rh_mm - 6, @dm.w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
-          end
-          if ( @layer & Component::LAYER_FACE ) != 0
-            # cutting guidelines for the stator
-            @img.rectangle( @dm.x_mm, y_mm, @dm.w_mm, rh_mm, @style )
-            # branding texts
-            brand = PageNoBackprint.new( @img, @dm.x_mm + 168, @dm.y_mm + 6, @branding.height, @style_branding )
-              brand.sett( @branding.brand, true )
-              brand.render()
-            brand = PageNoBackprint.new( @img, @dm.x_mm + 174, @dm.y_mm + 105, @branding.height, @style_branding )
-              brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), @branding.model ], true )
-              brand.render()
-            @img.rtext( @dm.x_mm + @dm.w_mm - 5, @dm.y_mm + @dm.hl_mm + @dm.t_mm + @dm.h_mm / 2, -90, @branding.version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
-          end
-          if dir < 0 then rh_mm = 0 end
-          @parent.render_cursor( y_mm + dir * ( rh_mm + @dm.y_mm ), dir )
-          super()
+        # both on same sheet?
+        rh_mm = @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.hl_mm # height of rectangle
+        dir, y_mm = ( @layer & Component::LAYER_FACE ) == 0 ? [ -1, @dm.sh_mm - @dm.y_mm - rh_mm ] : [ 1, @dm.y_mm ]
+        if ( @layer & Component::LAYER_REVERSE ) != 0
+          # bending guidelines for the stator
+          @img.pline( @dm.x_mm, y_mm + @dm.hu_mm, @dm.x_mm + @dm.w_mm, y_mm + @dm.hu_mm, @style_contours, @branding.pattern )
+          @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @style_contours, @branding.pattern )
+          @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @style_contours, @branding.pattern )
+          @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @style_contours, @branding.pattern )
+          # strengthened back glue area
+          @img.rectangle( @dm.x_mm, y_mm + @dm.hu_mm + @dm.t_mm, @dm.w_mm, @dm.h_mm, @style_contours.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+          # transparent window glue area
+          @img.rectangle( @dm.x_mm, y_mm + 2, @dm.w_mm, 4, @style_contours.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+          @img.rectangle( @dm.x_mm, y_mm + rh_mm - 6, @dm.w_mm, 4, @style_contours.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+        end
+        if ( @layer & Component::LAYER_FACE ) != 0
+          # cutting guidelines for the stator
+          @img.rectangle( @dm.x_mm, y_mm, @dm.w_mm, rh_mm, @style_contours )
+          # branding texts
+          brand = PageNoBackprint.new( @img, @dm.x_mm + 168, @dm.y_mm + 6, @branding.height, @style_branding )
+            brand.sett( @branding.brand, true )
+            brand.render()
+          brand = PageNoBackprint.new( @img, @dm.x_mm + 174, @dm.y_mm + 105, @branding.height, @style_branding )
+            brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), @branding.model ], true )
+            brand.render()
+          @img.rtext( @dm.x_mm + @dm.w_mm - 5, @dm.y_mm + @dm.hl_mm + @dm.t_mm + @dm.h_mm / 2, -90, @branding.version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
+        end
+        if dir < 0 then rh_mm = 0 end
+        @parent.render_cursor( y_mm + dir * ( rh_mm + @dm.y_mm ), dir )
+
+        super()
       end # render
 
     end # Stock

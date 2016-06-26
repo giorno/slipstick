@@ -68,6 +68,7 @@ module Io::Creat::Slipstick
         @style_branding = @style[Io::Creat::Slipstick::Entity::BRANDING]
         @style_pageno = @style[Io::Creat::Slipstick::Entity::PAGENO]
         @style_aux = Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::AUX], SVG_STYLE_TEXT )
+        @style_contours = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
 
       end # initialize
 

@@ -58,10 +58,6 @@ module Io::Creat::Slipstick
         @dm = Dimensions.new( @h_mm, @w_mm )
 
         # prepare style for smaller scales
-        @style_small = @style.merge( { Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::LOTICK] } )
-        @style_units = @style.merge( { Io::Creat::Slipstick::Entity::TICK => @style[Io::Creat::Slipstick::Entity::UNITS] } )
-        @style_branding = @style[Io::Creat::Slipstick::Entity::BRANDING]
-        @style_pageno = @style[Io::Creat::Slipstick::Entity::PAGENO]
         @style_aux = Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::AUX], SVG_STYLE_TEXT )
 
         if ( component == COMP_STOCK )
