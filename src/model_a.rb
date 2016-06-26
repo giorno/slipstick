@@ -65,7 +65,7 @@ module Io::Creat::Slipstick
 
       public
       def initialize ( parent, layer )
-        raise "Face must be either LAYER_FACE or LAYER_REVERSE" unless ( [ LAYER_FACE, LAYER_REVERSE ].include?( layer ) )
+        raise "Face must be either LAYER_FACE or LAYER_REVERSE" unless ( [ LAYER_FACE, LAYER_REVERSE, LAYER_FACE | LAYER_REVERSE ].include?( layer ) )
         @parent = parent
         @img = @parent.img
         @dm = @parent.dm # instance of class Dimensions
@@ -291,11 +291,9 @@ module Io::Creat::Slipstick
       attr_accessor :dm, :img, :style, :bprints, :i18n
 
       # layers to generate
-      LAYER_FACE    = 0x1  # front side (page) of printout sheet
-      LAYER_REVERSE = 0x2  # reverse side of printout
-      LAYER_STOCK   = 0x4  # generate stator and cursor elements
-      LAYER_SLIDE   = 0x8  # generate slide element
-      LAYER_TRANSP  = 0x10 # gneerate transparent elements
+      COMP_STOCK   = 0x4  # generate stator and cursor elements
+      COMP_SLIDE   = 0x8  # generate slide element
+      COMP_TRANSP  = 0x10 # gneerate transparent elements
 
       # branding/version texts
       RELEASE       = true
@@ -305,10 +303,10 @@ module Io::Creat::Slipstick
       PATTERN_BEND  = "1, 1" # line pattern for bent edges
 
       public
-      def initialize ( layers, style )
+      def initialize ( component, layer, style )
         super()
         set_style( style )
-        raise "Layer must be one of LAYER_STOCK, LAYER_SLIDE or LAYER_TRANSP" unless ( layers & 0x1c ) != 0
+        raise "Component must be one of COMP_STOCK, COMP_SLIDE or COMP_TRANSP" unless ( component & 0x1c ) != 0
         @i18n = Io::Creat::Slipstick::I18N.instance
         @img.pattern( 'glued', 3 )
         if RELEASE
@@ -316,7 +314,8 @@ module Io::Creat::Slipstick
         else
           @version = "ts0x%s" % Time.now.getutc().to_i().to_s( 16 )
         end
-        @layers = layers
+        @comp = component # todo temporary placeholder
+        @layer = layer
         @dm = Dimensions.new( @h_mm, @w_mm )
         @bprints = [] # backprints
 
@@ -327,24 +326,19 @@ module Io::Creat::Slipstick
         @style_pageno = @style[Io::Creat::Slipstick::Entity::PAGENO]
         @style_aux = Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::AUX], SVG_STYLE_TEXT )
 
-        # scales of the stator
-        if ( ( @layers & LAYER_STOCK ) != 0 )
-          @component = Stock.new( self, @layers & 0x3 )
+        if ( component == COMP_STOCK )
+          @component = Stock.new( self, @layer & 0x3 )
+        elsif ( component == COMP_SLIDE )
+          @component = Slide.new( self, @layer & 0x3 )
+        elsif ( component == COMP_TRANSP )
+          # page number only on transparent elements
+          if ( ( @layer & Component::LAYER_FACE ) != 0 )
+            # page number
+            pn = PageNoBackprint.new( @img, @dm.x_mm + @dm.w_mm / 2, @dm.sh_mm - @dm.y_mm, 6, @style_pageno )
+              pn.sett( '%s (%s)' % [ @i18n.string( 'part_transp' ), @i18n.string( 'tracing_paper' ) ] )
+              @bprints << pn
+          end
         end
-
-        # sides of the slide
-        if ( ( @layers & LAYER_SLIDE ) != 0 )
-          @component = Slide.new( self, @layers & 0x3 )
-        end
-
-        # page number only on transparent elements
-        if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
-          # page number
-          pn = PageNoBackprint.new( @img, @dm.x_mm + @dm.w_mm / 2, @dm.sh_mm - @dm.y_mm, 6, @style_pageno )
-            pn.sett( '%s (%s)' % [ @i18n.string( 'part_transp' ), @i18n.string( 'tracing_paper' ) ] )
-            @bprints << pn
-       end
-
       end
       
       # allows to create strip with absolute positioning
@@ -363,7 +357,7 @@ module Io::Creat::Slipstick
         b_mm = 15.0 # overlap
         rw_mm = 2 * @dm.ch_mm + b_mm + 2 * s_mm # projected width of rectangle
         x_mm = @dm.x_mm + ( @dm.w_mm - rw_mm ) / 2
-        if ( @layers & LAYER_FACE ) != 0
+        if ( @layer & Component::LAYER_FACE ) != 0
           # instructions
           off = 0.05
           csr = InstructionsBackprint.new( @img, x_mm + rw_mm - @dm.ch_mm + @dm.ch_mm * off, y_mm + @dm.ch_mm * off, @dm.ch_mm * ( 1 - 2 * off ) )
@@ -392,7 +386,7 @@ module Io::Creat::Slipstick
             inch.style = @style_cursor
             inch.render()
           @img.rectangle( x_mm, y_mm, b_mm, @dm.cw_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
-          if ( @layers & LAYER_REVERSE ) == 0
+          if ( @layer & Component::LAYER_REVERSE ) == 0
             # bending edges
             [ b_mm, s_mm, @dm.ch_mm, s_mm ].each do | w |
               x_mm += w
@@ -401,7 +395,7 @@ module Io::Creat::Slipstick
             end
           end
         end
-        if ( @layers & LAYER_REVERSE ) != 0
+        if ( @layer & Component::LAYER_REVERSE ) != 0
           # reset
           x_mm = @dm.x_mm + ( @dm.w_mm - rw_mm ) / 2
           gy_mm = dir != -1 ? y_mm : y_mm + @dm.cw_mm
@@ -429,11 +423,11 @@ module Io::Creat::Slipstick
         @style_cursor = @style[Io::Creat::Slipstick::Entity::LOTICK]
         @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
         # [stock] lines are intentionally positioned upside down (in landscape)
-        if ( @layers & LAYER_STOCK ) != 0
+        if ( @comp == COMP_STOCK )
           # both on same sheet?
           rh_mm = @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.hl_mm # height of rectangle
-          dir, y_mm = ( @layers & LAYER_FACE ) == 0 ? [ -1, @dm.sh_mm - @dm.y_mm - rh_mm ] : [ 1, @dm.y_mm ]
-          if ( @layers & LAYER_REVERSE ) != 0
+          dir, y_mm = ( @layer & Component::LAYER_FACE ) == 0 ? [ -1, @dm.sh_mm - @dm.y_mm - rh_mm ] : [ 1, @dm.y_mm ]
+          if ( @layer & Component::LAYER_REVERSE ) != 0
             # bending guidelines for the stator
             @img.pline( @dm.x_mm, y_mm + @dm.hu_mm, @dm.x_mm + @dm.w_mm, y_mm + @dm.hu_mm, @style, PATTERN_BEND )
             @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @style, PATTERN_BEND )
@@ -445,7 +439,7 @@ module Io::Creat::Slipstick
             @img.rectangle( @dm.x_mm, y_mm + 2, @dm.w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
             @img.rectangle( @dm.x_mm, y_mm + rh_mm - 6, @dm.w_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
           end
-          if ( @layers & LAYER_FACE ) != 0
+          if ( @layer & Component::LAYER_FACE ) != 0
             # cutting guidelines for the stator
             @img.rectangle( @dm.x_mm, y_mm, @dm.w_mm, rh_mm, @style )
             # branding texts
@@ -462,10 +456,10 @@ module Io::Creat::Slipstick
         end
 
         # [slide] element
-        if ( ( @layers & LAYER_SLIDE ) != 0 )
-          if ( ( @layers & LAYER_REVERSE ) != 0 )
+        if ( @comp == COMP_SLIDE )
+          if ( ( @layer & Component::LAYER_REVERSE ) != 0 )
             # cutting guidelines for the slipstick
-            both = ( @layers & LAYER_FACE ) != 0
+            both = ( @layer & Component::LAYER_FACE ) != 0
             y_mm = !both ? @dm.sh_mm - @dm.y_mm - 2 * ( @dm.h_mm - @dm.cs_mm ) : @dm.y_mm
             @img.line( 0, y_mm + @dm.cs_mm, @dm.sw_mm, y_mm + @dm.cs_mm, @style )
             @img.pline( 0, y_mm + @dm.h_mm - @dm.cs_mm, @dm.sw_mm, y_mm + @dm.h_mm - @dm.cs_mm, @style, PATTERN_BEND )
@@ -483,7 +477,7 @@ module Io::Creat::Slipstick
               @img.line( 0, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm + @dm.hs_mm, @dm.sw_mm, y_mm + @dm.hu_mm + @dm.h_mm - @dm.cs_mm + @dm.hs_mm, @style )
             end
           end
-          if ( ( @layers & LAYER_FACE ) != 0 )
+          if ( ( @layer & Component::LAYER_FACE ) != 0 )
             brand = PageNoBackprint.new( @img, @dm.sw_mm - 25, @dm.y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ) - 4, HEIGHT_BRAND, @style_branding )
               brand.sett( "%s %s %s" % [ BRAND, @i18n.string( 'slide_rule'), MODEL ], true )
               brand.render()
@@ -491,7 +485,7 @@ module Io::Creat::Slipstick
         end
 
         # [transparent] elements cutting lines
-        if ( ( @layers & LAYER_TRANSP ) != 0 ) and ( ( @layers & LAYER_FACE ) != 0 )
+        if ( @comp == COMP_TRANSP ) and ( ( @layer & Component::LAYER_FACE ) != 0 )
           style = @style.merge( { :stroke_width => @style[:stroke_width] * 2 } )
           # two stock part
           [ @dm.y_mm, @dm.y_mm + @dm.h_mm + 10 ].each do | y_mm |
@@ -553,7 +547,8 @@ def usage ( )
   $stderr.puts " reverse .. generate reverse side of the printout"
 end
 
-layers = 0
+component = 0
+layer = 0
 if ARGV.length <= 2
   usage( )
   exit
@@ -572,11 +567,11 @@ end
 if ARGV.length >= 3
   lang = ARGV[1]
   if ARGV[2] == 'stock'
-    layers = Io::Creat::Slipstick::Model::A::LAYER_STOCK
+    component = Io::Creat::Slipstick::Model::A::COMP_STOCK
   elsif ARGV[2] == 'slide'
-    layers = Io::Creat::Slipstick::Model::A::LAYER_SLIDE
+    component = Io::Creat::Slipstick::Model::A::COMP_SLIDE
   elsif ARGV[2] == 'transp'
-    layers = Io::Creat::Slipstick::Model::A::LAYER_TRANSP
+    component = Io::Creat::Slipstick::Model::A::COMP_TRANSP
   else
     usage
   end
@@ -584,11 +579,11 @@ end
 
 if ARGV.length > 3
   if ARGV[3] == 'face'
-    layers |= Io::Creat::Slipstick::Model::A::LAYER_FACE
+    layer |= Io::Creat::Slipstick::Model::Component::LAYER_FACE
   elsif ARGV[3] == 'reverse'
-    layers |= Io::Creat::Slipstick::Model::A::LAYER_REVERSE
+    layer |= Io::Creat::Slipstick::Model::Component::LAYER_REVERSE
   elsif ARGV[3] == 'both'
-    layers |= Io::Creat::Slipstick::Model::A::LAYER_FACE | Io::Creat::Slipstick::Model::A::LAYER_REVERSE
+    layer |= Io::Creat::Slipstick::Model::Component::LAYER_FACE | Io::Creat::Slipstick::Model::Component::LAYER_REVERSE
   else
     usage
     exit
@@ -597,6 +592,6 @@ end
 
 
 Io::Creat::Slipstick::I18N.instance.load( 'src/model_a.yml', lang )
-a = Io::Creat::Slipstick::Model::A.new( layers, style )
+a = Io::Creat::Slipstick::Model::A.new( component, layer, style )
 puts a.render()
 
