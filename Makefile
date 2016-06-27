@@ -61,6 +61,7 @@ LANGUAGES = en sk
 
 # Builds printouts for Instrument A
 model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
+model_a_photo: en_model_a_photo sk_model_a_photo
 
 %_model_a_default :
 	$(info Generating Instrument A, localization $*, style default )
@@ -98,11 +99,21 @@ model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
 	@cp build/$*_model_a_trip.pdf build/$(BRAND)-$*-trip.pdf
 	@echo "Result PDF: build/$(BRAND)-$*-trip.pdf"
 
+%_model_a_photo :
+	$(info Generating photo Slide of Instrument A, localization $* )
+	@src/model_a.rb default $* slide-photo face | xmllint --format - > build/$*_model_a_slide_photo_face.svg
+	@src/model_a.rb default $* slide-photo reverse | xmllint --format - > build/$*_model_a_slide_photo_reverse.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_photo_face.pdf $(shell pwd)/build/$*_model_a_slide_photo_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_photo_reverse.pdf $(shell pwd)/build/$*_model_a_slide_photo_reverse.svg
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a_slide_photo.pdf build/$*_model_a_slide_photo_face.pdf build/$*_model_a_slide_photo_reverse.pdf
+	@cp build/$*_model_a_slide_photo.pdf build/$(BRAND)-$*-photo.pdf
+	@echo "Result PDF: build/$(BRAND)-$*-photo.pdf"
+
 model_a_debug :
 	@echo "Generating debug (all layers) SVG's of Instrument A"
-	@src/model_a.rb en stock both | xmllint --format - > build/model_a_stock_both.svg
-	@src/model_a.rb en slide-math both | xmllint --format - > build/model_a_slide_both.svg
-	@src/model_a.rb en transp both | xmllint --format - > build/model_a_transp_both.svg
+	@src/model_a.rb default en stock both | xmllint --format - > build/model_a_stock_both.svg
+	@src/model_a.rb default en slide-math both | xmllint --format - > build/model_a_slide_both.svg
+	@src/model_a.rb default en transp both | xmllint --format - > build/model_a_transp_both.svg
 	@echo "Result SVG's are in directory 'build', suffixed '_both.svg'"
 	@echo "Use 'ls -la build/*_both.svg' to list them"
 

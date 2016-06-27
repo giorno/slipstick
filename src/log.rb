@@ -4,7 +4,7 @@ require_relative 'scale'
 
 module Io::Creat::Slipstick
 
-  # common functionality of all logarithmit scales
+  # common functionality of all logarithmic scales
   class LogScale < Scale
     #FLAG_IGN_FULL_HEIGHT = 1
     # values [list] values to be explicitly generated at maximal height

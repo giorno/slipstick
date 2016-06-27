@@ -13,7 +13,8 @@ require_relative 'backprints/trigon'
 
 require_relative 'i18n'
 require_relative 'model_a_component.rb'
-require_relative 'model_a_slide.rb'
+require_relative 'model_a_slide_math.rb'
+require_relative 'model_a_slide_photo.rb'
 require_relative 'model_a_stock.rb'
 require_relative 'model_a_transparent.rb'
 require_relative 'qr'
@@ -29,16 +30,17 @@ module Io::Creat::Slipstick
     class A < Io::Creat::Slipstick::Layout::Sheet
       attr_accessor :dm, :img, :style, :bprints, :i18n, :branding
 
-      # layers to generate
-      COMP_STOCK   = 0x4  # generate stator and cursor elements
-      COMP_SLIDE_MATH   = 0x8  # generate slide element
-      COMP_TRANSP  = 0x10 # gneerate transparent elements
+      # component specifier
+      COMP_STOCK       = 0x1 # generate stator and cursor elements
+      COMP_SLIDE_MATH  = 0x2 # generate math slide element
+      COMP_SLIDE_PHOTO = 0x4 # generate photo slide elements
+      COMP_TRANSP      = 0x8 # generate transparent elements
 
       public
       def initialize ( component, layer, style )
         super()
         set_style( style )
-        raise "Component must be one of COMP_STOCK, COMP_SLIDE_MATH or COMP_TRANSP" unless ( component & 0x1c ) != 0
+        raise "Component must be one of COMP_STOCK, COMP_SLIDE_MATH or COMP_TRANSP" unless [ COMP_STOCK, COMP_SLIDE_MATH, COMP_SLIDE_PHOTO, COMP_TRANSP ].include?( component )
         @i18n = Io::Creat::Slipstick::I18N.instance
         @img.pattern( 'glued', 3 )
         # branding/version texts
@@ -63,7 +65,9 @@ module Io::Creat::Slipstick
         if ( component == COMP_STOCK )
           @component = Stock.new( self, @layer )
         elsif ( component == COMP_SLIDE_MATH )
-          @component = Slide.new( self, @layer )
+          @component = MathSlide.new( self, @layer )
+        elsif ( component == COMP_SLIDE_PHOTO )
+          @component = PhotoSlide.new( self, @layer )
         elsif ( component == COMP_TRANSP )
           @component = Transparent.new( self, @layer )
         end
@@ -234,6 +238,8 @@ if ARGV.length >= 3
     component = Io::Creat::Slipstick::Model::A::COMP_STOCK
   elsif ARGV[2] == 'slide-math'
     component = Io::Creat::Slipstick::Model::A::COMP_SLIDE_MATH
+  elsif ARGV[2] == 'slide-photo'
+    component = Io::Creat::Slipstick::Model::A::COMP_SLIDE_PHOTO
   elsif ARGV[2] == 'transp'
     component = Io::Creat::Slipstick::Model::A::COMP_TRANSP
   else

@@ -4,6 +4,7 @@ require_relative 'custom'
 require_relative 'decimal'
 require_relative 'linear'
 require_relative 'pythag'
+require_relative 'photo'
 require_relative 'power'
 require_relative 'temp'
 require_relative 'trigon'
@@ -25,6 +26,7 @@ module Io::Creat::Slipstick::ScaleType
   CUST_DEG    = 130
   CUST_RAD    = 140
   CUST_GRAD   = 150
+  PHOTO_HFD   = 160 # for calculation of hyperfocal distance
 end
 
 module Io::Creat::Slipstick::Layout
@@ -78,6 +80,8 @@ module Io::Creat::Slipstick::Layout
           return Io::Creat::Slipstick::RadGradeScale.new( self, label, 0, 0, h_ratio, flipped )
         when Io::Creat::Slipstick::ScaleType::CUST_GRAD
           return Io::Creat::Slipstick::GradGradeScale.new( self, label, 0, 0, h_ratio, flipped )
+        when Io::Creat::Slipstick::ScaleType::PHOTO_HFD
+          return Io::Creat::Slipstick::HyperfocalDistanceScale.new( self, label, 0, 0, h_ratio, flipped )
         else
           raise "Unrecognized scale type"
       end
