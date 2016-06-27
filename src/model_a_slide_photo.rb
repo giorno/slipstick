@@ -30,7 +30,7 @@ module Io::Creat::Slipstick
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "DX 19μm", 0.5 )
               scale.set_params( 0.019 )
               scale.set_overflow( 4.0 )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "APS-C Canon 18μm", 0.33, true )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "APS-C Canon 18μm", 0.33 )
               scale.set_params( 0.018 )
               scale.set_style( @style_small )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "FX 29μm", 0.5, true )
