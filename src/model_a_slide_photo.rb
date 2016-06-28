@@ -10,15 +10,6 @@ module Io::Creat::Slipstick
     # Sliding component for photographic calculations
     class PhotoSlide < Slide
 
-      def arrow ( x_mm, y_mm, h_mm )
-        @img.pbegin()
-          @img.move( x_mm, y_mm )
-          @img.rline( x_mm - h_mm.abs / 3, y_mm + h_mm )
-          @img.rline( x_mm + h_mm.abs / 3, y_mm + h_mm )
-          @img.rline( x_mm, y_mm )
-        @img.pend( @style_aux.merge( { 'fill' => 'black', 'stroke-linecap' => 'square' } ) )
-      end # arrow
-
       public
       def initialize ( parent, layer )
         super( parent, layer )
@@ -55,13 +46,9 @@ module Io::Creat::Slipstick
 	# corresponding to values 1 and 10 on C/D scales
         if ( ( @layer & Component::LAYER_FACE ) != 0 )
 	  [ @dm.x_mm + @dm.w_l_mm + @dm.w_s_mm, @dm.x_mm + @dm.w_l_mm + @dm.w_s_mm + @dm.w_m_mm ].each do | x_mm |
-            y1_mm = @dm.y_mm + @dm.h_mm - @dm.cs_mm + @dm.h_mm / 2 - 3
-            y2_mm = @dm.y_mm + @dm.h_mm - @dm.cs_mm + @dm.h_mm / 2 + 3.5
+            y1_mm = @dm.y_mm + @dm.h_mm - @dm.cs_mm + @dm.h_mm / 2 - 5
             @img.line( x_mm, y1_mm, x_mm, @dm.y_mm + @dm.h_mm - @dm.cs_mm + ( ( @dm.h_mm - @dm.hs_mm ) / 2 ) - 4, @style_contours )
-            @img.line( x_mm, y2_mm, x_mm, @dm.y_mm + @dm.h_mm - @dm.cs_mm + ( ( @dm.h_mm + @dm.hs_mm ) / 2 ) + 4, @style_contours )
-            @img.text( x_mm, @dm.y_mm + @dm.h_mm - @dm.cs_mm + @dm.h_mm / 2 + 1, 'H', @style_aux )
-            arrow( x_mm, y1_mm - 3, 4 )
-            arrow( x_mm, y2_mm + 3, -4 )
+            @img.text( x_mm, y1_mm + 3, 'H', @style_aux )
 	  end
         end
 
