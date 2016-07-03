@@ -12,6 +12,7 @@ module Io::Creat::Slipstick::Backprints
 
     # Hyperfocal Distance series
     H = [ 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000 ]
+    FODDERS = [ [ 4, 0.2], [ 2, 0.5], [ 4, 0.20 ] ]
     RES = 1.0 # per millimeter resolution for horizontal stepping
     DOF_LO = 0.001 # low limit on the DoF axis
     DOF_MULT = 10 # DoF index multiplicator
@@ -29,7 +30,7 @@ module Io::Creat::Slipstick::Backprints
     end # initialize
 
     private
-    def plot ( h )
+    def plot ( h, secondary = false )
       clear = 2.0
       x = clear + 7
       y = -1
@@ -39,7 +40,7 @@ module Io::Creat::Slipstick::Backprints
       py = -1
       alpha1 = -1 # angle of the first segment
       alpha99 = -1 # andle of the last segment
-      @img.pbegin()
+      @img.pbegin( secondary ? "1, 1" : nil )
       inline = false
       while ( x < @w_mm - clear ) do
         s = 10 ** ( Math.log10( S_LO ) + x / @scale_x )
@@ -72,9 +73,9 @@ module Io::Creat::Slipstick::Backprints
         py = y
         x += RES / @scale_x
       end
-      @img.pend( @line_style.merge( { :stroke_width => @line_style[:stroke_width] * 2 } ) )
+      @img.pend( @line_style.merge( { :stroke_width => @line_style[:stroke_width] * ( secondary ? 0.5 : 2 ) } ) )
       # series description
-      if ( px != -1 ) and ( py != -1 )
+      if ( !secondary and ( px != -1 ) and ( py != -1 ) )
         r_mm = 0.5
         x_mm = fx - r_mm * Math.sin( alpha1 )
         y_mm = fy + r_mm * Math.cos( alpha1 )
@@ -121,7 +122,14 @@ module Io::Creat::Slipstick::Backprints
         end
       end
       @img.rtext( @x_mm - 3 * of_mm, @y_mm + @h_mm / 2, -90, "DoF", @text_style.merge( { :font_weight => 'bold' } ) )
-      H.each do | h | plot( h ) end
+      H.each_with_index do | h, index |
+        plot( h )
+        fodders = FODDERS[index % 3]
+        (1..fodders[0]).each do | frac |
+          fh = h + h * frac * fodders[1]
+          plot( fh, true )
+        end
+      end
     end
 
     public

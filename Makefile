@@ -101,8 +101,8 @@ model_a_photo: en_model_a_photo sk_model_a_photo
 
 %_model_a_photo :
 	$(info Generating photo Slide of Instrument A, localization $* )
-	@src/model_a.rb default $* slide-photo face | xmllint --format - > build/$*_model_a_slide_photo_face.svg
-	@src/model_a.rb default $* slide-photo reverse | xmllint --format - > build/$*_model_a_slide_photo_reverse.svg
+	@src/model_a.rb default $* slide-photo face > build/$*_model_a_slide_photo_face.svg
+	@src/model_a.rb default $* slide-photo reverse > build/$*_model_a_slide_photo_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_photo_face.pdf $(shell pwd)/build/$*_model_a_slide_photo_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_photo_reverse.pdf $(shell pwd)/build/$*_model_a_slide_photo_reverse.svg
 	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a_slide_photo.pdf build/$*_model_a_slide_photo_face.pdf build/$*_model_a_slide_photo_reverse.pdf
