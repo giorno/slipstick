@@ -47,6 +47,12 @@ module Io::Creat::Slipstick::Backprints
           dof = 2 * h * s ** 2 / ( h ** 2 - s ** 2 )
           if dof > 0
             y = @scale_y * ( Math.log10( dof ) - Math.log10( DOF_LO ) )
+            alpha99 = Math.atan( ( py - y ) / ( px - x ) )
+            if ( inline and alpha1 == -1 )
+              alpha1 = alpha99
+              fx = x
+              fy = y
+            end
             if ( y >= clear ) and ( y <= @h_mm - clear )
               if not inline
                 @img.move( @x_mm + x, @y_mm + @h_mm - y )
@@ -62,12 +68,6 @@ module Io::Creat::Slipstick::Backprints
           break
         end
 
-        alpha99 = Math.atan( ( py - y ) / ( px - x ) )
-        if ( inline and alpha1 == -1 )
-          alpha1 = alpha99
-          fx = x
-          fy = y
-        end
         px = x
         py = y
         x += RES / @scale_x
@@ -78,10 +78,10 @@ module Io::Creat::Slipstick::Backprints
         r_mm = 0.5
         x_mm = fx - r_mm * Math.sin( alpha1 )
         y_mm = fy + r_mm * Math.cos( alpha1 )
-        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha1 * 180 / Math::PI, "%g" % h, @text_style.merge( { :text_anchor => 'start', :font_weight => 'bold', :font_size => 2.0 } ) )
+        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha1 * 180 / Math::PI, "%g" % h, @text_style.merge( { :text_anchor => 'start', :font_size => 2.0 } ) )
         x_mm = px - r_mm * Math.sin( alpha99 )
         y_mm = py + r_mm * Math.cos( alpha99 )
-        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha99 * 180 / Math::PI, "%g" % h, @text_style.merge( { :text_anchor => 'end', :font_weight => 'bold', :font_size => 2.0 } ) )
+        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha99 * 180 / Math::PI, "%g" % h, @text_style.merge( { :text_anchor => 'end', :font_size => 2.0 } ) )
       end
     end # plot
 
