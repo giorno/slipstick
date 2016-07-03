@@ -7,6 +7,7 @@ require_relative 'log'
 
 module Io::Creat::Slipstick
 
+  # Properties used by photo scales.
   class PhotoScale < LogScale
 
     # f-stop ~= sqrt( 2 ^ aperture value )
@@ -63,12 +64,16 @@ module Io::Creat::Slipstick
 
   end # PhotoScale
 
-  # Scale for calculating hyperfocal distance
+  # Scale for calculating Hyperfocal Distance
   # H = f^2 / coc * val
   class HyperfocalDistanceScale < PhotoScale
+    # f-stop thirds, labelled
     SMALL   = [ 1.3, 1.7, 2.3, 2.7, 3.3, 3.3, 4.3, 4.7, 5.3, 5.7, 6.3, 6.7, 7.3, 7.7,
                 8.3, 8.7, 9.3, 9.7 ]
+    # f-stop halves, not labelled
     NO_LABEL = [ 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5 ]
+
+    public
     def fmt ( val )
       if NO_LABEL.include?( val )
         return nil
