@@ -19,13 +19,13 @@ module Io::Creat::Slipstick
           # power scales
           ll_off_mm = 4 # shift LL scales to the left to make room for the last (too wide) tick label
           strip = @parent.create_strip( @dm.x_mm, @dm.y_mm + @dm.h_mm - @dm.cs_mm + ( ( @dm.h_mm - @dm.hs_mm ) / 2 ), @dm.hs_mm, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "DX 19μm", 0.5 )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "Nikon DX 19μm", 0.5 )
               scale.set_params( 0.019 )
               scale.set_overflow( 4.0 )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "APS-C Canon 18μm", 0.33 )
               scale.set_params( 0.018 )
               scale.set_style( @style_small )
-            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "FX 29μm", 0.5, true )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "35mm 29μm", 0.5, true )
               scale.set_params( 0.029 )
               scale.set_overflow( 4.0 )
 
