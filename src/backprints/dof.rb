@@ -33,9 +33,12 @@ module Io::Creat::Slipstick::Backprints
       clear = 2.0
       x = clear + 7
       y = -1
+      fx = -1
+      fy = -1
       px = -1 # to calculate last segment angle
       py = -1
-      alpha = -1
+      alpha1 = -1 # angle of the first segment
+      alpha99 = -1 # andle of the last segment
       @img.pbegin()
       inline = false
       while ( x < @w_mm - clear ) do
@@ -59,7 +62,12 @@ module Io::Creat::Slipstick::Backprints
           break
         end
 
-        alpha = Math.atan( ( py - y ) / ( px - x ) )
+        alpha99 = Math.atan( ( py - y ) / ( px - x ) )
+        if ( inline and alpha1 == -1 )
+          alpha1 = alpha99
+          fx = x
+          fy = y
+        end
         px = x
         py = y
         x += RES / @scale_x
@@ -68,9 +76,12 @@ module Io::Creat::Slipstick::Backprints
       # series description
       if ( px != -1 ) and ( py != -1 )
         r_mm = 0.5
-        x_mm = px - r_mm * Math.sin( alpha )
-        y_mm = py + r_mm * Math.cos( alpha )
-        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha * 180 / Math::PI, "%g" % h, @text_style.merge( { :text_anchor => 'end', :font_weight => 'bold' } ) )
+        x_mm = fx - r_mm * Math.sin( alpha1 )
+        y_mm = fy + r_mm * Math.cos( alpha1 )
+        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha1 * 180 / Math::PI, "%g" % h, @text_style.merge( { :text_anchor => 'start', :font_weight => 'bold', :font_size => 2.0 } ) )
+        x_mm = px - r_mm * Math.sin( alpha99 )
+        y_mm = py + r_mm * Math.cos( alpha99 )
+        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha99 * 180 / Math::PI, "%g" % h, @text_style.merge( { :text_anchor => 'end', :font_weight => 'bold', :font_size => 2.0 } ) )
       end
     end # plot
 
