@@ -124,6 +124,10 @@ module Io::Creat::Slipstick::Backprints
       @img.rtext( @x_mm - 3 * of_mm, @y_mm + @h_mm / 2, -90, "DoF", @text_style.merge( { :font_weight => 'bold' } ) )
       H.each_with_index do | h, index |
         plot( h )
+        # do not render last fodders
+        if ( index == H.length - 1 )
+          break
+        end
         fodders = FODDERS[index % 3]
         (1..fodders[0]).each do | frac |
           fh = h + h * frac * fodders[1]
