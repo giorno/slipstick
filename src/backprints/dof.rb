@@ -90,7 +90,7 @@ module Io::Creat::Slipstick::Backprints
           (2..9).each do | frac |
             fs = frac * s
             fx_mm = @x_mm + ( Math.log10( fs ) - Math.log10( S_LO ) ) * @scale_x
-            @img.line( fx_mm, @y_mm, fx_mm, @y_mm + @h_mm, grid )
+            @img.line( fx_mm, @y_mm, fx_mm, @y_mm + @h_mm + ( frac == 5 ? of_mm : 0 ), grid )
           end
         end
       end
@@ -105,11 +105,11 @@ module Io::Creat::Slipstick::Backprints
           (2..9).each do | frac |
             fh = frac * h
             fy_mm = @y_mm + @h_mm - ( Math.log10( fh ) - Math.log10( DOF_LO ) ) * @scale_y
-            @img.line( @x_mm, fy_mm, @x_mm + @w_mm, fy_mm, grid.merge( { :stroke_width => grid[:stroke_width] / 2 } ) )
+            @img.line( @x_mm - ( frac == 5 ? of_mm : 0 ) , fy_mm, @x_mm + @w_mm, fy_mm, grid.merge( { :stroke_width => grid[:stroke_width] / 2 } ) )
           end
         end
       end
-      @img.rtext( @x_mm - 2 * of_mm, @y_mm + @h_mm / 2, -90, "DoF", @text_style.merge( { :font_weight => 'bold' } ) )
+      @img.rtext( @x_mm - 3 * of_mm, @y_mm + @h_mm / 2, -90, "DoF", @text_style.merge( { :font_weight => 'bold' } ) )
       H.each do | h | plot( h ) end
     end
 
