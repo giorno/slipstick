@@ -72,7 +72,7 @@ module Io::Creat::Slipstick::Backprints
         py = y
         x += RES / @scale_x
       end
-      @img.pend( @line_style.merge( { :stroke_width => @line_style[:stroke_width] * 4 } ) )
+      @img.pend( @line_style.merge( { :stroke_width => @line_style[:stroke_width] * 2 } ) )
       # series description
       if ( px != -1 ) and ( py != -1 )
         r_mm = 0.5
