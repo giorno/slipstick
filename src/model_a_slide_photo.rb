@@ -35,7 +35,7 @@ module Io::Creat::Slipstick
             @bprints << pn
 
           brand = PageNoBackprint.new( @img, @dm.sw_mm - 25, @dm.y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ) - 4, @branding.height, @style_branding )
-            brand.sett( "%s %s %s" % [ @branding.brand, @i18n.string( 'slide_rule'), @branding.model ], true )
+            brand.sett( "%s %s %s-P" % [ @branding.brand, @i18n.string( 'part_slide_photo'), @branding.model ], true )
             @bprints << brand
 
           @bprints << DepthOfFieldBackprint.new( @img, @dm.x_mm + 5, @dm.y_mm + @dm.cs_mm + @dm.x_mm - 2, @dm.sw_mm - 2 * @dm.x_mm - 5, @dm.h_mm - @dm.cs_mm - 2 * @dm.x_mm + 2, @style_small )
