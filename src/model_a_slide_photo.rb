@@ -40,6 +40,22 @@ module Io::Creat::Slipstick
 
           @bprints << DepthOfFieldBackprint.new( @img, @dm.x_mm + 5, @dm.y_mm + @dm.cs_mm + @dm.x_mm - 2, @dm.sw_mm - 2 * @dm.x_mm - 5, @dm.h_mm - @dm.cs_mm - 2 * @dm.x_mm + 2, @style_small )
         end
+        if ( ( @layer & LAYER_REVERSE ) != 0 )
+          # log scales
+          strip = @parent.create_strip( @dm.x_mm, @dm.sh_mm - @dm.y_mm - 2 * ( @dm.h_mm - @dm.cs_mm ) + ( ( @dm.h_mm - @dm.hs_mm ) / 2 ), @dm.hs_mm, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "B", 0.5 )
+              scale.set_params( 2 )
+              scale.set_overflow( 4.0 )
+              scale.add_constants( )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "CI", 0.33, true )
+              scale.set_style( @style_small )
+              scale.set_params( 1, true )
+              scale.add_constants( )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "C", 0.5, true )
+              scale.set_params( 1 )
+              scale.set_overflow( 4.0 )
+              scale.add_constants( )
+        end
       end # initialize
 
       def render ( )
