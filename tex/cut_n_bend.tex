@@ -1,0 +1,17 @@
+\usepackage{background}
+
+% lines for cutting and bending for folded book like manual
+\backgroundsetup{
+color=black,
+scale=1,
+opacity=1,
+angle=0,
+contents={\tikz\draw[line width=0.1mm, gray]
+    (0mm, 0mm) -- (0mm, 297mm)
+    (180mm, 0mm) -- (180mm, 297mm)
+    [dashed]
+    (60mm, 0mm) -- (60mm, 297mm)
+    (120mm, 0mm) -- (120mm, 297mm);
+  }
+}
+
