@@ -1,7 +1,8 @@
 % table of stock and slide scales
-\renewcommand{\arraystretch}{1.2}
+\renewcommand{\arraystretch}{1.2}% vertical spacing
+\setlength{\tabcolsep}{1.2em}% horizontal padding
 \begin{center}
-  \begin{tabular}{ |c|c|}
+  \begin{tabularx}{\columnwidth}{ |c|X|}
     \hline
     \multicolumn{2}{|c|}{\tabstockupper} \\
     \hline
@@ -42,6 +43,6 @@
     \hline
       ST & \(sin x \approx tan x \) \\
     \hline
-  \end{tabular}
+  \end{tabularx}
 \end{center}
 
