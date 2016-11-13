@@ -1,12 +1,12 @@
 % table of stock and slide scales
-\renewcommand{\arraystretch}{1.2}% vertical spacing
-\setlength{\tabcolsep}{1.2em}% horizontal padding
+\renewcommand{\arraystretch}{1.4}% vertical spacing
+\setlength{\tabcolsep}{0.6em}% horizontal padding
 \begin{center}
-  \begin{tabularx}{\columnwidth}{ |c|X|}
+  \begin{tabularx}{\columnwidth}{ c X }
+    \multicolumn{2}{ c }{\textbf\tabstockupper} \\
     \hline
-    \multicolumn{2}{|c|}{\tabstockupper} \\
     \hline
-      L & \(log x\) \\
+      L & \(log\ x\) \\
     \hline
       P & \(\sqrt{1 - x^2}\) \\
     \hline
@@ -14,8 +14,8 @@
     \hline
       A & \(x^2\) \\
     \hline
+    \multicolumn{2}{ c }{\textbf\tabslidefront} \\
     \hline
-    \multicolumn{2}{|c|}{\tabslidefront} \\
     \hline
       B & \(x^2\) \\
     \hline
@@ -23,8 +23,8 @@
     \hline
       C & \(x\) \\
     \hline
+    \multicolumn{2}{ c }{\textbf\tabslideback} \\
     \hline
-    \multicolumn{2}{|c|}{\tabslideback} \\
     \hline
       LL1 & \(e^{0.01x}\) \\
     \hline
@@ -32,16 +32,16 @@
     \hline
       LL3 & \(e^{1x}\) \\
     \hline
+    \multicolumn{2}{ c }{\textbf\tabstocklower} \\
     \hline
-    \multicolumn{2}{|c|}{\tabstocklower} \\
     \hline
       D & \(x\) \\
     \hline
-      S & \(sin x\) \\
+      S & \(sin\ x\) \\
     \hline
-      T & \(tan x\) \\
+      T & \(tan\ x\) \\
     \hline
-      ST & \(sin x \approx tan x \) \\
+      ST & \(sin\ x \approx tan\ x \) \\
     \hline
   \end{tabularx}
 \end{center}
