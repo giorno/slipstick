@@ -28,10 +28,23 @@ contents={\tikz\draw[line width=0.1mm, gray]
 
 \newcommand{\makefulltitle}{Ako používať Logaritmické pravítko }
 % localisation strings used in the templates
+% table of scales (scalest.tex)
 \newcommand{\tabstockupper}{Horná polovica Pevnej časti }
 \newcommand{\tabslidefront}{Predná strana Posuvnej časti }
 \newcommand{\tabslideback}{Zadná strana Posuvnej časti }
 \newcommand{\tabstocklower}{Spodná polovica Pevnej časti }
+% table of operations (opst.tex)
+\newcommand{\tabmultdiv}{násobenie\hfill \break delenie }
+\newcommand{\tabreciprdiv}{recipročné delenie }
+\newcommand{\tabsqr}{druhá (od)mocnina }
+\newcommand{\tabcube}{tretia (od)mocnina }
+\newcommand{\tabdec}{desiata (od)mocnina }
+\newcommand{\tabhund}{stá (od)mocnina }
+\newcommand{\tabarbpr}{všeobecná mocnina }
+\newcommand{\tabcos}{kosínus }
+\newcommand{\tabsin}{sínus }
+\newcommand{\tabtan}{tangens }
+\newcommand{\tablog}{dekadický logaritmus }
 \input{makefooters.tex}
 \input{makeperex_sk.tex}
 
@@ -51,11 +64,13 @@ contents={\tikz\draw[line width=0.1mm, gray]
   \begin{multicols*}{3}
   \normalsize{
   Logaritmické pravítko sa skladá z:
-    \begin{inparaenum}[a\upshape)]
+    \begin{enumerate}
+      \setlength{\parskip}{0pt}
+      \setlength{\parsep}{0pt}
       \item Pevnej časti;
       \item Posuvnej časti; a
       \item Bežca.
-    \end{inparaenum}
+    \end{enumerate}
 
   Na prednej strane Pevnej časti a oboch stranách Posuvnej časti sú zobrazené logaritmické stupnice, označené veľkými písmenami:
 
@@ -66,8 +81,7 @@ contents={\tikz\draw[line width=0.1mm, gray]
 a
   Posuvná časť sa pohybuje vo vnútri Pevnej časti a Bežec po jej povrchu. Matematické operácie sa vykonávajú vzájomným posúvaním častí, zarovnaním indexov stupníc a odčítaním hodnôt. Niektoré operácie vyžadujú drobnú konverziu desatinných miest.
 
-  \centerline{\includegraphics{ops_sk}}
-  \vspace*{3mm}
+  \input{opst.tex}
 
   \makeop{2mm}{{x}\cdot{y}}
   \textbf{Jednoduché násobenie}

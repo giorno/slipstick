@@ -25,10 +25,23 @@ contents={\tikz\draw[line width=0.1mm, gray]
 
 \newcommand{\makefulltitle}{How To Use The Slide Rule }
 % localisation strings used in the templates
+% table of scales (scalest.tex)
 \newcommand{\tabstockupper}{Upper half of the Stock }
 \newcommand{\tabslidefront}{Front side of the Slide }
 \newcommand{\tabslideback}{Reverse side of the Slide }
 \newcommand{\tabstocklower}{Lower half of the Stock }
+% table of operations (opst.tex)
+\newcommand{\tabmultdiv}{multiplication\hfill \break division }
+\newcommand{\tabreciprdiv}{reciprocal division }
+\newcommand{\tabsqr}{square, square root }
+\newcommand{\tabcube}{cube, cube root }
+\newcommand{\tabdec}{\(10^{th}\) power and root }
+\newcommand{\tabhund}{\(100^{th}\) power and root }
+\newcommand{\tabarbpr}{arbitrary power }
+\newcommand{\tabcos}{cosine }
+\newcommand{\tabsin}{sine }
+\newcommand{\tabtan}{tangent }
+\newcommand{\tablog}{decadic logarithm }
 \input{makefooters.tex}
 \input{makeperex_en.tex}
 
@@ -49,11 +62,13 @@ contents={\tikz\draw[line width=0.1mm, gray]
   \begin{multicols*}{3}
   \normalsize{
   The Slide Rule consists of three components:
-    \begin{inparaenum}[a\upshape)]
+    \begin{enumerate}
+      \setlength{\parskip}{0pt}
+      \setlength{\parsep}{0pt}
       \item Stock;
       \item Slide; and
       \item Cursor.
-    \end{inparaenum}
+    \end{enumerate}
 
   On the Stock face and both sides of the Slide there are logarithmic scales marked by capital letters:
 
@@ -64,8 +79,7 @@ contents={\tikz\draw[line width=0.1mm, gray]
 
   The Slide slides inside the Stock and the Cursor slides on the top of the Stock. By sliding these parts, aligning the scales at appropriate indexes and reading them, mathematical operations are performed. Some operations require a little deal of mental arithmetic to sort out decimal places.
 
-  \centerline{\includegraphics{ops_en}}
-  \vspace*{3mm}
+  \input{opst.tex}
 
   \makeop{2mm}{{x}\cdot{y}}
   \textbf{Basic Multiplication}
