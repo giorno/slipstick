@@ -121,6 +121,6 @@ model_a_debug :
 prerequisites : print_os check_ruby check_rasem check_xmllint check_inkscape check_gs
 
 prepare:
-	@cp artwork/logo.svg build/logo.svg
 	@mkdir -p build
+	@cp artwork/logo.svg build/logo.svg
 
