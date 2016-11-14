@@ -6,6 +6,7 @@ all: prepare check_xelatex tex
 
 clean:
 	@rm -rf ../build/making_*
+	@rm -rf *.log *.pdf *.aux
 
 fonts:
 	$(info Installing Google Fonts for TEX sources)

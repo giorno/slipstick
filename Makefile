@@ -13,6 +13,7 @@ all : prerequisites prepare fonts tex model_a
 
 clean :
 	@rm -rf build
+	make -C tex clean
 
 print_os :
 	$(info Detected operating system: $(OS))
