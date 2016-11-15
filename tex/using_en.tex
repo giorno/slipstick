@@ -69,9 +69,7 @@
   The Slide slides inside the Stock and the Cursor slides on the top of the Stock. By sliding these parts, aligning the scales at appropriate indexes and reading them, mathematical operations are performed. Some operations require a little deal of mental arithmetic to sort out decimal places.
 
   \input{opst.tex}
-
-  \makeop{2mm}{{x}\cdot{y}}
-  \textbf{Basic Multiplication}
+  \makesectiontitle{Basic Multiplication}
 
 \constt{1.2{\char"00D7}2.3:}
 Move index 1 on the scale C to position of index 1.2 on the scale D.
@@ -81,7 +79,7 @@ The position that the Cursor shows on scale C is the result: \constt{2.76}.
 \footnotesize Use the scales A and B for multiplication and division of bigger numbers.
 \normalsize
 
-  \textbf{Wrap-around Multiplication}
+  \makesectiontitle{Wrap-around Multiplication}
 
 \constt{2.4{\char"00D7}4.6}
 Move index 10 on the scale C to 2.4 on the scale D.
@@ -91,8 +89,7 @@ Mental calculation of approximate values 2.5{\char"00D7}5 gives result of 12.5.
 The result is therefore greater than 10.
 Adjusting decimal place gives the result: \constt{11.05}. 
 
-  \makeop{2mm}{{x}/{y}}
-  \textbf{Basic Division}
+  \makesectiontitle{Basic Division}
 
 \constt{4.6/7.7:}
 Move the Cursor index 4.6 on the scale D.
@@ -100,8 +97,7 @@ Slide index 7.7 on the scale C to the Cursor.
 Move the Cursor to either index 1 or index 10 on the scale C, whichever is in range. In this case, index 10.
 The Cursor is now at index 5.97. The correct answer is near 4 / 8 = 0.5. Adjusting decimal place gives the result: \constt{0.597}.
 
-  \makeop{2mm}{{1}/{x}}
-  \textbf{Reciprocal Value}
+  \makesectiontitle{Reciprocal Value}
 
 \footnotesize Scale CI is an inverse scale, numbers increase from the right to the left. \normalsize
 
@@ -110,15 +106,13 @@ Move the Cursor to index 7.8 on the scale CI.
 The cursor is now at 1.132 on the scale C.
 The correct answer is near 1 / 10 = 0.1. Adjusting decimal place gives the result: \constt{0.1132}.
 
-  \makeop{3mm}{x^2}
-  \textbf{Square Number}
+  \makesectiontitle{Square Number}
 
 \constt{4.2\textsuperscript{2}:}
 Move the Cursor to index 4.2 on the scale C.
 The Cursor is at result index \constt{17.6} on the scale B.
 
-  \makeop{3mm}{\sqrt{x}}
-  \textbf{Square Root}
+  \makesectiontitle{Square Root}
 
 \footnotesize For square root of numbers with odd number of digits, use range [1, 10] on the scale B. For square root of numbers with even number of digits, use range [10, 100] on the scale B. \normalsize
 
@@ -126,15 +120,13 @@ The Cursor is at result index \constt{17.6} on the scale B.
 Move the Cursor to index 44 on the scale B (4400 has even number of digits).
 The Cursor is at index 6.65 on the scale C. The correct answer is near 70, as 70\textsuperscript{2} = 4900. Adjusting decimal places gives the result: \constt{66.5}.
 
-  \makeop{3mm}{x^3}
-  \textbf{Cube}
+  \makesectiontitle{Cube Number}
 
 \constt{4.8\textsuperscript{3}:}
 Move the Cursor to index 4.8 on the scale D.
 The position of the Cursor on the scale K gives the result: \constt{110}.
 
-  \makeop{3mm}{\sqrt[\leftroot{5}\uproot{2}3]{x}}
-  \textbf{Cube Root}
+  \makesectiontitle{Cube Root}
 
 \footnotesize Range [1, 10] on the scale K is used for cube roots of one-digit numbers, range [10, 100] for two-digit numbers, [100, 1000] for three-digit numbers. Four digit numbers again the first range, five digit the second range, etc. \normalsize
 
@@ -143,8 +135,7 @@ Move the Cursor to index 4.4 on the scale K (4400 has 4 digits).
 The Cursor is now at 1.655 on the scale D.
 The correct answer is between 10 and 20 as 10\textsuperscript{3} = 1000 and 20\textsuperscript{3} = 8000. Adjusting decimal place gives the result: \constt{16.55}.
 
-  \makeop{3mm}{{x}^{10}}
-  \textbf{Raising to Power of 10}
+  \makesectiontitle{Raising to Power of 10}
 
 \footnotesize Powers of 10 and Arbitrary Powers (including Roots) use LL scales, which are located on the reverse side of the Slide. \normalsize
 
@@ -152,29 +143,25 @@ The correct answer is between 10 and 20 as 10\textsuperscript{3} = 1000 and 20\t
 Move the Cursor to index 1.36 on the scale LL2.
 The Cursor is now at \constt{21.5} on the scale LL3, which is the result.
 
-  \makeop{3mm}{\sqrt[\leftroot{6}\uproot{2}10]{x}}
-  \textbf{10\textsuperscript{th} Root}
+  \makesectiontitle{10\textsuperscript{th} Root}
 
 \constt{5\textsuperscript{0.1}:}
 Move the Cursor to index 5 on the scale LL3.
 The Cursor is now at index \constt{1.175} on the scale LL2, which is the result.
 
-  \makeop{3mm}{{x}^{100}}
-  \textbf{Raising to Power of 100}
+  \makesectiontitle{Raising to Power of 100}
 
 \constt{1.02\textsuperscript{100}:}
 Move the Cursor to index 1.02 on the scale LL1.
 The Cursor is now at \constt{7.25} on the scale LL3, which is the result.
 
-  \makeop{3mm}{\sqrt[\leftroot{7}\uproot{2}100]{x}}
-  \textbf{100\textsuperscript{th} Root}
+  \makesectiontitle{100\textsuperscript{th} Root}
 
 \constt{5\textsuperscript{0.01}:}
 Move the Cursor to index 5 on the scale LL3.
 The Cursor is now at index \constt{1.022} on the scale LL1, which is the result.
 
-  \makeop{3mm}{x^y}
-  \textbf{Arbitrary Power}
+  \makesectiontitle{Arbitrary Power}
 
 \constt{9.1\textsuperscript{2.3}:}
 Move index 9.1 on the scale LL3 to the position of index 1 on the scale D.
@@ -202,8 +189,7 @@ Move the Cursor to index 5.6 on the scale C.
 The Cursor is now at index 3.6 on the scale LL3.
 As we used one 100\textsuperscript{th} of the exponent, we adjust the value by two decimal places, which gives the result: \constt{0.036}.
 
-  \makeop{3mm}{\sin{x}}
-  \textbf{Sine}
+  \makesectiontitle{Sine}
 
 \footnotesize Use scale S for finding sine of angles between 5\textdegree and 90\textdegree, and scale ST for angles between 30' and 6\textdegree. \normalsize
 
@@ -212,15 +198,13 @@ Move the Cursor to index 33 on the scale S.
 The Cursor is at index 5.45 on the scale C.
 The correct answer is between 0.1 and 1. Adjusting decimal place gives the result: \constt{0.545}.
 
-  \makeop{3mm}{\cos{x}}
-  \textbf{Cosine}
+  \makesectiontitle{Cosine}
 
 \constt{cos(33\textdegree):}
 Move the Cursor to index 33 on the scale S.
 The Cursor is at index \constt{0.83} on the scale P (it is an inverse scale), which gives the result.
 
-  \makeop{3mm}{\tan{x}}
-  \textbf{Tangent}
+  \makesectiontitle{Tangent}
 
 \footnotesize Use scale T for finding tangent of angles between 5\textdegree and 45\textdegree, and scale ST for angles between 30' and 6\textdegree. \normalsize
 
@@ -229,8 +213,7 @@ Move the Cursor to index 33 on the scale S.
 The Cursor is at index 6.5 on the scale D.
 The correct answer is between 0.1 and 1. Adjusting decimal place gives the result: \constt{0.65}.
 
-  \makeop{3mm}{\log_{10}{x}}
-  \textbf{Logarithm of Base 10}
+  \makesectiontitle{Logarithm of Base 10}
 
 \constt{log\textsubscript{10}2.6:}
 Move the Cursor to index 2.6 on the scale C.
