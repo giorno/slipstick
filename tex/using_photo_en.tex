@@ -1,0 +1,102 @@
+\input{preamble.tex}
+\usepackage{background}
+\usetikzlibrary{calc}
+\usepackage{color}
+\usepackage{fixltx2e}
+\usepackage{unicode-math}
+\usepackage{fancybox}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\input{cut_n_bend.tex}
+
+\newcommand{\makefulltitle}{How To Use The Photoslide }
+\input{makefooters.tex}
+\input{makeperex_en.tex}
+
+\title{\fontsize{60}{60}\selectfont THE PHOTOSLIDE}
+\preauthor{}\postauthor{}\author{}
+\predate{}\postdate{}\date{}
+\everymath{\displaystyle}
+\begin{document}
+
+  \begin{center}
+    \headingfont\fontsize{28}{28}\selectfont \textcolor{lightgray}{HOW TO USE} THE PHOTOSLIDE
+  \end{center}
+
+  \nosection{}
+  \large\textbf{The Photoslide is a specialised component\footnote{On the inside, scales B, CI and C of standard Slide Rule are printed to extend the range of operations to the basic set. Consult the \textbf{How To Use The Slide Rule} printout for details on how to use them.} that replaces the standard Slide component of paper made Slide Rule \modelname. Its purpose is to help determining certain aspects of photography in the field. }
+
+  \begin{multicols*}{3}
+  \normalsize{
+  \makesectiontitle{HYPERFOCAL DISTANCE}
+
+This distance \footnote{The hyperfocal distance is the closest distance at which a lens can be focused while keeping objects at infinity acceptably sharp. When the lens is focused at this distance, all objects at distances from half of the hyperfocal distance out to infinity will be acceptably sharp. (https://en.wikipedia.org/wiki/Hyperfocal\_distance)} is used in photography as the distance at which the photographer focuses the lens to obtain the most of the picture in sharp focus. The H value is a function of lens focal length, aperture and circle of confusion. Circle of confusion is determined by the camera light sensing medium (chip size or film frame size).
+
+  The Photoslide face contains 3 H scales, populated with full, half and third \textbf{f-stop} values in range from f/1 to f/32:
+    \begin{inparaenum}[a\upshape)]
+      \item \textbf{Nikon DX 19µm}\footnote{The µm value is the circle of confusion for the given camera system, it only has informational value, it is not involved in calculations using the Photoslide. Cameras with same circle of confusion can use same scale.} for work with Nikon DX format cameras;
+      \item \textbf{APS-C Canon 18µm} for work with Canon APS-C\footnote{Advanced Photo System type-C sensors used in a range of Canon digital cameras.} format cameras; and
+      \item \textbf{35mm 29µm} for work with full-frame (digital, Nikon FX) or film cameras.
+    \end{inparaenum}
+
+\constt{film camera, 50mm lens, f/1.4}
+Move the cursor to the index 5 on the scale D.
+Move index 1.4 on the 35mm scale to the cursor.
+Left index H points to 6.05 on the scale A.
+Adjusting the decimal place (we used 5 instead of 50), the result is \constt{60.5m}.
+
+\constt{Nikon DX camera, 11mm lens, f/2.8}
+Move the cursor to the index 1.1 on the scale D.
+Move index 2.8 on the DX scale to the cursor.
+Right index H points to \constt{22.3m} on the scale A.
+Decimal place adjustment is not required since we wrapped around the H index.
+
+\constt{Nikon DX camera, 200mm lens, f/11}
+Move the cursor to the index 2 on the scale D.
+Move index 11 on the DX scale to the cursor.
+Right index H points to 18.4 on the scale A.
+Adjusting the decimal place (we used 2 instead of 200, divided by wrap-around of 10), the result is \constt{184m}.
+\vfill\columnbreak
+
+  \makesectiontitle{DEPTH OF FIELD}
+
+The necessary pre-requisite for depth of field calculation is the knowledge of hyperfocal distance first (H value).
+The depth of field value is a function of subject distance \textbf{s} and the \textbf{H} value.
+
+The reverse of the Photoslide contains diagram for calculation of depth of field value (vertical axis).
+Series of H values are graphed to provide the relation between the distance and depth of field. 
+
+\constt{H=60.5m, s=2m}
+The closest H series is 60, rendered as dashed line next to 50.
+Following it to the s value 2 (horizontal grid line after value 1) gives the depth of field of \constt{~0.15m}.
+
+\constt{H=22.3m, s=5m}
+The closest H series is 20.
+Following it to the s value 5 (thicker horizontal grid line between values 1 and 10) gives the depth of field of \constt{~1.7m}.
+
+\constt{H=184m, s=20m}
+The closest H series is 180, rendered as dashed line before 200.
+Following it to the s value 20 (horizontal grid line after value 10) gives the depth of field of \constt{~4.5m}.
+
+\vfill\columnbreak
+  \makesectiontitle{F-STOP}
+
+Reciprocal calculation of the aperture stop (f-stop) from the subject distance, required depth of field and lens focal length is done by reversing the steps used for depth of field and hyperfocal distance calculation.
+
+First the H value is determined from the parameters of the scene (depth of field and subject distance).
+Then one of the H indexes on the hyperfocal distance scales is aligned with the calculated H value.
+Moving the cursor to the lens focal length on the scale D will align it with the nearest f-stop at which the desired depth of field is achieved.
+
+\constt{Nikon DX camera, 200mm lens, distance 20m, depth of field 5m}
+\footnotesize The H value is determined from subject distance s of 20m (first grid line after 10 on the horizontal axis) and depth of field of 5m (forth after 1 on the vertical axis) using the depth of field diagram on the back of the Photoslide.
+
+The dashed H series line closest to the intersection point of 20 and 5 is 160m (the H value).
+Move the cursor to the index 16 on the scale A.
+Move the right index H to the cursor.
+Move the cursor to the index 2 on the scale D.
+The cursor is near the f-stop \constt{13} on the DX scale.
+  }
+  \end{multicols*}
+  
+\end{document}
