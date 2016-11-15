@@ -16,8 +16,8 @@ module Io::Creat::Slipstick
         super( parent, layer )
         if ( ( @layer & LAYER_FACE ) != 0 )
 
-          # power scales
-          ll_off_mm = 4 # shift LL scales to the left to make room for the last (too wide) tick label
+          # photo scales
+          ll_off_mm = 4
           strip = @parent.create_strip( @dm.x_mm, @dm.y_mm + @dm.h_mm - @dm.cs_mm + ( ( @dm.h_mm - @dm.hs_mm ) / 2 ), @dm.hs_mm, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::PHOTO_HFD, "Nikon DX 19μm", 0.5 )
               scale.set_params( 0.019 )
@@ -41,6 +41,7 @@ module Io::Creat::Slipstick
           @bprints << DepthOfFieldBackprint.new( @img, @dm.x_mm + 5, @dm.y_mm + @dm.cs_mm + @dm.x_mm - 2, @dm.sw_mm - 2 * @dm.x_mm - 5, @dm.h_mm - @dm.cs_mm - 2 * @dm.x_mm + 2, @style_small )
         end
         if ( ( @layer & LAYER_REVERSE ) != 0 )
+
           # log scales
           strip = @parent.create_strip( @dm.x_mm, @dm.sh_mm - @dm.y_mm - 2 * ( @dm.h_mm - @dm.cs_mm ) + ( ( @dm.h_mm - @dm.hs_mm ) / 2 ), @dm.hs_mm, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_DECIMAL, "B", 0.5 )
@@ -55,6 +56,20 @@ module Io::Creat::Slipstick
               scale.set_params( 1 )
               scale.set_overflow( 4.0 )
               scale.add_constants( )
+
+          # power scales
+          ll_off_mm = 4
+          strip = @parent.create_strip( @dm.x_mm, @dm.sh_mm - @dm.y_mm - ( @dm.h_mm - @dm.cs_mm ) + ( ( @dm.h_mm - @dm.hs_mm ) / 2 ), @dm.hs_mm, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm - ll_off_mm, @dm.w_a_mm )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL1", 0.5 )
+              scale.set_params( 100 )
+              scale.set_overflow( 4.0 )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL2", 0.33, true )
+              scale.set_style( @style_small )
+              scale.set_params( 10 )
+            scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LOG_POWER, "LL3", 0.5, true )
+              scale.set_params( 1 )
+              scale.set_overflow( 4.0 )
+
         end
       end # initialize
 
