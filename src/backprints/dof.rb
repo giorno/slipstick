@@ -12,7 +12,7 @@ module Io::Creat::Slipstick::Backprints
   class DepthOfFieldBackprint < Backprint
 
     # Hyperfocal Distance series
-    H = [ 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000 ]
+    H = [ 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000 ]
     # Parameters to render the secondary H series (fodders)
     SECONDARY = [ [ 4, 0.2], [ 2, 0.5], [ 4, 0.20 ] ]
     RES = 1.0 # per millimeter resolution for horizontal stepping
@@ -81,13 +81,14 @@ module Io::Creat::Slipstick::Backprints
       @img.pend( @line_style.merge( { :stroke_width => @line_style[:stroke_width] * ( secondary ? 0.5 : 2 ) } ) )
       # series description
       if ( !secondary and ( px != -1 ) and ( py != -1 ) )
+        label = ( h >= 1000 ) ? "%gk" % ( h / 1000 ) : "%g" % h
         r_mm = 0.5
         x_mm = fx - r_mm * Math.sin( alpha1 )
         y_mm = fy + r_mm * Math.cos( alpha1 )
-        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha1 * 180 / Math::PI, "%g" % h, @text_style.merge( { :text_anchor => 'start', :font_size => 2.0 } ) )
+        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha1 * 180 / Math::PI, label, @text_style.merge( { :text_anchor => 'start', :font_size => 2.0 } ) )
         x_mm = px - r_mm * Math.sin( alpha99 )
         y_mm = py + r_mm * Math.cos( alpha99 )
-        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha99 * 180 / Math::PI, "%g" % h, @text_style.merge( { :text_anchor => 'end', :font_size => 2.0 } ) )
+        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha99 * 180 / Math::PI, label, @text_style.merge( { :text_anchor => 'end', :font_size => 2.0 } ) )
       end
     end # plot
 
