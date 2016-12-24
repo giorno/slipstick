@@ -26,6 +26,8 @@ fonts:
 tex: en_tex sk_tex en_tex_photo
 %_tex:
 	$(info Building Slide Rule PDF documents from TEX sources, localization $*)
+	@cp ../artwork/logo.pdf* ./
+	@$(XELATEX) -interaction=batchmode -output-directory=../build/ title_$*.tex > /dev/null
 	@$(XELATEX) -interaction=batchmode -output-directory=../build/ making_$*.tex > /dev/null
 	@$(XELATEX) -interaction=batchmode -output-directory=../build/ using_$*.tex > /dev/null
 	@$(XELATEX) -interaction=batchmode -output-directory=../build/ printing_$*.tex > /dev/null
