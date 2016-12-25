@@ -6,9 +6,7 @@
 \usetikzlibrary{calc}
 \usepackage{fixltx2e}
 \usepackage{unicode-math}
-%\usepackage{fancybox}
 \usepackage{amsmath}
-%\usepackage{graphicx}
 \usepackage{tabularx}
 
 \input{cut_n_bend.tex}
@@ -43,7 +41,7 @@
 \begin{document}
 
   \begin{center}
-    \headingfont\fontsize{28}{28}\selectfont AKO POUŽÍVAŤ LOGARITMICKÉ PRAVÍTKO
+    \headingfont\fontsize{32}{32}\selectfont AKO POUŽÍVAŤ LOGARITMICKÉ PRAVÍTKO
   \end{center}
 
 %  {\let\newpage\relax\maketitle}% no new line before title
@@ -66,8 +64,10 @@
   \input{scalest.tex}
   Čiary na stupniciach sa nazývajú \textbf{indexy} alebo rysky. Číselné značky na stupnici označujú významné indexy.
 
-  Na \textbf{zadnej strane Pevnej časti} sú tabuľky \textbf{matematických a fyzikálnych konštánt} a ďalšia užitočná grafika\footnote{Metrické a palcové stupnice na zadnej strane Pevnej časti a prednej strane Bežca nemusia merať presne, pretože teplota a vlhkosť spôsobené lepením menia mechanické vlastnosti a rozmery papiera.}, ale tieto sa priamo nepoužívajú v matematických operáciách. Posuvná časť  obsahuje prevodné mierky pre imperiálne a metrické (SI) jednotky a na vnútorných stranách prevodné stupnice medzi číselnými sústavami a mierami uhlov.
-a
+  Na \textbf{zadnej strane Pevnej časti} sú tabuľky \textbf{matematických a fyzikálnych konštánt} a ďalšia užitočná grafika\footnote{Metrické a palcové stupnice na zadnej strane Pevnej časti a prednej strane Bežca nemusia merať presne, pretože teplota a vlhkosť spôsobené lepením menia mechanické vlastnosti a rozmery papiera.}, ale tieto sa priamo nepoužívajú v matematických operáciách.
+
+Posuvná časť  obsahuje prevodné mierky pre imperiálne a metrické (SI) jednotky a na vnútorných stranách prevodné stupnice medzi číselnými sústavami \textbf{hex-dec-oct-bin} a mierami uhlov \textbf{deg-rad-grad}.
+
   Posuvná časť sa pohybuje vo vnútri Pevnej časti a Bežec po jej povrchu. Matematické operácie sa vykonávajú vzájomným posúvaním častí, zarovnaním indexov stupníc a odčítaním hodnôt. Niektoré operácie vyžadujú drobnú konverziu desatinných miest.
 
   \input{opst.tex}
@@ -119,9 +119,9 @@ Bežec ukazuje výsledok \constt{17.6} na stupnici B.
 
 \constt{4400\textsuperscript{0.5}:}
 Posuň Bežec na index 44 stupnice B (4400 má párny počet číslic).
-Bežec je na indexe 6.65 na strupnici C. Správna odpoveď je približne 70, keďźe 70\textsuperscript{2} = 4900. Úpravout desatinného miesta získaš výsledok: \constt{66.5}.
-
-  \makesectiontitle{Tretia mocnina}
+Bežec je na indexe 6.65 na stupnici C. Správna odpoveď je približne 70, keďže 70\textsuperscript{2} = 4900. Úpravou desatinného miesta získaš výsledok: \constt{66.5}.
+\vfill\columnbreak
+  \vspace*{-7mm}\makesectiontitle{Tretia mocnina}
 
 \constt{4.8\textsuperscript{3}:}
 Posuň Bežec na index 4.8 stupnice D.
