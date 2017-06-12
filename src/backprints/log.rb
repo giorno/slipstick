@@ -10,46 +10,46 @@ module Io::Creat::Slipstick::Backprints
 
     def oval ( x_mm, y_mm, w_mm, h_mm, content )
       r_mm = h_mm / 2
-      @img.pbegin()
-        @img.move( x_mm - w_mm / 2 + r_mm, y_mm + h_mm )
-        @img.arc( x_mm - w_mm / 2 + r_mm, y_mm, r_mm )
-        @img.rline( x_mm + w_mm / 2 - r_mm, y_mm )
-        @img.arc( x_mm + w_mm / 2 - r_mm, y_mm + h_mm, r_mm )
-        @img.rline( x_mm - w_mm / 2 + r_mm, y_mm + h_mm )
-      @img.pend( @line_style )
-      @img.text( x_mm, y_mm + 0.75 * h_mm, content, @text_style.merge( { 'text-anchor' => 'middle' } ) )
+      @img.path( @line_style.clone ) do
+        moveToA( x_mm - w_mm / 2 + r_mm, y_mm + h_mm )
+        arcToA( x_mm - w_mm / 2 + r_mm, y_mm, r_mm, r_mm, 0, 0, 1 )
+        lineToA( x_mm + w_mm / 2 - r_mm, y_mm )
+        arcToA( x_mm + w_mm / 2 - r_mm, y_mm + h_mm, r_mm, r_mm, 0, 0, 1 )
+        lineToA( x_mm - w_mm / 2 + r_mm, y_mm + h_mm )
+      end
+      @img._text( x_mm, y_mm + 0.75 * h_mm, content, @text_style.merge( { 'text-anchor' => 'middle' } ) )
     end
 
     def arrow ( x_mm, y_mm, w_mm, h_mm, arrow = nil )
       inv_x = w_mm < 0 ? -1 : 1
       inv_y = h_mm < 0 ? -1 : 1
-      dir = "0,1"
-      if inv_x * inv_y > 0 then dir = "0,0" end
+      dir = 1
+      if inv_x * inv_y > 0 then dir = 0 end
       r_mm = @fs_mm / 2
-      @img.pbegin()
-        @img.move( x_mm, y_mm )
-        @img.rline( x_mm, y_mm + ( h_mm - inv_y * r_mm ) )
-        @img.arc( x_mm + inv_x * r_mm, y_mm + h_mm, r_mm, dir )
-        @img.rline( x_mm + w_mm, y_mm + h_mm )
-      @img.pend( @line_style )
-      if not arrow.nil?
-        @img.pbegin()
-          @img.move( x_mm, y_mm )
-          @img.rline( x_mm - r_mm / 3, y_mm + inv_y * r_mm )
-          @img.rline( x_mm + r_mm / 3, y_mm + inv_y * r_mm )
-          @img.rline( x_mm, y_mm )
-        @img.pend( @line_style.merge( { 'fill' => 'black', 'stroke-linecap' => 'square' } ) )
+      @img.path( @line_style.clone ) do
+        moveToA( x_mm, y_mm )
+        lineToA( x_mm, y_mm + ( h_mm - inv_y * r_mm ) )
+        arcToA( x_mm + inv_x * r_mm, y_mm + h_mm, r_mm, r_mm, 0, 0, dir )
+        lineToA( x_mm + w_mm, y_mm + h_mm )
       end
-    end
+      if not arrow.nil?
+        @img.path( @line_style.merge( { :fill => 'black', :"stroke-linecap" => 'square' } ) ) do
+          moveToA( x_mm, y_mm )
+          lineToA( x_mm - r_mm / 3, y_mm + inv_y * r_mm )
+          lineToA( x_mm + r_mm / 3, y_mm + inv_y * r_mm )
+          lineToA( x_mm, y_mm )
+        end
+      end
+    end # arrow
 
     def render()
       @y_mm -= @h_mm # correct back
       w_mm = getw()
-      @img.text( @x_mm, @y_mm + 3 * @fs_mm, "x", @text_style.merge( { 'text-anchor' => 'start' } ) )
+      @img._text( @x_mm, @y_mm + 3 * @fs_mm, "x", @text_style.merge( { 'text-anchor' => 'start' } ) )
       arrow( @x_mm + 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 2 * @fs_mm, ( w_mm / 2 ) - 2.7 * FONT_WH_RATIO * @fs_mm, - 1.3 * @fs_mm )
       oval( @x_mm + w_mm / 2, @y_mm, 4 * FONT_WH_RATIO * @fs_mm, 1.4 * @fs_mm, "aˣ" )
       arrow( @x_mm + w_mm - 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 2 * @fs_mm, -( ( w_mm / 2 ) - 2.7 * FONT_WH_RATIO * @fs_mm), - 1.3 * @fs_mm, true )
-      @img.text( @x_mm + w_mm, @y_mm + 3 * @fs_mm, "y", @text_style.merge( { 'text-anchor' => 'end' } ) )
+      @img._text( @x_mm + w_mm, @y_mm + 3 * @fs_mm, "y", @text_style.merge( { 'text-anchor' => 'end' } ) )
       arrow( @x_mm + w_mm - 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 3.5 * @fs_mm, -( ( w_mm / 2 ) - 4.2 * FONT_WH_RATIO * @fs_mm), 1.2 * @fs_mm )
       oval( @x_mm + w_mm / 2, @y_mm + 4 * @fs_mm, 7 * FONT_WH_RATIO * @fs_mm, 1.4 * @fs_mm, "logₐy" )
       arrow( @x_mm + 0.7 * FONT_WH_RATIO * @fs_mm, @y_mm + 3.5 * @fs_mm, ( w_mm / 2 ) - 4.2 * FONT_WH_RATIO * @fs_mm,  1.2 * @fs_mm, true )
@@ -64,7 +64,7 @@ module Io::Creat::Slipstick::Backprints
         "\u00a0logₐ 1 = 0", # log of 1
         "\u00a0logₐ a = 1", # log of base
       ].each_with_index do | rule, index |
-        @img.text( @x_mm, @y_mm + ( 7 + index * 1.4 ) * @fs_mm, rule, @text_style.merge( { 'text-anchor' => 'begin' } ) )
+        @img._text( @x_mm, @y_mm + ( 7 + index * 1.4 ) * @fs_mm, rule, @text_style.merge( { 'text-anchor' => 'begin' } ) )
       end
     end
 

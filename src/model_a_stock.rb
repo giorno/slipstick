@@ -120,7 +120,7 @@ module Io::Creat::Slipstick
         end
         if ( @layer & Component::LAYER_FACE ) != 0
           # cutting guidelines for the stator
-          @img.rectangle( @dm.x_mm, y_mm, @dm.w_mm, rh_mm, @style_contours )
+          @img.rectangle @dm.x_mm, y_mm, @dm.w_mm, rh_mm, @style_contours
           # branding texts
           brand = PageNoBackprint.new( @img, @dm.x_mm + 168, @dm.y_mm + 6, @branding.height, @style_branding )
             brand.sett( @branding.brand, true )
@@ -128,7 +128,7 @@ module Io::Creat::Slipstick
           brand = PageNoBackprint.new( @img, @dm.x_mm + 174, @dm.y_mm + 105, @branding.height, @style_branding )
             brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), @branding.model ], true )
             brand.render()
-          @img.rtext( @dm.x_mm + @dm.w_mm - 5, @dm.y_mm + @dm.hl_mm + @dm.t_mm + @dm.h_mm / 2, -90, @branding.version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
+          @img._rtext( @dm.x_mm + @dm.w_mm - 5, @dm.y_mm + @dm.hl_mm + @dm.t_mm + @dm.h_mm / 2, -90, @branding.version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
         end
         if dir < 0 then rh_mm = 0 end
         @parent.render_cursor( y_mm + dir * ( rh_mm + @dm.y_mm ), dir )

@@ -105,9 +105,9 @@ module Io::Creat::Slipstick
 
       def text( x_mm, y_mm, label, style )
         if @orient == ORIENT_LANDSCAPE
-          @img.rtext( @x_mm + y_mm, @y_mm - x_mm, -90, label, style )
+          @img._rtext( @x_mm + y_mm, @y_mm - x_mm, -90, label, style )
         else
-          @img.text( @x_mm + x_mm, @y_mm + y_mm, label, style )
+          @img._text( @x_mm + x_mm, @y_mm + y_mm, label, style )
         end
       end
 
@@ -126,7 +126,7 @@ module Io::Creat::Slipstick
               line( j_mm, h_mm, j_mm, h_mm + row.geth() )
             end
             hal = cell.geta()
-            text( j_mm + ( hal == Td::MID ? cell.getw / 2 : @spacing ), h_mm + row.geth - ( row.geth() + @spacing - Io::Creat::Slipstick::Dim::DEFAULT[Io::Creat::Slipstick::Key::VERT_CORR][1] * @text_style[:font_size] ) / 2, cell.gett(), hal == Td::MID ? @text_style.merge( { 'text-anchor' => 'middle' } ): @text_style )
+            text( j_mm + ( hal == Td::MID ? cell.getw / 2 : @spacing ), h_mm + row.geth - ( row.geth() + @spacing - Io::Creat::Slipstick::Dim::DEFAULT[Io::Creat::Slipstick::Key::VERT_CORR][1] * @text_style[:"font-size"] ) / 2, cell.gett(), hal == Td::MID ? @text_style.merge( { 'text-anchor' => 'middle' } ): @text_style )
             j_mm += cell.getw()
           end
           h_mm += row.geth()

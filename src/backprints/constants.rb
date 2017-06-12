@@ -58,7 +58,7 @@ module Io::Creat::Slipstick
         w1_mm = 0.40 * @h_mm
         w2_mm = 0.10 * @h_mm
         w3_mm = 0.50 * @h_mm
-        style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { :font_size => fs_mm } )
+        style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { :"font-size" => fs_mm } )
         spacing = @fs_mm * 0.2
         tables = []
         table = Table.new( @img, @x_mm, @y_mm, spacing, Table::ORIENT_LANDSCAPE, style )

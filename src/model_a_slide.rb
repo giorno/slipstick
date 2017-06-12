@@ -18,7 +18,7 @@ module Io::Creat::Slipstick
           @img.line( 0, y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ), @dm.sw_mm, y_mm + 2 * ( @dm.h_mm - @dm.cs_mm ), @style_contours ) # cut
           # debugging mode, outline borders of area visible in the stock
           if not @branding.release
-            @img.text( @dm.sw_mm / 2, y_mm + @dm.h_mm - @dm.cs_mm - 4, @version, @style_branding )
+            @img._text( @dm.sw_mm / 2, y_mm + @dm.h_mm - @dm.cs_mm - 4, @version, @style_branding )
           end
           if both
             # power scales side

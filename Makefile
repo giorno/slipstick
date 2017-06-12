@@ -3,6 +3,12 @@
 OS=$(shell uname -s)
 BRAND="creat.io-sr-m1a2"
 
+# workaround for Rasem's inability to produce units in the result SVG
+APPLYMM=sed -e 's/" height=/mm" height=/' -e 's/" viewBox=/mm" viewBox=/'
+
+# postprocessing commands for Inkscape SVG ouput
+POSTPROCESS=| $(APPLYMM) | xmllint --format -
+
 ifeq ($(OS),Darwin)
 	INKSCAPE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
 else
@@ -25,6 +31,10 @@ check_ruby :
 check_rasem :
 	$(info Checking if Ruby Gem Rasem is installed)
 	@gem list | grep rasem > /dev/null
+
+check_rqrcode :
+	$(info Checking if Ruby Gem RQRCode is installed)
+	@gem list | grep rqrcode > /dev/null
 
 check_gs :
 	$(info Checking if Ghostscript is installed)
@@ -66,12 +76,12 @@ model_a_photo: en_model_a_photo sk_model_a_photo
 
 %_model_a_default :
 	$(info Generating Instrument A, localization $*, style default )
-	@src/model_a.rb default $* stock face | xmllint --format - > build/$*_model_a_stock_face.svg
-	@src/model_a.rb default $* stock reverse | xmllint --format - > build/$*_model_a_stock_reverse.svg 
-	@src/model_a.rb default $* slide-math face | xmllint --format - > build/$*_model_a_slide_face.svg
-	@src/model_a.rb default $* slide-math reverse | xmllint --format - > build/$*_model_a_slide_reverse.svg 
-	@src/model_a.rb default $* transp face | xmllint --format - > build/$*_model_a_transp_face.svg
-	@src/model_a.rb default $* transp reverse | xmllint --format - > build/$*_model_a_transp_reverse.svg 
+	@src/model_a.rb default $* stock face $(POSTPROCESS) > build/$*_model_a_stock_face.svg
+	@src/model_a.rb default $* stock reverse $(POSTPROCESS) > build/$*_model_a_stock_reverse.svg 
+	@src/model_a.rb default $* slide-math face $(POSTPROCESS) > build/$*_model_a_slide_face.svg
+	@src/model_a.rb default $* slide-math reverse $(POSTPROCESS) > build/$*_model_a_slide_reverse.svg 
+	@src/model_a.rb default $* transp face $(POSTPROCESS) > build/$*_model_a_transp_face.svg
+	@src/model_a.rb default $* transp reverse $(POSTPROCESS) > build/$*_model_a_transp_reverse.svg 
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_stock_face.pdf $(shell pwd)/build/$*_model_a_stock_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_stock_reverse.pdf $(shell pwd)/build/$*_model_a_stock_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_face.pdf $(shell pwd)/build/$*_model_a_slide_face.svg
@@ -84,12 +94,12 @@ model_a_photo: en_model_a_photo sk_model_a_photo
 
 %_model_a_trip :
 	$(info Generating Instrument A, localization $*, style trip )
-	@src/model_a.rb trip $* stock face | xmllint --format - > build/$*_model_a_trip_stock_face.svg
-	@src/model_a.rb trip $* stock reverse | xmllint --format - > build/$*_model_a_trip_stock_reverse.svg 
-	@src/model_a.rb trip $* slide-math face | xmllint --format - > build/$*_model_a_trip_slide_face.svg
-	@src/model_a.rb trip $* slide-math reverse | xmllint --format - > build/$*_model_a_trip_slide_reverse.svg 
-	@src/model_a.rb trip $* transp face | xmllint --format - > build/$*_model_a_trip_transp_face.svg
-	@src/model_a.rb trip $* transp reverse | xmllint --format - > build/$*_model_a_trip_transp_reverse.svg 
+	@src/model_a.rb trip $* stock face $(POSTPROCESS) > build/$*_model_a_trip_stock_face.svg
+	@src/model_a.rb trip $* stock reverse $(POSTPROCESS) > build/$*_model_a_trip_stock_reverse.svg 
+	@src/model_a.rb trip $* slide-math face $(POSTPROCESS) > build/$*_model_a_trip_slide_face.svg
+	@src/model_a.rb trip $* slide-math reverse $(POSTPROCESS) > build/$*_model_a_trip_slide_reverse.svg 
+	@src/model_a.rb trip $* transp face $(POSTPROCESS) > build/$*_model_a_trip_transp_face.svg
+	@src/model_a.rb trip $* transp reverse $(POSTPROCESS) > build/$*_model_a_trip_transp_reverse.svg 
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_stock_face.pdf $(shell pwd)/build/$*_model_a_trip_stock_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_stock_reverse.pdf $(shell pwd)/build/$*_model_a_trip_stock_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_slide_face.pdf $(shell pwd)/build/$*_model_a_trip_slide_face.svg
@@ -102,8 +112,8 @@ model_a_photo: en_model_a_photo sk_model_a_photo
 
 %_model_a_photo :
 	$(info Generating photo Slide of Instrument A, localization $* )
-	@src/model_a.rb default $* slide-photo face > build/$*_model_a_slide_photo_face.svg
-	@src/model_a.rb default $* slide-photo reverse > build/$*_model_a_slide_photo_reverse.svg
+	@src/model_a.rb default $* slide-photo face $(POSTPROCESS)> build/$*_model_a_slide_photo_face.svg
+	@src/model_a.rb default $* slide-photo reverse $(POSTPROCESS)> build/$*_model_a_slide_photo_reverse.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_photo_face.pdf $(shell pwd)/build/$*_model_a_slide_photo_face.svg
 	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_slide_photo_reverse.pdf $(shell pwd)/build/$*_model_a_slide_photo_reverse.svg
 	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a_slide_photo.pdf build/$*_model_a_slide_photo_face.pdf build/$*_model_a_slide_photo_reverse.pdf
@@ -112,13 +122,13 @@ model_a_photo: en_model_a_photo sk_model_a_photo
 
 model_a_debug :
 	@echo "Generating debug (all layers) SVG's of Instrument A"
-	@src/model_a.rb default en stock both | xmllint --format - > build/model_a_stock_both.svg
-	@src/model_a.rb default en slide-math both | xmllint --format - > build/model_a_slide_both.svg
-	@src/model_a.rb default en transp both | xmllint --format - > build/model_a_transp_both.svg
+	@src/model_a.rb default en stock both $(POSTPROCESS) > build/model_a_stock_both.svg
+	@src/model_a.rb default en slide-math both $(POSTPROCESS) > build/model_a_slide_both.svg
+	@src/model_a.rb default en transp both $(POSTPROCESS) > build/model_a_transp_both.svg
 	@echo "Result SVG's are in directory 'build', suffixed '_both.svg'"
 	@echo "Use 'ls -la build/*_both.svg' to list them"
 
-prerequisites : print_os check_ruby check_rasem check_xmllint check_inkscape check_gs
+prerequisites : print_os check_ruby check_rasem check_rqrcode check_xmllint check_inkscape check_gs
 
 prepare:
 	@mkdir -p build

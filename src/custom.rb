@@ -55,7 +55,7 @@ module Io::Creat::Slipstick
       if @line
         y_mm = @off_y_mm
         style = Io::Creat::Slipstick::Entity::TICK
-        @img.line( @off_x_mm + @start_mm, y_mm, @off_x_mm + @start_mm + @w_mainscale_mm, y_mm, { "stroke" => @style[style][:stroke], "stroke-width" => "%f" % @style[style][:stroke_width], "stroke-linecap" => "butt" } )
+        @img.line( @off_x_mm + @start_mm, y_mm, @off_x_mm + @start_mm + @w_mainscale_mm, y_mm, { "stroke" => @style[style][:stroke], "stroke-width" => "%f" % @style[style][:"stroke-width"], "stroke-linecap" => "butt" } )
       end
       render_label( )
     end

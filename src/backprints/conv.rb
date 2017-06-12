@@ -54,7 +54,7 @@ module Io::Creat::Slipstick::Backprints
       @labels[0..1].each do | label |
         @tw_mm = [ @tw_mm, label.length ].max
       end
-      @text_style[:font_size] = @fs_mm
+      @text_style[:"font-size"] = @fs_mm
     end
 
     # adds number of unbreakable spaces in front of the test to make first
@@ -77,16 +77,16 @@ module Io::Creat::Slipstick::Backprints
       # bigger one
       @img.line( @x_mm + off_x_mm, @y_mm, @x_mm + off_x_mm, @y_mm + h_mm, @line_style )
       text = center_text( @labels[0] )
-      @img.text( @x_mm + off_x_mm, @y_mm + h_mm + @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] * @fs_mm, text, @text_style )
+      @img._text( @x_mm + off_x_mm, @y_mm + h_mm + @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] * @fs_mm, text, @text_style )
       text = center_text( @labels[1] )
-      @img.text( @x_mm + off_x_mm, @y_mm + h_mm + @fs_mm + @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] * @fs_mm, text, @text_style )
+      @img._text( @x_mm + off_x_mm, @y_mm + h_mm + @fs_mm + @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] * @fs_mm, text, @text_style )
       # smaller one
       off_x_mm = @scale[:real] / @scale[:scale]
       @img.line( @x_mm + off_x_mm, @y_mm, @x_mm + off_x_mm, @y_mm - h_mm, @line_style )
       text = center_text( @labels[2] )
-      @img.text( @x_mm + off_x_mm, @y_mm - h_mm + @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] * @fs_mm, text, @text_style )
+      @img._text( @x_mm + off_x_mm, @y_mm - h_mm + @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] * @fs_mm, text, @text_style )
       text = center_text( @labels[3] )
-      @img.text( @x_mm + off_x_mm, @y_mm - h_mm - @fs_mm + @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] * @fs_mm, text, @text_style )
+      @img._text( @x_mm + off_x_mm, @y_mm - h_mm - @fs_mm + @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] * @fs_mm, text, @text_style )
     end
 
     public

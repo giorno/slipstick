@@ -3,7 +3,7 @@ OS=$(shell uname -s)
 USERNAME=$(shell whoami)
 
 ifeq ($(OS),Darwin)
-	FONTFORGE="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
+	FONTFORGE="/opt/local/bin/fontforge"
 else
 	FONTFORGE=$(shell which fontforge 2> /dev/null)
 endif
@@ -35,6 +35,7 @@ fonts :
 
 install : fonts
 	$(info Installing fonts for user $(USERNAME))
+	@mkdir ~/.fonts
 	@cp ../build/*.ttf ~/.fonts
 	@fc-cache -f -v > /dev/null
 

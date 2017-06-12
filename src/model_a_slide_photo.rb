@@ -81,7 +81,7 @@ module Io::Creat::Slipstick
 	  [ @dm.x_mm + @dm.w_l_mm + @dm.w_s_mm, @dm.x_mm + @dm.w_l_mm + @dm.w_s_mm + @dm.w_m_mm ].each do | x_mm |
             y1_mm = @dm.y_mm + @dm.h_mm - @dm.cs_mm + @dm.h_mm / 2 - 5
             @img.line( x_mm, y1_mm, x_mm, @dm.y_mm + @dm.h_mm - @dm.cs_mm + ( ( @dm.h_mm - @dm.hs_mm ) / 2 ) - 4, @style_contours )
-            @img.text( x_mm, y1_mm + 3, 'H', @style_aux )
+            @img._text( x_mm, y1_mm + 3, 'H', @style_aux )
 	  end
         end
 

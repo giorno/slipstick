@@ -48,18 +48,18 @@ module Io::Creat::Slipstick::Backprints
                  y_mm,
                  @x_mm,
                  y_mm,
-                 @style.merge( { :stroke_linecap => 'butt' } ) )
+                 @style.merge( { :"stroke-linecap" => 'butt' } ) )
 
       if label.nil? then return end
       for space in 0..@suffix.length do
         label = "\u00a0" + label
       end
       label = label + ' ' + @suffix
-      @img.rtext( @x_mm + ( @l2r ? 1 + h_mm : - h_mm - @style[:font_size] ),
-                  y_mm,
-                  90,
-                  label,
-                  Io::Creat::svg_dec_style_units( @style.merge( { :text_anchor => 'middle' } ), Io::Creat::SVG_STYLE_TEXT ) )
+      @img._rtext( @x_mm + ( @l2r ? 1 + h_mm : - h_mm - @style[:"font-size"] ),
+                   y_mm,
+                   90,
+                   label,
+                   Io::Creat::svg_dec_style_units( @style.merge( { :"text-anchor" => 'middle' } ), Io::Creat::SVG_STYLE_TEXT ) )
     end
   
   end # BottomUpLinearScale

@@ -15,10 +15,10 @@ module Io::Creat::Slipstick::Layout
 
     public
     def render ( )
-        @img.text( "%f" % @off_x_mm,
-                   "%f" % ( @off_y_mm + @style[Io::Creat::Slipstick::Entity::TICK][:font_size] ),
-                   "%s" % @label,
-                   Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::TICK] ) )
+        @img._text( "%f" % @off_x_mm,
+                    "%f" % ( @off_y_mm + @style[Io::Creat::Slipstick::Entity::TICK][:"font-size"] ),
+                    "%s" % @label,
+                    Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::TICK] ) )
       
     end
   end
@@ -33,7 +33,7 @@ module Io::Creat::Slipstick::Layout
       @h_mm         = h_mm
       @spacing_y_mm = spacing_y_mm.nil? ? @off_y_mm : spacing_y_mm
       @y_tracker_mm = @off_y_mm
-      @img = Io::Creat::Svg.new( "%d" % @w_mm, "%d" % @h_mm )
+      @img = Io::Creat::Svg.new( :width => "%d" % @w_mm, :height => "%d" % @h_mm )
     end
 
     # TODO throw exception when tracker would reach beyond the bottom border
@@ -48,7 +48,7 @@ module Io::Creat::Slipstick::Layout
     public
     def create_label ( label )
       caption = Caption.new( self, 0, @y_tracker_mm, label )
-      @y_tracker_mm += caption.instance_variable_get( :@style )[Io::Creat::Slipstick::Entity::TICK][:font_size] + @spacing_y_mm
+      @y_tracker_mm += caption.instance_variable_get( :@style )[Io::Creat::Slipstick::Entity::TICK][:"font-size"] + @spacing_y_mm
       return caption
     end
 

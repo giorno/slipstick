@@ -96,16 +96,17 @@ module Io::Creat::Slipstick
           csr.setw( @dm.cw_mm - @dm.ch_mm * 2 * off )
           csr.render()
           # contour
-          @img.pbegin()
-            @img.move( x_mm, y_mm )
-            @img.rline( x_mm + b_mm + s_mm, y_mm )
+          dm = @dm
+          @img.path( @style.clone ) do
+            moveToA( x_mm, y_mm )
+            hlineToA( x_mm + b_mm + s_mm )
             # circular cutout
-            @img.arc( x_mm + b_mm + s_mm + @dm.ch_mm, y_mm, 0.75 * @dm.ch_mm, "0,0" )
-            @img.rline( x_mm + rw_mm, y_mm )
-            @img.rline( x_mm + rw_mm, y_mm + @dm.cw_mm )
-            @img.rline( x_mm, y_mm + @dm.cw_mm )
-            @img.rline( x_mm, y_mm )
-          @img.pend( @style )
+            arcToA( x_mm + b_mm + s_mm + dm.ch_mm, y_mm, 0.75 * dm.ch_mm, 0.75 * dm.ch_mm, 0, 0, 0 )
+            lineToA( x_mm + rw_mm, y_mm )
+            lineToA( x_mm + rw_mm, y_mm + dm.cw_mm )
+            lineToA( x_mm, y_mm + dm.cw_mm )
+            lineToA( x_mm, y_mm )
+          end
           # logo
           logo_w_mm = 17
           logo_h_mm = 18 * logo_w_mm / 15
@@ -117,7 +118,7 @@ module Io::Creat::Slipstick
           inch = BottomUpInchScale.new( @img, x_mm + b_mm + s_mm, y_mm + @dm.cw_mm, @dm.cw_mm - 5, 5 )
             inch.style = @style_cursor
             inch.render()
-          @img.rectangle( x_mm, y_mm, b_mm, @dm.cw_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+          @img.rectangle x_mm, y_mm, b_mm, @dm.cw_mm, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } )
           if ( @layer & Component::LAYER_REVERSE ) == 0
             # bending edges
             [ b_mm, s_mm, @dm.ch_mm, s_mm ].each do | w |
@@ -132,15 +133,16 @@ module Io::Creat::Slipstick
           x_mm = @dm.x_mm + ( @dm.w_mm - rw_mm ) / 2
           gy_mm = dir != -1 ? y_mm : y_mm + @dm.cw_mm
           # see-through edge of cursor
-          @img.pbegin( )
-            @img.move( x_mm + b_mm + s_mm, gy_mm )
-            @img.arc( x_mm + b_mm + s_mm + @dm.ch_mm, gy_mm, 0.75 * @dm.ch_mm, dir != -1 ? "0,0" : "0,1" )
-            @img.rline( x_mm + b_mm + s_mm + @dm.ch_mm, gy_mm + dir * 16 )
-            @img.rline( x_mm + b_mm + s_mm, gy_mm + dir * 16 )
-            @img.rline( x_mm + b_mm + s_mm, gy_mm )
-          @img.pend( @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+          dm = @dm
+          @img.path( @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) ) do
+            moveToA( x_mm + b_mm + s_mm, gy_mm )
+            arcToA( x_mm + b_mm + s_mm + dm.ch_mm, gy_mm, 0.75 * dm.ch_mm, 0.75 * dm.ch_mm, 0, 0, dir != -1 ? 0 : 1 )
+            lineToA( x_mm + b_mm + s_mm + dm.ch_mm, gy_mm + dir * 16 )
+            lineToA( x_mm + b_mm + s_mm, gy_mm + dir * 16 )
+            lineToA( x_mm + b_mm + s_mm, gy_mm )
+          end
           # invisible part of cursor transparent element
-          @img.rectangle( x_mm + b_mm + s_mm, y_mm + ( dir == -1 ? 2 : @dm.cw_mm - 6 ), @dm.ch_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+          @img.rectangle x_mm + b_mm + s_mm, y_mm + ( dir == -1 ? 2 : @dm.cw_mm - 6 ), @dm.ch_mm, 4, @style.merge( { :stroke => 'none', :fill => 'url(#glued)' } )
           # debug mode bending edges
           [ b_mm, s_mm, @dm.ch_mm, s_mm ].each do | w |
             x_mm += w
@@ -153,20 +155,20 @@ module Io::Creat::Slipstick
       public
       def render()
         @style_cursor = @style[Io::Creat::Slipstick::Entity::LOTICK]
-        @style = { :stroke_width => 0.1, :stroke => "black", :stroke_cap => "square", :fill => "none" }
+        @style = { :"stroke-width" => 0.1, :stroke => "black", :"stroke-linecap" => "square", :fill => "none" }
         # [slide] element
         if ( !@component.nil? ) then @component.render() end
 
         # [transparent] elements cutting lines
         if ( @comp == COMP_TRANSP ) and ( ( @layer & Component::LAYER_FACE ) != 0 )
-          style = @style.merge( { :stroke_width => @style[:stroke_width] * 2 } )
+          style = @style.merge( { :"stroke-width" => @style[:"stroke-width"] * 2 } )
           # two stock part
           [ @dm.y_mm, @dm.y_mm + @dm.h_mm + 10 ].each do | y_mm |
             @img.line( 0, y_mm, @dm.sw_mm, y_mm, style )
             @img.line( 0, y_mm + @dm.h_mm, @dm.sw_mm, y_mm + @dm.h_mm, style )
-            @img.text( @dm.sw_mm / 2, y_mm + @dm.h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @dm.sw_mm, @dm.h_mm ], @style_aux )
+            @img._text( @dm.sw_mm / 2, y_mm + @dm.h_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_stock' ), @dm.sw_mm, @dm.h_mm ], @style_aux )
             if not @branding.release
-              @img.text( @dm.sw_mm / 2, y_mm + @dm.h_mm - 4 , @version, @style_aux )
+              @img._text( @dm.sw_mm / 2, y_mm + @dm.h_mm - 4 , @version, @style_aux )
             end
           end
           # two cursor parts
@@ -174,28 +176,29 @@ module Io::Creat::Slipstick
           [ ( @dm.sw_mm / 4 ) - ( @dm.ch_mm / 2 ), ( 3 * @dm.sw_mm / 4 ) - ( @dm.ch_mm / 2 ) ].each do | x_mm |
             #x_mm = ( @dm.sw_mm - @dm.ch_mm ) / 2
             @img.line( x_mm, y_mm, x_mm - @dm.hint_mm, y_mm, style )
-            @img.rtext( x_mm - 2 * @dm.hint_mm, y_mm, -90, '1', @style_aux )
+            @img._rtext( x_mm - 2 * @dm.hint_mm, y_mm, -90, '1', @style_aux )
             @img.line( x_mm, y_mm, x_mm, y_mm - @dm.hint_mm, style )
-            @img.text( x_mm, y_mm - 2 * @dm.hint_mm, '2', @style_aux )
+            @img._text( x_mm, y_mm - 2 * @dm.hint_mm, '2', @style_aux )
             @img.line( x_mm + @dm.ch_mm, y_mm, x_mm + @dm.ch_mm + @dm.hint_mm, y_mm, style )
-            @img.rtext( x_mm + @dm.ch_mm + 3 * @dm.hint_mm, y_mm, -90, '1', @style_aux )
+            @img._rtext( x_mm + @dm.ch_mm + 3 * @dm.hint_mm, y_mm, -90, '1', @style_aux )
             @img.line( x_mm + @dm.ch_mm, y_mm, x_mm + @dm.ch_mm, y_mm - @dm.hint_mm, style )
-            @img.text( x_mm + @dm.ch_mm, y_mm - 2 * @dm.hint_mm, '3', @style_aux )
+            @img._text( x_mm + @dm.ch_mm, y_mm - 2 * @dm.hint_mm, '3', @style_aux )
             @img.line( x_mm - @dm.hint_mm, y_mm + @dm.cw_mm, x_mm + @dm.ch_mm + @dm.hint_mm, y_mm + @dm.cw_mm, style )
-            @img.text( x_mm, y_mm + @dm.cw_mm + 3 * @dm.hint_mm, '2', @style_aux )
-            @img.rtext( x_mm - 2 * @dm.hint_mm, y_mm + @dm.cw_mm, -90, '4', @style_aux )
+            @img._text( x_mm, y_mm + @dm.cw_mm + 3 * @dm.hint_mm, '2', @style_aux )
+            @img._rtext( x_mm - 2 * @dm.hint_mm, y_mm + @dm.cw_mm, -90, '4', @style_aux )
             @img.line( x_mm, y_mm + @dm.cw_mm, x_mm, y_mm + @dm.cw_mm + @dm.hint_mm, style )
-            @img.text( x_mm + @dm.ch_mm, y_mm + @dm.cw_mm + 3 * @dm.hint_mm, '3', @style_aux )
+            @img._text( x_mm + @dm.ch_mm, y_mm + @dm.cw_mm + 3 * @dm.hint_mm, '3', @style_aux )
             @img.line( x_mm + @dm.ch_mm, y_mm + @dm.cw_mm, x_mm + @dm.ch_mm, y_mm + @dm.cw_mm + @dm.hint_mm, style )
-            @img.rtext( x_mm + @dm.ch_mm + 3 * @dm.hint_mm, y_mm + @dm.cw_mm, -90, '4', @style_aux )
-            @img.text( x_mm + @dm.ch_mm / 2, y_mm + @dm.cw_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_cursor' ), @dm.ch_mm, @dm.cw_mm ], @style_aux )
+            @img._rtext( x_mm + @dm.ch_mm + 3 * @dm.hint_mm, y_mm + @dm.cw_mm, -90, '4', @style_aux )
+            @img._text( x_mm + @dm.ch_mm / 2, y_mm + @dm.cw_mm + 5, "%s W%gmm H%gmm" % [ @i18n.string( 'part_cursor' ), @dm.ch_mm, @dm.cw_mm ], @style_aux )
           end
         end
 
         # strips of scales
         super( true )
-        @img.close()
-        return @img.output
+        output = ""
+        @img.write(output)
+        return output
       end
 
     end # A

@@ -51,7 +51,7 @@ module Io::Creat::Slipstick
 
     public
     def calc_tick_font_height_mm ( )
-      return @style[Io::Creat::Slipstick::Entity::TICK][:font_size]
+      return @style[Io::Creat::Slipstick::Entity::TICK][:"font-size"]
     end
 
     protected
@@ -68,9 +68,9 @@ module Io::Creat::Slipstick
     protected
     def render_label ( )
       if not @label.nil? and @w_label_mm > 0
-        font_size_mm = @style[Io::Creat::Slipstick::Entity::LABEL][:font_size]
+        font_size_mm = @style[Io::Creat::Slipstick::Entity::LABEL][:"font-size"]
         dy_mm = ( @flipped ? -@h_mm : @h_mm ) / 2
-        @img.text( "%f" % ( @off_x_mm + @dim[Io::Creat::Slipstick::Key::CLEARING] ),
+        @img._text( "%f" % ( @off_x_mm + @dim[Io::Creat::Slipstick::Key::CLEARING] ),
                    "%f" % ( @off_y_mm + dy_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ),
                    "\u00a0\u00a0%s" % @label,
                    Io::Creat::svg_dec_style_units( @style[Io::Creat::Slipstick::Entity::LABEL], Io::Creat::SVG_STYLE_TEXT ) )
@@ -86,7 +86,7 @@ module Io::Creat::Slipstick
                  "%f" % ( @off_y_mm - flip * ( style == Io::Creat::Slipstick::Entity::CONSTANT ? -@dim[Io::Creat::Slipstick::Key::TICK_HEIGHT][3] * h_mm : @dim[Io::Creat::Slipstick::Key::TICK_OVERFLOW] ) ),
                  "%f" % ( @off_x_mm + x_mm ),
                  "%f" % ( @off_y_mm + flip * h_mm ),
-                 Io::Creat::svg_dec_style_units( @style[style].merge( { :stroke_linecap => 'butt' } ) ) )
+                 Io::Creat::svg_dec_style_units( @style[style].merge( { :"stroke-linecap" => 'butt' } ) ) )
       render_tick_label( x_mm, h_mm, label, style )
     end
 
@@ -94,11 +94,11 @@ module Io::Creat::Slipstick
     def render_tick_label ( x_mm, h_mm, label = nil, style = Io::Creat::Slipstick::Entity::TICK )
       if not label.nil?
         flip = @flipped ? -1 : 1
-        font_size_mm = @style[style][:font_size]
-        @img.text( "%f" % ( @off_x_mm + x_mm + ( style == Io::Creat::Slipstick::Entity::CONSTANT ? -font_size_mm * 0.05 : 0 ) ),
+        font_size_mm = @style[style][:"font-size"]
+        @img._text( "%f" % ( @off_x_mm + x_mm + ( style == Io::Creat::Slipstick::Entity::CONSTANT ? -font_size_mm * 0.05 : 0 ) ),
                    "%f" % ( flip * h_mm + @off_y_mm + ( @flipped ? @dim[Io::Creat::Slipstick::Key::VERT_CORR][0] : @dim[Io::Creat::Slipstick::Key::VERT_CORR][1] ) * font_size_mm ), # compensation for ignored (by viewers) vertical alignments
                    "%s" % label,
-                   Io::Creat::svg_dec_style_units( @style[style].merge( { :text_anchor => 'middle' } ), Io::Creat::SVG_STYLE_TEXT ) )
+                   Io::Creat::svg_dec_style_units( @style[style].merge( { :"text-anchor" => 'middle' } ), Io::Creat::SVG_STYLE_TEXT ) )
       end
     end 
 

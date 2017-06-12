@@ -45,65 +45,70 @@ module Io::Creat::Slipstick::Backprints
       py = -1
       alpha1 = -1 # angle of the first segment
       alpha99 = -1 # andle of the last segment
-      @img.pbegin( secondary ? "1, 1" : nil )
-      inline = false
-      while ( x < @w_mm - clear ) do
-        s = 10 ** ( Math.log10( S_LO ) + x / @scale_x )
-        if s < h
-          dof = 2 * h * s ** 2 / ( h ** 2 - s ** 2 )
-          if dof > 0
-            y = @scale_y * ( Math.log10( dof ) - Math.log10( DOF_LO ) )
-            alpha99 = Math.atan( ( py - y ) / ( px - x ) )
-            if ( inline and alpha1 == -1 )
-              alpha1 = alpha99
-              fx = x
-              fy = y
-            end
-            if ( y >= clear ) and ( y <= @h_mm - clear )
-              if not inline
-                @img.move( @x_mm + x, @y_mm + @h_mm - y )
-                inline = true
-              else
-                @img.rline( @x_mm + x, @y_mm + @h_mm - y )
+      scale_y = @scale_y
+      h_mm = @h_mm
+      x_mm = @x_mm
+      y_mm = @y_mm
+      @img.path( @line_style.merge( { :"stroke-width" => @line_style[:"stroke-width"] * ( secondary ? 0.5 : 2 ) } ) ) do
+#      @img.path( secondary ? "1, 1" : nil ) do
+        inline = false
+        while ( x < @w_mm - clear ) do
+          s = 10 ** ( Math.log10( S_LO ) + x / @scale_x )
+          if s < h
+            dof = 2 * h * s ** 2 / ( h ** 2 - s ** 2 )
+            if dof > 0
+              y = scale_y * ( Math.log10( dof ) - Math.log10( DOF_LO ) )
+              alpha99 = Math.atan( ( py - y ) / ( px - x ) )
+              if ( inline and alpha1 == -1 )
+                alpha1 = alpha99
+                fx = x
+                fy = y
               end
-            elsif ( y > @h_mm - clear )
-              break
+              if ( y >= clear ) and ( y <= h_mm - clear )
+                if not inline
+                  moveToA( x_mm + x, y_mm + h_mm - y )
+                  inline = true
+                else
+                  lineTo( x_mm + x, y_mm + h_mm - y )
+                end
+              elsif ( y > h_mm - clear )
+                break
+              end
             end
+          else
+            break
           end
-        else
-          break
-        end
 
-        px = x
-        py = y
-        x += RES / @scale_x
+          px = x
+          py = y
+          x += RES / @scale_x
+        end
       end
-      @img.pend( @line_style.merge( { :stroke_width => @line_style[:stroke_width] * ( secondary ? 0.5 : 2 ) } ) )
       # series description
       if ( !secondary and ( px != -1 ) and ( py != -1 ) )
         label = ( h >= 1000 ) ? "%gk" % ( h / 1000 ) : "%g" % h
         r_mm = 0.5
         x_mm = fx - r_mm * Math.sin( alpha1 )
         y_mm = fy + r_mm * Math.cos( alpha1 )
-        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha1 * 180 / Math::PI, label, @text_style.merge( { :text_anchor => 'start', :font_size => 2.0 } ) )
+        @img._rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha1 * 180 / Math::PI, label, @text_style.merge( { :"text-anchor" => 'start', :"font-size" => 2.0 } ) )
         x_mm = px - r_mm * Math.sin( alpha99 )
         y_mm = py + r_mm * Math.cos( alpha99 )
-        @img.rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha99 * 180 / Math::PI, label, @text_style.merge( { :text_anchor => 'end', :font_size => 2.0 } ) )
+        @img._rtext( @x_mm + x_mm, @y_mm + @h_mm - y_mm, 0 - alpha99 * 180 / Math::PI, label, @text_style.merge( { :"text-anchor" => 'end', :"font-size" => 2.0 } ) )
       end
     end # plot
 
     public
     def render()
       of_mm = 0.5 # major gridline overflow
-      fs_mm = @text_style[:font_size]
-      grid = @line_style.merge( { :stroke_width => @line_style[:stroke_width] / 2 } )
+      fs_mm = @text_style[:"font-size"]
+      grid = @line_style.merge( { :"stroke-width" => @line_style[:"stroke-width"] / 2 } )
       @img.line( @x_mm, @y_mm, @x_mm, @y_mm + @h_mm, @line_style )
       # horizontal axis
       (0..S_INDEXES).each do | exp |
         s = S_LO * S_MULT ** exp
         x_mm = @x_mm + ( Math.log10( s ) - Math.log10( S_LO ) ) * @scale_x
         @img.line( x_mm, @y_mm, x_mm, @y_mm + @h_mm + of_mm, @line_style )
-        @img.text( x_mm, @y_mm + @h_mm + of_mm + fs_mm, "%g" % s, @text_style )
+        @img._text( x_mm, @y_mm + @h_mm + of_mm + fs_mm, "%g" % s, @text_style )
         if ( s < S_LO * S_MULT ** S_INDEXES )
           (2..9).each do | frac |
             fs = frac * s
@@ -113,13 +118,13 @@ module Io::Creat::Slipstick::Backprints
         end
       end
       # horizontal axis legend
-      @img.text( @x_mm + @w_mm / 2, @y_mm + @h_mm + fs_mm, "s", @text_style.merge( { :font_weight => 'bold' } ) )
+      @img._text( @x_mm + @w_mm / 2, @y_mm + @h_mm + fs_mm, "s", @text_style.merge( { :"font-weight" => 'bold' } ) )
       # vertical axis
       (0..DOF_INDEXES).each do | exp |
         h = DOF_LO * DOF_MULT ** exp
         y_mm = @y_mm + @h_mm - ( Math.log10( h ) - Math.log10( DOF_LO ) ) * @scale_y
         @img.line( @x_mm - of_mm, y_mm, @x_mm + @w_mm, y_mm, @line_style )
-        @img.text( @x_mm - 2 * of_mm, y_mm + 0.25 * @fs_mm, "%g" % h, @text_style.merge( { :text_anchor => 'end' } ) )
+        @img._text( @x_mm - 2 * of_mm, y_mm + 0.25 * @fs_mm, "%g" % h, @text_style.merge( { :"text-anchor" => 'end' } ) )
         if ( h < DOF_LO * DOF_MULT ** DOF_INDEXES )
           (2..9).each do | frac |
             fh = frac * h
@@ -129,7 +134,7 @@ module Io::Creat::Slipstick::Backprints
         end
       end
       # vertical axis legend
-      @img.rtext( @x_mm - 3 * of_mm, @y_mm + @h_mm / 2, -90, "DoF", @text_style.merge( { :font_weight => 'bold' } ) )
+      @img._rtext( @x_mm - 3 * of_mm, @y_mm + @h_mm / 2, -90, "DoF", @text_style.merge( { :"font-weight" => 'bold' } ) )
       H.each_with_index do | h, index |
         plot( h )
         # do not render last fodders

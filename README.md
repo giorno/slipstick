@@ -1,53 +1,31 @@
-slipstick
-=========
+# Slipstick - A Paper Made Slide Rule
 This project generates printable PDF's of paper-made slide rules (it can also be used to generate various types of slide rule scales in the form of an SVG file). Printouts have to be cut out and bent along designated lines, and glued to make a particular model of slide rule.
 
-##Prerequisites
-To make it work, project requires certain applications in the environment. To make it appealing, certain fonts have to be installed.
+## Dependencies
+A number of other applications and packages are expected to be present in the system to run the build system. Their absence is detected and breaks the build.
 
-###Basic features
-This includes SVG output generation for simple scales or paper models. It relies on Ruby and Ruby Gems [Rasem](https://github.com/aseldawy/rasem) and [RQRcoder](https://github.com/whomwah/rqrcode).
+ * Ruby
+ * Ruby Gems: [Rasem](https://github.com/aseldawy/rasem), [RQRCoder](https://github.com/whomwah/rqrcode)
+ * Wget
+ * FontForge
+ * Inkscape
+ * Xelatex
+ * TexLive packages: texlive-latex-extra
+ * Ghostscript
 
-####Gentoo Linux
+### Install dependencies from MacPorts on macOS
+
+### Install dependencies on Gentoo Linux
+
 ```
 emerge dev-lang/ruby dev-ruby/rubygems
 gem install rasem
 gem install rqrcode
-```
-
-###PDF printouts
-This requires Inkscape in non-GUI mode.
-
-####Gentoo Linux
-```
 emerge media-gfx/inkscape
 ```
 
-###Fonts used for labels and scale numbering
-
-####Gentoo Linux
-Standard labels: [Droid Sans Mono](http://www.droidfonts.com/info/droid-sans-mono-fonts/)
-
-```
-emerge media-fonts/droid
-```
-
-Constant labels: [Open Sans](http://www.fontsquirrel.com/fonts/open-sans), download [the ZIP file](http://www.fontsquirrel.com/fonts/download/open-sans) and extract it into `~/.fonts` directory, then update the fonts cache:
-
-```
-wget http://www.fontsquirrel.com/fonts/download/open-sans -O /tmp/open-sans.zip
-unzip /tmp/open-sans.zip -d ~/.fonts
-fc-cache -f -v
-rm /tmp/open-sans.zip
-```
-##Usage
-
-###Make paper model PDF printouts
+## Build
 In the project directory:
 ```
 make
 ```
-
-Size scale for PDF printing: 99.6% (use Adobe Reader)
-
-PDF export will fail if prerequisite applications are not installed. Exported PDF's are put in directory `build` (created in the process).
