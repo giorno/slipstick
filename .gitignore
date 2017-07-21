@@ -3,4 +3,6 @@ build
 *.aux
 *.log
 tex/*.pdf
+tex/*.pdf_tex
 /*.pdf
+.*
