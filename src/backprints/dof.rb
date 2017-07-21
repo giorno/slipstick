@@ -49,11 +49,13 @@ module Io::Creat::Slipstick::Backprints
       h_mm = @h_mm
       x_mm = @x_mm
       y_mm = @y_mm
-      @img.path( @line_style.merge( { :"stroke-width" => @line_style[:"stroke-width"] * ( secondary ? 0.5 : 2 ) } ) ) do
+      w_mm = @w_mm
+      scale_x = @scale_x
+      @img.path( @line_style.merge( { :"stroke-width" => @line_style[:"stroke-width"] * ( secondary ? 0.5 : 2 ), :"stroke-dasharray" => ( secondary ? "1, 1" : "none" ) } ) ) do
 #      @img.path( secondary ? "1, 1" : nil ) do
         inline = false
-        while ( x < @w_mm - clear ) do
-          s = 10 ** ( Math.log10( S_LO ) + x / @scale_x )
+        while ( x < w_mm - clear ) do
+          s = 10 ** ( Math.log10( S_LO ) + x / scale_x )
           if s < h
             dof = 2 * h * s ** 2 / ( h ** 2 - s ** 2 )
             if dof > 0
@@ -69,7 +71,7 @@ module Io::Creat::Slipstick::Backprints
                   moveToA( x_mm + x, y_mm + h_mm - y )
                   inline = true
                 else
-                  lineTo( x_mm + x, y_mm + h_mm - y )
+                  lineToA( x_mm + x, y_mm + h_mm - y )
                 end
               elsif ( y > h_mm - clear )
                 break
@@ -81,7 +83,7 @@ module Io::Creat::Slipstick::Backprints
 
           px = x
           py = y
-          x += RES / @scale_x
+          x += RES / scale_x
         end
       end
       # series description
