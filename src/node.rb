@@ -13,7 +13,7 @@ module Io::Creat::Slipstick
 	# defaults
         @off_x_mm = rel_off_x_mm
 	@off_y_mm = rel_off_y_mm
-	@style    = Io::Creat::Slipstick::Style::DEFAULT
+	@style    = Io::Creat::Slipstick::STYLE
 	@dim      = Io::Creat::Slipstick::Dim::DEFAULT
       else
         # tree node or leaf -> derive/inherit from the parent

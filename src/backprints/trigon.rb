@@ -20,7 +20,7 @@ module Io::Creat::Slipstick
         h_mm *= SCALE
         @r_step_mm  = h_mm / 5
         @fs_mm = @r_step_mm / 3.5
-        super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { :"font-size" => @fs_mm } ) )
+        super( img, x_mm, y_mm + h_mm, h_mm, Io::Creat::Slipstick::STYLE[Io::Creat::Slipstick::Entity::SCALE].merge( { :"font-size" => @fs_mm } ) )
         @img        = img
         @overlap_mm = @r_step_mm * 0.1
         @output     = @img.instance_variable_get( :@output )

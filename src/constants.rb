@@ -1,8 +1,6 @@
 
 # vim: et
 
-require_relative '../svg/src/style'
-
 # also initializes basic namespaces
 module Io
   module Creat
@@ -32,34 +30,6 @@ module Io
         PAGENO   = 0x90 # page numbers
         AUX      = 0xa0 # auxilliary lines (content not present in the product, such as cutting lines, comments)
         QR       = 0xb0 # QR code style
-      end
-
-      module Style
-        # per scale style
-        DEFAULT = { Io::Creat::Slipstick::Entity::TICK     => Io::Creat::SVG_STYLE,
-                    Io::Creat::Slipstick::Entity::HITICK   => Io::Creat::SVG_STYLE.merge( { :"font-weight" => 'bold' } ),
-                    Io::Creat::Slipstick::Entity::LOTICK   => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4 } ),
-                    Io::Creat::Slipstick::Entity::LABEL    => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4, :"font-weight" => 'bold', :"letter-spacing" => -0.10 } ),
-                    Io::Creat::Slipstick::Entity::SCALE    => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4, :"letter-spacing" => -0.10 } ),
-                    Io::Creat::Slipstick::Entity::CONSTANT => Io::Creat::SVG_STYLE.merge( { :"font-style" => 'oblique', :"font-size" => 2.4, :fill => 'black' } ),
-                    Io::Creat::Slipstick::Entity::UNITS    => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4, :fill => 'black' } ),
-                    Io::Creat::Slipstick::Entity::BRANDING => Io::Creat::SVG_STYLE.merge( { :"text-anchor" => 'middle', :fill => 'black', :"letter-spacing" => -0.10 } ),
-                    Io::Creat::Slipstick::Entity::PAGENO   => Io::Creat::SVG_STYLE.merge( { :"text-anchor" => 'middle', :fill => 'black', :"stroke-width" => 0.22 } ),
-                    Io::Creat::Slipstick::Entity::AUX      => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4, :"text-anchor" => 'middle', :"letter-spacing" => 0 } ),
-                    Io::Creat::Slipstick::Entity::QR       => { :fill => "black", :"stroke-width" => "0.01mm", :stroke => "black" },
-                  }
-        TRIP    = { Io::Creat::Slipstick::Entity::TICK     => Io::Creat::SVG_STYLE,
-                    Io::Creat::Slipstick::Entity::HITICK   => Io::Creat::SVG_STYLE.merge( { :"font-weight" => 'bold', :fill => '#ff6f00' } ),
-                    Io::Creat::Slipstick::Entity::LOTICK   => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4 } ),
-                    Io::Creat::Slipstick::Entity::LABEL    => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4, :fill => '#971c1c', :"font-weight" => 'bold', :"letter-spacing" => -0.10 } ),
-                    Io::Creat::Slipstick::Entity::SCALE    => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4, :"letter-spacing" => -0.10 } ),
-                    Io::Creat::Slipstick::Entity::CONSTANT => Io::Creat::SVG_STYLE.merge( { :"font-style" => 'oblique', :"font-size" => 2.4, :fill => '#283593', :stroke => '#283593' } ),
-                    Io::Creat::Slipstick::Entity::UNITS    => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4, :fill => '#878787', :stroke => '#878787' } ),
-                    Io::Creat::Slipstick::Entity::BRANDING => Io::Creat::SVG_STYLE.merge( { :"text-anchor" => 'middle', :stroke => '#971c1c', :"letter-spacing" => -0.10 } ),
-                    Io::Creat::Slipstick::Entity::PAGENO   => Io::Creat::SVG_STYLE.merge( { :"text-anchor" => 'middle', :fill => 'black', :"stroke-width" => 0.22 } ),
-                    Io::Creat::Slipstick::Entity::AUX      => Io::Creat::SVG_STYLE.merge( { :"font-size" => 2.4, :"text-anchor" => 'middle', :"letter-spacing" => 0 } ),
-                    Io::Creat::Slipstick::Entity::QR       => { :fill => "black", :"stroke-width" => "0.01mm", :stroke => "black" },
-                  }
       end
 
       # dimensions controlling rendering of a scale (per scale)

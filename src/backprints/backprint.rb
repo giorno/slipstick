@@ -14,7 +14,7 @@ module Io::Creat::Slipstick
       FONT_WH_RATIO = 0.48 # ratio between Slipstick Sans Mono Regular width and height
 
       public
-      def initialize ( img, x_mm, y_mm, h_mm, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE] )
+      def initialize ( img, x_mm, y_mm, h_mm, style = Io::Creat::Slipstick::STYLE[Io::Creat::Slipstick::Entity::SCALE] )
         super( style )
         @img   = img # Svg instance to render on
         @x_mm  = x_mm # left boundary

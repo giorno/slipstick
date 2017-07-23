@@ -71,7 +71,7 @@ tex :
 LANGUAGES = en sk
 
 # Builds printouts for Instrument A
-model_a : en_model_a_default sk_model_a_default en_model_a_trip sk_model_a_trip
+model_a : en_model_a_default sk_model_a_default en_model_a_colored sk_model_a_colored
 model_a_photo: en_model_a_photo sk_model_a_photo
 
 %_model_a_default :
@@ -92,23 +92,23 @@ model_a_photo: en_model_a_photo sk_model_a_photo
 	@cp build/$*_model_a.pdf build/$(BRAND)-$*.pdf
 	@echo "Result PDF: build/$(BRAND)-$*.pdf"
 
-%_model_a_trip :
-	$(info Generating Instrument A, localization $*, style trip )
-	@src/model_a.rb trip $* stock face $(POSTPROCESS) > build/$*_model_a_trip_stock_face.svg
-	@src/model_a.rb trip $* stock reverse $(POSTPROCESS) > build/$*_model_a_trip_stock_reverse.svg 
-	@src/model_a.rb trip $* slide-math face $(POSTPROCESS) > build/$*_model_a_trip_slide_face.svg
-	@src/model_a.rb trip $* slide-math reverse $(POSTPROCESS) > build/$*_model_a_trip_slide_reverse.svg 
-	@src/model_a.rb trip $* transp face $(POSTPROCESS) > build/$*_model_a_trip_transp_face.svg
-	@src/model_a.rb trip $* transp reverse $(POSTPROCESS) > build/$*_model_a_trip_transp_reverse.svg 
-	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_stock_face.pdf $(shell pwd)/build/$*_model_a_trip_stock_face.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_stock_reverse.pdf $(shell pwd)/build/$*_model_a_trip_stock_reverse.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_slide_face.pdf $(shell pwd)/build/$*_model_a_trip_slide_face.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_slide_reverse.pdf $(shell pwd)/build/$*_model_a_trip_slide_reverse.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_transp_face.pdf $(shell pwd)/build/$*_model_a_trip_transp_face.svg
-	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_trip_transp_reverse.pdf $(shell pwd)/build/$*_model_a_trip_transp_reverse.svg
-	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a_trip.pdf build/title_$*.pdf build/$*_model_a_trip_stock_face.pdf build/$*_model_a_trip_stock_reverse.pdf build/$*_model_a_trip_stock_face.pdf build/$*_model_a_trip_stock_reverse.pdf build/$*_model_a_trip_slide_face.pdf build/$*_model_a_trip_slide_reverse.pdf build/$*_model_a_trip_slide_face.pdf build/$*_model_a_trip_slide_reverse.pdf build/$*_model_a_trip_transp_face.pdf build/$*_model_a_trip_transp_reverse.pdf build/printing_$*.pdf build/making_$*.pdf build/using_$*.pdf build/using_$*.pdf
-	@cp build/$*_model_a_trip.pdf build/$(BRAND)-$*-trip.pdf
-	@echo "Result PDF: build/$(BRAND)-$*-trip.pdf"
+%_model_a_colored :
+	$(info Generating Instrument A, localization $*, style colored )
+	@src/model_a.rb colored $* stock face $(POSTPROCESS) > build/$*_model_a_colored_stock_face.svg
+	@src/model_a.rb colored $* stock reverse $(POSTPROCESS) > build/$*_model_a_colored_stock_reverse.svg 
+	@src/model_a.rb colored $* slide-math face $(POSTPROCESS) > build/$*_model_a_colored_slide_face.svg
+	@src/model_a.rb colored $* slide-math reverse $(POSTPROCESS) > build/$*_model_a_colored_slide_reverse.svg 
+	@src/model_a.rb colored $* transp face $(POSTPROCESS) > build/$*_model_a_colored_transp_face.svg
+	@src/model_a.rb colored $* transp reverse $(POSTPROCESS) > build/$*_model_a_colored_transp_reverse.svg 
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_colored_stock_face.pdf $(shell pwd)/build/$*_model_a_colored_stock_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_colored_stock_reverse.pdf $(shell pwd)/build/$*_model_a_colored_stock_reverse.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_colored_slide_face.pdf $(shell pwd)/build/$*_model_a_colored_slide_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_colored_slide_reverse.pdf $(shell pwd)/build/$*_model_a_colored_slide_reverse.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_colored_transp_face.pdf $(shell pwd)/build/$*_model_a_colored_transp_face.svg
+	@$(INKSCAPE) -z -A $(shell pwd)/build/$*_model_a_colored_transp_reverse.pdf $(shell pwd)/build/$*_model_a_colored_transp_reverse.svg
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dAutoRotatePages=/None -sOutputFile=build/$*_model_a_colored.pdf build/title_$*.pdf build/$*_model_a_colored_stock_face.pdf build/$*_model_a_colored_stock_reverse.pdf build/$*_model_a_colored_stock_face.pdf build/$*_model_a_colored_stock_reverse.pdf build/$*_model_a_colored_slide_face.pdf build/$*_model_a_colored_slide_reverse.pdf build/$*_model_a_colored_slide_face.pdf build/$*_model_a_colored_slide_reverse.pdf build/$*_model_a_colored_transp_face.pdf build/$*_model_a_colored_transp_reverse.pdf build/printing_$*.pdf build/making_$*.pdf build/using_$*.pdf build/using_$*.pdf
+	@cp build/$*_model_a_colored.pdf build/$(BRAND)-$*-colored.pdf
+	@echo "Result PDF: build/$(BRAND)-$*-colored.pdf"
 
 %_model_a_photo :
 	$(info Generating photo Slide of Instrument A, localization $* )

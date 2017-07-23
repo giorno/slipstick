@@ -27,7 +27,7 @@ module Io::Creat::Slipstick::Backprints
       spacing = @fs_mm * 0.2
       h_mm = @w_mm / DATA.length
       fs_mm = h_mm / 1.8
-      style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::SCALE].merge( { :"font-size" => fs_mm } )
+      style = Io::Creat::Slipstick::STYLE[Io::Creat::Slipstick::Entity::SCALE].merge( { :"font-size" => fs_mm } )
       table = Table.new( @img, @x_mm, @y_mm, spacing, Table::ORIENT_PORTRAIT, style )
       DATA.each do | cols |
         tr = table.tr( h_mm )

@@ -8,7 +8,7 @@ module Io::Creat::Slipstick::Backprints
   class BottomUpLinearScale
     attr_writer :style
 
-    def initialize ( img, x_mm, y_mm, l_mm, h_mm, style = Io::Creat::Slipstick::Style::DEFAULT[Io::Creat::Slipstick::Entity::TICK] )
+    def initialize ( img, x_mm, y_mm, l_mm, h_mm, style = Io::Creat::Slipstick::STYLE[Io::Creat::Slipstick::Entity::TICK] )
       @img   = img
       @x_mm  = x_mm
       @y_mm  = y_mm
