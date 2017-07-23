@@ -71,7 +71,7 @@ tex :
 LANGUAGES = en sk
 
 # Builds printouts for Instrument A
-model_a : en_model_a_default sk_model_a_default en_model_a_colored sk_model_a_colored
+model_a : en_model_a_default sk_model_a_default en_model_a_colored sk_model_a_colored en_model_a_iosevka sk_model_a_iosevka
 model_a_photo: en_model_a_photo sk_model_a_photo
 
 define model_a_template
@@ -113,6 +113,8 @@ $(eval $(call model_a_template,en,default))
 $(eval $(call model_a_template,sk,default))
 $(eval $(call model_a_template,en,colored))
 $(eval $(call model_a_template,sk,colored))
+$(eval $(call model_a_template,en,iosevka))
+$(eval $(call model_a_template,sk,iosevka))
 
 %_model_a_photo :
 	$(info Generating photo Slide of Instrument A, localization $* )
