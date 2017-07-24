@@ -5,7 +5,7 @@
 
 def usage ( )
   $stderr.puts "Usage: #{$0} <style> <lang> <stator|slide-math|transp> [both|face|reverse]\n\nOutputs SVG for given element and printout side.\n"
-  $stderr.puts " style       .. name of the style to use, supported: default, colored, iosevka"
+  $stderr.puts " style       .. name of the style to use, supported: default, colored"
   $stderr.puts " lang        .. language code for internationalized strings, supported: en, sk"
   $stderr.puts " stator      .. stock element of slide rule (static)"
   $stderr.puts " slide-math  .. sliding element of slide rule for mathematic operations"
@@ -24,7 +24,7 @@ end
 
 # retrieve the style
 if ARGV.length >= 2
-  if ['default', 'colored', 'iosevka'].include? ARGV[0]
+  if ['default', 'colored'].include? ARGV[0]
     # sets Io::Creat::Slipstick::STYLE
     require_relative File.join( 'style', ARGV[0] )
   else
