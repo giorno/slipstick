@@ -13,11 +13,11 @@ module Io::Creat::Slipstick
                [ 'omega',                  'Ω', "\u00a00.567143290409783872" ],
                [ 'euler_mascheroni',       'γ', "\u00a00.57721566490153286061" ],
                [ 'apery',                  'ζ', "\u00a01.2020569031595942854" ],
-               [ 'pythagoras',       "\u221b2", "\u00a01.4142135623730950488" ],
+               [ 'pythagoras',            "√2", "\u00a01.4142135623730950488" ],
                [ 'ramanujan_soldner',      'μ', "\u00a01.45136923488338105028" ],
                [ 'golden_ratio',           'φ', "\u00a01.61803398874989484820" ],
-               [ 'theodorus',        "\u221b3", "\u00a01.73205080756887729353" ],
-               [ 'empty',            "\u221b5", "\u00a02.23606797749978969641" ],
+               [ 'theodorus',            "³√3", "\u00a01.73205080756887729353" ],
+               [ 'empty',                "³√5", "\u00a02.23606797749978969641" ],
                [ 'euler',                  'e', "\u00a02.71828182845904523536" ],
                [ 'archimedes',             'π', "\u00a03.14159265358979323846" ],
                [ 'recipr_fibonacci',       'ψ', "\u00a03.35988566624317755317" ],
@@ -32,7 +32,7 @@ module Io::Creat::Slipstick
                [ 'impedance_vacuum',      'Z₀', '3.7673×10² Ω' ],
                [ 'coulomb',          "k\u2091", '8.9876×10⁹ N·m²·C⁻²' ],
                [ 'elementary_charge',      'e', '1.6022×10⁻¹⁹ C' ],
-               [ 'bohr_magneton',    "µ\u1d03", '9.2740×10⁻²⁴ J·T⁻¹' ], # Slipstick Sans Mono glyph for this code point is subscript capital letter B
+               [ 'bohr_magneton',    "µ\u1d66", '9.2740×10⁻²⁴ J·T⁻¹' ], # should be subscript capital letter B
                [ 'boltzmann',              'k', '1.3806×10⁻²³ J·K⁻¹' ],
                [ 'molar_gas',              'R', '8.3145 J·K⁻¹·mol⁻¹' ],
                [ 'avogadro',         "N\u1d00", '6.0221x10²³ mol⁻¹' ],
