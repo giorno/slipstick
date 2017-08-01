@@ -129,6 +129,13 @@ module Io::Creat::Slipstick
             brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), @branding.model ], true )
             brand.render()
           @img._rtext( @dm.x_mm + @dm.w_mm - 5, @dm.y_mm + @dm.hl_mm + @dm.t_mm + @dm.h_mm / 2, -90, @branding.version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
+          # bending hints for the stator on the face side
+          y = y_mm
+          [ 0, @dm.hu_mm, @dm.t_mm, @dm.h_mm, @dm.t_mm].each do |increment|
+            y += increment
+            @img.pline( @dm.x_mm, y, @dm.x_mm + @dm.hint_mm, y, @style_contours )
+            @img.pline( @dm.x_mm + @dm.w_mm, y, @dm.x_mm + @dm.w_mm - @dm.hint_mm, y, @style_contours )
+          end
         end
         if dir < 0 then rh_mm = 0 end
         @parent.render_cursor( y_mm + dir * ( rh_mm + @dm.y_mm ), dir )
