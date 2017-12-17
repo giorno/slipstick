@@ -38,13 +38,13 @@ module Io::Creat::Slipstick
               scale.set_overflow( @dm.b_mm )
 
           # bottom of the stock back
-          strip = @parent.create_strip( @dm.x_mm, @dm.y_mm + @dm.t_mm + @dm.h_mm + @dm.hl_mm - 8, 8, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
+          strip = @parent.create_strip( @dm.x_mm, @dm.y_mm + @dm.t_mm + @dm.h_mm + @dm.sc_mm + @dm.hl_mm - 8, 8, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_INCH, "inches", 0.33, true )
               scale.set_params( 10 )
               scale.set_overflow( @dm.b_mm )
 
           # top stock strip
-          strip = @parent.create_strip( @dm.x_mm, @dm.y_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.hu_mm, @dm.hu_mm, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
+          strip = @parent.create_strip( @dm.x_mm, @dm.y_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.sc_mm + @dm.hu_mm, @dm.hu_mm, @dm.w_m_mm, @dm.w_l_mm, @dm.w_s_mm, @dm.w_a_mm )
             scale = strip.create_scale( Io::Creat::Slipstick::ScaleType::LIN_DECIMAL, "L", 0.33 )
               scale.set_params( 10 )
               scale.set_overflow( @dm.b_mm )
@@ -64,7 +64,7 @@ module Io::Creat::Slipstick
           # backprints
           bp_border_mm = 12.0
           bp_y_mm = @dm.y_mm + @dm.hl_mm + @dm.t_mm + bp_border_mm
-          bp_h_mm = @dm.h_mm - 2 * bp_border_mm
+          bp_h_mm = @dm.h_mm + @dm.sc_mm - 2 * bp_border_mm
           bp_x_mm = @dm.x_mm + 0.5 * bp_border_mm
 
           # scales layout
@@ -104,16 +104,16 @@ module Io::Creat::Slipstick
       def render ( )
         # [stock] lines are intentionally positioned upside down (in landscape)
         # both on same sheet?
-        rh_mm = @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.hl_mm # height of rectangle
+        rh_mm = @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.sc_mm + @dm.hl_mm # height of rectangle
         dir, y_mm = ( @layer & Component::LAYER_FACE ) == 0 ? [ -1, @dm.sh_mm - @dm.y_mm - rh_mm ] : [ 1, @dm.y_mm ]
         if ( @layer & Component::LAYER_REVERSE ) != 0
           # bending guidelines for the stator
           @img.pline( @dm.x_mm, y_mm + @dm.hu_mm, @dm.x_mm + @dm.w_mm, y_mm + @dm.hu_mm, @style_contours, @branding.pattern )
           @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm ), @style_contours, @branding.pattern )
-          @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @style_contours, @branding.pattern )
-          @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @style_contours, @branding.pattern )
+          @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm + @dm.sc_mm ), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + @dm.t_mm + @dm.h_mm ), @style_contours, @branding.pattern )
+          @img.pline( @dm.x_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm + @dm.sc_mm), @dm.x_mm + @dm.w_mm, y_mm + ( @dm.hu_mm + 2 * @dm.t_mm + @dm.h_mm ), @style_contours, @branding.pattern )
           # strengthened back glue area
-          @img.rectangle( @dm.x_mm, y_mm + @dm.hu_mm + @dm.t_mm, @dm.w_mm, @dm.h_mm, @style_contours.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
+          @img.rectangle( @dm.x_mm, y_mm + @dm.hu_mm + @dm.t_mm, @dm.w_mm, @dm.h_mm + @dm.sc_mm, @style_contours.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
           # transparent window glue area
           @img.rectangle( @dm.x_mm, y_mm + 2, @dm.w_mm, 4, @style_contours.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
           @img.rectangle( @dm.x_mm, y_mm + rh_mm - 6, @dm.w_mm, 4, @style_contours.merge( { :stroke => 'none', :fill => 'url(#glued)' } ) )
@@ -125,13 +125,13 @@ module Io::Creat::Slipstick
           brand = PageNoBackprint.new( @img, @dm.x_mm + 168, @dm.y_mm + 6, @branding.height, @style_branding )
             brand.sett( @branding.brand, true )
             brand.render()
-          brand = PageNoBackprint.new( @img, @dm.x_mm + 174, @dm.y_mm + 105, @branding.height, @style_branding )
+          brand = PageNoBackprint.new( @img, @dm.x_mm + 174, @dm.y_mm + 104, @branding.height, @style_branding )
             brand.sett( "%s %s" % [ @i18n.string( 'slide_rule'), @branding.model ], true )
             brand.render()
-          @img._rtext( @dm.x_mm + @dm.w_mm - 5, @dm.y_mm + @dm.hl_mm + @dm.t_mm + @dm.h_mm / 2, -90, @branding.version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
+          @img._rtext( @dm.x_mm + @dm.w_mm - 5, @dm.y_mm + @dm.hl_mm + @dm.t_mm + ( @dm.h_mm + @dm.sc_mm ) / 2, -90, @branding.version, Io::Creat::svg_dec_style_units( @style_branding, SVG_STYLE_TEXT ) )
           # bending hints for the stator on the face side
           y = y_mm
-          [ 0, @dm.hu_mm, @dm.t_mm, @dm.h_mm, @dm.t_mm].each do |increment|
+          [ 0, @dm.hu_mm, @dm.t_mm, @dm.h_mm + @dm.sc_mm, @dm.t_mm].each do |increment|
             y += increment
             @img.pline( @dm.x_mm, y, @dm.x_mm + @dm.hint_mm, y, @style_contours )
             @img.pline( @dm.x_mm + @dm.w_mm, y, @dm.x_mm + @dm.w_mm - @dm.hint_mm, y, @style_contours )

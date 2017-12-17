@@ -15,13 +15,14 @@ module Io::Creat::Slipstick
       attr_accessor :hu_mm, :hl_mm, :hs_mm, :t_mm, :sh_mm, :sw_mm, :h_mm,
                     :x_mm, :y_mm, :w_mm, :b_mm, :ct_mm, :cc_mm, :cs_mm,
                     :cw_mm, :ch_mm, :hint_mm, :w_m_mm, :w_l_mm, :w_s_mm,
-                    :w_a_mm
+                    :w_a_mm, :sc_mm
 
       def initialize( h_mm, w_mm )
         @hu_mm = 22.0 # height of upper half of stator strip
         @hl_mm = 22.0 # height of lower half of stator strip
         @hs_mm = 18.0 # height of slipstick strip
-        @t_mm  = 1.5 # thickness of the slipstick
+        @t_mm  = 0.0#1.5 # thickness of the slipstick
+        @sc_mm = 2.0 # compensation of the stock height
         @sh_mm = h_mm # sheet height
         @sw_mm = w_mm # sheet width
         @h_mm  = @hu_mm + @hl_mm + @hs_mm
@@ -29,8 +30,8 @@ module Io::Creat::Slipstick
         @y_mm  = 10.0
         @w_mm  = 287.0
         @b_mm  = 0.1 # bending radius (approximated)
-        @ct_mm = 2.0 # thickness of cursor
-        @cc_mm = 1.5 # compensation to add to cursor height
+        @ct_mm = 1.0 # thickness of cursor
+        @cc_mm = 0#1.5 # compensation to add to cursor height
         @cs_mm = 0.5 # correction for slide height
         @cw_mm = 40.0 # cursor width
         @ch_mm = @cc_mm + @h_mm + @b_mm # cursor height
