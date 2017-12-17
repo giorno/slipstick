@@ -108,7 +108,7 @@ module Io::Creat::Slipstick
           # logo
           logo_w_mm = 17
           logo_h_mm = 18 * logo_w_mm / 15
-          @img.import( 'logo.svg', x_mm + b_mm + s_mm + ( @dm.ch_mm + logo_h_mm ) / 2, y_mm + @dm.cw_mm - 1.37 * logo_w_mm, logo_w_mm, logo_h_mm, 90 )
+          @img.import( 'logo.svg#layer1', x_mm + b_mm + s_mm + ( @dm.ch_mm + logo_h_mm ) / 2, y_mm + @dm.cw_mm - 1.37 * logo_w_mm, logo_w_mm, logo_h_mm, 90 )
           # mini-scales
           cm = BottomUpCmScale.new( @img, x_mm + b_mm + s_mm + @dm.ch_mm, y_mm + @dm.cw_mm, @dm.cw_mm - 5, 5 )
             cm.style = @style_cursor

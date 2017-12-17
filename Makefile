@@ -78,6 +78,8 @@ define model_a_template
 $(1)_model_a_$(2) :
 	@echo "Generating Instrument A, localization $(1), style $(2)"
 	@src/model_a.rb $(2) $(1) stock face $(POSTPROCESS) > build/$(1)_model_a_stock_face_$(2).svg
+	@cat build/$(1)_model_a_stock_face_$(2).svg | sed -e 's/<image /<use /g' > build/$(1)_model_a_stock_face_$(2)_hack.svg # TODO fix this (use tag not being available) in Rasem lib
+	@mv build/$(1)_model_a_stock_face_$(2)_hack.svg build/$(1)_model_a_stock_face_$(2).svg
 	@src/model_a.rb $(2) $(1) stock reverse $(POSTPROCESS) > build/$(1)_model_a_stock_reverse_$(2).svg 
 	@src/model_a.rb $(2) $(1) slide-math face $(POSTPROCESS) > build/$(1)_model_a_slide_face_$(2).svg
 	@src/model_a.rb $(2) $(1) slide-math reverse $(POSTPROCESS) > build/$(1)_model_a_slide_reverse_$(2).svg 
