@@ -25,7 +25,7 @@ module Io::Creat::Slipstick
             td = tr.td( 'log', 2 * w_mm )
           tr = table.tr( h_mm )
             td = tr.td( 'P', w_mm )
-            td = tr.td( '√1-x²', w_mm )
+            td = tr.td( '√(1-x²)', w_mm )
           tr = table.tr( h_mm )
             td = tr.td( 'K', w_mm )
             td = tr.td( 'x³', w_mm )

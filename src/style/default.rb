@@ -9,7 +9,7 @@ module Io
 
     # Default style uses Iosevka ss11-variant font-famimly to provide
     # instrument-like L&F.
-    SVG_STYLE[:"font-family"] = 'Iosevka'
+    SVG_STYLE[:"font-family"] = 'Slipstick Index'
     SVG_STYLE[:"letter-spacing"] = 0
     SVG_STYLE[:"font-weight"] = '300'
 
