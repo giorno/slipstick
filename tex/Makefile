@@ -21,19 +21,20 @@ fonts: check_wget
 	@wget https://www.dropbox.com/s/vi798bfhhtaru2k/Oswald-Bold.ttf?dl=0 -O ../build/Oswald-Bold.ttf
 	@wget https://www.dropbox.com/s/nnvq3aeupegzek2/Oswald-Light.ttf?dl=0 -O ../build/Oswald-Light.ttf
 	@wget https://www.dropbox.com/s/pi3vo57b7c0upbg/Oswald-Regular.ttf?dl=0 -O ../build/Oswald-Regular.ttf
-	@wget https://www.dropbox.com/s/jv3yl7wdrhgnoxy/RobotoSlab-Bold.ttf?dl=0 -O ../build/RobotoSlab-Bold.ttf
-	@wget https://www.dropbox.com/s/h8tfnpmxqvf2a2k/RobotoSlab-Light.ttf?dl=0 -O ../build/RobotoSlab-Light.ttf
-	@wget https://www.dropbox.com/s/mcyso3hqjt233x9/RobotoSlab-Regular.ttf?dl=0 -O ../build/RobotoSlab-Regular.ttf
-	@wget https://www.dropbox.com/s/p5dx7xrfjuwyjmn/RobotoSlab-Thin.ttf?dl=0 -O ../build/RobotoSlab-Thin.ttf
-	@wget https://www.dropbox.com/s/dp4q57s11ccepuv/Roboto-Medium.ttf?dl=0 -O ../build/Roboto-Medium.ttf
-	@wget https://www.dropbox.com/s/qskbk37q7ocvtem/Roboto-MediumItalic.ttf?dl=0 -O ../build/Roboto-MediumItalic.ttf
+	@wget https://www.dropbox.com/s/dwfedyqrps7zahu/OpenSansCondensed-Bold.ttf?dl=0 -O ../build/OpenSansCondensed-Bold.ttf
+	@wget https://www.dropbox.com/s/207a09ymaio4rfz/OpenSansCondensed-Light.ttf?dl=0 -O ../build/OpenSansCondensed-Light.ttf
+	@wget https://www.dropbox.com/s/4qc7y4tc92dbp8v/OpenSansCondensed-LightItalic.ttf?dl=0 -O ../build/OpenSansCondensed-LightItalic.ttf
+	@wget https://www.dropbox.com/s/zhqoi3hdn87m335/EBGaramond-Regular.ttf?dl=0 -O ../build/EBGaramond-Regular.ttf
+
 ifeq ($(OS),Darwin)
 	@mkdir -p ~/Library/Fonts
 	@cp ../build/Oswald*.ttf ~/Library/Fonts
-	@cp ../build/Roboto*.ttf ~/Library/Fonts
+	@cp ../build/OpenSansCondensed*.ttf ~/Library/Fonts
+	@cp ../build/EBGaramond*.ttf ~/Library/Fonts
 else
 	@cp ../build/Oswald*.ttf ~/.fonts
-	@cp ../build/Roboto*.ttf ~/.fonts
+	@cp ../build/OpenSansCondensed*.ttf ~/.fonts
+	@cp ../build/EBGaramond*.ttf ~/.fonts
 	@fc-cache -f -v > /dev/null
 endif
 
