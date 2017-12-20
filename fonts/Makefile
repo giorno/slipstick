@@ -29,9 +29,9 @@ endif
 
 # Builds printouts for Model A
 fonts :
-	@$(FONTFORGE) -lang=ff -c 'Open("SlipstickSansMono-Regular.sfd"); Generate("../build/SlipstickSansMono-Regular.ttf");' 2> /dev/null
-	@$(FONTFORGE) -lang=ff -c 'Open("SlipstickSansMono-Bold.sfd"); Generate("../build/SlipstickSansMono-Bold.ttf");' 2> /dev/null
-	@$(FONTFORGE) -lang=ff -c 'Open("SlipstickSansMono-Italic.sfd"); Generate("../build/SlipstickSansMono-Italic.ttf");' 2> /dev/null
+	@$(FONTFORGE) -lang=ff -c 'Open("Slipstick-Index-Light.sfd"); Generate("../build/Slipstick-Index-Light.sfd.ttf");' 2> /dev/null
+	@$(FONTFORGE) -lang=ff -c 'Open("Slipstick-Index-Light-Italic.sfd"); Generate("../build/Slipstick-Index-Light-Italic.ttf");' 2> /dev/null
+	@$(FONTFORGE) -lang=ff -c 'Open("Slipstick-Index-Medium.sfd"); Generate("../build/Slipstick-Index-Medium.ttf");' 2> /dev/null
 
 install : fonts
 	$(info Installing fonts for user $(USERNAME))
