@@ -45,8 +45,8 @@ module Io::Creat::Slipstick
         @branding = Branding.new
           @branding.release = false
           @branding.brand = "CREAT.IO"
-          @branding.model = "SR-M1A2"
-          @branding.height = 2.2
+          @branding.model = "SR-M1A3"
+          @branding.height = 2.3
           @branding.pattern = "1, 1" # line pattern for bent edges
           if @branding.release
             @branding.version = "%s %s" % [ @i18n.string( 'slide_rule'), @branding.model ]
