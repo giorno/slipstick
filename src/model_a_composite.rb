@@ -43,7 +43,7 @@ module Io::Creat::Slipstick
         @img.pattern( 'glued', 3 )
         # branding/version texts
         @branding = Branding.new
-          @branding.release = true
+          @branding.release = false
           @branding.brand = "CREAT.IO"
           @branding.model = "SR-M1A2"
           @branding.height = 2.2
