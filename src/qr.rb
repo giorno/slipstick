@@ -24,7 +24,7 @@ module Io::Creat::Slipstick
     def render ( )
       @qr.modules.each_index do |x|
         @qr.modules.each_index do |y|
-          if @qr.dark?( x, y )
+          if @qr.qrcode.checked?( x, y )
             @img.rectangle( "%g" % ( @x_mm + y * @scale ),
                             "%g" % ( @y_mm + x * @scale ),
                             "%g" % @scale,
